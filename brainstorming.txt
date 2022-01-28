@@ -3,7 +3,7 @@ Idées initiales :
 -bruitages
 -mix de dessin et graphismes
 -doublage dialogue
-
+-dresseurs = professeurs
 
 TODO :
 
