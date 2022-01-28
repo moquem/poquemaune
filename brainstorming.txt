@@ -1,0 +1,13 @@
+Idées initiales :
+
+-bruitages
+-mix de dessin et graphismes
+-doublage dialogue
+
+
+TODO :
+
+-afficher une fenêtre
+-afficher des pokémons
+-fenêtre d'accueil
+-gérer le récupèrage d'event (clic, touches, etc)
