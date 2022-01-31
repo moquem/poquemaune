@@ -11,3 +11,4 @@ TODO :
 - afficher des pokémons
 - fenêtre d'accueil
 - gérer le récupèrage d'event (clic, touches, etc)
+- récupèrer des images
