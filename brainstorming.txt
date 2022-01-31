@@ -12,3 +12,4 @@ TODO :
 - fenêtre d'accueil
 - gérer le récupèrage d'event (clic, touches, etc)
 - faire une interface graphique intuitive
+- récupèrer des images
