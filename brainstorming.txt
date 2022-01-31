@@ -13,4 +13,4 @@ TODO :
 - gérer le récupèrage d'event (clic, touches, etc)
 - faire une interface graphique intuitive
 - récupèrer des images
-- boire encore plus de thé
+- finir le projet
