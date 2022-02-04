@@ -1,1 +1,1 @@
-[[{},{}],{}]
+[[{"${BASE}/src/main/resources/pokemon_sprites.jpg":["${BASE}/target/scala-2.12/classes/pokemon_sprites.jpg"]},{"${BASE}/target/scala-2.12/classes/pokemon_sprites.jpg":["${BASE}/src/main/resources/pokemon_sprites.jpg"]}],{"${BASE}/src/main/resources/pokemon_sprites.jpg":{"file":"file:///home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/resources/pokemon_sprites.jpg","lastModified":1643989132912}}]
