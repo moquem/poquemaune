@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+<ivy-report version="1.0">
+	<info
+		organisation="my-project"
+		module="my-project_2.11.x"
+		revision="0.1-SNAPSHOT"
+		conf="scala-tool"
+		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool"
+		date="20220131203327"/>
+	<dependencies>
+		<module organisation="org.scala-lang" name="scala-compiler">
+			<revision name="2.11.x" status="release" pubdate="20210418003404" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="default, compile, runtime, optional, optional(default), master" position="0">
+				<metadata-artifact status="no" details="" size="4015" time="0" location="/home/bozec/.ivy2/cache/org.scala-lang/scala-compiler/ivy-2.11.x.xml" searched="false" original-local-location="/home/bozec/.ivy2/cache/org.scala-lang/scala-compiler/ivys/ivy-2.11.x.xml" origin-is-local="false" origin-location="file:/usr/share/maven-repo/org/scala-lang/scala-compiler/2.11.x/scala-compiler-2.11.x.pom"/>
+				<caller organisation="my-project" name="my-project_2.11.x" conf="scala-tool" rev="2.11.x" rev-constraint-default="2.11.x" rev-constraint-dynamic="2.11.x" callerrev="0.1-SNAPSHOT"/>
+				<artifacts>
+					<artifact name="scala-compiler" type="jar" ext="jar" status="no" details="" size="15344011" time="0" location="/home/bozec/.ivy2/cache/org.scala-lang/scala-compiler/jars/scala-compiler-2.11.x.jar">
+						<origin-location is-local="false" location="file:/usr/share/maven-repo/org/scala-lang/scala-compiler/2.11.x/scala-compiler-2.11.x.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="jline" name="jline">
+			<revision name="2.x" status="release" pubdate="20201227063054" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="master(*), compile, compile(*), master" position="5">
+				<metadata-artifact status="no" details="" size="4104" time="0" location="/home/bozec/.ivy2/cache/jline/jline/ivy-2.x.xml" searched="false" original-local-location="/home/bozec/.ivy2/cache/jline/jline/ivys/ivy-2.x.xml" origin-is-local="false" origin-location="file:/usr/share/maven-repo/jline/jline/2.x/jline-2.x.pom"/>
+				<caller organisation="org.scala-lang" name="scala-compiler" conf="optional" rev="2.x" rev-constraint-default="2.x" rev-constraint-dynamic="2.x" callerrev="2.11.x"/>
+				<artifacts>
+					<artifact name="jline" type="jar" ext="jar" status="no" details="" size="155813" time="0" location="/home/bozec/.ivy2/cache/jline/jline/jars/jline-2.x.jar">
+						<origin-location is-local="false" location="file:/usr/share/maven-repo/jline/jline/2.x/jline-2.x.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.fusesource.jansi" name="jansi">
+			<revision name="debian" status="release" pubdate="20190711235048" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="master(*), compile, compile(*), master" position="6">
+				<metadata-artifact status="no" details="" size="5332" time="0" location="/home/bozec/.ivy2/cache/org.fusesource.jansi/jansi/ivy-debian.xml" searched="false" original-local-location="/home/bozec/.ivy2/cache/org.fusesource.jansi/jansi/ivys/ivy-debian.xml" origin-is-local="false" origin-location="file:/usr/share/maven-repo/org/fusesource/jansi/jansi/debian/jansi-debian.pom"/>
+				<caller organisation="jline" name="jline" conf="compile" rev="debian" rev-constraint-default="debian" rev-constraint-dynamic="debian" callerrev="2.x"/>
+				<artifacts>
+					<artifact name="jansi" type="jar" ext="jar" status="no" details="" size="55988" time="0" location="/home/bozec/.ivy2/cache/org.fusesource.jansi/jansi/jars/jansi-debian.jar">
+						<origin-location is-local="false" location="file:/usr/share/maven-repo/org/fusesource/jansi/jansi/debian/jansi-debian.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.fusesource.jansi" name="jansi-native">
+			<revision name="debian" status="release" pubdate="20181126135112" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="master(*), compile, compile(*), master" position="8">
+				<metadata-artifact status="no" details="" size="3341" time="0" location="/home/bozec/.ivy2/cache/org.fusesource.jansi/jansi-native/ivy-debian.xml" searched="false" original-local-location="/home/bozec/.ivy2/cache/org.fusesource.jansi/jansi-native/ivys/ivy-debian.xml" origin-is-local="false" origin-location="file:/usr/share/maven-repo/org/fusesource/jansi/jansi-native/debian/jansi-native-debian.pom"/>
+				<caller organisation="org.fusesource.jansi" name="jansi" conf="compile" rev="debian" rev-constraint-default="debian" rev-constraint-dynamic="debian" callerrev="debian"/>
+				<artifacts>
+					<artifact name="jansi-native" type="jar" ext="jar" status="no" details="" size="23247" time="0" location="/home/bozec/.ivy2/cache/org.fusesource.jansi/jansi-native/jars/jansi-native-debian.jar">
+						<origin-location is-local="false" location="file:/usr/share/maven-repo/org/fusesource/jansi/jansi-native/debian/jansi-native-debian.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.fusesource.hawtjni" name="hawtjni-runtime">
+			<revision name="debian" status="release" pubdate="20190718112435" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="master(*), compile, compile(*), master" position="7">
+				<metadata-artifact status="no" details="" size="3194" time="0" location="/home/bozec/.ivy2/cache/org.fusesource.hawtjni/hawtjni-runtime/ivy-debian.xml" searched="false" original-local-location="/home/bozec/.ivy2/cache/org.fusesource.hawtjni/hawtjni-runtime/ivys/ivy-debian.xml" origin-is-local="false" origin-location="file:/usr/share/maven-repo/org/fusesource/hawtjni/hawtjni-runtime/debian/hawtjni-runtime-debian.pom"/>
+				<caller organisation="org.fusesource.jansi" name="jansi" conf="compile" rev="debian" rev-constraint-default="debian" rev-constraint-dynamic="debian" callerrev="debian"/>
+				<caller organisation="org.fusesource.jansi" name="jansi-native" conf="compile" rev="debian" rev-constraint-default="debian" rev-constraint-dynamic="debian" callerrev="debian"/>
+				<artifacts>
+					<artifact name="hawtjni-runtime" type="jar" ext="jar" status="no" details="" size="23134" time="0" location="/home/bozec/.ivy2/cache/org.fusesource.hawtjni/hawtjni-runtime/jars/hawtjni-runtime-debian.jar">
+						<origin-location is-local="false" location="file:/usr/share/maven-repo/org/fusesource/hawtjni/hawtjni-runtime/debian/hawtjni-runtime-debian.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-lang.modules" name="scala-parser-combinators_2.11">
+			<revision name="debian" status="release" pubdate="20210102001951" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="master(*), compile, runtime(*), runtime, compile(*), master" position="4">
+				<metadata-artifact status="no" details="" size="3028" time="0" location="/home/bozec/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.11/ivy-debian.xml" searched="false" original-local-location="/home/bozec/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.11/ivys/ivy-debian.xml" origin-is-local="false" origin-location="file:/usr/share/maven-repo/org/scala-lang/modules/scala-parser-combinators_2.11/debian/scala-parser-combinators_2.11-debian.pom"/>
+				<caller organisation="org.scala-lang" name="scala-compiler" conf="default, compile, runtime, optional, master" rev="debian" rev-constraint-default="debian" rev-constraint-dynamic="debian" callerrev="2.11.x"/>
+				<artifacts>
+					<artifact name="scala-parser-combinators_2.11" type="bundle" ext="jar" status="no" details="" size="435041" time="0" location="/home/bozec/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.11/bundles/scala-parser-combinators_2.11-debian.jar">
+						<origin-location is-local="false" location="file:/usr/share/maven-repo/org/scala-lang/modules/scala-parser-combinators_2.11/debian/scala-parser-combinators_2.11-debian.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-lang.modules" name="scala-xml_2.11">
+			<revision name="debian" status="release" pubdate="20210102004732" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="master(*), compile, runtime(*), runtime, compile(*), master" position="3">
+				<metadata-artifact status="no" details="" size="3114" time="0" location="/home/bozec/.ivy2/cache/org.scala-lang.modules/scala-xml_2.11/ivy-debian.xml" searched="false" original-local-location="/home/bozec/.ivy2/cache/org.scala-lang.modules/scala-xml_2.11/ivys/ivy-debian.xml" origin-is-local="false" origin-location="file:/usr/share/maven-repo/org/scala-lang/modules/scala-xml_2.11/debian/scala-xml_2.11-debian.pom"/>
+				<caller organisation="org.scala-lang" name="scala-compiler" conf="default, compile, runtime, optional, master" rev="debian" rev-constraint-default="debian" rev-constraint-dynamic="debian" callerrev="2.11.x"/>
+				<artifacts>
+					<artifact name="scala-xml_2.11" type="bundle" ext="jar" status="no" details="" size="669392" time="0" location="/home/bozec/.ivy2/cache/org.scala-lang.modules/scala-xml_2.11/bundles/scala-xml_2.11-debian.jar">
+						<origin-location is-local="false" location="file:/usr/share/maven-repo/org/scala-lang/modules/scala-xml_2.11/debian/scala-xml_2.11-debian.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-lang" name="scala-reflect">
+			<revision name="2.11.x" status="release" pubdate="20210418003404" resolver="sbt-chain" artresolver="sbt-chain" homepage="" extra-info.apiURL="http://www.scala-lang.org/api/2.11.12/" downloaded="false" searched="false" default="false" conf="master(*), compile, runtime(*), runtime, compile(*), master" position="2">
+				<metadata-artifact status="no" details="" size="2952" time="0" location="/home/bozec/.ivy2/cache/org.scala-lang/scala-reflect/ivy-2.11.x.xml" searched="false" original-local-location="/home/bozec/.ivy2/cache/org.scala-lang/scala-reflect/ivys/ivy-2.11.x.xml" origin-is-local="false" origin-location="file:/usr/share/maven-repo/org/scala-lang/scala-reflect/2.11.x/scala-reflect-2.11.x.pom"/>
+				<caller organisation="org.scala-lang" name="scala-compiler" conf="default, compile, runtime, optional, master" rev="2.11.x" rev-constraint-default="2.11.x" rev-constraint-dynamic="2.11.x" callerrev="2.11.x"/>
+				<artifacts>
+					<artifact name="scala-reflect" type="jar" ext="jar" status="no" details="" size="4576546" time="0" location="/home/bozec/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.11.x.jar">
+						<origin-location is-local="false" location="UNKNOWN"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-lang" name="scala-library">
+			<revision name="2.11.x" status="release" pubdate="20210418003404" resolver="sbt-chain" artresolver="sbt-chain" homepage="" downloaded="false" searched="false" default="false" conf="default, master(*), compile, runtime(*), runtime, optional, optional(default), compile(*), master" position="1">
+				<metadata-artifact status="no" details="" size="2476" time="0" location="/home/bozec/.ivy2/cache/org.scala-lang/scala-library/ivy-2.11.x.xml" searched="false" original-local-location="/home/bozec/.ivy2/cache/org.scala-lang/scala-library/ivys/ivy-2.11.x.xml" origin-is-local="false" origin-location="file:/usr/share/maven-repo/org/scala-lang/scala-library/2.11.x/scala-library-2.11.x.pom"/>
+				<caller organisation="org.scala-lang" name="scala-compiler" conf="default, compile, runtime, optional, master" rev="2.11.x" rev-constraint-default="2.11.x" rev-constraint-dynamic="2.11.x" callerrev="2.11.x"/>
+				<caller organisation="org.scala-lang" name="scala-reflect" conf="compile, runtime" rev="2.11.x" rev-constraint-default="2.11.x" rev-constraint-dynamic="2.11.x" callerrev="2.11.x"/>
+				<caller organisation="org.scala-lang.modules" name="scala-xml_2.11" conf="compile, runtime" rev="2.11.x" rev-constraint-default="2.11.x" rev-constraint-dynamic="2.11.x" callerrev="debian"/>
+				<caller organisation="my-project" name="my-project_2.11.x" conf="scala-tool" rev="2.11.x" rev-constraint-default="2.11.x" rev-constraint-dynamic="2.11.x" callerrev="0.1-SNAPSHOT"/>
+				<caller organisation="org.scala-lang.modules" name="scala-parser-combinators_2.11" conf="compile, runtime" rev="2.11.x" rev-constraint-default="2.11.x" rev-constraint-dynamic="2.11.x" callerrev="debian"/>
+				<artifacts>
+					<artifact name="scala-library" type="jar" ext="jar" status="no" details="" size="5686436" time="0" location="/home/bozec/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.x.jar">
+						<origin-location is-local="false" location="file:/usr/share/maven-repo/org/scala-lang/scala-library/2.11.x/scala-library-2.11.x.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+	</dependencies>
+</ivy-report>
