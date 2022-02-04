@@ -1,5 +1,4 @@
 import java.awt.Color
-import java.swing.ImageIcon
 import scala.swing._
 
 class UI extends MainFrame {
