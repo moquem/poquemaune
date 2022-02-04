@@ -1,11 +1,1 @@
-[0m[[0m[0mdebug[0m] [0m[0mPackaging /home/bozec/Documents/etudes/projet_prog_2/poquemaune/target/scala-2.12/my-project_2.12-0.1.0-SNAPSHOT.jar ...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	pokemon_sprites.jpg[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /home/bozec/Documents/etudes/projet_prog_2/poquemaune/target/scala-2.12/classes/pokemon_sprites.jpg[0m
-[0m[[0m[0mdebug[0m] [0m[0m	GuiProgramOne$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /home/bozec/Documents/etudes/projet_prog_2/poquemaune/target/scala-2.12/classes/GuiProgramOne$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	UI.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /home/bozec/Documents/etudes/projet_prog_2/poquemaune/target/scala-2.12/classes/UI.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	GuiProgramOne.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /home/bozec/Documents/etudes/projet_prog_2/poquemaune/target/scala-2.12/classes/GuiProgramOne.class[0m
-[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
+[0m[[0m[0mdebug[0m] [0m[0mJar uptodate: /home/bozec/Documents/etudes/projet_prog_2/poquemaune/target/scala-2.12/my-project_2.12-0.1.0-SNAPSHOT.jar[0m
