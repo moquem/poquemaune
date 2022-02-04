@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:2:13: object swing is not a member of package java[0m
 [0m[[0m[31merror[0m] [0m[0mimport java.swing.ImageIcon[0m
 [0m[[0m[31merror[0m] [0m[0m            ^[0m
@@ -5,3 +6,11 @@
 [0m[[0m[31merror[0m] [0m[0m    contents += new ImageIcon("../resources/pokemon_sprites.jpg")[0m
 [0m[[0m[31merror[0m] [0m[0m                    ^[0m
 [0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
+=======
+[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/class_pokemon.scala:32:36: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Array[String][0m
+[0m[[0m[31merror[0m] [0m[0m required: Array[Attack][0m
+[0m[[0m[31merror[0m] [0m[0m    var set_attack:Array[Attack] = new Array[String](4)[0m
+[0m[[0m[31merror[0m] [0m[0m                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
+>>>>>>> 1eb3a550200162d1827ce21d36116e0249fe9f1b
