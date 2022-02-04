@@ -1,19 +1,54 @@
-import swing._
-
+import java.awt.Color
+import java.swing.ImageIcon
 import scala.swing._
 
 class UI extends MainFrame {
-  title = "GUI Program #1"
-  preferredSize = new Dimension(320, 240)
-  contents = new Label("Here is the contents!")
+  val la = new Label("Look at me!")
+
+  la.foreground = Color.BLUE
+  title = "GUI Program #4"
+
+
+  contents = new BoxPanel(Orientation.Vertical) {
+    contents += la
+    contents += Swing.VStrut(10)
+    contents += Swing.Glue
+    contents += Button("Press me, please") { pressMe() }
+    contents += Swing.VStrut(5)
+    contents += Button("Change text") { changeText() }
+    contents += Swing.VStrut(5)
+    contents += Button("Close") { closeMe() }
+    border = Swing.EmptyBorder(10, 10, 10, 10)
+    contents += new ImageIcon("../resources/pokemon_sprites.jpg")
+  }
+
+  def pressMe() {
+    Dialog.showMessage(contents.head, "Thank you!", title="You pressed me")
+  }
+
+  def changeText() {
+    val r = Dialog.showInput(contents.head, "New label text", initial=la.text)
+    r match {
+      case Some(s) => la.text = s
+      case None => 
+    }
+  }
+
+  def closeMe() {
+    val res = Dialog.showConfirmation(contents.head, 
+				      "Do you really want to quit?", 
+				      optionType=Dialog.Options.YesNo,
+				      title=title)
+    if (res == Dialog.Result.Ok)
+      sys.exit(0)
+  }
 }
 
-object GuiProgramOne {
+object GuiProgramFour {
   def main(args: Array[String]) {
     val ui = new UI
     ui.visible = true
-    while (true){
-    }
-    println("End of main function")
+    while (true) {}
   }
 }
+
