@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:21:21: not found: type ImageIcon[0m
-[0m[[0m[31merror[0m] [0m[0m    contents += new ImageIcon("../resources/pokemon_sprites.jpg")[0m
-[0m[[0m[31merror[0m] [0m[0m                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:22:25: type read is not a member of object javax.imageio.ImageIO[0m
+[0m[[0m[31merror[0m] [0m[0m     icon = new ImageIO.read(f)[0m
+[0m[[0m[31merror[0m] [0m[0m                        ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

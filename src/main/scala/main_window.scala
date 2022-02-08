@@ -1,7 +1,6 @@
 import java.awt.Color
 import scala.swing._
 import scala.swing.Component
-import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 
 
@@ -17,7 +16,7 @@ class UI extends MainFrame {
 
   val label = new Label{
      background = Color.green
-     icon = new ImageIcon("pokemon_sprites.jpg")
+     icon = new ImageIcon("src/main/resources/pokemon_sprites.jpg")
      text = "this is very mysterious"
      opaque = true
      visible = true
