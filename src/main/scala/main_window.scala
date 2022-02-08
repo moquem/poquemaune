@@ -1,24 +1,39 @@
 import java.awt.Color
 import scala.swing._
+import scala.swing.Component
+import javax.imageio.ImageIO
+import javax.swing.ImageIcon
+
 
 class UI extends MainFrame {
-  val la = new Label("Look at me!")
+  val la = new Label{
+    text = "Look at me!"
+    background = Color.red
+    opaque = true
+  }
 
   la.foreground = Color.BLUE
   title = "GUI Program #4"
 
+  val label = new Label{
+     background = Color.green
+     icon = new ImageIcon("pokemon_sprites.jpg")
+     text = "this is very mysterious"
+     opaque = true
+     visible = true
+  }
 
   contents = new BoxPanel(Orientation.Vertical) {
     contents += la
-    contents += Swing.VStrut(10)
+    contents += label
+    /*contents += Swing.VStrut(10)
     contents += Swing.Glue
     contents += Button("Press me, please") { pressMe() }
     contents += Swing.VStrut(5)
     contents += Button("Change text") { changeText() }
     contents += Swing.VStrut(5)
-    contents += Button("Close") { closeMe() }
+    contents += Button("Close") { closeMe() }*/
     border = Swing.EmptyBorder(10, 10, 10, 10)
-    contents += new ImageIcon("../resources/pokemon_sprites.jpg")
   }
 
   def pressMe() {
