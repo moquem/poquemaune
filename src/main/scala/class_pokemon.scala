@@ -57,3 +57,22 @@ class Pokemon (name:String) {
     }
 
 }
+
+class Team {
+    var team:Array[Pokemon] = new Array[Attack](6)
+
+    def team_alive () : Boolean {
+        var nb_alive = 0
+        for (i <- 0 to 5) {
+            if (team(i).alive) {
+                nb_alive += 1
+            }
+        }
+        if (nb_alive != 0) {
+            return true
+        } else {
+            return false 
+        }
+    }
+    
+}
