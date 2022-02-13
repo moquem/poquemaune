@@ -1,28 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:28:22: value text is not a member of javax.swing.JButton[0m
-[0m[[0m[31merror[0m] [0m[0m  atkSelectionButton.text = "Attack"[0m
-[0m[[0m[31merror[0m] [0m[0m                     ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:35:25: value setVisible is not a member of scala.swing.Button[0m
-[0m[[0m[31merror[0m] [0m[0m  actionSelectionButton.setVisible(true)[0m
-[0m[[0m[31merror[0m] [0m[0m                        ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:36:25: value setText is not a member of scala.swing.Button[0m
-[0m[[0m[31merror[0m] [0m[0m  actionSelectionButton.setText("Action")[0m
-[0m[[0m[31merror[0m] [0m[0m                        ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:39:23: value setVisible is not a member of scala.swing.Button[0m
-[0m[[0m[31merror[0m] [0m[0m  itemSelectionButton.setVisible(true)[0m
-[0m[[0m[31merror[0m] [0m[0m                      ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:40:23: value settext is not a member of scala.swing.Button[0m
-[0m[[0m[31merror[0m] [0m[0m  itemSelectionButton.settext("Item")[0m
-[0m[[0m[31merror[0m] [0m[0m                      ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:68:19: overloaded method value add with alternatives:[0m
-[0m[[0m[31merror[0m] [0m[0m  (x$1: java.awt.Component)java.awt.Component <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (x$1: java.awt.PopupMenu)Unit[0m
-[0m[[0m[31merror[0m] [0m[0m cannot be applied to (scala.swing.Button)[0m
-[0m[[0m[31merror[0m] [0m[0m  actionMenuPanel.add(actionSelectionButton)[0m
-[0m[[0m[31merror[0m] [0m[0m                  ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:69:19: overloaded method value add with alternatives:[0m
-[0m[[0m[31merror[0m] [0m[0m  (x$1: java.awt.Component)java.awt.Component <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (x$1: java.awt.PopupMenu)Unit[0m
-[0m[[0m[31merror[0m] [0m[0m cannot be applied to (scala.swing.Button)[0m
-[0m[[0m[31merror[0m] [0m[0m  actionMenuPanel.add(itemSelectionButton)[0m
-[0m[[0m[31merror[0m] [0m[0m                  ^[0m
-[0m[[0m[31merror[0m] [0m[0m7 errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:120:18: not found: value nGraphicsEnvironment[0m
+[0m[[0m[31merror[0m] [0m[0m  val graphics = nGraphicsEnvironment.getLocalGraphicsEnvironment()[0m
+[0m[[0m[31merror[0m] [0m[0m                 ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

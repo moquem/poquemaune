@@ -15,67 +15,129 @@ import javax.imageio.ImageIO
 import java.io.InputStream
 import java.io.File
 import java.awt.GridLayout
+import javax.swing.border.Border
+import javax.swing.BorderFactory
+import java.awt.GraphicsDevice
+import java.awt.GraphicsEnvironment
 
 
 object CombatMenu {
+
+
+  /*
+   * We are using a null layout, this means we have to be precise about how we organise our panels
+   * Most importantly on any given pixel there should be at most one panel
+   * Otherwise we run the risk of having a components that are invisble
+   * This is all handled in the setBounds of all the panels, however, they must respect the following layout
+   *
+   *
+   *  |----|--------------------|
+   *  | s  |                    |
+   *  | i  |                    |
+   *  | d  v      imgPanel      |
+   *  | e  L                    |
+   *  | B  i--------hLim--------|
+   *  | a  m                    |
+   *  | r  |   actionMenuPanel  |
+   *  |    |                    |
+   *  |----|--------------------|
+   *
+   *  To this we have to add a border so it isn't hideous
+   *
+   *  It is possible that some single pixel adjusting may have to be done
+   *
+   *
+   */
   
+  val hLim = 600
+  val vLim = 250
+  val borderSize = 15
+
+  // Images for the player's and oponent's pokemon
   val playerPokemonImg = new ImageIcon("src/main/resources/green_square.png")
   val oppPokemonImg = new ImageIcon("src/main/resources/purple_square.png")
 
-
-  val atkSelectionButton = new JButton
+  // Button for selecting attacks
+  val atkSelectionButton = new JButton("Attack")
   atkSelectionButton.setVisible(true)
-  atkSelectionButton.text = "Attack"
 
-  val pokSelectionButton = new JButton
+  // Button for switching pokemon
+  val pokSelectionButton = new JButton("Change Pokemon")
+  pokSelectionButton.setText("Change Pokemon")
   pokSelectionButton.setVisible(true)
-  atkSelectionButton.setText("Change Pokemon")
 
-  val actionSelectionButton = new Button
+  // Button for selecting an action
+  val actionSelectionButton = new JButton
   actionSelectionButton.setVisible(true)
   actionSelectionButton.setText("Action")
 
-  val itemSelectionButton = new Button
+  // Button for slecting an item
+  val itemSelectionButton = new JButton
   itemSelectionButton.setVisible(true)
-  itemSelectionButton.settext("Item")
+  itemSelectionButton.setText("Item")
+  
 
   // Label for the image of player's pokemon
   val playerPokLabel = new JLabel(playerPokemonImg)
+  // makes the label visible
   playerPokLabel.setVisible(true)
+  // positioning, the size of the label is exactly the size of the image
   playerPokLabel.setBounds(250, 400, 100, 100)
   
   // Label for the image of opponent's pokemon
   val oppPokLabel = new JLabel(oppPokemonImg)
   oppPokLabel.setVisible(true)
-  oppPokLabel.setBounds(1600, 200, 100, 100)
+  oppPokLabel.setBounds(1400, 200, 100, 100)
 
 
   // Panel where the pokemons will be shown
   val pokemonImgPanel = new JPanel
-  pokemonImgPanel.setLayout(null)
+  // makes panel visible
   pokemonImgPanel.setVisible(true)
-  pokemonImgPanel.setBounds(0, 0, 1920, 1080)
+  // null layout enables absolute positioning
+  pokemonImgPanel.setLayout(null)
+  // panel size and position
+  pokemonImgPanel.setBounds(vLim, borderSize, 1920-vLim-borderSize, hLim-borderSize)
+  // adds the pokemon images to the panel
   pokemonImgPanel.add(playerPokLabel)
   pokemonImgPanel.add(oppPokLabel)
+  pokemonImgPanel.setBorder(BorderFactory.createLineBorder(Color.black))
 
   // Panel for the various action buttons
   val actionMenuPanel = new JPanel
   actionMenuPanel.setVisible(true)
+  actionMenuPanel.setBounds(vLim, hLim, 1920-vLim-borderSize, 1080-hLim-borderSize)
+  // panel layout, a 2x2 grid is what we want here
   actionMenuPanel.setLayout(new GridLayout(2, 2))
-  actionMenuPanel.setBounds(0, 0, 1920, 1080)
+  // add the buttons to the panel
   actionMenuPanel.add(atkSelectionButton)
   actionMenuPanel.add(pokSelectionButton)
   actionMenuPanel.add(actionSelectionButton)
   actionMenuPanel.add(itemSelectionButton)
-  
+  actionMenuPanel.setBorder(BorderFactory.createLineBorder(Color.black))
+ 
+  // enables us to set the window to full screen, i have no idea what it does 
+  val graphics = GraphicsEnvironment.getLocalGraphicsEnvironment()
+  val device = graphics.getDefaultScreenDevice()
+
+  // Main Frame, where everything is displayed
   val mainFrame = new JFrame
+  // makes sure that the 1920x1080 dimensions show fully on screen and are not obscured by additional stuff
+  mainFrame.setUndecorated(true)
+  // enables us to position panels absolutely
   mainFrame.setLayout(null)
+  // makes the current frame visible
   mainFrame.setVisible(true)
+  // adds the panels to the frame
   mainFrame.add(pokemonImgPanel)
+  mainFrame.add(actionMenuPanel)
+  // size of the window
   mainFrame.setPreferredSize(new Dimension(1920, 1080))
   mainFrame.pack()
+  // makes the window close when the cross is pressed
   mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
-
+  // makes the frame full screen
+  device.setFullScreenWindow(mainFrame)
   
 
   def main(args: Array[String]){
