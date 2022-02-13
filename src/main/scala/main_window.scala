@@ -2,66 +2,125 @@ import java.awt.Color
 import scala.swing._
 import scala.swing.Component
 import javax.swing.ImageIcon
+import java.awt.BorderLayout
+import java.awt.Dimension
+import javax.swing._
+import javax.swing.JFrame
+import javax.swing.JScrollPane
+import javax.swing.JLabel
+import javax.swing.JTextArea
+import java.awt.image.BufferedImage
+import java.awt.{Graphics2D,Color,Font,BasicStroke}
+import javax.imageio.ImageIO
+import java.io.InputStream
+import java.io.File
+import java.awt.GridLayout
 
 
-class UI extends MainFrame {
-  val la = new Label{
-    text = "Look at me!"
-    background = Color.red
-    opaque = true
-  }
+object CombatMenu {
+  
+  val playerPokemonImg = new ImageIcon("src/main/resources/green_square.png")
+  val oppPokemonImg = new ImageIcon("src/main/resources/purple_square.png")
 
-  la.foreground = Color.BLUE
-  title = "GUI Program #4"
 
-  val label = new Label{
-     background = Color.green
-     icon = new ImageIcon("src/main/resources/pokemon_sprites.jpg")
-     text = "this is very mysterious"
-     opaque = true
-     visible = true
-  }
+  val atkSelectionButton = new JButton
+  atkSelectionButton.setVisible(true)
+  atkSelectionButton.text = "Attack"
 
-  contents = new BoxPanel(Orientation.Vertical) {
-    contents += la
-    contents += label
-    /*contents += Swing.VStrut(10)
-    contents += Swing.Glue
-    contents += Button("Press me, please") { pressMe() }
-    contents += Swing.VStrut(5)
-    contents += Button("Change text") { changeText() }
-    contents += Swing.VStrut(5)
-    contents += Button("Close") { closeMe() }*/
-    border = Swing.EmptyBorder(10, 10, 10, 10)
-  }
+  val pokSelectionButton = new JButton
+  pokSelectionButton.setVisible(true)
+  atkSelectionButton.setText("Change Pokemon")
 
-  def pressMe() {
-    Dialog.showMessage(contents.head, "Thank you!", title="You pressed me")
-  }
+  val actionSelectionButton = new Button
+  actionSelectionButton.setVisible(true)
+  actionSelectionButton.setText("Action")
 
-  def changeText() {
-    val r = Dialog.showInput(contents.head, "New label text", initial=la.text)
-    r match {
-      case Some(s) => la.text = s
-      case None => 
-    }
-  }
+  val itemSelectionButton = new Button
+  itemSelectionButton.setVisible(true)
+  itemSelectionButton.settext("Item")
 
-  def closeMe() {
-    val res = Dialog.showConfirmation(contents.head, 
-				      "Do you really want to quit?", 
-				      optionType=Dialog.Options.YesNo,
-				      title=title)
-    if (res == Dialog.Result.Ok)
-      sys.exit(0)
-  }
-}
+  // Label for the image of player's pokemon
+  val playerPokLabel = new JLabel(playerPokemonImg)
+  playerPokLabel.setVisible(true)
+  playerPokLabel.setBounds(250, 400, 100, 100)
+  
+  // Label for the image of opponent's pokemon
+  val oppPokLabel = new JLabel(oppPokemonImg)
+  oppPokLabel.setVisible(true)
+  oppPokLabel.setBounds(1600, 200, 100, 100)
 
-object GuiProgramFour {
-  def main(args: Array[String]) {
-    val ui = new UI
-    ui.visible = true
+
+  // Panel where the pokemons will be shown
+  val pokemonImgPanel = new JPanel
+  pokemonImgPanel.setLayout(null)
+  pokemonImgPanel.setVisible(true)
+  pokemonImgPanel.setBounds(0, 0, 1920, 1080)
+  pokemonImgPanel.add(playerPokLabel)
+  pokemonImgPanel.add(oppPokLabel)
+
+  // Panel for the various action buttons
+  val actionMenuPanel = new JPanel
+  actionMenuPanel.setVisible(true)
+  actionMenuPanel.setLayout(new GridLayout(2, 2))
+  actionMenuPanel.setBounds(0, 0, 1920, 1080)
+  actionMenuPanel.add(atkSelectionButton)
+  actionMenuPanel.add(pokSelectionButton)
+  actionMenuPanel.add(actionSelectionButton)
+  actionMenuPanel.add(itemSelectionButton)
+  
+  val mainFrame = new JFrame
+  mainFrame.setLayout(null)
+  mainFrame.setVisible(true)
+  mainFrame.add(pokemonImgPanel)
+  mainFrame.setPreferredSize(new Dimension(1920, 1080))
+  mainFrame.pack()
+  mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
+
+  
+
+  def main(args: Array[String]){
     while (true) {}
   }
-}
 
+
+}
+/*
+object SwingExample {
+    
+
+
+    val image = new ImageIcon("src/main/resources/green_square.png")
+    val image2 = new ImageIcon("src/main/resources/purple_square.png")
+
+
+    val picLabel = new JLabel(image)
+    picLabel.setVisible(true)
+    picLabel.setBounds(300, 200, 100, 100)
+    //picLabel.setHorizontalAlignment(SwingConstants.LEFT)
+    //picLabel.setVerticalAlignment(SwingConstants.BOTTOM)
+    //picLabel.setBounds(300, 100, 100, 100)
+
+    val picLabel2 = new JLabel(image2)
+    picLabel2.setVisible(true)
+    picLabel2.setBounds(100, 400, 100, 100)
+
+    val picPanel = new JPanel
+    picPanel.setLayout(null)
+    picPanel.setVisible(true)
+    picPanel.add(picLabel)
+    picPanel.add(picLabel2)
+    picPanel.setBounds(0, 0, 700, 500)
+
+    val mainFrame = new JFrame
+    mainFrame.setLayout(null)
+    mainFrame.add(picPanel)
+    mainFrame.setVisible(true)
+    mainFrame.setPreferredSize(new Dimension(700, 500))
+    mainFrame.pack()
+    mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
+
+
+    def main(args: Array[String]){while (true) {}
+    }
+}
+*/
