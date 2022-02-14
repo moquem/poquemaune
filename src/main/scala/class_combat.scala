@@ -35,7 +35,7 @@ class Fight (team1:Team, team2:Team) {
         // TODO affichage set d'attaques
 
         var fail_attack = true
-        var att Attack
+        var att = new Attack
 
         while (fail_attack) {
 
@@ -58,11 +58,12 @@ class Fight (team1:Team, team2:Team) {
                 current_pok_2.loss_PV(att.damage)
             }
         }
+    }
     
     /* A lancer quand c'est au moment de l'ennemi d'attaquer */
     def attack_enemy () {
         val r = scala.util.Random
-        var att Attack
+        var att = new Attack
 
         var fail_attack = true
 
