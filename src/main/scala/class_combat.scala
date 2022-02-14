@@ -1,24 +1,28 @@
+import java.awt.event._
+
+
+
 class Fight (team1:Team, team2:Team) {
 
-    current_pok_1 = team1(0)
-    current_pok_2 = team2(0)
+    var current_pok_1 = team1.team(0)
+    var current_pok_2 = team2.team(0)
 
     /* Permet de changer de Pokemon, pour l'instant possible seulement quand le pokemon en frontline meurt */
-    def switch_pokemon (team:Team) : Boolean = {
+    def switch_pokemon (team:Team) : Unit = { // TODO used to return a bool but now returns Unit in order to fix typing issues
 
         // TODO affichage de l'équipe
 
-        var new_pok:Pokemon
+        var new_pok = new Pokemon("poketruc") // TODO trouver une solution permanente pour nommer le pokemon
         var fail_switch = true
 
         while (fail_switch) {
 
-            case event.ButtonClicked(pok0_team) => new_pok = team1(0)  
-            case event.ButtonClicked(pok1_team) => new_pok = team1(1)
-            case event.ButtonClicked(pok2_team) => new_pok = team1(2)
-            case event.ButtonClicked(pok3_team) => new_pok = team1(3)
-            case event.ButtonClicked(pok4_team) => new_pok = team1(4)
-            case event.ButtonClicked(pok5_team) => new_pok = team1(5)
+            case event.ButtonClicked(pok0_team) => new_pok = team1.team(0)
+            case event.ButtonClicked(pok1_team) => new_pok = team1.team(1)
+            case event.ButtonClicked(pok2_team) => new_pok = team1.team(2)
+            case event.ButtonClicked(pok3_team) => new_pok = team1.team(3)
+            case event.ButtonClicked(pok4_team) => new_pok = team1.team(4)
+            case event.ButtonClicked(pok5_team) => new_pok = team1.team(5)
 
             fail_switch = new_pok.alive
 
