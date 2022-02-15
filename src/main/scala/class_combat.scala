@@ -8,7 +8,7 @@ class Fight (team1:Team, team2:Team) {
     var current_pok_2 = team2.team(0)
 
     /* Permet de changer de Pokemon, pour l'instant possible seulement quand le pokemon en frontline meurt */
-    def switch_pokemon (team:Team) : Unit = { // TODO used to return a bool but now returns Unit in order to fix typing issues
+    def switch_pokemon () = { // TODO used to return a bool but now returns Unit in order to fix typing issues
 
         // TODO affichage de l'équipe
 
