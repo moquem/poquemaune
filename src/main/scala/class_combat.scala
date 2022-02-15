@@ -39,21 +39,9 @@ class Fight (team1:Team, team2:Team) {
         // TODO affichage set d'attaques
 
         var fail_attack = true
-        var att = new Attack("fulguropoing") // temporary name
+        var att = team1.set_attack(nb_attack)
 
         while (fail_attack) {
-
-            /*case event.ButtonClicked(attack0) => 
-            att = current_pok_1.set_attack(0)
-
-            case event.ButtonClicked(attack1) => 
-            att = current_pok_1.set_attack(1)
-
-            case event.ButtonClicked(attack2) => 
-            att = current_pok_1.set_attack(2)
-
-            case event.ButtonClicked(attack3) => 
-            att = current_pok_1.set_attack(3)*/
 
             fail_attack = att.use_attack()
             if (fail_attack) {

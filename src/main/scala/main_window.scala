@@ -199,7 +199,7 @@ class CombatMenu (fight:Fight) {
           pokemonImgPanel.setVisible(true)
           actionMenuPanel.setVisible(true)
           attackMenuPanel.setVisible(false)
-          fight.team1.attack_ally(0)
+          fight.team1.attack_ally(1)
         }
     }
   )
@@ -210,7 +210,7 @@ class CombatMenu (fight:Fight) {
           pokemonImgPanel.setVisible(true)
           actionMenuPanel.setVisible(true)
           attackMenuPanel.setVisible(false)
-          fight.team1.attack_ally(0)
+          fight.team1.attack_ally(2)
         }
     }
   )
@@ -221,7 +221,7 @@ class CombatMenu (fight:Fight) {
           pokemonImgPanel.setVisible(true)
           actionMenuPanel.setVisible(true)
           attackMenuPanel.setVisible(false)
-          fight.team1.attack_ally(0)
+          fight.team1.attack_ally(3)
         }
     }
   )
