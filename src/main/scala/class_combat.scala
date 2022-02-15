@@ -34,7 +34,7 @@ class Fight (team1:Team, team2:Team) {
     }
 
     /* A lancer au moment où c'est au joueur d'attaquer */
-    def attack_ally () {
+    def attack_ally (nb_attack:Int) {
 
         // TODO affichage set d'attaques
 
