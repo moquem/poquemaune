@@ -188,7 +188,6 @@ class CombatMenu (fight:Fight) {
           pokemonImgPanel.setVisible(true)
           actionMenuPanel.setVisible(true)
           attackMenuPanel.setVisible(false)
-          end_of_turn = true
         }
     }
   )
@@ -199,7 +198,6 @@ class CombatMenu (fight:Fight) {
           pokemonImgPanel.setVisible(true)
           actionMenuPanel.setVisible(true)
           attackMenuPanel.setVisible(false)
-          end_of_turn = true 
         }
     }
   )
@@ -210,7 +208,6 @@ class CombatMenu (fight:Fight) {
           pokemonImgPanel.setVisible(true)
           actionMenuPanel.setVisible(true)
           attackMenuPanel.setVisible(false)
-          end_of_turn = true
         }
     }
   )
