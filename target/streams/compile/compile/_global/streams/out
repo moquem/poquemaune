@@ -1,13 +1,13 @@
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:191:11: not found: value end_of_turn[0m
-[0m[[0m[31merror[0m] [0m[0m          end_of_turn = true[0m
-[0m[[0m[31merror[0m] [0m[0m          ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:202:11: not found: value end_of_turn[0m
-[0m[[0m[31merror[0m] [0m[0m          end_of_turn = true [0m
-[0m[[0m[31merror[0m] [0m[0m          ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:213:11: not found: value end_of_turn[0m
-[0m[[0m[31merror[0m] [0m[0m          end_of_turn = true[0m
-[0m[[0m[31merror[0m] [0m[0m          ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:224:11: not found: value end_of_turn[0m
-[0m[[0m[31merror[0m] [0m[0m          end_of_turn = true[0m
-[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:191:24: value attack_ally is not a member of Team[0m
+[0m[[0m[31merror[0m] [0m[0m          fight.team_1.attack_ally(0)[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:202:24: value attack_ally is not a member of Team[0m
+[0m[[0m[31merror[0m] [0m[0m          fight.team_1.attack_ally(0)[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:213:24: value attack_ally is not a member of Team[0m
+[0m[[0m[31merror[0m] [0m[0m          fight.team_1.attack_ally(0)[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:224:24: value attack_ally is not a member of Team[0m
+[0m[[0m[31merror[0m] [0m[0m          fight.team_1.attack_ally(0)[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
 [0m[[0m[31merror[0m] [0m[0mfour errors found[0m
