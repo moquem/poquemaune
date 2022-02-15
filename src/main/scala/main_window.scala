@@ -19,10 +19,12 @@ import javax.swing.border.Border
 import javax.swing.BorderFactory
 import java.awt.GraphicsDevice
 import java.awt.GraphicsEnvironment
+import java.awt.event._
+//import scala.swing.event._
+
 
 
 object CombatMenu {
-
 
   /*
    * We are using a null layout, this means we have to be precise about how we organise our panels
@@ -56,6 +58,9 @@ object CombatMenu {
   // Images for the player's and oponent's pokemon
   val playerPokemonImg = new ImageIcon("src/main/resources/green_square.png")
   val oppPokemonImg = new ImageIcon("src/main/resources/purple_square.png")
+  
+
+  // adding action listers to the buttons so we can know when they are clicked
 
   // Button for selecting attacks
   val atkSelectionButton = new JButton("Attack")
@@ -63,18 +68,15 @@ object CombatMenu {
 
   // Button for switching pokemon
   val pokSelectionButton = new JButton("Change Pokemon")
-  pokSelectionButton.setText("Change Pokemon")
   pokSelectionButton.setVisible(true)
 
   // Button for selecting an action
-  val actionSelectionButton = new JButton
+  val actionSelectionButton = new JButton("Action")
   actionSelectionButton.setVisible(true)
-  actionSelectionButton.setText("Action")
 
   // Button for slecting an item
-  val itemSelectionButton = new JButton
+  val itemSelectionButton = new JButton("Item")
   itemSelectionButton.setVisible(true)
-  itemSelectionButton.setText("Item")
   
 
   // Label for the image of player's pokemon
@@ -114,8 +116,72 @@ object CombatMenu {
   actionMenuPanel.add(pokSelectionButton)
   actionMenuPanel.add(actionSelectionButton)
   actionMenuPanel.add(itemSelectionButton)
-  actionMenuPanel.setBorder(BorderFactory.createLineBorder(Color.black))
+  // creates border around the panel (mainly for test purposes)
+  //actionMenuPanel.setBorder(BorderFactory.createLineBorder(Color.black))
+  
+
+  /*
+   *
+   *  Attack menu, has 5 buttons, 4 for the various attacks and one for returning to the main menu
+   *
+   * */
+  
+  // Attack buttons
+  val attackButton1 = new JButton("attack 1")
+  attackButton1.setVisible(true)
+  attackButton1.setBounds(borderSize, borderSize, 100, 50)
+  val attackButton2 = new JButton("attack 2")
+  attackButton2.setVisible(true)
+  attackButton2.setBounds(1920-borderSize-100, borderSize, 100, 50)
+  val attackButton3 = new JButton("attack 3")
+  attackButton3.setVisible(true)
+  attackButton3.setBounds(borderSize, 1080-borderSize-50, 100, 50)
+  val attackButton4 = new JButton("attack 4")
+  attackButton4.setVisible(true)
+  attackButton4.setBounds(1920-borderSize-100, 1080-borderSize-50, 100, 50)
+  // Return button
+  val returnButton = new JButton("return")
+  returnButton.setVisible(true)
+  returnButton.setBounds(1920-200, 1080-200, 100, 100)
+
+  // Panel for the attack menu, is activated when the attack button is pressed
+  val attackMenuPanel = new JPanel
+  attackMenuPanel.setVisible(false)
+  attackMenuPanel.setBounds(0, 0, 1920, 1080)
+  // We need a null layout in order to be able to place the return button
+  attackMenuPanel.setLayout(null)
+  // buttons
+  attackMenuPanel.add(attackButton1)
+  attackMenuPanel.add(attackButton2)
+  attackMenuPanel.add(attackButton3)
+  attackMenuPanel.add(attackButton4)
+  attackMenuPanel.add(returnButton)
+
+
+  // Button actions
  
+  // Activate attack menu
+  atkSelectionButton.addActionListener(
+    new ActionListener{
+      def actionPerformed(e:ActionEvent) {
+          pokemonImgPanel.setVisible(false)
+          actionMenuPanel.setVisible(false)
+          attackMenuPanel.setVisible(true)
+
+        }
+    }
+  )
+
+  returnButton.addActionListener(
+    new ActionListener{
+      def actionPerformed (e:ActionEvent) {
+        pokemonImgPanel.setVisible(true)
+        actionMenuPanel.setVisible(true)
+        attackMenuPanel.setVisible(false)
+      }
+    }
+  )
+
   // enables us to set the window to full screen, i have no idea what it does 
   val graphics = GraphicsEnvironment.getLocalGraphicsEnvironment()
   val device = graphics.getDefaultScreenDevice()
@@ -131,6 +197,7 @@ object CombatMenu {
   // adds the panels to the frame
   mainFrame.add(pokemonImgPanel)
   mainFrame.add(actionMenuPanel)
+  mainFrame.add(attackMenuPanel)
   // size of the window
   mainFrame.setPreferredSize(new Dimension(1920, 1080))
   mainFrame.pack()
@@ -139,6 +206,10 @@ object CombatMenu {
   // makes the frame full screen
   device.setFullScreenWindow(mainFrame)
   
+  
+
+
+
 
   def main(args: Array[String]){
     while (true) {}

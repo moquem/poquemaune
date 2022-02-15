@@ -59,7 +59,7 @@ class Pokemon (name:String) {
 }
 
 class Team {
-    var team:Array[Pokemon] = new Array[Attack](6)
+    var team:Array[Pokemon] = new Array[Pokemon](6)
 
     def team_alive () : Boolean = {
         var nb_alive = 0

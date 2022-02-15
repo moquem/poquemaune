@@ -17,16 +17,16 @@ class Fight (team1:Team, team2:Team) {
 
         while (fail_switch) {
 
-            case pok0_team.isPressed() => new_pok = team1.team(0)
-            case pok1_team.isPressed() => new_pok = team1.team(1)
-            case pok2_team.isPressed() => new_pok = team1.team(2)
-            case pok3_team.isPressed() => new_pok = team1.team(3)
-            case pok4_team.isPressed() => new_pok = team1.team(4)
-            case pok5_team.isPressed() => new_pok = team1.team(5)
+            /*case event.ButtonClicked(pok0_team) => new_pok = team1.team(0)
+            case event.ButtonClicked(pok1_team) => new_pok = team1.team(1)
+            case event.ButtonClicked(pok2_team) => new_pok = team1.team(2)
+            case event.ButtonClicked(pok3_team) => new_pok = team1.team(3)
+            case event.ButtonClicked(pok4_team) => new_pok = team1.team(4)
+            case event.ButtonClicked(pok5_team) => new_pok = team1.team(5)*/
 
             fail_switch = new_pok.alive
 
-            if (not(fail_switch)) { 
+            if (!(fail_switch)) { 
                 // TODO affichage message d'erreur "Le pokemon n'a plus de PV"
             }
         }
@@ -39,11 +39,11 @@ class Fight (team1:Team, team2:Team) {
         // TODO affichage set d'attaques
 
         var fail_attack = true
-        var att = new Attack
+        var att = new Attack("fulguropoing") // temporary name
 
         while (fail_attack) {
 
-            case event.ButtonClicked(attack0) => 
+            /*case event.ButtonClicked(attack0) => 
             att = current_pok_1.set_attack(0)
 
             case event.ButtonClicked(attack1) => 
@@ -53,7 +53,7 @@ class Fight (team1:Team, team2:Team) {
             att = current_pok_1.set_attack(2)
 
             case event.ButtonClicked(attack3) => 
-            att = current_pok_1.set_attack(3)
+            att = current_pok_1.set_attack(3)*/
 
             fail_attack = att.use_attack()
             if (fail_attack) {
@@ -67,14 +67,14 @@ class Fight (team1:Team, team2:Team) {
     /* A lancer quand c'est au moment de l'ennemi d'attaquer */
     def attack_enemy () {
         val r = scala.util.Random
-        var att = new Attack
+        var att = new Attack("turbo-défoncage") // temporary attack name
 
         var fail_attack = true
 
         while (fail_attack) {
             att = current_pok_2.set_attack(r.nextInt(4))
             fail_attack = att.use_attack()
-            if (not(fail_attack)) { 
+            if (!(fail_attack)) { 
                 current_pok_1.loss_PV(att.damage)
             }
         }
