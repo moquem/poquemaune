@@ -24,7 +24,7 @@ import java.awt.event._
 
 
 
-object CombatMenu {
+class CombatMenu (fight:Fight) {
 
   /*
    * We are using a null layout, this means we have to be precise about how we organise our panels
