@@ -1,10 +1,11 @@
-[0m[[0m[0mdebug[0m] [0m[0mCreated transactional ClassFileManager with tempDir = /home/bozec/Documents/etudes/projet_prog_2/poquemaune/target/scala-2.12/classes.bak[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreated transactional ClassFileManager with tempDir = /home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/target/scala-2.12/classes.bak[0m
 [0m[[0m[0mdebug[0m] [0m[0mAbout to delete class files:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu.class[0m
 [0m[[0m[0mdebug[0m] [0m[0mWe backup class files:[0m
+<<<<<<< HEAD
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$1.class[0m
@@ -13,5 +14,17 @@
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$.class[0m
+=======
+>>>>>>> 4a15f331b7cbd0d332d5adbc627b937aa944591a
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$2.class[0m
-[0m[[0m[0mdebug[0m] [0m[0mRemoving the temporary directory used for backing up class files: /home/bozec/Documents/etudes/projet_prog_2/poquemaune/target/scala-2.12/classes.bak[0m
+[0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	CombatMenu.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mRolling back changes to class files.[0m
+[0m[[0m[0mdebug[0m] [0m[0mRemoving generated classes:[0m
+[0m[[0m[0mdebug[0m] [0m[0mRestoring class files: [0m
+[0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	CombatMenu.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mRemoving the temporary directory used for backing up class files: /home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/target/scala-2.12/classes.bak[0m

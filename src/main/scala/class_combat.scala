@@ -80,7 +80,7 @@ class Fight (team1:Team, team2:Team) {
         }
     }
 
-/*class Fight_processing (team1:Team, team2:Team) {
+/* class Fight_processing (team1:Team, team2:Team) {
 
     var fight_in_progress = Fight(team1,team2)
 
@@ -94,4 +94,5 @@ class Fight (team1:Team, team2:Team) {
             }
         }
     }*/
-}
+    
+} 

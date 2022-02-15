@@ -20,13 +20,18 @@
 [0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(${BASE}/src/main/scala/main_window.scala)[0m
 [0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: CombatMenu[0m
 [0m[[0m[0mdebug[0m] [0m[0mcompilation cycle 1[0m
-[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /home/bozec/Documents/etudes/projet_prog_2/poquemaune/target/scala-2.12/classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/target/scala-2.12/classes ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.12:1.6.0:compile for Scala 2.12.15[0m
+<<<<<<< HEAD
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 4e8dd552 for Scala compiler version 2.12.15[0m
+=======
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 39650005 for Scala compiler version 2.12.15[0m
+>>>>>>> 4a15f331b7cbd0d332d5adbc627b937aa944591a
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
-[0m[[0m[0mdebug[0m] [0m[0m	/home/bozec/.sbt/boot/scala-2.12.15/lib/scala-library.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	/home/maena/.sbt/boot/scala-2.12.15/lib/scala-library.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
+<<<<<<< HEAD
 [0m[[0m[0mdebug[0m] [0m[0m	/home/bozec/Documents/etudes/projet_prog_2/poquemaune/target/scala-2.12/classes:/home/bozec/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-swing_2.12/2.0.1/scala-swing_2.12-2.0.1.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0mNew invalidations:[0m
 [0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: [0m
@@ -36,3 +41,8 @@
 [0m[[0m[0mdebug[0m] [0m[0mNo classes were invalidated.[0m
 [0m[[0m[0mdebug[0m] [0m[0mScala compilation took 2.164667555 s[0m
 [0m[[0m[0mdebug[0m] [0m[0mdone compiling[0m
+=======
+[0m[[0m[0mdebug[0m] [0m[0m	/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/target/scala-2.12/classes:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-swing_2.12/2.0.1/scala-swing_2.12-2.0.1.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0mCompilation failed (CompilerInterface)[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+>>>>>>> 4a15f331b7cbd0d332d5adbc627b937aa944591a
