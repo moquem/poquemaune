@@ -17,12 +17,12 @@ class Fight (team1:Team, team2:Team) {
 
         while (fail_switch) {
 
-            case event.ButtonClicked(pok0_team) => new_pok = team1.team(0)
-            case event.ButtonClicked(pok1_team) => new_pok = team1.team(1)
-            case event.ButtonClicked(pok2_team) => new_pok = team1.team(2)
-            case event.ButtonClicked(pok3_team) => new_pok = team1.team(3)
-            case event.ButtonClicked(pok4_team) => new_pok = team1.team(4)
-            case event.ButtonClicked(pok5_team) => new_pok = team1.team(5)
+            case pok0_team.isPressed() => new_pok = team1.team(0)
+            case pok1_team.isPressed() => new_pok = team1.team(1)
+            case pok2_team.isPressed() => new_pok = team1.team(2)
+            case pok3_team.isPressed() => new_pok = team1.team(3)
+            case pok4_team.isPressed() => new_pok = team1.team(4)
+            case pok5_team.isPressed() => new_pok = team1.team(5)
 
             fail_switch = new_pok.alive
 
@@ -80,4 +80,18 @@ class Fight (team1:Team, team2:Team) {
         }
     }
 
+class Fight_processing (team1:Team, team2:Team) {
+
+    var fight_in_progress = Fight(team1,team2)
+
+    def fight (team1:Team, team2:Team) : Boolean {
+        // TODO déplacer les boutons ici 
+        var step = 0 
+        
+        while (team_ally.team_alive() && team_enemy.team_alive()) {
+            if (atkSelectionButton.isPressed()) {
+                fight_in_progress.attack_ally()
+            }
+        }
+    }
 }
