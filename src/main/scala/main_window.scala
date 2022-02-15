@@ -19,6 +19,8 @@ import javax.swing.border.Border
 import javax.swing.BorderFactory
 import java.awt.GraphicsDevice
 import java.awt.GraphicsEnvironment
+import java.awt.event._
+//import scala.swing.event._
 
 
 
@@ -56,6 +58,9 @@ object CombatMenu {
   // Images for the player's and oponent's pokemon
   val playerPokemonImg = new ImageIcon("src/main/resources/green_square.png")
   val oppPokemonImg = new ImageIcon("src/main/resources/purple_square.png")
+  
+
+  // adding action listers to the buttons so we can know when they are clicked
 
   // Button for selecting attacks
   val atkSelectionButton = new JButton("Attack")
@@ -111,7 +116,8 @@ object CombatMenu {
   actionMenuPanel.add(pokSelectionButton)
   actionMenuPanel.add(actionSelectionButton)
   actionMenuPanel.add(itemSelectionButton)
-  actionMenuPanel.setBorder(BorderFactory.createLineBorder(Color.black))
+  // creates border around the panel (mainly for test purposes)
+  //actionMenuPanel.setBorder(BorderFactory.createLineBorder(Color.black))
   
 
   /*
@@ -152,8 +158,29 @@ object CombatMenu {
   attackMenuPanel.add(returnButton)
 
 
+  // Button actions
+ 
+  // Activate attack menu
+  atkSelectionButton.addActionListener(
+    new ActionListener{
+      def actionPerformed(e:ActionEvent) {
+          pokemonImgPanel.setVisible(false)
+          actionMenuPanel.setVisible(false)
+          attackMenuPanel.setVisible(true)
 
+        }
+    }
+  )
 
+  returnButton.addActionListener(
+    new ActionListener{
+      def actionPerformed (e:ActionEvent) {
+        pokemonImgPanel.setVisible(true)
+        actionMenuPanel.setVisible(true)
+        attackMenuPanel.setVisible(false)
+      }
+    }
+  )
 
   // enables us to set the window to full screen, i have no idea what it does 
   val graphics = GraphicsEnvironment.getLocalGraphicsEnvironment()
