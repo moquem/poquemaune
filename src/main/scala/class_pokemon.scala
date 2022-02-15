@@ -23,7 +23,7 @@ class Attack (name:String) {
 
 class Pokemon (name:String) {
     var lien:String = "TODO"
-    var PVMax:Int = -1
+    var PVMax:Int = 0
     var typ:String = "TODO"
 
     var PV:Int = PVMax

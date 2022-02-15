@@ -1,4 +1,7 @@
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:166:11: not found: value pokImgPanel[0m
-[0m[[0m[31merror[0m] [0m[0m          pokImgPanel.setVisible(false)[0m
-[0m[[0m[31merror[0m] [0m[0m          ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/class_combat.scala:83:1: Missing closing brace `}' assumed here[0m
+[0m[[0m[31merror[0m] [0m[0mclass Fight_processing (team1:Team, team2:Team) {[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/class_combat.scala:91:9: illegal start of declaration (possible cause: missing `=' in front of current method body)[0m
+[0m[[0m[31merror[0m] [0m[0m        while (team_ally.team_alive() && team_enemy.team_alive()) {[0m
+[0m[[0m[31merror[0m] [0m[0m        ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

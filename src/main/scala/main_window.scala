@@ -212,7 +212,65 @@ object CombatMenu {
 
 
   def main(args: Array[String]){
-    while (true) {}
+    while (true) {
+      var pok_empty = Pokemon("")
+      pok_empty.alive = false
+
+      atk1 = Attack("Griffe acier")
+      atk1.damage = 7
+      atk1.PP_max = 10
+      atk1.PP_cost = 10
+
+      atk2 = Attack("Charge")
+      atk2.damage = 5
+      atk2.PP_max = 20
+      atk2.PP_cost = 20
+
+      atk3 = Attack("Inutile")
+      atk3.damage = 0
+      atk3.PP_max = 30
+      atk3.PP_cost = 30
+
+      atk4 = Attack("Roulade")
+      atk4.damage = 5
+      atk4.PP_max = 10
+      atk4.PP_cost = 10
+
+      pok1 = Pokemon("Noacier")
+      pok1.PVMax = 50
+      pok1.PV = 50
+      pok1.set_attack(0) = atk1
+      pok1.set_attack(1) = atk2
+      pok1.set_attack(2) = atk3
+      pok1.set_attack(3) = atk4
+
+      pok2 = Pokemon("Grodrive")
+      pok2.PVMax = 50
+      pok2.PV = 50
+      pok2.set_attack(0) = atk1
+      pok2.set_attack(1) = atk2
+      pok2.set_attack(2) = atk3
+      pok2.set_attack(3) = atk4
+
+      pok3 = Pokemon("Cabriolaine")
+      pok3.PVMax = 50
+      pok3.PV = 50
+      pok3.set_attack(0) = atk1
+      pok3.set_attack(1) = atk2
+      pok3.set_attack(2) = atk3
+      pok3.set_attack(3) = atk4
+
+      pok4 = Pokemon("Spoink")
+      pok4.PVMax = 50
+      pok4.PV = 50
+      pok4.set_attack(0) = atk1
+      pok4.set_attack(1) = atk2
+      pok4.set_attack(2) = atk3
+      pok4.set_attack(3) = atk4
+
+      team1 = Team
+      team2 = Team
+    }
   }
 
 
