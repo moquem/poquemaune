@@ -182,6 +182,50 @@ object CombatMenu {
     }
   )
 
+  attackButton1.addActionListener(
+    new ActionListener {
+      def actionPerformed(e:ActionEvent) {
+          pokemonImgPanel.setVisible(true)
+          actionMenuPanel.setVisible(true)
+          attackMenuPanel.setVisible(false)
+          end_of_turn = true
+        }
+    }
+  )
+
+  attackButton2.addActionListener(
+    new ActionListener {
+      def actionPerformed(e:ActionEvent) {
+          pokemonImgPanel.setVisible(true)
+          actionMenuPanel.setVisible(true)
+          attackMenuPanel.setVisible(false)
+          end_of_turn = true 
+        }
+    }
+  )
+
+  attackButton3.addActionListener(
+    new ActionListener {
+      def actionPerformed(e:ActionEvent) {
+          pokemonImgPanel.setVisible(true)
+          actionMenuPanel.setVisible(true)
+          attackMenuPanel.setVisible(false)
+          end_of_turn = true
+        }
+    }
+  )
+
+  attackButton4.addActionListener(
+    new ActionListener {
+      def actionPerformed(e:ActionEvent) {
+          pokemonImgPanel.setVisible(true)
+          actionMenuPanel.setVisible(true)
+          attackMenuPanel.setVisible(false)
+          end_of_turn = true
+        }
+    }
+  )
+
   // enables us to set the window to full screen, i have no idea what it does 
   val graphics = GraphicsEnvironment.getLocalGraphicsEnvironment()
   val device = graphics.getDefaultScreenDevice()
@@ -206,37 +250,34 @@ object CombatMenu {
   // makes the frame full screen
   device.setFullScreenWindow(mainFrame)
   
-  
-
-
 
 
   def main(args: Array[String]){
     while (true) {
-      var pok_empty = Pokemon("")
+      var pok_empty = new Pokemon("")
       pok_empty.alive = false
 
-      atk1 = Attack("Griffe acier")
+      var atk1 = new Attack("Griffe acier")
       atk1.damage = 7
       atk1.PP_max = 10
       atk1.PP_cost = 10
 
-      atk2 = Attack("Charge")
+      var atk2 = new Attack("Charge")
       atk2.damage = 5
       atk2.PP_max = 20
       atk2.PP_cost = 20
 
-      atk3 = Attack("Inutile")
+      var atk3 = new Attack("Inutile")
       atk3.damage = 0
       atk3.PP_max = 30
       atk3.PP_cost = 30
 
-      atk4 = Attack("Roulade")
+      var atk4 = new Attack("Roulade")
       atk4.damage = 5
       atk4.PP_max = 10
       atk4.PP_cost = 10
 
-      pok1 = Pokemon("Noacier")
+      var pok1 = new Pokemon("Noacier")
       pok1.PVMax = 50
       pok1.PV = 50
       pok1.set_attack(0) = atk1
@@ -244,7 +285,7 @@ object CombatMenu {
       pok1.set_attack(2) = atk3
       pok1.set_attack(3) = atk4
 
-      pok2 = Pokemon("Grodrive")
+      var pok2 = new Pokemon("Grodrive")
       pok2.PVMax = 50
       pok2.PV = 50
       pok2.set_attack(0) = atk1
@@ -252,7 +293,7 @@ object CombatMenu {
       pok2.set_attack(2) = atk3
       pok2.set_attack(3) = atk4
 
-      pok3 = Pokemon("Cabriolaine")
+      var pok3 = new Pokemon("Cabriolaine")
       pok3.PVMax = 50
       pok3.PV = 50
       pok3.set_attack(0) = atk1
@@ -260,7 +301,7 @@ object CombatMenu {
       pok3.set_attack(2) = atk3
       pok3.set_attack(3) = atk4
 
-      pok4 = Pokemon("Spoink")
+      var pok4 = new Pokemon("Spoink")
       pok4.PVMax = 50
       pok4.PV = 50
       pok4.set_attack(0) = atk1
@@ -268,8 +309,18 @@ object CombatMenu {
       pok4.set_attack(2) = atk3
       pok4.set_attack(3) = atk4
 
-      team1 = Team
-      team2 = Team
+      var team1 = new Team
+      var team2 = new Team
+
+      team1.team(0) = pok1 
+      team1.team(1) = pok2
+      team1.team(2) = pok_empty
+      team1.team(3) = pok_empty
+
+      team2.team(0) = pok3
+      team2.team(1) = pok4
+      team2.team(2) = pok_empty
+      team2.team(3) = pok_empty
     }
   }
 
