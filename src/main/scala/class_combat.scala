@@ -80,11 +80,11 @@ class Fight (team1:Team, team2:Team) {
         }
     }
 
-class Fight_processing (team1:Team, team2:Team) {
+/*class Fight_processing (team1:Team, team2:Team) {
 
     var fight_in_progress = Fight(team1,team2)
 
-    def fight (team1:Team, team2:Team) : Boolean {
+    def fight (team1:Team, team2:Team) : Boolean = {
         // TODO déplacer les boutons ici 
         var step = 0 
         
@@ -93,5 +93,5 @@ class Fight_processing (team1:Team, team2:Team) {
                 fight_in_progress.attack_ally()
             }
         }
-    }
+    }*/
 }

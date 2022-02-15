@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:166:11: not found: value pokImgPanel[0m
-[0m[[0m[31merror[0m] [0m[0m          pokImgPanel.setVisible(false)[0m
-[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/class_combat.scala:97:4: '}' expected but eof found.[0m
+[0m[[0m[31merror[0m] [0m[0m}*/[0m
+[0m[[0m[31merror[0m] [0m[0m   ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

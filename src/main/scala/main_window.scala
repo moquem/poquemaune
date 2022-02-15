@@ -129,16 +129,16 @@ object CombatMenu {
   // Attack buttons
   val attackButton1 = new JButton("attack 1")
   attackButton1.setVisible(true)
-  attackButton1.setBounds(borderSize, borderSize, 100, 50)
+  attackButton1.setBounds(borderSize+300, borderSize + 300, 300, 100)
   val attackButton2 = new JButton("attack 2")
   attackButton2.setVisible(true)
-  attackButton2.setBounds(1920-borderSize-100, borderSize, 100, 50)
+  attackButton2.setBounds(1920-borderSize-300, borderSize + 300, 300, 100)
   val attackButton3 = new JButton("attack 3")
   attackButton3.setVisible(true)
-  attackButton3.setBounds(borderSize, 1080-borderSize-50, 100, 50)
+  attackButton3.setBounds(borderSize+300, 1080-borderSize-100, 300, 100)
   val attackButton4 = new JButton("attack 4")
   attackButton4.setVisible(true)
-  attackButton4.setBounds(1920-borderSize-100, 1080-borderSize-50, 100, 50)
+  attackButton4.setBounds(1920-borderSize-300, 1080-borderSize-100, 300, 100)
   // Return button
   val returnButton = new JButton("return")
   returnButton.setVisible(true)
@@ -182,6 +182,7 @@ object CombatMenu {
     }
   )
 
+
   // enables us to set the window to full screen, i have no idea what it does 
   val graphics = GraphicsEnvironment.getLocalGraphicsEnvironment()
   val device = graphics.getDefaultScreenDevice()
@@ -217,43 +218,4 @@ object CombatMenu {
 
 
 }
-/*
-object SwingExample {
-    
 
-
-    val image = new ImageIcon("src/main/resources/green_square.png")
-    val image2 = new ImageIcon("src/main/resources/purple_square.png")
-
-
-    val picLabel = new JLabel(image)
-    picLabel.setVisible(true)
-    picLabel.setBounds(300, 200, 100, 100)
-    //picLabel.setHorizontalAlignment(SwingConstants.LEFT)
-    //picLabel.setVerticalAlignment(SwingConstants.BOTTOM)
-    //picLabel.setBounds(300, 100, 100, 100)
-
-    val picLabel2 = new JLabel(image2)
-    picLabel2.setVisible(true)
-    picLabel2.setBounds(100, 400, 100, 100)
-
-    val picPanel = new JPanel
-    picPanel.setLayout(null)
-    picPanel.setVisible(true)
-    picPanel.add(picLabel)
-    picPanel.add(picLabel2)
-    picPanel.setBounds(0, 0, 700, 500)
-
-    val mainFrame = new JFrame
-    mainFrame.setLayout(null)
-    mainFrame.add(picPanel)
-    mainFrame.setVisible(true)
-    mainFrame.setPreferredSize(new Dimension(700, 500))
-    mainFrame.pack()
-    mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
-
-
-    def main(args: Array[String]){while (true) {}
-    }
-}
-*/
