@@ -1,32 +1,13 @@
-<<<<<<< HEAD
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/class_combat.scala:97:4: '}' expected but eof found.[0m
-[0m[[0m[31merror[0m] [0m[0m}*/[0m
-[0m[[0m[31merror[0m] [0m[0m   ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
-=======
-[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/main_window.scala:186:9: trait ActionListener is a trait; does not take constructor arguments[0m
-[0m[[0m[31merror[0m] [0m[0m    new ActionListener (end_of_turn) {[0m
-[0m[[0m[31merror[0m] [0m[0m        ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/main_window.scala:191:11: not found: value end_of_turn[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:191:11: not found: value end_of_turn[0m
 [0m[[0m[31merror[0m] [0m[0m          end_of_turn = true[0m
 [0m[[0m[31merror[0m] [0m[0m          ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/main_window.scala:197:9: trait ActionListener is a trait; does not take constructor arguments[0m
-[0m[[0m[31merror[0m] [0m[0m    new ActionListener (end_of_turn) {[0m
-[0m[[0m[31merror[0m] [0m[0m        ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/main_window.scala:202:11: not found: value end_of_turn[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:202:11: not found: value end_of_turn[0m
 [0m[[0m[31merror[0m] [0m[0m          end_of_turn = true [0m
 [0m[[0m[31merror[0m] [0m[0m          ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/main_window.scala:208:9: trait ActionListener is a trait; does not take constructor arguments[0m
-[0m[[0m[31merror[0m] [0m[0m    new ActionListener (end_of_turn) {[0m
-[0m[[0m[31merror[0m] [0m[0m        ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/main_window.scala:213:11: not found: value end_of_turn[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:213:11: not found: value end_of_turn[0m
 [0m[[0m[31merror[0m] [0m[0m          end_of_turn = true[0m
 [0m[[0m[31merror[0m] [0m[0m          ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/main_window.scala:219:9: trait ActionListener is a trait; does not take constructor arguments[0m
-[0m[[0m[31merror[0m] [0m[0m    new ActionListener (end_of_turn) {[0m
-[0m[[0m[31merror[0m] [0m[0m        ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/main_window.scala:224:11: not found: value end_of_turn[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:224:11: not found: value end_of_turn[0m
 [0m[[0m[31merror[0m] [0m[0m          end_of_turn = true[0m
 [0m[[0m[31merror[0m] [0m[0m          ^[0m
-[0m[[0m[31merror[0m] [0m[0m8 errors found[0m
->>>>>>> 4a15f331b7cbd0d332d5adbc627b937aa944591a
+[0m[[0m[31merror[0m] [0m[0mfour errors found[0m

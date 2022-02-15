@@ -262,7 +262,7 @@ class CombatMenu (fight:Fight) {
       atk1.PP_max = 10
       atk1.PP_cost = 10
 
-      var atk2 = new Attack("Charge")
+      var atk2 = new Attack("Fulguropoing")
       atk2.damage = 5
       atk2.PP_max = 20
       atk2.PP_cost = 20
@@ -272,7 +272,7 @@ class CombatMenu (fight:Fight) {
       atk3.PP_max = 30
       atk3.PP_cost = 30
 
-      var atk4 = new Attack("Roulade")
+      var atk4 = new Attack("Roulade Tactique")
       atk4.damage = 5
       atk4.PP_max = 10
       atk4.PP_cost = 10
