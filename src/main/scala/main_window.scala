@@ -251,79 +251,83 @@ class CombatMenu (fight:Fight) {
   device.setFullScreenWindow(mainFrame)
   
 
+}
 
-  def main(args: Array[String]){
-    while (true) {
-      var pok_empty = new Pokemon("")
-      pok_empty.alive = false
+object MainGame {
+  var pok_empty = new Pokemon("")
+  pok_empty.alive = false
 
-      var atk1 = new Attack("Griffe acier")
-      atk1.damage = 7
-      atk1.PP_max = 10
-      atk1.PP_cost = 10
+  var atk1 = new Attack("Griffe acier")
+  atk1.damage = 7
+  atk1.PP_max = 10
+  atk1.PP_cost = 10
 
-      var atk2 = new Attack("Fulguropoing")
-      atk2.damage = 5
-      atk2.PP_max = 20
-      atk2.PP_cost = 20
+  var atk2 = new Attack("Fulguropoing")
+  atk2.damage = 5
+  atk2.PP_max = 20
+  atk2.PP_cost = 20
 
-      var atk3 = new Attack("Inutile")
-      atk3.damage = 0
-      atk3.PP_max = 30
-      atk3.PP_cost = 30
+  var atk3 = new Attack("Inutile")
+  atk3.damage = 0
+  atk3.PP_max = 30
+  atk3.PP_cost = 30
 
-      var atk4 = new Attack("Roulade Tactique")
-      atk4.damage = 5
-      atk4.PP_max = 10
-      atk4.PP_cost = 10
+  var atk4 = new Attack("Roulade Tactique")
+  atk4.damage = 5
+  atk4.PP_max = 10
+  atk4.PP_cost = 10
 
-      var pok1 = new Pokemon("Noacier")
-      pok1.PVMax = 50
-      pok1.PV = 50
-      pok1.set_attack(0) = atk1
-      pok1.set_attack(1) = atk2
-      pok1.set_attack(2) = atk3
-      pok1.set_attack(3) = atk4
+  var pok1 = new Pokemon("Noacier")
+  pok1.PVMax = 50
+  pok1.PV = 50
+  pok1.set_attack(0) = atk1
+  pok1.set_attack(1) = atk2
+  pok1.set_attack(2) = atk3
+  pok1.set_attack(3) = atk4
 
-      var pok2 = new Pokemon("Grodrive")
-      pok2.PVMax = 50
-      pok2.PV = 50
-      pok2.set_attack(0) = atk1
-      pok2.set_attack(1) = atk2
-      pok2.set_attack(2) = atk3
-      pok2.set_attack(3) = atk4
+  var pok2 = new Pokemon("Grodrive")
+  pok2.PVMax = 50
+  pok2.PV = 50
+  pok2.set_attack(0) = atk1
+  pok2.set_attack(1) = atk2
+  pok2.set_attack(2) = atk3
+  pok2.set_attack(3) = atk4
 
-      var pok3 = new Pokemon("Cabriolaine")
-      pok3.PVMax = 50
-      pok3.PV = 50
-      pok3.set_attack(0) = atk1
-      pok3.set_attack(1) = atk2
-      pok3.set_attack(2) = atk3
-      pok3.set_attack(3) = atk4
+  var pok3 = new Pokemon("Cabriolaine")
+  pok3.PVMax = 50
+  pok3.PV = 50
+  pok3.set_attack(0) = atk1
+  pok3.set_attack(1) = atk2
+  pok3.set_attack(2) = atk3
+  pok3.set_attack(3) = atk4
 
-      var pok4 = new Pokemon("Spoink")
-      pok4.PVMax = 50
-      pok4.PV = 50
-      pok4.set_attack(0) = atk1
-      pok4.set_attack(1) = atk2
-      pok4.set_attack(2) = atk3
-      pok4.set_attack(3) = atk4
+  var pok4 = new Pokemon("Spoink")
+  pok4.PVMax = 50
+  pok4.PV = 50
+  pok4.set_attack(0) = atk1
+  pok4.set_attack(1) = atk2
+  pok4.set_attack(2) = atk3
+  pok4.set_attack(3) = atk4
 
-      var team1 = new Team
-      var team2 = new Team
+  var team1 = new Team
+  var team2 = new Team
 
-      team1.team(0) = pok1 
-      team1.team(1) = pok2
-      team1.team(2) = pok_empty
-      team1.team(3) = pok_empty
+  team1.team(0) = pok1 
+  team1.team(1) = pok2
+  team1.team(2) = pok_empty
+  team1.team(3) = pok_empty
 
-      team2.team(0) = pok3
-      team2.team(1) = pok4
-      team2.team(2) = pok_empty
-      team2.team(3) = pok_empty
-    }
+  team2.team(0) = pok3
+  team2.team(1) = pok4
+  team2.team(2) = pok_empty
+  team2.team(3) = pok_empty
+
+  var fight = new Fight(team1,team2)
+  var combatInterface = new CombatMenu(fight)
+
+  def main {
+    while (true) {}
   }
-
-
+  
 }
 
