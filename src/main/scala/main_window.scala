@@ -254,6 +254,7 @@ class CombatMenu (fight:Fight) {
 
 
   // End of turn
+
   endOfTurnButton.addActionListener(
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
@@ -261,11 +262,17 @@ class CombatMenu (fight:Fight) {
           actionMenuPanel.setVisible(false)
           endFightPanel.setVisible(true)
         } else {
+          fight.new_pok_enemy()
           var nb_attack:Int = 0
           nb_attack = fight.attack_enemy()
           if (!fight.team_1.team_alive()) {
             actionMenuPanel.setVisible(false)
             endFightPanel.setVisible(true)
+          } else {
+            if (!fight.current_pok_ally.alive) {
+              actionMenuPanel.setVisible(false)
+              teamMenuPanel.setVisible(true)
+            }
           }
         }
       }

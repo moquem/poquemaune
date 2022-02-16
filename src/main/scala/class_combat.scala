@@ -34,5 +34,20 @@ class Fight (team1:Team, team2:Team) {
         nb_attack
     }
 
+    def new_pok_enemy () {
+        val r = scala.util.Random
+
+        var dead_pok = !current_pok_enemy.alive
+        var nb_pok:Int = 0
+
+        while (dead_pok) {
+            nb_pok = r.nextInt(6)
+            if (team2.team(nb_pok).alive) {
+                current_pok_enemy = team2.team(nb_pok)
+                dead_pok = false
+            }
+        }
+  }
+
     
 } 
