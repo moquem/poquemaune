@@ -233,23 +233,20 @@ class CombatMenu (fight:Fight) {
   val returnButtonPokSelection = new JButton("Retour")
   returnButton.setVisible(true)
 
-  val emptyButton = new JButton("")
-  emptyButton.setVisible(true)
 
   val teamMenuPanel = new JPanel
   teamMenuPanel.setVisible(true)
   teamMenuPanel.setBounds(vLim, hLim, 1920-vLim-borderSize, 1080-hLim-borderSize)
   // panel layout, a 2x2 grid is what we want here
-  teamMenuPanel.setLayout(new GridLayout(3, 3))
+  teamMenuPanel.setLayout(new GridLayout(2, 3))
 
   teamMenuPanel.add(pok1SelectionButton)
   teamMenuPanel.add(pok2SelectionButton)
   teamMenuPanel.add(pok3SelectionButton)
   teamMenuPanel.add(pok4SelectionButton)
   teamMenuPanel.add(pok5SelectionButton)
-  teamMenuPanel.add(pok6SelectionButton)
-  teamMenuPanel.add(returnButtonPokSelection)
-  teamMenuPanel.add(emptyButton)
+  teamMenuPanel.add(pok6SelectionButton
+
 
 
 
@@ -280,15 +277,6 @@ class CombatMenu (fight:Fight) {
     }
   )
 
-  returnButtonPokSelection.addActionListener(
-    new ActionListener{
-      def actionPerformed(e:ActionEvent) {
-        pokemonImgPanel.setVisible(true)
-        actionMenuPanel.setVisible(true)
-        teamMenuPanel.setVisible(false)
-      }
-    }
-  )
 
 
   //Attack menu
