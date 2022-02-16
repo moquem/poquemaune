@@ -61,7 +61,7 @@ class CombatMenu (fight:Fight) {
   
   // Text to display messages to the palyer
   val messageTextLabel = new JLabel("this is a test for now !")
-  messageTextLabel.setBounds(300, 50, 800, 100)
+  messageTextLabel.setBounds(250, 300, 800, 100)
 
 
 
@@ -118,13 +118,13 @@ class CombatMenu (fight:Fight) {
   // Side panel
   val sidePanel = new JPanel
   sidePanel.setVisible(true)
+  sidePanel.setLayout(null)
   sidePanel.setBounds(borderSize, borderSize, vLim, 1080-borderSize)
 
   // Return button
   val returnButton = new JButton("return")
   returnButton.setVisible(true)
-  //attackMenuPanel.add(returnButton)
-  returnButton.setBounds(0, 0, vLim-borderSize, 100)
+  returnButton.setBounds(0, hLim-borderSize, vLim-borderSize+1, 1080-hLim-borderSize-1)
   sidePanel.add(returnButton)
 
 
