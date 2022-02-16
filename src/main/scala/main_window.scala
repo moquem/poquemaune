@@ -61,10 +61,9 @@ class CombatMenu (fight:Fight) {
   
   // Text to display messages to the palyer
   val messageTextLabel = new JLabel("this is a test for now !")
-  messageTextLabel.setBounds(300, 50, 200, 200)
+  messageTextLabel.setBounds(300, 50, 200, 500)
 
 
-  // adding action listers to the buttons so we can know when they are clicked
 
   // Button for selecting attacks
   val atkSelectionButton = new JButton("Attack")
@@ -98,7 +97,6 @@ class CombatMenu (fight:Fight) {
 
 
 
-
   // Panel where the pokemons will be shown
   val pokemonImgPanel = new JPanel
   // makes panel visible
@@ -114,8 +112,17 @@ class CombatMenu (fight:Fight) {
   //pokemonImgPanel.setBorder(BorderFactory.createLineBorder(Color.black))
 
 
+  // Side panel
+  val sidePanel = new JPanel
+  sidePanel.setVisible(true)
+  sidePanel.setBounds(borderSize, borderSize, vLim, 1080-borderSize)
 
-
+  // Return button
+  val returnButton = new JButton("return")
+  returnButton.setVisible(true)
+  //attackMenuPanel.add(returnButton)
+  returnButton.setBounds(0, 0, vLim-borderSize, 100)
+  sidePanel.add(returnButton)
 
 
 
@@ -149,64 +156,31 @@ class CombatMenu (fight:Fight) {
   // Panel for the attack menu, is activated when the attack button is pressed
   val attackMenuPanel = new JPanel
   attackMenuPanel.setVisible(false)
-  attackMenuPanel.setBounds(0, 0, 1920, 1080)
-  // We need a null layout in order to be able to place the return button
-  attackMenuPanel.setLayout(new GridBagLayout())
-  // Constraints for the buttons' position and size in the GridBag layout
-  var c = new GridBagConstraints()
-  c.weightx = 2
-  c.weighty = 3
-  c.fill = GridBagConstraints.NONE
+  attackMenuPanel.setBounds(vLim, hLim, 1920-vLim-borderSize, 1080-hLim-borderSize)
+  // Grid layout is good here
+  attackMenuPanel.setLayout(new GridLayout(2,2))
   
   // Attack buttons
   val attackButton1 = new JButton("attack 1")
-  c.gridwidth = 1
-  c.gridheight = 1
-  c.gridx = 0
-  c.gridy = 0
-  attackMenuPanel.add(attackButton1, c)
+  attackMenuPanel.add(attackButton1)
   attackButton1.setVisible(true)
-  //attackButton1.setBounds(borderSize+300, borderSize + 300, 300, 100)
   val attackButton2 = new JButton("attack 2")
   attackButton2.setVisible(true)  
-  c.gridwidth = 1
-  c.gridheight = 1
-  c.gridx = 1
-  c.gridy = 0
-  attackMenuPanel.add(attackButton2, c)
-  //attackButton2.setBounds(1920-borderSize-300, borderSize + 300, 300, 100)
+  attackMenuPanel.add(attackButton2)
   val attackButton3 = new JButton("attack 3")
   attackButton3.setVisible(true)
-  c.gridwidth = 1
-  c.gridheight = 1
-  c.gridx = 0
-  c.gridy = 1
-  attackMenuPanel.add(attackButton3, c)
-  //attackButton3.setBounds(borderSize+300, 1080-borderSize-100, 300, 100)
+  attackMenuPanel.add(attackButton3)
   val attackButton4 = new JButton("attack 4")
   attackButton4.setVisible(true)
-  c.gridwidth = 1
-  c.gridheight = 1
-  c.gridx = 1
-  c.gridy = 1
-  attackMenuPanel.add(attackButton4, c)
-  //attackButton4.setBounds(1920-borderSize-300, 1080-borderSize-100, 300, 100)
-  // Return button
-  val returnButton = new JButton("return")
-  returnButton.setVisible(true)
-  c.gridwidth = 2
-  c.gridheight = 1
-  c.gridx = 0
-  c.gridy = 2
-  attackMenuPanel.add(returnButton, c)
-  // returnButton.setBounds(1920-200, 1080-200, 100, 100)
+  attackMenuPanel.add(attackButton4)
+
 
 
   // buttons
+  attackMenuPanel.add(attackButton1)
   attackMenuPanel.add(attackButton2)
   attackMenuPanel.add(attackButton3)
   attackMenuPanel.add(attackButton4)
-  attackMenuPanel.add(returnButton)
 
 
 
@@ -257,8 +231,9 @@ class CombatMenu (fight:Fight) {
   atkSelectionButton.addActionListener(
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
-          pokemonImgPanel.setVisible(false)
+          pokemonImgPanel.setVisible(true)
           actionMenuPanel.setVisible(false)
+          teamMenuPanel.setVisible(false)
           attackMenuPanel.setVisible(true)
 
         }
@@ -270,7 +245,8 @@ class CombatMenu (fight:Fight) {
   pokSelectionButton.addActionListener(
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
-        pokemonImgPanel.setVisible(false)
+        pokemonImgPanel.setVisible(true)
+        attackMenuPanel.setVisible(false)
         actionMenuPanel.setVisible(false)
         teamMenuPanel.setVisible(true)
       }
@@ -358,7 +334,7 @@ class CombatMenu (fight:Fight) {
 
 
 
-  //Attack menu
+  // Return button
 
   returnButton.addActionListener(
     new ActionListener{
@@ -366,9 +342,12 @@ class CombatMenu (fight:Fight) {
         pokemonImgPanel.setVisible(true)
         actionMenuPanel.setVisible(true)
         attackMenuPanel.setVisible(false)
+        teamMenuPanel.setVisible(false)
       }
     }
   )
+
+  // Attack menu
 
   attackButton1.addActionListener(
     new ActionListener {
@@ -434,6 +413,7 @@ class CombatMenu (fight:Fight) {
   mainFrame.add(actionMenuPanel)
   mainFrame.add(attackMenuPanel)
   mainFrame.add(teamMenuPanel)
+  mainFrame.add(sidePanel)
   // size of the window
   mainFrame.setPreferredSize(new Dimension(1920, 1080))
   mainFrame.pack()

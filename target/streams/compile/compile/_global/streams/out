@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:174:5: value gridhwidth is not a member of java.awt.GridBagConstraints[0m
-[0m[[0m[31merror[0m] [0m[0m  c.gridhwidth = 1[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:251:24: javax.swing.JPanel does not take parameters[0m
+[0m[[0m[31merror[0m] [0m[0m        attackMenuPanel(false)[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
