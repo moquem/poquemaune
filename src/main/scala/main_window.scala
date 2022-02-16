@@ -245,7 +245,7 @@ class CombatMenu (fight:Fight) {
   teamMenuPanel.add(pok3SelectionButton)
   teamMenuPanel.add(pok4SelectionButton)
   teamMenuPanel.add(pok5SelectionButton)
-  teamMenuPanel.add(pok6SelectionButton
+  teamMenuPanel.add(pok6SelectionButton)
 
 
 
@@ -276,6 +276,85 @@ class CombatMenu (fight:Fight) {
       }
     }
   )
+
+  pok1SelectionButton.addActionListener(
+    new ActionListener{
+      def actionPerformed(e:ActionEvent) {
+        if (fight.team_1.team(0).alive) {
+          fight.current_pok_ally = fight.team_1.team(0)
+          pokemonImgPanel.setVisible(true)
+          actionMenuPanel.setVisible(true)
+          teamMenuPanel.setVisible(false)
+        }
+      }
+    }
+  )
+
+  pok2SelectionButton.addActionListener(
+    new ActionListener{
+      def actionPerformed(e:ActionEvent) {
+        if (fight.team_1.team(1).alive) {
+          fight.current_pok_ally = fight.team_1.team(1)
+          pokemonImgPanel.setVisible(true)
+          actionMenuPanel.setVisible(true)
+          teamMenuPanel.setVisible(false)
+        }
+      }
+    }
+  )
+
+  pok3SelectionButton.addActionListener(
+    new ActionListener{
+      def actionPerformed(e:ActionEvent) {
+        if (fight.team_1.team(2).alive) {
+          fight.current_pok_ally = fight.team_1.team(2)
+          pokemonImgPanel.setVisible(true)
+          actionMenuPanel.setVisible(true)
+          teamMenuPanel.setVisible(false)
+        }
+      }
+    }
+  )
+
+  pok4SelectionButton.addActionListener(
+    new ActionListener{
+      def actionPerformed(e:ActionEvent) {
+        if (fight.team_1.team(3).alive) {
+          fight.current_pok_ally = fight.team_1.team(3)
+          pokemonImgPanel.setVisible(true)
+          actionMenuPanel.setVisible(true)
+          teamMenuPanel.setVisible(false)
+        }
+      }
+    }
+  )
+
+  pok5SelectionButton.addActionListener(
+    new ActionListener{
+      def actionPerformed(e:ActionEvent) {
+        if (fight.team_1.team(4).alive) {
+          fight.current_pok_ally = fight.team_1.team(4)
+          pokemonImgPanel.setVisible(true)
+          actionMenuPanel.setVisible(true)
+          teamMenuPanel.setVisible(false)
+        }
+      }
+    }
+  )
+
+  pok6SelectionButton.addActionListener(
+    new ActionListener{
+      def actionPerformed(e:ActionEvent) {
+        if (fight.team_1.team(5).alive) {
+          fight.current_pok_ally = fight.team_1.team(5)
+          pokemonImgPanel.setVisible(true)
+          actionMenuPanel.setVisible(true)
+          teamMenuPanel.setVisible(false)
+        }
+      }
+    }
+  )
+
 
 
 
