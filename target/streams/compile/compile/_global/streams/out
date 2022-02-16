@@ -1,7 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/main_window.scala:325:3: not found: value fight[0m
-[0m[[0m[31merror[0m] [0m[0m  fight = new Fight(team1,team2)[0m
-[0m[[0m[31merror[0m] [0m[0m  ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/main_window.scala:326:3: not found: value combatInterface[0m
-[0m[[0m[31merror[0m] [0m[0m  combatInterface = new CombatMenu(fight)[0m
-[0m[[0m[31merror[0m] [0m[0m  ^[0m
-[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:171:31: value Horizontal is not a member of object java.awt.GridBagConstraints[0m
+[0m[[0m[31merror[0m] [0m[0m  c.fill = GridBagConstraints.Horizontal[0m
+[0m[[0m[31merror[0m] [0m[0m                              ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

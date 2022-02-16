@@ -15,6 +15,8 @@ import javax.imageio.ImageIO
 import java.io.InputStream
 import java.io.File
 import java.awt.GridLayout
+import java.awt.GridBagLayout
+import java.awt._
 import javax.swing.border.Border
 import javax.swing.BorderFactory
 import java.awt.GraphicsDevice
@@ -125,33 +127,67 @@ class CombatMenu (fight:Fight) {
    *  Attack menu, has 5 buttons, 4 for the various attacks and one for returning to the main menu
    *
    * */
-  
-  // Attack buttons
-  val attackButton1 = new JButton("attack 1")
-  attackButton1.setVisible(true)
-  attackButton1.setBounds(borderSize+300, borderSize + 300, 300, 100)
-  val attackButton2 = new JButton("attack 2")
-  attackButton2.setVisible(true)
-  attackButton2.setBounds(1920-borderSize-300, borderSize + 300, 300, 100)
-  val attackButton3 = new JButton("attack 3")
-  attackButton3.setVisible(true)
-  attackButton3.setBounds(borderSize+300, 1080-borderSize-100, 300, 100)
-  val attackButton4 = new JButton("attack 4")
-  attackButton4.setVisible(true)
-  attackButton4.setBounds(1920-borderSize-300, 1080-borderSize-100, 300, 100)
-  // Return button
-  val returnButton = new JButton("return")
-  returnButton.setVisible(true)
-  returnButton.setBounds(1920-200, 1080-200, 100, 100)
-
   // Panel for the attack menu, is activated when the attack button is pressed
   val attackMenuPanel = new JPanel
   attackMenuPanel.setVisible(false)
   attackMenuPanel.setBounds(0, 0, 1920, 1080)
   // We need a null layout in order to be able to place the return button
-  attackMenuPanel.setLayout(null)
+  attackMenuPanel.setLayout(new GridBagLayout())
+  // Constraints for the buttons' position and size in the GridBag layout
+  var c = new GridBagConstraints()
+  c.gridwidth = 2
+  c.gridheight = 3
+  
+  // Attack buttons
+  val attackButton1 = new JButton("attack 1")
+  c.fill = GridBagConstraints.BOTH
+  c.weightx = 0.1
+  c.weighty = 0
+  c.gridx = 0
+  c.gridy = 0
+  attackMenuPanel.add(attackButton1, c)
+  attackButton1.setVisible(true)
+  //attackButton1.setBounds(borderSize+300, borderSize + 300, 300, 100)
+  val attackButton2 = new JButton("attack 2")
+  attackButton2.setVisible(true)  
+  c.fill = GridBagConstraints.BOTH
+  c.weightx = 0.1
+  c.weighty = 0
+  c.gridx = 1
+  c.gridy = 0
+  attackMenuPanel.add(attackButton2, c)
+  //attackButton2.setBounds(1920-borderSize-300, borderSize + 300, 300, 100)
+  val attackButton3 = new JButton("attack 3")
+  attackButton3.setVisible(true)
+  c.fill = GridBagConstraints.BOTH
+  c.weightx = 0.1
+  c.weighty = 0
+  c.gridx = 0
+  c.gridy = 1
+  attackMenuPanel.add(attackButton3, c)
+  //attackButton3.setBounds(borderSize+300, 1080-borderSize-100, 300, 100)
+  val attackButton4 = new JButton("attack 4")
+  attackButton4.setVisible(true)
+  c.fill = GridBagConstraints.BOTH
+  c.weightx = 0.1
+  c.weighty = 0
+  c.gridx = 1
+  c.gridy = 1
+  attackMenuPanel.add(attackButton4, c)
+  //attackButton4.setBounds(1920-borderSize-300, 1080-borderSize-100, 300, 100)
+  // Return button
+  val returnButton = new JButton("return")
+  returnButton.setVisible(true)
+  c.fill = GridBagConstraints.HORIZONTAL
+  c.weightx = 0.5
+  c.weighty = 0.5
+  c.gridx = 0
+  c.gridy = 2
+  attackMenuPanel.add(returnButton, c)
+  // returnButton.setBounds(1920-200, 1080-200, 100, 100)
+
+
   // buttons
-  attackMenuPanel.add(attackButton1)
   attackMenuPanel.add(attackButton2)
   attackMenuPanel.add(attackButton3)
   attackMenuPanel.add(attackButton4)
@@ -325,7 +361,7 @@ object MainGame {
   var fight = new Fight(team1,team2)
   var combatInterface = new CombatMenu(fight)
 
-  def main {
+  def main(args: Array[String]) { // we need to keep that argument, otherwise it doesn't count as the main function
     while (true) {}
   }
   
