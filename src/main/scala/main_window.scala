@@ -1,6 +1,4 @@
 import java.awt.Color
-import scala.swing._
-import scala.swing.Component
 import javax.swing.ImageIcon
 import java.awt.BorderLayout
 import java.awt.Dimension
@@ -211,6 +209,51 @@ class CombatMenu (fight:Fight) {
   attackMenuPanel.add(returnButton)
 
 
+
+
+  // Team panel
+    val pok1SelectionButton = new JButton(fight.team_1.team(0).pokemonName)
+  atkSelectionButton.setVisible(true)
+
+  val pok2SelectionButton = new JButton(fight.team_1.team(1).pokemonName)
+  pokSelectionButton.setVisible(true)
+
+  val pok3SelectionButton = new JButton(fight.team_1.team(2).pokemonName)
+  actionSelectionButton.setVisible(true)
+
+  val pok4SelectionButton = new JButton(fight.team_1.team(3).pokemonName)
+  itemSelectionButton.setVisible(true)
+
+  val pok5SelectionButton = new JButton(fight.team_1.team(4).pokemonName)
+  actionSelectionButton.setVisible(true)
+
+  val pok6SelectionButton = new JButton(fight.team_1.team(5).pokemonName)
+  itemSelectionButton.setVisible(true)
+
+  val returnButtonPokSelection = new JButton("Retour")
+  returnButton.setVisible(true)
+
+  val emptyButton = new JButton("")
+  emptyButton.setVisible(true)
+
+  val teamMenuPanel = new JPanel
+  teamMenuPanel.setVisible(true)
+  teamMenuPanel.setBounds(vLim, hLim, 1920-vLim-borderSize, 1080-hLim-borderSize)
+  // panel layout, a 2x2 grid is what we want here
+  teamMenuPanel.setLayout(new GridLayout(3, 3))
+
+  teamMenuPanel.add(pok1SelectionButton)
+  teamMenuPanel.add(pok2SelectionButton)
+  teamMenuPanel.add(pok3SelectionButton)
+  teamMenuPanel.add(pok4SelectionButton)
+  teamMenuPanel.add(pok5SelectionButton)
+  teamMenuPanel.add(pok6SelectionButton)
+  teamMenuPanel.add(returnButtonPokSelection)
+  teamMenuPanel.add(emptyButton)
+
+
+
+
   // Button actions
  
   // Activate attack menu
@@ -224,6 +267,31 @@ class CombatMenu (fight:Fight) {
         }
     }
   )
+
+  // Switch pokemon
+
+  pokSelectionButton.addActionListener(
+    new ActionListener{
+      def actionPerformed(e:ActionEvent) {
+        pokemonImgPanel.setVisible(false)
+        actionMenuPanel.setVisible(false)
+        teamMenuPanel.setVisible(true)
+      }
+    }
+  )
+
+  returnButtonPokSelection.addActionListener(
+    new ActionListener{
+      def actionPerformed(e:ActionEvent) {
+        pokemonImgPanel.setVisible(true)
+        actionMenuPanel.setVisible(true)
+        teamMenuPanel.setVisible(false)
+      }
+    }
+  )
+
+
+  //Attack menu
 
   returnButton.addActionListener(
     new ActionListener{
@@ -280,44 +348,6 @@ class CombatMenu (fight:Fight) {
     }
   )
 
-  val pok1SelectionButton = new JButton(fight.team_1.team(0).pokemonName)
-  atkSelectionButton.setVisible(true)
-
-  val pok2SelectionButton = new JButton(fight.team_1.team(1).pokemonName)
-  pokSelectionButton.setVisible(true)
-
-  val pok3SelectionButton = new JButton(fight.team_1.team(2).pokemonName)
-  actionSelectionButton.setVisible(true)
-
-  val pok4SelectionButton = new JButton(fight.team_1.team(3).pokemonName)
-  itemSelectionButton.setVisible(true)
-
-  val pok5SelectionButton = new JButton(fight.team_1.team(4).pokemonName)
-  actionSelectionButton.setVisible(true)
-
-  val pok6SelectionButton = new JButton(fight.team_1.team(5).pokemonName)
-  itemSelectionButton.setVisible(true)
-
-  val returnButtonPokSelection = new JButton("Retour")
-  returnButton.setVisible(true)
-
-  val emptyButton = new JButton("")
-  emptyButton.setVisible(true)
-
-  val teamMenuPanel = new JPanel
-  teamMenuPanel.setVisible(true)
-  teamMenuPanel.setBounds(vLim, hLim, 1920-vLim-borderSize, 1080-hLim-borderSize)
-  // panel layout, a 2x2 grid is what we want here
-  teamMenuPanel.setLayout(new GridLayout(3, 3))
-
-  teamMenuPanel.add(pok1SelectionButton)
-  teamMenuPanel.add(pok2SelectionButton)
-  teamMenuPanel.add(pok3SelectionButton)
-  teamMenuPanel.add(pok4SelectionButton)
-  teamMenuPanel.add(pok5SelectionButton)
-  teamMenuPanel.add(pok6SelectionButton)
-  teamMenuPanel.add(returnButtonPokSelection)
-  teamMenuPanel.add(emptyButton)
 
 
   // enables us to set the window to full screen, i have no idea what it does 
