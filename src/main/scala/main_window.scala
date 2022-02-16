@@ -149,56 +149,31 @@ class CombatMenu (fight:Fight) {
   // Panel for the attack menu, is activated when the attack button is pressed
   val attackMenuPanel = new JPanel
   attackMenuPanel.setVisible(false)
-  attackMenuPanel.setBounds(0, 0, 1920, 1080)
-  // We need a null layout in order to be able to place the return button
-  attackMenuPanel.setLayout(new GridBagLayout())
-  // Constraints for the buttons' position and size in the GridBag layout
-  var c = new GridBagConstraints()
-  c.weightx = 2
-  c.weighty = 3
-  c.fill = GridBagConstraints.NONE
+  attackMenuPanel.setBounds(vLim, hLim, 1920-vLim-borderSize, 1080-hLim-borderSize)
+  // Grid layout is good here
+  attackMenuPanel.setLayout(new GridLayout(2,2))
   
   // Attack buttons
   val attackButton1 = new JButton("attack 1")
-  c.gridwidth = 1
-  c.gridheight = 1
-  c.gridx = 0
-  c.gridy = 0
-  attackMenuPanel.add(attackButton1, c)
+  attackMenuPanel.add(attackButton1)
   attackButton1.setVisible(true)
   //attackButton1.setBounds(borderSize+300, borderSize + 300, 300, 100)
   val attackButton2 = new JButton("attack 2")
   attackButton2.setVisible(true)  
-  c.gridwidth = 1
-  c.gridheight = 1
-  c.gridx = 1
-  c.gridy = 0
-  attackMenuPanel.add(attackButton2, c)
+  attackMenuPanel.add(attackButton2)
   //attackButton2.setBounds(1920-borderSize-300, borderSize + 300, 300, 100)
   val attackButton3 = new JButton("attack 3")
   attackButton3.setVisible(true)
-  c.gridwidth = 1
-  c.gridheight = 1
-  c.gridx = 0
-  c.gridy = 1
-  attackMenuPanel.add(attackButton3, c)
+  attackMenuPanel.add(attackButton3)
   //attackButton3.setBounds(borderSize+300, 1080-borderSize-100, 300, 100)
   val attackButton4 = new JButton("attack 4")
   attackButton4.setVisible(true)
-  c.gridwidth = 1
-  c.gridheight = 1
-  c.gridx = 1
-  c.gridy = 1
-  attackMenuPanel.add(attackButton4, c)
+  attackMenuPanel.add(attackButton4)
   //attackButton4.setBounds(1920-borderSize-300, 1080-borderSize-100, 300, 100)
   // Return button
   val returnButton = new JButton("return")
   returnButton.setVisible(true)
-  c.gridwidth = 2
-  c.gridheight = 1
-  c.gridx = 0
-  c.gridy = 2
-  attackMenuPanel.add(returnButton, c)
+  //attackMenuPanel.add(returnButton)
   // returnButton.setBounds(1920-200, 1080-200, 100, 100)
 
 
