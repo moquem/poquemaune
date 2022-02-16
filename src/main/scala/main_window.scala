@@ -98,6 +98,9 @@ class CombatMenu (fight:Fight) {
   oppPokLabel.setBounds(1400, 200, 100, 100)
 
 
+
+
+
   // Panel where the pokemons will be shown
   val pokemonImgPanel = new JPanel
   // makes panel visible
@@ -112,7 +115,14 @@ class CombatMenu (fight:Fight) {
   pokemonImgPanel.add(messageTextLabel)
   //pokemonImgPanel.setBorder(BorderFactory.createLineBorder(Color.black))
 
-  // Panel for the various action buttons
+
+
+
+
+
+
+  // Panel for the various action buttons 
+
   val actionMenuPanel = new JPanel
   actionMenuPanel.setVisible(true)
   actionMenuPanel.setBounds(vLim, hLim, 1920-vLim-borderSize, 1080-hLim-borderSize)
@@ -132,6 +142,12 @@ class CombatMenu (fight:Fight) {
    *  Attack menu, has 5 buttons, 4 for the various attacks and one for returning to the main menu
    *
    * */
+
+
+
+
+
+
   // Panel for the attack menu, is activated when the attack button is pressed
   val attackMenuPanel = new JPanel
   attackMenuPanel.setVisible(false)
@@ -268,6 +284,46 @@ class CombatMenu (fight:Fight) {
     }
   )
 
+  val pok1SelectionButton = new JButton(team1(0).name)
+  atkSelectionButton.setVisible(true)
+
+  val pok2SelectionButton = new JButton(team1(1).name)
+  pokSelectionButton.setVisible(true)
+
+  val pok3SelectionButton = new JButton(team1(2).name)
+  actionSelectionButton.setVisible(true)
+
+  val pok4SelectionButton = new JButton(team1(3).name)
+  itemSelectionButton.setVisible(true)
+
+  val pok5SelectionButton = new JButton(team1(4).name)
+  actionSelectionButton.setVisible(true)
+
+  val pok6SelectionButton = new JButton(team1(5).name)
+  itemSelectionButton.setVisible(true)
+
+  val returnButton = new JButton("Retour")
+  returnButton.setVisible(true)
+
+  val emptyButton = new JButton("")
+  emptyButton.setVisible(true)
+
+  val teamMenuPanel = new JPanel
+  teamMenuPanel.setVisible(true)
+  teamMenuPanel.setBounds(vLim, hLim, 1920-vLim-borderSize, 1080-hLim-borderSize)
+  // panel layout, a 2x2 grid is what we want here
+  teamMenuPanel.setLayout(new GridLayout(3, 3))
+
+  teamMenuPanel.add(pok1SelectionButton)
+  teamMenuPanel.add(pok2SelectionButton)
+  teamMenuPanel.add(pok3SelectionButton)
+  teamMenuPanel.add(pok4SelectionButton)
+  teamMenuPanel.add(pok5SelectionButton)
+  teamMenuPanel.add(pok6SelectionButton)
+  teamMenuPanel.add(returnButton)
+  teamMenuPanel.add(emptyButton)
+
+
   // enables us to set the window to full screen, i have no idea what it does 
   val graphics = GraphicsEnvironment.getLocalGraphicsEnvironment()
   val device = graphics.getDefaultScreenDevice()
@@ -358,11 +414,15 @@ object MainGame {
   team1.team(1) = pok2
   team1.team(2) = pok_empty
   team1.team(3) = pok_empty
+  team1.team(4) = pok_empty
+  team1.team(5) = pok_empty
 
   team2.team(0) = pok3
   team2.team(1) = pok4
   team2.team(2) = pok_empty
   team2.team(3) = pok_empty
+  team1.team(4) = pok_empty
+  team1.team(5) = pok_empty
 
   var fight = new Fight(team1,team2)
   var combatInterface = new CombatMenu(fight)
