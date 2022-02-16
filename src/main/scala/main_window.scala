@@ -156,14 +156,14 @@ class CombatMenu (fight:Fight) {
   attackMenuPanel.setLayout(new GridBagLayout())
   // Constraints for the buttons' position and size in the GridBag layout
   var c = new GridBagConstraints()
-  c.gridwidth = 2
-  c.gridheight = 3
+  c.weightx = 2
+  c.weighty = 3
+  c.fill = GridBagConstraints.NONE
   
   // Attack buttons
   val attackButton1 = new JButton("attack 1")
-  c.fill = GridBagConstraints.BOTH
-  c.weightx = 0.1
-  c.weighty = 0
+  c.gridwidth = 1
+  c.gridheight = 1
   c.gridx = 0
   c.gridy = 0
   attackMenuPanel.add(attackButton1, c)
@@ -171,27 +171,24 @@ class CombatMenu (fight:Fight) {
   //attackButton1.setBounds(borderSize+300, borderSize + 300, 300, 100)
   val attackButton2 = new JButton("attack 2")
   attackButton2.setVisible(true)  
-  c.fill = GridBagConstraints.BOTH
-  c.weightx = 0.1
-  c.weighty = 0
+  c.gridwidth = 1
+  c.gridheight = 1
   c.gridx = 1
   c.gridy = 0
   attackMenuPanel.add(attackButton2, c)
   //attackButton2.setBounds(1920-borderSize-300, borderSize + 300, 300, 100)
   val attackButton3 = new JButton("attack 3")
   attackButton3.setVisible(true)
-  c.fill = GridBagConstraints.BOTH
-  c.weightx = 0.1
-  c.weighty = 0
+  c.gridwidth = 1
+  c.gridheight = 1
   c.gridx = 0
   c.gridy = 1
   attackMenuPanel.add(attackButton3, c)
   //attackButton3.setBounds(borderSize+300, 1080-borderSize-100, 300, 100)
   val attackButton4 = new JButton("attack 4")
   attackButton4.setVisible(true)
-  c.fill = GridBagConstraints.BOTH
-  c.weightx = 0.1
-  c.weighty = 0
+  c.gridwidth = 1
+  c.gridheight = 1
   c.gridx = 1
   c.gridy = 1
   attackMenuPanel.add(attackButton4, c)
@@ -199,9 +196,8 @@ class CombatMenu (fight:Fight) {
   // Return button
   val returnButton = new JButton("return")
   returnButton.setVisible(true)
-  c.fill = GridBagConstraints.HORIZONTAL
-  c.weightx = 0.5
-  c.weighty = 0.5
+  c.gridwidth = 2
+  c.gridheight = 1
   c.gridx = 0
   c.gridy = 2
   attackMenuPanel.add(returnButton, c)
