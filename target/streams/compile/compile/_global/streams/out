@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:171:31: value Horizontal is not a member of object java.awt.GridBagConstraints[0m
-[0m[[0m[31merror[0m] [0m[0m  c.fill = GridBagConstraints.Horizontal[0m
-[0m[[0m[31merror[0m] [0m[0m                              ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:65:25: not found: type JTextAreaa[0m
+[0m[[0m[31merror[0m] [0m[0m  val messageText = new JTextAreaa("this is a test for now !")[0m
+[0m[[0m[31merror[0m] [0m[0m                        ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

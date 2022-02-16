@@ -61,6 +61,10 @@ class CombatMenu (fight:Fight) {
   val playerPokemonImg = new ImageIcon("src/main/resources/green_square.png")
   val oppPokemonImg = new ImageIcon("src/main/resources/purple_square.png")
   
+  // Text to display messages to the palyer
+  val messageTextLabel = new JLabel("this is a test for now !")
+  messageTextLabel.setBounds(300, 50, 200, 200)
+
 
   // adding action listers to the buttons so we can know when they are clicked
 
@@ -105,7 +109,8 @@ class CombatMenu (fight:Fight) {
   // adds the pokemon images to the panel
   pokemonImgPanel.add(playerPokLabel)
   pokemonImgPanel.add(oppPokLabel)
-  pokemonImgPanel.setBorder(BorderFactory.createLineBorder(Color.black))
+  pokemonImgPanel.add(messageTextLabel)
+  //pokemonImgPanel.setBorder(BorderFactory.createLineBorder(Color.black))
 
   // Panel for the various action buttons
   val actionMenuPanel = new JPanel
@@ -224,6 +229,7 @@ class CombatMenu (fight:Fight) {
           pokemonImgPanel.setVisible(true)
           actionMenuPanel.setVisible(true)
           attackMenuPanel.setVisible(false)
+          messageTextLabel.text = fight.current_pok_ally.name + " used " + fight.current_pok_ally.set_attack[0].name + " it's not very effective"
           fight.attack_ally(0)
         }
     }
