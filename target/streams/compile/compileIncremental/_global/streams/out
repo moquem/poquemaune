@@ -1,6 +1,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] IncrementalCompile -----------[0m
 [0m[[0m[0mdebug[0m] [0m[0mIncrementalCompile.incrementalCompile[0m
-[0m[[0m[0mdebug[0m] [0m[0mprevious = Stamps for: 22 products, 4 sources, 1 libraries[0m
+[0m[[0m[0mdebug[0m] [0m[0mprevious = Stamps for: 23 products, 4 sources, 1 libraries[0m
 [0m[[0m[0mdebug[0m] [0m[0mcurrent source = Set(${BASE}/src/main/scala/main_poquemaune.scala, ${BASE}/src/main/scala/class_combat.scala, ${BASE}/src/main/scala/class_pokemon.scala, ${BASE}/src/main/scala/main_window.scala)[0m
 [0m[[0m[0mdebug[0m] [0m[0m> initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(${BASE}/src/main/scala/main_window.scala, ${BASE}/src/main/scala/class_combat.scala), unmodified = ...),Set(),Set(),API Changes: Set())[0m
 [0m[[0m[0mdebug[0m] [0m[0m[0m
@@ -20,13 +20,43 @@
 [0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(${BASE}/src/main/scala/main_window.scala, ${BASE}/src/main/scala/class_combat.scala)[0m
 [0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: MainGame, CombatMenu, Fight[0m
 [0m[[0m[0mdebug[0m] [0m[0mcompilation cycle 1[0m
+<<<<<<< HEAD
 [0m[[0m[0minfo[0m] [0m[0mcompiling 2 Scala sources to /home/bozec/Documents/etudes/projet_prog_2/poquemaune/target/scala-2.12/classes ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.12:1.6.0:compile for Scala 2.12.15[0m
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 66533bd for Scala compiler version 2.12.15[0m
+=======
+[0m[[0m[0minfo[0m] [0m[0mcompiling 2 Scala sources to /home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/target/scala-2.12/classes ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.12:1.6.0:compile for Scala 2.12.15[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 42a4254d for Scala compiler version 2.12.15[0m
+>>>>>>> 61a61a69510f7b85bacab397b3941223680f0acc
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
-[0m[[0m[0mdebug[0m] [0m[0m	/home/bozec/.sbt/boot/scala-2.12.15/lib/scala-library.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	/home/maena/.sbt/boot/scala-2.12.15/lib/scala-library.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
+<<<<<<< HEAD
 [0m[[0m[0mdebug[0m] [0m[0m	/home/bozec/Documents/etudes/projet_prog_2/poquemaune/target/scala-2.12/classes:/home/bozec/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-swing_2.12/2.0.1/scala-swing_2.12-2.0.1.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0mCompilation failed (CompilerInterface)[0m
 [0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+=======
+[0m[[0m[0mdebug[0m] [0m[0m	/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/target/scala-2.12/classes:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-swing_2.12/2.0.1/scala-swing_2.12-2.0.1.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from Fight...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: Fight[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(Fight)[0m
+[0m[[0m[0mdebug[0m] [0m[0mNone of the modified names appears in source file of MainGame. This dependency is not being considered for invalidation.[0m
+[0m[[0m[0mdebug[0m] [0m[0mThe following modified names cause invalidation of CombatMenu: [UsedName(new_pok_enemy,[Default])][0m
+[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(Fight,ModifiedNames(changes = UsedName(new_pok_enemy,[Default]))) invalidates 2 classes due to The Fight has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(new_pok_enemy,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0m  > by transitive inheritance: Set(Fight)[0m
+[0m[[0m[0mdebug[0m] [0m[0m  > [0m
+[0m[[0m[0mdebug[0m] [0m[0m  > by member reference: Set(CombatMenu)[0m
+[0m[[0m[0mdebug[0m] [0m[0m        [0m
+[0m[[0m[0mdebug[0m] [0m[0mNew invalidations:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	CombatMenu[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: CombatMenu[0m
+[0m[[0m[0mdebug[0m] [0m[0mPreviously invalidated, but (transitively) depend on new invalidations:[0m
+[0m[[0m[0mdebug[0m] [0m[0mFinal step, transitive dependencies:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Set(CombatMenu)[0m
+[0m[[0m[0mdebug[0m] [0m[0mNo classes were invalidated.[0m
+[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 15.082166884 s[0m
+[0m[[0m[0mdebug[0m] [0m[0mdone compiling[0m
+>>>>>>> 61a61a69510f7b85bacab397b3941223680f0acc

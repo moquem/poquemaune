@@ -14,24 +14,6 @@ class Fight (team1:Team, team2:Team) {
 
     /* Permet de changer de Pokemon, pour l'instant possible seulement quand le pokemon en frontline meurt */
 
-    /* A lancer au moment où c'est au joueur d'attaquer */
-    def attack_ally (nb_attack:Int) {
-
-        // TODO affichage set d'attaques
-
-        var fail_attack = true
-        var att = current_pok_ally.set_attack(nb_attack)
-
-        while (fail_attack) {
-
-            fail_attack = att.use_attack()
-            if (fail_attack) {
-                // TODO affichage message d'erreur "Cette attaque ne peut plus être utilisée"
-            } else {
-                current_pok_enemy.loss_PV(att.damage)
-            }
-        }
-    }
     
     /* A lancer quand c'est au moment de l'ennemi d'attaquer */
     def attack_enemy ():Int = {
@@ -47,10 +29,25 @@ class Fight (team1:Team, team2:Team) {
             fail_attack = att.use_attack()
             if (!(fail_attack)) { 
                 current_pok_ally.loss_PV(att.damage)
-                nb_attack
             }
         }
+        nb_attack
     }
+
+    def new_pok_enemy () {
+        val r = scala.util.Random
+
+        var dead_pok = !current_pok_enemy.alive
+        var nb_pok:Int = 0
+
+        while (dead_pok) {
+            nb_pok = r.nextInt(6)
+            if (team2.team(nb_pok).alive) {
+                current_pok_enemy = team2.team(nb_pok)
+                dead_pok = false
+            }
+        }
+  }
 
     
 } 
