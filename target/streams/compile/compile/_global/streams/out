@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:65:25: not found: type JTextAreaa[0m
-[0m[[0m[31merror[0m] [0m[0m  val messageText = new JTextAreaa("this is a test for now !")[0m
-[0m[[0m[31merror[0m] [0m[0m                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:248:59: value name is not a member of Pokemon[0m
+[0m[[0m[31merror[0m] [0m[0m          messageTextLabel.setText(fight.current_pok_ally.name + " used " + fight.current_pok_ally.set_attack(0).attackName + " it's not very effective")[0m
+[0m[[0m[31merror[0m] [0m[0m                                                          ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

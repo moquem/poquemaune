@@ -245,7 +245,7 @@ class CombatMenu (fight:Fight) {
           pokemonImgPanel.setVisible(true)
           actionMenuPanel.setVisible(true)
           attackMenuPanel.setVisible(false)
-          messageTextLabel.text = fight.current_pok_ally.name + " used " + fight.current_pok_ally.set_attack[0].name + " it's not very effective"
+          messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(0).attackName + " it's not very effective")
           fight.attack_ally(0)
         }
     }
@@ -284,25 +284,25 @@ class CombatMenu (fight:Fight) {
     }
   )
 
-  val pok1SelectionButton = new JButton(team1(0).name)
+  val pok1SelectionButton = new JButton(fight.team_1.team(0).pokemonName)
   atkSelectionButton.setVisible(true)
 
-  val pok2SelectionButton = new JButton(team1(1).name)
+  val pok2SelectionButton = new JButton(fight.team_1.team(1).pokemonName)
   pokSelectionButton.setVisible(true)
 
-  val pok3SelectionButton = new JButton(team1(2).name)
+  val pok3SelectionButton = new JButton(fight.team_1.team(2).pokemonName)
   actionSelectionButton.setVisible(true)
 
-  val pok4SelectionButton = new JButton(team1(3).name)
+  val pok4SelectionButton = new JButton(fight.team_1.team(3).pokemonName)
   itemSelectionButton.setVisible(true)
 
-  val pok5SelectionButton = new JButton(team1(4).name)
+  val pok5SelectionButton = new JButton(fight.team_1.team(4).pokemonName)
   actionSelectionButton.setVisible(true)
 
-  val pok6SelectionButton = new JButton(team1(5).name)
+  val pok6SelectionButton = new JButton(fight.team_1.team(5).pokemonName)
   itemSelectionButton.setVisible(true)
 
-  val returnButton = new JButton("Retour")
+  val returnButtonPokSelection = new JButton("Retour")
   returnButton.setVisible(true)
 
   val emptyButton = new JButton("")
@@ -320,7 +320,7 @@ class CombatMenu (fight:Fight) {
   teamMenuPanel.add(pok4SelectionButton)
   teamMenuPanel.add(pok5SelectionButton)
   teamMenuPanel.add(pok6SelectionButton)
-  teamMenuPanel.add(returnButton)
+  teamMenuPanel.add(returnButtonPokSelection)
   teamMenuPanel.add(emptyButton)
 
 
