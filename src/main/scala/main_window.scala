@@ -178,10 +178,11 @@ class CombatMenu (fight:Fight) {
 
 
   // buttons
+  attackMenuPanel.add(attackButton1)
   attackMenuPanel.add(attackButton2)
   attackMenuPanel.add(attackButton3)
   attackMenuPanel.add(attackButton4)
-  attackMenuPanel.add(returnButton)
+  //attackMenuPanel.add(returnButton)
 
 
 
@@ -220,7 +221,7 @@ class CombatMenu (fight:Fight) {
   teamMenuPanel.add(pok3SelectionButton)
   teamMenuPanel.add(pok4SelectionButton)
   teamMenuPanel.add(pok5SelectionButton)
-  teamMenuPanel.add(pok6SelectionButton
+  teamMenuPanel.add(pok6SelectionButton)
 
 
 
@@ -232,8 +233,9 @@ class CombatMenu (fight:Fight) {
   atkSelectionButton.addActionListener(
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
-          pokemonImgPanel.setVisible(false)
+          pokemonImgPanel.setVisible(true)
           actionMenuPanel.setVisible(false)
+          teamMenuPanel.setVisible(false)
           attackMenuPanel.setVisible(true)
 
         }
@@ -245,7 +247,8 @@ class CombatMenu (fight:Fight) {
   pokSelectionButton.addActionListener(
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
-        pokemonImgPanel.setVisible(false)
+        pokemonImgPanel.setVisible(true)
+        attackMenuPanel.setVisible(false)
         actionMenuPanel.setVisible(false)
         teamMenuPanel.setVisible(true)
       }
@@ -254,7 +257,7 @@ class CombatMenu (fight:Fight) {
 
 
 
-  //Attack menu
+  // Return button
 
   returnButton.addActionListener(
     new ActionListener{
@@ -262,9 +265,12 @@ class CombatMenu (fight:Fight) {
         pokemonImgPanel.setVisible(true)
         actionMenuPanel.setVisible(true)
         attackMenuPanel.setVisible(false)
+        teamMenuPanel.setVisible(false)
       }
     }
   )
+
+  // Attack menu
 
   attackButton1.addActionListener(
     new ActionListener {

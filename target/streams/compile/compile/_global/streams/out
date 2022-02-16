@@ -1,16 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:158:38: not found: value c[0m
-[0m[[0m[31merror[0m] [0m[0m  attackMenuPanel.add(attackButton1, c)[0m
-[0m[[0m[31merror[0m] [0m[0m                                     ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:163:38: not found: value c[0m
-[0m[[0m[31merror[0m] [0m[0m  attackMenuPanel.add(attackButton2, c)[0m
-[0m[[0m[31merror[0m] [0m[0m                                     ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:167:38: not found: value c[0m
-[0m[[0m[31merror[0m] [0m[0m  attackMenuPanel.add(attackButton3, c)[0m
-[0m[[0m[31merror[0m] [0m[0m                                     ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:171:38: not found: value c[0m
-[0m[[0m[31merror[0m] [0m[0m  attackMenuPanel.add(attackButton4, c)[0m
-[0m[[0m[31merror[0m] [0m[0m                                     ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:176:37: not found: value c[0m
-[0m[[0m[31merror[0m] [0m[0m  attackMenuPanel.add(returnButton, c)[0m
-[0m[[0m[31merror[0m] [0m[0m                                    ^[0m
-[0m[[0m[31merror[0m] [0m[0m5 errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:251:24: javax.swing.JPanel does not take parameters[0m
+[0m[[0m[31merror[0m] [0m[0m        attackMenuPanel(false)[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
