@@ -13,30 +13,6 @@ class Fight (team1:Team, team2:Team) {
     var current_pok_enemy = team2.team(0)
 
     /* Permet de changer de Pokemon, pour l'instant possible seulement quand le pokemon en frontline meurt */
-    def switch_pokemon () = { // TODO used to return a bool but now returns Unit in order to fix typing issues
-
-        // TODO affichage de l'équipe
-
-        var new_pok = new Pokemon("poketruc") // TODO trouver une solution permanente pour nommer le pokemon
-        var fail_switch = true
-
-        while (fail_switch) {
-
-            /*case event.ButtonClicked(pok0_team) => new_pok = team1.team(0)
-            case event.ButtonClicked(pok1_team) => new_pok = team1.team(1)
-            case event.ButtonClicked(pok2_team) => new_pok = team1.team(2)
-            case event.ButtonClicked(pok3_team) => new_pok = team1.team(3)
-            case event.ButtonClicked(pok4_team) => new_pok = team1.team(4)
-            case event.ButtonClicked(pok5_team) => new_pok = team1.team(5)*/
-
-            fail_switch = new_pok.alive
-
-            if (!(fail_switch)) { 
-                // TODO affichage message d'erreur "Le pokemon n'a plus de PV"
-            }
-        }
-
-    }
 
     /* A lancer au moment où c'est au joueur d'attaquer */
     def attack_ally (nb_attack:Int) {
@@ -58,34 +34,23 @@ class Fight (team1:Team, team2:Team) {
     }
     
     /* A lancer quand c'est au moment de l'ennemi d'attaquer */
-    def attack_enemy () {
+    def attack_enemy ():Int = {
         val r = scala.util.Random
-        var att = new Attack("turbo-défoncage") // temporary attack name
 
         var fail_attack = true
+        var nb_attack:Int = 0
+        var att:Attack = new Attack("")
 
         while (fail_attack) {
-            att = current_pok_enemy.set_attack(r.nextInt(4))
+            nb_attack = r.nextInt(4)
+            att = current_pok_enemy.set_attack(nb_attack)
             fail_attack = att.use_attack()
             if (!(fail_attack)) { 
                 current_pok_ally.loss_PV(att.damage)
+                nb_attack
             }
         }
     }
 
-/* class Fight_processing (team1:Team, team2:Team) {
-
-    var fight_in_progress = Fight(team1,team2)
-
-    def fight (team1:Team, team2:Team) : Boolean = {
-        // TODO déplacer les boutons ici 
-        var step = 0 
-        
-        while (team_ally.team_alive() && team_enemy.team_alive()) {
-            if (atkSelectionButton.isPressed()) {
-                fight_in_progress.attack_ally()
-            }
-        }
-    }*/
     
 } 
