@@ -61,10 +61,9 @@ class CombatMenu (fight:Fight) {
   
   // Text to display messages to the palyer
   val messageTextLabel = new JLabel("this is a test for now !")
-  messageTextLabel.setBounds(300, 50, 200, 200)
+  messageTextLabel.setBounds(300, 50, 200, 500)
 
 
-  // adding action listers to the buttons so we can know when they are clicked
 
   // Button for selecting attacks
   val atkSelectionButton = new JButton("Attack")
@@ -98,7 +97,6 @@ class CombatMenu (fight:Fight) {
 
 
 
-
   // Panel where the pokemons will be shown
   val pokemonImgPanel = new JPanel
   // makes panel visible
@@ -114,8 +112,17 @@ class CombatMenu (fight:Fight) {
   //pokemonImgPanel.setBorder(BorderFactory.createLineBorder(Color.black))
 
 
+  // Side panel
+  val sidePanel = new JPanel
+  sidePanel.setVisible(true)
+  sidePanel.setBounds(borderSize, borderSize, vLim, 1080-borderSize)
 
-
+  // Return button
+  val returnButton = new JButton("return")
+  returnButton.setVisible(true)
+  //attackMenuPanel.add(returnButton)
+  returnButton.setBounds(0, 0, vLim-borderSize, 100)
+  sidePanel.add(returnButton)
 
 
 
@@ -157,24 +164,16 @@ class CombatMenu (fight:Fight) {
   val attackButton1 = new JButton("attack 1")
   attackMenuPanel.add(attackButton1)
   attackButton1.setVisible(true)
-  //attackButton1.setBounds(borderSize+300, borderSize + 300, 300, 100)
   val attackButton2 = new JButton("attack 2")
   attackButton2.setVisible(true)  
   attackMenuPanel.add(attackButton2)
-  //attackButton2.setBounds(1920-borderSize-300, borderSize + 300, 300, 100)
   val attackButton3 = new JButton("attack 3")
   attackButton3.setVisible(true)
   attackMenuPanel.add(attackButton3)
-  //attackButton3.setBounds(borderSize+300, 1080-borderSize-100, 300, 100)
   val attackButton4 = new JButton("attack 4")
   attackButton4.setVisible(true)
   attackMenuPanel.add(attackButton4)
-  //attackButton4.setBounds(1920-borderSize-300, 1080-borderSize-100, 300, 100)
-  // Return button
-  val returnButton = new JButton("return")
-  returnButton.setVisible(true)
-  //attackMenuPanel.add(returnButton)
-  // returnButton.setBounds(1920-200, 1080-200, 100, 100)
+
 
 
   // buttons
@@ -182,7 +181,6 @@ class CombatMenu (fight:Fight) {
   attackMenuPanel.add(attackButton2)
   attackMenuPanel.add(attackButton3)
   attackMenuPanel.add(attackButton4)
-  //attackMenuPanel.add(returnButton)
 
 
 
@@ -415,6 +413,7 @@ class CombatMenu (fight:Fight) {
   mainFrame.add(actionMenuPanel)
   mainFrame.add(attackMenuPanel)
   mainFrame.add(teamMenuPanel)
+  mainFrame.add(sidePanel)
   // size of the window
   mainFrame.setPreferredSize(new Dimension(1920, 1080))
   mainFrame.pack()
