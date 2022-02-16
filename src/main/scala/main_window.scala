@@ -60,10 +60,22 @@ class CombatMenu (fight:Fight) {
   val oppPokemonImg = new ImageIcon("src/main/resources/purple_square.png")
   
   // Text to display messages to the palyer
-  val messageTextLabel = new JLabel("this is a test for now !")
+  val messageTextLabel = new JLabel("")
+  messageTextLabel.setVisible(true)
   messageTextLabel.setBounds(250, 300, 800, 100)
 
+  val playerHPTextLabel = new JLabel("hp. 100/100")
+  playerHPTextLabel.setVisible(true)
+  playerHPTextLabel.setBounds(400, 400, 150, 30)
 
+  val playerPPTextLabel = new JLabel("pp. 100/100")
+  playerPPTextLabel.setVisible(true)
+  playerPPTextLabel.setBounds(400, 430, 150, 30)
+
+  def updatePlayerStatText() : Unit = {
+    playerHPTextLabel.setText("hp. " + fight.team_player.team(0).PV + "/" + fight.team_player.team(0).PVMax)
+    //playerPPTextLabel.text = "pp. " + fight.team_ally.team(0).PV + "/" + fight.team_ally.team(0).PVMax
+  }
 
   // Button for selecting attacks
   val atkSelectionButton = new JButton("Attack")
@@ -112,6 +124,8 @@ class CombatMenu (fight:Fight) {
   pokemonImgPanel.add(playerPokLabel)
   pokemonImgPanel.add(oppPokLabel)
   pokemonImgPanel.add(messageTextLabel)
+  pokemonImgPanel.add(playerHPTextLabel)
+  pokemonImgPanel.add(playerPPTextLabel)
   //pokemonImgPanel.setBorder(BorderFactory.createLineBorder(Color.black))
 
 
@@ -282,8 +296,9 @@ class CombatMenu (fight:Fight) {
   endOfTurnButton.addActionListener(
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
-        if (!fight.team_opp.team_alive()) {
+        if (! fight.team_opp.team_alive() ) {
           actionMenuPanel.setVisible(false)
+          pokemonImgPanel.setVisible(false)
           endFightPanel.setVisible(true)
         } else {
           fight.new_pok_enemy()
@@ -401,8 +416,9 @@ class CombatMenu (fight:Fight) {
       pokemonImgPanel.setVisible(true)
       actionMenuPanel.setVisible(true)
       attackMenuPanel.setVisible(false)
-      messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName + " it's not very effective")
+      messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName + "")
       fight.current_pok_enemy.loss_PV(att.damage)
+      updatePlayerStatText()
     }
 
   }
@@ -472,7 +488,7 @@ class CombatMenu (fight:Fight) {
 }
 
 object MainGame {
-  var pok_empty = new Pokemon("")
+  var pok_empty = new Pokemon(" ")
   pok_empty.alive = false
 
   var atk1 = new Attack("Griffe acier")
@@ -532,22 +548,23 @@ object MainGame {
 
   team1.team(0) = pok1 
   team1.team(1) = pok2
-  team1.team(2) = pok_empty
-  team1.team(3) = pok_empty
-  team1.team(4) = pok_empty
-  team1.team(5) = pok_empty
+  team1.team(2) = new Pokemon("")
+  team1.team(3) = new Pokemon("")
+  team1.team(4) = new Pokemon("")
+  team1.team(5) = new Pokemon("")
 
   team2.team(0) = pok3
   team2.team(1) = pok4
-  team2.team(2) = pok_empty
-  team2.team(3) = pok_empty
-  team1.team(4) = pok_empty
-  team1.team(5) = pok_empty
+  team2.team(2) = new Pokemon("")
+  team2.team(3) = new Pokemon("")
+  team2.team(4) = new Pokemon("")
+  team2.team(5) = new Pokemon("")
 
-  var fight = new Fight(team1,team2)
+  var fight = new Fight(team1, team2)
   var combatInterface = new CombatMenu(fight)
 
   def main(args: Array[String]) { // we need to keep that argument, otherwise it doesn't count as the main function
+    combatInterface.updatePlayerStatText()
     while (true) {}
   }
   

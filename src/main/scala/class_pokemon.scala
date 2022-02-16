@@ -29,7 +29,12 @@ class Pokemon (name:String) {
     var typ:String = "TODO"
 
     var PV:Int = PVMax
-    var alive = true
+    var alive : Boolean = true
+    if (name == ""){
+      alive = false
+    } else {
+      alive = true
+    }
 
     var set_attack:Array[Attack] = new Array[Attack](4)
 
@@ -60,13 +65,16 @@ class Pokemon (name:String) {
 
 }
 
+
 class Team {
     var team:Array[Pokemon] = new Array[Pokemon](6)
 
     def team_alive () : Boolean = {
         var nb_alive = 0
+        val i = 0
         for (i <- 0 to 5) {
             if (team(i).alive) {
+                println(team(i).pokemonName)
                 nb_alive += 1
             }
         }
