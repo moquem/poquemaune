@@ -5,20 +5,21 @@ class Attack (name:String) {
 
     var PP_max:Int = -1
 
-    var PP_cost:Int = PP_max
+    var PP:Int = PP_max
+    var PP_cost:Int = 10
 
     def use_attack () : Boolean = { 
-        if (PP_cost == 0) {
+        if (PP < PP_cost) {
             false
         } else {
-            PP_cost -= 1
+            PP -= PP_cost
             true
         }
     }
 
     def restore_PP (restore:Int) = { 
-        PP_cost += restore 
-        PP_cost.min(PP_max) }
+        PP += restore 
+        PP.min(PP_max) }
 
 }
 
