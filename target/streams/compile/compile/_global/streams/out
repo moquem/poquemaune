@@ -1,19 +1,6 @@
-<<<<<<< HEAD
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/class_combat.scala:44:9: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : Unit[0m
-[0m[[0m[31merror[0m] [0m[0m required: Int[0m
-[0m[[0m[31merror[0m] [0m[0m        while (fail_attack) {[0m
-[0m[[0m[31merror[0m] [0m[0m        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:271:77: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Attack[0m
+[0m[[0m[31merror[0m] [0m[0m required: String[0m
+[0m[[0m[31merror[0m] [0m[0m            attackButtonList(k).setText(fight.team_player.team(0).set_attack(k)) [0m
+[0m[[0m[31merror[0m] [0m[0m                                                                            ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
-=======
-[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/class_combat.scala:45:23: Team does not take parameters[0m
-[0m[[0m[31merror[0m] [0m[0m            if (team_2(nb_pok).alive) {[0m
-[0m[[0m[31merror[0m] [0m[0m                      ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/class_combat.scala:46:43: Team does not take parameters[0m
-[0m[[0m[31merror[0m] [0m[0m                current_pok_enemy = team_2(nb_pok)[0m
-[0m[[0m[31merror[0m] [0m[0m                                          ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/main_window.scala:265:11: not found: value new_pok_enemy[0m
-[0m[[0m[31merror[0m] [0m[0m          new_pok_enemy()[0m
-[0m[[0m[31merror[0m] [0m[0m          ^[0m
-[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
->>>>>>> 61a61a69510f7b85bacab397b3941223680f0acc

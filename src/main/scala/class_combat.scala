@@ -4,10 +4,10 @@ import java.awt.event._
 
 class Fight (team1:Team, team2:Team) {
   
-    var team_1 = new Team 
-    team_1 = team1
-    var team_2 = new Team
-    team_2 = team2
+    var team_player = new Team 
+    team_player = team1
+    var team_opp = new Team
+    team_opp = team2
 
     var current_pok_ally = team1.team(0)
     var current_pok_enemy = team2.team(0)
