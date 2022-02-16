@@ -9,8 +9,8 @@ class Fight (team1:Team, team2:Team) {
     var team_2 = new Team
     team_2 = team2
 
-    var current_pok_1 = team1.team(0)
-    var current_pok_2 = team2.team(0)
+    var current_pok_ally = team1.team(0)
+    var current_pok_enemy = team2.team(0)
 
     /* Permet de changer de Pokemon, pour l'instant possible seulement quand le pokemon en frontline meurt */
     def switch_pokemon () = { // TODO used to return a bool but now returns Unit in order to fix typing issues
@@ -44,7 +44,7 @@ class Fight (team1:Team, team2:Team) {
         // TODO affichage set d'attaques
 
         var fail_attack = true
-        var att = current_pok_1.set_attack(nb_attack)
+        var att = current_pok_ally.set_attack(nb_attack)
 
         while (fail_attack) {
 
@@ -52,7 +52,7 @@ class Fight (team1:Team, team2:Team) {
             if (fail_attack) {
                 // TODO affichage message d'erreur "Cette attaque ne peut plus être utilisée"
             } else {
-                current_pok_2.loss_PV(att.damage)
+                current_pok_enemy.loss_PV(att.damage)
             }
         }
     }
@@ -65,10 +65,10 @@ class Fight (team1:Team, team2:Team) {
         var fail_attack = true
 
         while (fail_attack) {
-            att = current_pok_2.set_attack(r.nextInt(4))
+            att = current_pok_enemy.set_attack(r.nextInt(4))
             fail_attack = att.use_attack()
             if (!(fail_attack)) { 
-                current_pok_1.loss_PV(att.damage)
+                current_pok_ally.loss_PV(att.damage)
             }
         }
     }

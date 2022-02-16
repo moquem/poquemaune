@@ -1,4 +1,5 @@
 class Attack (name:String) {
+    var name:String = name
     var typ:String = "TODO"
     var damage:Int = -1
 
@@ -22,6 +23,7 @@ class Attack (name:String) {
 }
 
 class Pokemon (name:String) {
+    var name:String = name
     var lien:String = "TODO"
     var PVMax:Int = 0
     var typ:String = "TODO"
