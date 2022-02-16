@@ -1,4 +1,7 @@
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:251:24: javax.swing.JPanel does not take parameters[0m
-[0m[[0m[31merror[0m] [0m[0m        attackMenuPanel(false)[0m
-[0m[[0m[31merror[0m] [0m[0m                       ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/main_window.scala:260:13: not found: value not[0m
+[0m[[0m[31merror[0m] [0m[0m        if (not(fight.team_2.team_alive())) {[0m
+[0m[[0m[31merror[0m] [0m[0m            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/src/main/scala/main_window.scala:266:15: not found: value not[0m
+[0m[[0m[31merror[0m] [0m[0m          if (not(fight.team_1.team_alive())) {[0m
+[0m[[0m[31merror[0m] [0m[0m              ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

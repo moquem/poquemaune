@@ -80,6 +80,9 @@ class CombatMenu (fight:Fight) {
   // Button for slecting an item
   val itemSelectionButton = new JButton("Item")
   itemSelectionButton.setVisible(true)
+
+  val endOfTurnButton = new JButton("Fin du tour")
+  endOfTurnButton.setVisible(true)
   
 
   // Label for the image of player's pokemon
@@ -126,18 +129,20 @@ class CombatMenu (fight:Fight) {
 
 
 
+
   // Panel for the various action buttons 
 
   val actionMenuPanel = new JPanel
   actionMenuPanel.setVisible(true)
   actionMenuPanel.setBounds(vLim, hLim, 1920-vLim-borderSize, 1080-hLim-borderSize)
   // panel layout, a 2x2 grid is what we want here
-  actionMenuPanel.setLayout(new GridLayout(2, 2))
+  actionMenuPanel.setLayout(new GridLayout(2, 3))
   // add the buttons to the panel
   actionMenuPanel.add(atkSelectionButton)
   actionMenuPanel.add(pokSelectionButton)
   actionMenuPanel.add(actionSelectionButton)
   actionMenuPanel.add(itemSelectionButton)
+  actionMenuPanel.add(endOfTurnButton) 
   // creates border around the panel (mainly for test purposes)
   //actionMenuPanel.setBorder(BorderFactory.createLineBorder(Color.black))
   
@@ -150,6 +155,12 @@ class CombatMenu (fight:Fight) {
 
 
 
+
+  // Panel end of game
+
+  val endFightPanel = new JPanel
+  endFightPanel.setVisible(false)
+  actionMenuPanel.setBounds(vLim, hLim, 1920-vLim-borderSize, 1080-hLim-borderSize)
 
 
 
@@ -240,7 +251,39 @@ class CombatMenu (fight:Fight) {
     }
   )
 
+
+
+  // End of turn
+  endOfTurnButton.addActionListener(
+    new ActionListener{
+      def actionPerformed(e:ActionEvent) {
+        if (!fight.team_2.team_alive()) {
+          actionMenuPanel.setVisible(false)
+          endFightPanel.setVisible(true)
+        } else {
+          var nb_attack:Int = 0
+          nb_attack = fight.attack_enemy()
+          if (!fight.team_1.team_alive()) {
+            actionMenuPanel.setVisible(false)
+            endFightPanel.setVisible(true)
+          }
+        }
+      }
+    }
+  )
+
+
+
   // Switch pokemon
+
+  def switch_pok(nb_pok:Int) {
+    if (fight.team_1.team(nb_pok).alive) {
+        fight.current_pok_ally = fight.team_1.team(nb_pok)
+        pokemonImgPanel.setVisible(true)
+        actionMenuPanel.setVisible(true)
+        teamMenuPanel.setVisible(false)
+      }
+  }
 
   pokSelectionButton.addActionListener(
     new ActionListener{
@@ -256,12 +299,7 @@ class CombatMenu (fight:Fight) {
   pok1SelectionButton.addActionListener(
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
-        if (fight.team_1.team(0).alive) {
-          fight.current_pok_ally = fight.team_1.team(0)
-          pokemonImgPanel.setVisible(true)
-          actionMenuPanel.setVisible(true)
-          teamMenuPanel.setVisible(false)
-        }
+        switch_pok(0)
       }
     }
   )
@@ -269,12 +307,7 @@ class CombatMenu (fight:Fight) {
   pok2SelectionButton.addActionListener(
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
-        if (fight.team_1.team(1).alive) {
-          fight.current_pok_ally = fight.team_1.team(1)
-          pokemonImgPanel.setVisible(true)
-          actionMenuPanel.setVisible(true)
-          teamMenuPanel.setVisible(false)
-        }
+        switch_pok(1)
       }
     }
   )
@@ -282,12 +315,7 @@ class CombatMenu (fight:Fight) {
   pok3SelectionButton.addActionListener(
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
-        if (fight.team_1.team(2).alive) {
-          fight.current_pok_ally = fight.team_1.team(2)
-          pokemonImgPanel.setVisible(true)
-          actionMenuPanel.setVisible(true)
-          teamMenuPanel.setVisible(false)
-        }
+        switch_pok(2)
       }
     }
   )
@@ -295,12 +323,7 @@ class CombatMenu (fight:Fight) {
   pok4SelectionButton.addActionListener(
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
-        if (fight.team_1.team(3).alive) {
-          fight.current_pok_ally = fight.team_1.team(3)
-          pokemonImgPanel.setVisible(true)
-          actionMenuPanel.setVisible(true)
-          teamMenuPanel.setVisible(false)
-        }
+        switch_pok(3)
       }
     }
   )
@@ -308,12 +331,7 @@ class CombatMenu (fight:Fight) {
   pok5SelectionButton.addActionListener(
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
-        if (fight.team_1.team(4).alive) {
-          fight.current_pok_ally = fight.team_1.team(4)
-          pokemonImgPanel.setVisible(true)
-          actionMenuPanel.setVisible(true)
-          teamMenuPanel.setVisible(false)
-        }
+        switch_pok(4)
       }
     }
   )
@@ -321,12 +339,7 @@ class CombatMenu (fight:Fight) {
   pok6SelectionButton.addActionListener(
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
-        if (fight.team_1.team(5).alive) {
-          fight.current_pok_ally = fight.team_1.team(5)
-          pokemonImgPanel.setVisible(true)
-          actionMenuPanel.setVisible(true)
-          teamMenuPanel.setVisible(false)
-        }
+        switch_pok(5)
       }
     }
   )
@@ -349,14 +362,23 @@ class CombatMenu (fight:Fight) {
 
   // Attack menu
 
+  def attack_processing (nb_attack:Int) {
+    var att = new Attack("")
+    att = fight.current_pok_ally.set_attack(nb_attack)
+    if (att.use_attack()) {
+      pokemonImgPanel.setVisible(true)
+      actionMenuPanel.setVisible(true)
+      attackMenuPanel.setVisible(false)
+      messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName + " it's not very effective")
+      fight.current_pok_enemy.loss_PV(att.damage)
+    }
+
+  }
+
   attackButton1.addActionListener(
     new ActionListener {
       def actionPerformed(e:ActionEvent) {
-          pokemonImgPanel.setVisible(true)
-          actionMenuPanel.setVisible(true)
-          attackMenuPanel.setVisible(false)
-          messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(0).attackName + " it's not very effective")
-          fight.attack_ally(0)
+          attack_processing(0)
         }
     }
   )
@@ -364,10 +386,7 @@ class CombatMenu (fight:Fight) {
   attackButton2.addActionListener(
     new ActionListener {
       def actionPerformed(e:ActionEvent) {
-          pokemonImgPanel.setVisible(true)
-          actionMenuPanel.setVisible(true)
-          attackMenuPanel.setVisible(false)
-          fight.attack_ally(1)
+          attack_processing(1)
         }
     }
   )
@@ -375,10 +394,7 @@ class CombatMenu (fight:Fight) {
   attackButton3.addActionListener(
     new ActionListener {
       def actionPerformed(e:ActionEvent) {
-          pokemonImgPanel.setVisible(true)
-          actionMenuPanel.setVisible(true)
-          attackMenuPanel.setVisible(false)
-          fight.attack_ally(2)
+          attack_processing(2)
         }
     }
   )
@@ -386,10 +402,7 @@ class CombatMenu (fight:Fight) {
   attackButton4.addActionListener(
     new ActionListener {
       def actionPerformed(e:ActionEvent) {
-          pokemonImgPanel.setVisible(true)
-          actionMenuPanel.setVisible(true)
-          attackMenuPanel.setVisible(false)
-          fight.attack_ally(3)
+          attack_processing(3)
         }
     }
   )
@@ -414,6 +427,7 @@ class CombatMenu (fight:Fight) {
   mainFrame.add(attackMenuPanel)
   mainFrame.add(teamMenuPanel)
   mainFrame.add(sidePanel)
+  mainFrame.add(endFightPanel)
   // size of the window
   mainFrame.setPreferredSize(new Dimension(1920, 1080))
   mainFrame.pack()
