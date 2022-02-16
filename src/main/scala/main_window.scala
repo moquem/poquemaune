@@ -216,23 +216,23 @@ class CombatMenu (fight:Fight) {
 
 
   // Team panel
-    val pok1SelectionButton = new JButton(fight.team_1.team(0).pokemonName)
-  atkSelectionButton.setVisible(true)
+  val pok1SelectionButton = new JButton(fight.team_1.team(0).pokemonName)
+  pok1SelectionButton.setVisible(true)
 
   val pok2SelectionButton = new JButton(fight.team_1.team(1).pokemonName)
-  pokSelectionButton.setVisible(true)
+  pok2SelectionButton.setVisible(true)
 
   val pok3SelectionButton = new JButton(fight.team_1.team(2).pokemonName)
-  actionSelectionButton.setVisible(true)
+  pok3SelectionButton.setVisible(true)
 
   val pok4SelectionButton = new JButton(fight.team_1.team(3).pokemonName)
-  itemSelectionButton.setVisible(true)
+  pok4SelectionButton.setVisible(true)
 
   val pok5SelectionButton = new JButton(fight.team_1.team(4).pokemonName)
-  actionSelectionButton.setVisible(true)
+  pok5SelectionButton.setVisible(true)
 
   val pok6SelectionButton = new JButton(fight.team_1.team(5).pokemonName)
-  itemSelectionButton.setVisible(true)
+  pok6SelectionButton.setVisible(true)
 
   val returnButtonPokSelection = new JButton("Retour")
   returnButton.setVisible(true)
