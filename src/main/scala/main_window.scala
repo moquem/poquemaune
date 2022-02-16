@@ -237,7 +237,7 @@ class CombatMenu (fight:Fight) {
   val teamMenuPanel = new JPanel
   teamMenuPanel.setVisible(true)
   teamMenuPanel.setBounds(vLim, hLim, 1920-vLim-borderSize, 1080-hLim-borderSize)
-  // panel layout, a 2x2 grid is what we want here
+  // panel layout, a 2x3 grid is what we want here
   teamMenuPanel.setLayout(new GridLayout(2, 3))
 
   teamMenuPanel.add(pok1SelectionButton)
@@ -354,6 +354,7 @@ class CombatMenu (fight:Fight) {
   mainFrame.add(pokemonImgPanel)
   mainFrame.add(actionMenuPanel)
   mainFrame.add(attackMenuPanel)
+  mainFrame.add(teamMenuPanel)
   // size of the window
   mainFrame.setPreferredSize(new Dimension(1920, 1080))
   mainFrame.pack()
