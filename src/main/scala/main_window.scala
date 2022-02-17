@@ -178,11 +178,11 @@ class CombatMenu (fight:Fight) {
   // Panel end of game
   
   // End game screen
-  val endScreenImage = new ImageIcon("src/main/resources/end_screen.png")
+  val endScreenImage = new ImageIcon("src/main/resources/end_img.png")
 
   val endScreenImgLabel = new JLabel(endScreenImage)
   endScreenImgLabel.setVisible(true)
-  endScreenImgLabel.setBounds(0, 0, 1920-2*borderSize, 1080-2*borderSize)
+  endScreenImgLabel.setBounds(0, 0, 1920, 1080)
 
   val endScreenText = new JLabel("You win ;-)")
   endScreenText.setVisible(true)
@@ -191,7 +191,7 @@ class CombatMenu (fight:Fight) {
   val endFightPanel = new JPanel
   endFightPanel.setLayout(null)
   endFightPanel.setVisible(false)
-  endFightPanel.setBounds(vLim, hLim, 1920-vLim-borderSize, 1080-hLim-borderSize)
+  endFightPanel.setBounds(0, 0, 1920, 1080)
   endFightPanel.add(endScreenImgLabel)
   endFightPanel.add(endScreenText)
 
@@ -305,6 +305,7 @@ class CombatMenu (fight:Fight) {
           actionMenuPanel.setVisible(false)
           pokemonImgPanel.setVisible(false)
           teamMenuPanel.setVisible(false)
+          sidePanel.setVisible(false)
           endFightPanel.setVisible(true)
         } else {
           fight.new_pok_enemy()
@@ -315,6 +316,7 @@ class CombatMenu (fight:Fight) {
             actionMenuPanel.setVisible(false)
             teamMenuPanel.setVisible(false)
             pokemonImgPanel.setVisible(false)
+            sidePanel.setVisible(false)
             endFightPanel.setVisible(true)
           } else {
             if (!fight.current_pok_ally.alive) {
