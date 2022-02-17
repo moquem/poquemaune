@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:352:9: not found: value updatePokImg[0m
-[0m[[0m[31merror[0m] [0m[0m        updatePokImg()[0m
-[0m[[0m[31merror[0m] [0m[0m        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:454:7: not found: value updatePlayerStatText[0m
+[0m[[0m[31merror[0m] [0m[0m      updatePlayerStatText()[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
