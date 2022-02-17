@@ -82,6 +82,11 @@ class CombatMenu (fight:Fight) {
     //playerPPTextLabel.text = "pp. " + fight.team_ally.team(0).PV + "/" + fight.team_ally.team(0).PVMax
   }
 
+/*  def updatePokImg() : Unit = {
+    fight.current_pok_ally.img.setVisble(true)
+    fight.current_pok_enemy.img.setVisible(true)
+  }*/
+
   // Button for selecting attacks
   val atkSelectionButton = new JButton("Attack")
   atkSelectionButton.setVisible(true)
@@ -435,6 +440,9 @@ class CombatMenu (fight:Fight) {
       fight.current_pok_enemy.loss_PV(att.damage)
       updateStatText()
     }
+    else {
+      messageTextLabel.setText("you can only attack once per turn")
+    }
 
   }
 
@@ -508,23 +516,23 @@ object MainGame {
 
   var atk1 = new Attack("Griffe acier")
   atk1.damage = 7
-  atk1.PP_max = 10
-  atk1.PP_cost = 10
+  atk1.PP_max = 1
+  atk1.PP_cost = 0
 
   var atk2 = new Attack("Fulguropoing")
   atk2.damage = 5
-  atk2.PP_max = 20
-  atk2.PP_cost = 20
+  atk2.PP_max = 1
+  atk2.PP_cost = 0
 
   var atk3 = new Attack("Inutile")
   atk3.damage = 0
-  atk3.PP_max = 30
-  atk3.PP_cost = 30
+  atk3.PP_max = 1
+  atk3.PP_cost = 0
 
   var atk4 = new Attack("Roulade Tactique")
   atk4.damage = 5
-  atk4.PP_max = 10
-  atk4.PP_cost = 10
+  atk4.PP_max = 1
+  atk4.PP_cost = 0
 
   var pok1 = new Pokemon("Noacier")
   pok1.PVMax = 50

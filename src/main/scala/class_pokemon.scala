@@ -3,10 +3,10 @@ class Attack (name:String) {
     var typ:String = "TODO"
     var damage:Int = -1
 
-    var PP_max:Int = -1
+    var PP_max:Int = 1
 
     var PP:Int = PP_max
-    var PP_cost:Int = 10
+    var PP_cost:Int = 1
 
     def use_attack () : Boolean = { 
         if (PP < PP_cost) {

@@ -12,6 +12,8 @@ class Fight (team1:Team, team2:Team) {
     var current_pok_ally = team1.team(0)
     var current_pok_enemy = team2.team(0)
 
+    var currentActionPoints = 1
+
     /* Permet de changer de Pokemon, pour l'instant possible seulement quand le pokemon en frontline meurt */
 
     
