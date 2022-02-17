@@ -54,6 +54,7 @@ class CombatMenu (fight:Fight) {
   val hLim = 600
   val vLim = 250
   val borderSize = 15
+  var myTurn = true
 
   // Images for the player's and oponent's pokemon
   val playerPokemonImg = new ImageIcon("src/main/resources/green_square.png")
@@ -266,11 +267,16 @@ class CombatMenu (fight:Fight) {
 
 
   // Button actions
+
+  def errorMessage() {
+    //TODO
+  }
  
   // Activate attack menu
   atkSelectionButton.addActionListener(
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
+        if (myTurn) {
           pokemonImgPanel.setVisible(true)
           actionMenuPanel.setVisible(false)
           teamMenuPanel.setVisible(false)
@@ -284,8 +290,10 @@ class CombatMenu (fight:Fight) {
             // Set the button to the name of the pokemon attack
             attackButtonList(k).setText(fight.team_player.team(0).set_attack(k).attackName) 
           }
-
+        } else {
+          errorMessage()
         }
+      }
     }
   )
 
@@ -301,6 +309,7 @@ class CombatMenu (fight:Fight) {
           pokemonImgPanel.setVisible(false)
           endFightPanel.setVisible(true)
         } else {
+          myTurn = true
           fight.new_pok_enemy()
           var nb_attack:Int = 0
           nb_attack = fight.attack_enemy()
@@ -329,16 +338,21 @@ class CombatMenu (fight:Fight) {
         attackMenuPanel.setVisible(false)
         actionMenuPanel.setVisible(true)
         teamMenuPanel.setVisible(false)
+        myTurn = false
       }
   }
 
   pokSelectionButton.addActionListener(
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
+        if (myTurn) {
         pokemonImgPanel.setVisible(true)
         attackMenuPanel.setVisible(false)
         actionMenuPanel.setVisible(false)
         teamMenuPanel.setVisible(true)
+        } else {
+          errorMessage() 
+        }
       }
     }
   )
@@ -419,6 +433,7 @@ class CombatMenu (fight:Fight) {
       messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName + "")
       fight.current_pok_enemy.loss_PV(att.damage)
       updatePlayerStatText()
+      myTurn = false
     }
 
   }
@@ -494,22 +509,22 @@ object MainGame {
   var atk1 = new Attack("Griffe acier")
   atk1.damage = 7
   atk1.PP_max = 10
-  atk1.PP_cost = 10
+  atk1.PP = 10
 
   var atk2 = new Attack("Fulguropoing")
   atk2.damage = 5
   atk2.PP_max = 20
-  atk2.PP_cost = 20
+  atk2.PP = 20
 
   var atk3 = new Attack("Inutile")
   atk3.damage = 0
   atk3.PP_max = 30
-  atk3.PP_cost = 30
+  atk3.PP = 30
 
   var atk4 = new Attack("Roulade Tactique")
   atk4.damage = 5
   atk4.PP_max = 10
-  atk4.PP_cost = 10
+  atk4.PP = 10
 
   var pok1 = new Pokemon("Noacier")
   pok1.PVMax = 50
