@@ -53,4 +53,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$11.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$9.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$12.class[0m
+<<<<<<< HEAD
 [0m[[0m[0mdebug[0m] [0m[0mRemoving the temporary directory used for backing up class files: /home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/target/scala-2.12/classes.bak[0m
+=======
+[0m[[0m[0mdebug[0m] [0m[0mRemoving the temporary directory used for backing up class files: /home/bozec/Documents/etudes/projet_prog_2/poquemaune/target/scala-2.12/classes.bak[0m
+>>>>>>> cdc27670393c10d55bc0943680a1ecc1a09baebe

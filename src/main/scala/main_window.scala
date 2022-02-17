@@ -68,13 +68,18 @@ class CombatMenu (fight:Fight) {
   val playerHPTextLabel = new JLabel("hp. 100/100")
   playerHPTextLabel.setVisible(true)
   playerHPTextLabel.setBounds(400, 400, 150, 30)
+  
+  val enemyHPTextLabel = new JLabel ("hp. 100/100")
+  enemyHPTextLabel.setVisible(true)
+  enemyHPTextLabel.setBounds(1270, 200, 150, 30)
 
-  val playerPPTextLabel = new JLabel("pp. 100/100")
+  /*val playerPPTextLabel = new JLabel("pp. 100/100")
   playerPPTextLabel.setVisible(true)
-  playerPPTextLabel.setBounds(400, 430, 150, 30)
+  playerPPTextLabel.setBounds(400, 430, 150, 30)*/
 
-  def updatePlayerStatText() : Unit = {
-    playerHPTextLabel.setText("hp. " + fight.team_player.team(0).PV + "/" + fight.team_player.team(0).PVMax)
+  def updateStatText() : Unit = {
+    playerHPTextLabel.setText("hp. " + fight.current_pok_ally.PV + "/" + fight.current_pok_ally.PVMax)
+    enemyHPTextLabel.setText("hp. " + fight.current_pok_enemy.PV + "/" + fight.current_pok_enemy.PVMax)
     //playerPPTextLabel.text = "pp. " + fight.team_ally.team(0).PV + "/" + fight.team_ally.team(0).PVMax
   }
 
@@ -126,7 +131,7 @@ class CombatMenu (fight:Fight) {
   pokemonImgPanel.add(oppPokLabel)
   pokemonImgPanel.add(messageTextLabel)
   pokemonImgPanel.add(playerHPTextLabel)
-  pokemonImgPanel.add(playerPPTextLabel)
+  pokemonImgPanel.add(enemyHPTextLabel)
   //pokemonImgPanel.setBorder(BorderFactory.createLineBorder(Color.black))
 
 
@@ -174,11 +179,11 @@ class CombatMenu (fight:Fight) {
   // Panel end of game
   
   // End game screen
-  val endScreenImage = new ImageIcon("src/main/resources/end_screen.png")
+  val endScreenImage = new ImageIcon("src/main/resources/end_img.png")
 
   val endScreenImgLabel = new JLabel(endScreenImage)
   endScreenImgLabel.setVisible(true)
-  endScreenImgLabel.setBounds(0, 0, 1920-2*borderSize, 1080-2*borderSize)
+  endScreenImgLabel.setBounds(0, 0, 1920, 1080)
 
   val endScreenText = new JLabel("You win ;-)")
   endScreenText.setVisible(true)
@@ -187,7 +192,7 @@ class CombatMenu (fight:Fight) {
   val endFightPanel = new JPanel
   endFightPanel.setLayout(null)
   endFightPanel.setVisible(false)
-  endFightPanel.setBounds(vLim, hLim, 1920-vLim-borderSize, 1080-hLim-borderSize)
+  endFightPanel.setBounds(0, 0, 1920, 1080)
   endFightPanel.add(endScreenImgLabel)
   endFightPanel.add(endScreenText)
 
@@ -288,7 +293,7 @@ class CombatMenu (fight:Fight) {
           var k = 0
           for (k<-0 until 4){
             // Set the button to the name of the pokemon attack
-            attackButtonList(k).setText(fight.team_player.team(0).set_attack(k).attackName) 
+            attackButtonList(k).setText(fight.current_pok_ally.set_attack(k).attackName) 
           }
         } else {
           errorMessage()
@@ -307,22 +312,31 @@ class CombatMenu (fight:Fight) {
         if (! fight.team_opp.team_alive() ) {
           actionMenuPanel.setVisible(false)
           pokemonImgPanel.setVisible(false)
+          teamMenuPanel.setVisible(false)
+          sidePanel.setVisible(false)
           endFightPanel.setVisible(true)
         } else {
           myTurn = true
           fight.new_pok_enemy()
           var nb_attack:Int = 0
           nb_attack = fight.attack_enemy()
+          messageTextLabel.setText( fight.current_pok_enemy.pokemonName + " used " + fight.current_pok_enemy.set_attack(nb_attack).attackName)
           if (!fight.team_player.team_alive()) {
             actionMenuPanel.setVisible(false)
+            teamMenuPanel.setVisible(false)
+            pokemonImgPanel.setVisible(false)
+            sidePanel.setVisible(false)
             endFightPanel.setVisible(true)
           } else {
             if (!fight.current_pok_ally.alive) {
               actionMenuPanel.setVisible(false)
               teamMenuPanel.setVisible(true)
+              messageTextLabel.setText("choose a new pokemon")
+              updateStatText()
             }
           }
         }
+        updateStatText()
       }
     }
   )
@@ -579,7 +593,7 @@ object MainGame {
   var combatInterface = new CombatMenu(fight)
 
   def main(args: Array[String]) { // we need to keep that argument, otherwise it doesn't count as the main function
-    combatInterface.updatePlayerStatText()
+    combatInterface.updateStatText()
     while (true) {}
   }
   
