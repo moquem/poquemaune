@@ -551,6 +551,66 @@ object MainGame {
   atk4.PP_max = 10
   atk4.PP = 10
 
+  var atk5 = new Attack("Griffe acier")
+  atk5.damage = 7
+  atk5.PP_max = 10
+  atk5.PP = 10
+
+  var atk6 = new Attack("Fulguropoing")
+  atk6.damage = 5
+  atk6.PP_max = 20
+  atk6.PP = 20
+
+  var atk7 = new Attack("Inutile")
+  atk7.damage = 0
+  atk7.PP_max = 30
+  atk7.PP = 30
+
+  var atk8 = new Attack("Roulade Tactique")
+  atk8.damage = 5
+  atk8.PP_max = 10
+  atk8.PP = 10
+
+  var atk9 = new Attack("Griffe acier")
+  atk9.damage = 7
+  atk9.PP_max = 10
+  atk9.PP = 10
+
+  var atk10 = new Attack("Fulguropoing")
+  atk10.damage = 5
+  atk10.PP_max = 20
+  atk10.PP = 20
+
+  var atk11 = new Attack("Inutile")
+  atk11.damage = 0
+  atk11.PP_max = 30
+  atk11.PP = 30
+
+  var atk12 = new Attack("Roulade Tactique")
+  atk12.damage = 5
+  atk12.PP_max = 10
+  atk12.PP = 10
+
+  var atk13 = new Attack("Griffe acier")
+  atk13.damage = 7
+  atk13.PP_max = 10
+  atk13.PP = 10
+
+  var atk14 = new Attack("Fulguropoing")
+  atk14.damage = 5
+  atk14.PP_max = 20
+  atk14.PP = 20
+
+  var atk15 = new Attack("Inutile")
+  atk3.damage = 0
+  atk3.PP_max = 30
+  atk3.PP = 30
+
+  var atk16 = new Attack("Roulade Tactique")
+  atk4.damage = 5
+  atk4.PP_max = 10
+  atk4.PP = 10
+
   var pok1 = new Pokemon("Noacier")
   pok1.PVMax = 50
   pok1.PV = 50
@@ -562,26 +622,26 @@ object MainGame {
   var pok2 = new Pokemon("Grodrive")
   pok2.PVMax = 50
   pok2.PV = 50
-  pok2.set_attack(0) = atk1
-  pok2.set_attack(1) = atk2
-  pok2.set_attack(2) = atk3
-  pok2.set_attack(3) = atk4
+  pok2.set_attack(0) = atk5
+  pok2.set_attack(1) = atk6
+  pok2.set_attack(2) = atk7
+  pok2.set_attack(3) = atk8
 
   var pok3 = new Pokemon("Cabriolaine")
   pok3.PVMax = 50
   pok3.PV = 50
-  pok3.set_attack(0) = atk1
-  pok3.set_attack(1) = atk2
-  pok3.set_attack(2) = atk3
-  pok3.set_attack(3) = atk4
+  pok3.set_attack(0) = atk9
+  pok3.set_attack(1) = atk10
+  pok3.set_attack(2) = atk11
+  pok3.set_attack(3) = atk12
 
   var pok4 = new Pokemon("Spoink")
   pok4.PVMax = 50
   pok4.PV = 50
-  pok4.set_attack(0) = atk1
-  pok4.set_attack(1) = atk2
-  pok4.set_attack(2) = atk3
-  pok4.set_attack(3) = atk4
+  pok4.set_attack(0) = atk13
+  pok4.set_attack(1) = atk14
+  pok4.set_attack(2) = atk15
+  pok4.set_attack(3) = atk16
 
   var team1 = new Team
   var team2 = new Team
