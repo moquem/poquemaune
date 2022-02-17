@@ -3,8 +3,15 @@ class Attack (name:String) {
     var typ:String = "TODO"
     var damage:Int = -1
 
+<<<<<<< HEAD
     var PP_max:Int = -1
     var PP:Int = -1
+=======
+    var PP_max:Int = 1
+
+    var PP:Int = PP_max
+    var PP_cost:Int = 1
+>>>>>>> 34643e52d4542c1be6f263d4ac37c86214c23a76
 
     def use_attack () : Boolean = { 
         if (PP == 0) {

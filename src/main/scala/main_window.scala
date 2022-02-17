@@ -83,6 +83,11 @@ class CombatMenu (fight:Fight) {
     //playerPPTextLabel.text = "pp. " + fight.team_ally.team(0).PV + "/" + fight.team_ally.team(0).PVMax
   }
 
+/*  def updatePokImg() : Unit = {
+    fight.current_pok_ally.img.setVisble(true)
+    fight.current_pok_enemy.img.setVisible(true)
+  }*/
+
   // Button for selecting attacks
   val atkSelectionButton = new JButton("Attack")
   atkSelectionButton.setVisible(true)
@@ -448,6 +453,9 @@ class CombatMenu (fight:Fight) {
       fight.current_pok_enemy.loss_PV(att.damage)
       updatePlayerStatText()
       myTurn = false
+    }
+    else {
+      messageTextLabel.setText("you can only attack once per turn")
     }
 
   }
