@@ -75,7 +75,6 @@ class Team {
         val i = 0
         for (i <- 0 to 5) {
             if (team(i).alive) {
-                println(team(i).pokemonName)
                 nb_alive += 1
             }
         }
