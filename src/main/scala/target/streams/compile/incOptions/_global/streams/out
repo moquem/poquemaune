@@ -5,10 +5,15 @@
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$6.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$7.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	MainGame$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Team.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Pokemon.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	poquemaune.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$4.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Attack.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	poquemaune$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Fight.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	MainGame.class[0m
@@ -18,10 +23,15 @@
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$6.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$7.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	MainGame$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Team.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Pokemon.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	poquemaune.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$4.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Attack.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	poquemaune$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Fight.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	MainGame.class[0m
@@ -29,8 +39,13 @@
 [0m[[0m[0mdebug[0m] [0m[0mRemoving generated classes:[0m
 [0m[[0m[0mdebug[0m] [0m[0mRestoring class files: [0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$5.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	poquemaune.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Attack.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$6.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	poquemaune$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Pokemon.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Team.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	MainGame.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	CombatMenu$$anon$8.class[0m

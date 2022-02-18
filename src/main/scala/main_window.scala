@@ -55,6 +55,7 @@ class CombatMenu (fight:Fight) {
   val vLim = 250
   val borderSize = 15
   var myTurn = true
+  var currentPokDead = false
 
   // Images for the player's and oponent's pokemon
   val playerPokemonImg = new ImageIcon("src/main/resources/green_square.png")
@@ -334,6 +335,7 @@ class CombatMenu (fight:Fight) {
             endFightPanel.setVisible(true)
           } else {
             if (!fight.current_pok_ally.alive) {
+              currentPokDead = true
               actionMenuPanel.setVisible(false)
               teamMenuPanel.setVisible(true)
               messageTextLabel.setText("choose a new pokemon")
@@ -357,7 +359,11 @@ class CombatMenu (fight:Fight) {
         attackMenuPanel.setVisible(false)
         actionMenuPanel.setVisible(true)
         teamMenuPanel.setVisible(false)
-        myTurn = false
+        if (!currentPokDead) {
+          myTurn = false
+        } else {
+          currentPokDead = false
+        }
       }
   }
 
