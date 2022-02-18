@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:352:9: not found: value updatePokImg[0m
-[0m[[0m[31merror[0m] [0m[0m        updatePokImg()[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/class_pokemon.scala:12:9: Invalid literal number[0m
+[0m[[0m[31merror[0m] [0m[0m>>>>>>> 57a2c21ea661b8ad7e65256a251f4fec82480f97[0m
 [0m[[0m[31merror[0m] [0m[0m        ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

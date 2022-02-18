@@ -6,6 +6,8 @@ class Attack (name:String) {
     var PP_max:Int = -1
     var PP:Int = -1
 
+    var PP_cost:Int = 1
+
     def use_attack () : Boolean = { 
         if (PP == 0) {
             false

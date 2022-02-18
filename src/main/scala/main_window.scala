@@ -105,7 +105,7 @@ class CombatMenu (fight:Fight) {
   val itemSelectionButton = new JButton("Item")
   itemSelectionButton.setVisible(true)
 
-  val endOfTurnButton = new JButton("Fin du tour")
+  val endOfTurnButton = new JButton("End turn")
   endOfTurnButton.setVisible(true)
   
 
@@ -280,7 +280,7 @@ class CombatMenu (fight:Fight) {
   // Button actions
 
   def errorMessage() {
-    //TODO
+    messageTextLabel.setText("this action cannot be taken")
   }
  
   // Activate attack menu
@@ -365,6 +365,7 @@ class CombatMenu (fight:Fight) {
           currentPokDead = false
         }
       }
+    updateStatText()
   }
 
   pokSelectionButton.addActionListener(
@@ -375,8 +376,10 @@ class CombatMenu (fight:Fight) {
         attackMenuPanel.setVisible(false)
         actionMenuPanel.setVisible(false)
         teamMenuPanel.setVisible(true)
+        updateStatText()
         } else {
-          errorMessage() 
+          errorMessage()
+          updateStatText()
         }
       }
     }
@@ -457,11 +460,11 @@ class CombatMenu (fight:Fight) {
       attackMenuPanel.setVisible(false)
       messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName + "")
       fight.current_pok_enemy.loss_PV(att.damage)
-      updatePlayerStatText()
+      updateStatText()
       myTurn = false
     }
     else {
-      messageTextLabel.setText("you can only attack once per turn")
+      messageTextLabel.setText("not enough pp")
     }
 
   }
