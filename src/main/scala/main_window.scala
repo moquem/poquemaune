@@ -24,6 +24,23 @@ import java.awt.event._
 
 
 
+/*
+ * TODO :
+ * - Factoriser code et mettre tour au propre 
+ * - Refaire fenêtre
+ *    - refaire menu qui ont besoins d'être retravaillés
+ *    - retravailler les menus pour que ce soit beau
+ * - Menu acceuil
+ *    - palceholder menu
+ * - Animations 1
+ *    - animations basique
+ *    - animation combats fonctionnelles de base
+ * - Système monde
+ *    - base avec placeholder
+ *    - petit mais propre
+ *    - étendre par morceaux
+ */
+
 class CombatMenu (fight:Fight) {
 
   /*
@@ -50,7 +67,8 @@ class CombatMenu (fight:Fight) {
    *
    *
    */
-  
+
+
   val hLim = 600
   val vLim = 250
   val borderSize = 15
@@ -84,10 +102,6 @@ class CombatMenu (fight:Fight) {
     //playerPPTextLabel.text = "pp. " + fight.team_ally.team(0).PV + "/" + fight.team_ally.team(0).PVMax
   }
 
-/*  def updatePokImg() : Unit = {
-    fight.current_pok_ally.img.setVisble(true)
-    fight.current_pok_enemy.img.setVisible(true)
-  }*/
 
   // Button for selecting attacks
   val atkSelectionButton = new JButton("Attack")
@@ -122,6 +136,24 @@ class CombatMenu (fight:Fight) {
   oppPokLabel.setBounds(1400, 200, 100, 100)
 
 
+  val pokemonImgPanel2 = new JPanel
+  pokemonImgPanel2.setVisible(true)
+  pokemonImgPanel2.setBounds(vLim, borderSize, 1920-vLim-borderSize, hLim-borderSize)
+  pokemonImgPanel2.setLayout(new GridBagLayout())
+  val c = new GridBagConstraints()
+  c.gridwidth = 1
+  c.gridheight = 1
+  c.fill = GridBagConstraints.NONE
+  c.weightx = 0.5
+  c.weighty = 0.5
+  c.gridx = 1
+  c.gridy = 1
+  pokemonImgPanel2.add(playerPokLabel, c)
+  pokemonImgPanel2.add(new JButton("Test1"), c)
+  c.gridx = 5
+  c.gridy = 5
+  pokemonImgPanel2.add(oppPokLabel, c)
+  pokemonImgPanel2.add(new JButton("Test2"), c)
 
 
   // Panel where the pokemons will be shown
@@ -213,49 +245,46 @@ class CombatMenu (fight:Fight) {
   attackMenuPanel.setLayout(new GridLayout(2,2))
   
   // Attack buttons
+
+  val attackButtonList = new Array[JButton](4)
+
   val attackButton1 = new JButton("attack 1")
-  attackMenuPanel.add(attackButton1)
-  attackButton1.setVisible(true)
+  attackButtonList(0) = attackButton1;
   val attackButton2 = new JButton("attack 2")
-  attackButton2.setVisible(true) 
-  attackMenuPanel.add(attackButton2)
+  attackButtonList(1) = attackButton2;
   val attackButton3 = new JButton("attack 3")
-  attackButton3.setVisible(true)
-  attackMenuPanel.add(attackButton3)
+  attackButtonList(2) = attackButton3;
   val attackButton4 = new JButton("attack 4")
-  attackButton4.setVisible(true)
-  attackMenuPanel.add(attackButton4)
+  attackButtonList(3) = attackButton4;
 
+  for (k<-0 until 3){
+    attackMenuPanel.add(attackButtonList(k));
+    attackButtonList(k).setVisible(true);
+  }
 
-
-  // buttons
-  attackMenuPanel.add(attackButton1)
-  attackMenuPanel.add(attackButton2)
-  attackMenuPanel.add(attackButton3)
-  attackMenuPanel.add(attackButton4)
-
-
+  
 
 
   // Team panel
+  
+
+  // pokemon selection buttons
+  
+  val pokSelectButtonList = new Array[JButton](6);
+
   val pok1SelectionButton = new JButton(fight.team_player.team(0).pokemonName)
-  pok1SelectionButton.setVisible(true)
-
+  pokSelectButtonList(0)=pok1SelectionButton;
   val pok2SelectionButton = new JButton(fight.team_player.team(1).pokemonName)
-  pok2SelectionButton.setVisible(true)
-
+  pokSelectButtonList(1)=pok2SelectionButton;
   val pok3SelectionButton = new JButton(fight.team_player.team(2).pokemonName)
-  pok3SelectionButton.setVisible(true)
-
+  pokSelectButtonList(2)=pok3SelectionButton; 
   val pok4SelectionButton = new JButton(fight.team_player.team(3).pokemonName)
-  pok4SelectionButton.setVisible(true)
-
+  pokSelectButtonList(3)=pok4SelectionButton;
   val pok5SelectionButton = new JButton(fight.team_player.team(4).pokemonName)
-  pok5SelectionButton.setVisible(true)
-
+  pokSelectButtonList(4)=pok5SelectionButton;
   val pok6SelectionButton = new JButton(fight.team_player.team(5).pokemonName)
-  pok6SelectionButton.setVisible(true)
-
+  pokSelectButtonList(5)=pok6SelectionButton;
+ 
   val returnButtonPokSelection = new JButton("Retour")
   returnButton.setVisible(true)
 
@@ -266,18 +295,19 @@ class CombatMenu (fight:Fight) {
   // panel layout, a 2x3 grid is what we want here
   teamMenuPanel.setLayout(new GridLayout(2, 3))
 
-  teamMenuPanel.add(pok1SelectionButton)
-  teamMenuPanel.add(pok2SelectionButton)
-  teamMenuPanel.add(pok3SelectionButton)
-  teamMenuPanel.add(pok4SelectionButton)
-  teamMenuPanel.add(pok5SelectionButton)
-  teamMenuPanel.add(pok6SelectionButton)
 
-
-
-
+  var k = 0
+  for (k<-0 until 5){
+    teamMenuPanel.add(pokSelectButtonList(k));
+    pokSelectButtonList(k).setVisible(true)
+  }
+  
 
   // Button actions
+  
+
+  panelArray = new Array[JPanel](6)
+  panelArray(0)=pokemonImgPanel; panelArray(1)=sidePanel; pannelArray(2)=actionMenuPanel;
 
   def errorMessage() {
     messageTextLabel.setText("this action cannot be taken")
@@ -289,14 +319,16 @@ class CombatMenu (fight:Fight) {
       def actionPerformed(e:ActionEvent) {
         if (myTurn) {
           pokemonImgPanel.setVisible(true)
+          // side panel
           actionMenuPanel.setVisible(false)
           teamMenuPanel.setVisible(false)
           attackMenuPanel.setVisible(true)
+          // end panel
+          // [1, 1, 0, 0, 1, 0]
 
           val attackButtonList = new Array[JButton](4)
           attackButtonList(0) = attackButton1; attackButtonList(1) =  attackButton2;  attackButtonList(2) = attackButton3; attackButtonList(3) = attackButton4
         
-          var k = 0
           for (k<-0 until 4){
             // Set the button to the name of the pokemon attack
             attackButtonList(k).setText(fight.current_pok_ally.set_attack(k).attackName) 
@@ -316,11 +348,15 @@ class CombatMenu (fight:Fight) {
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
         if (! fight.team_opp.team_alive() ) {
-          actionMenuPanel.setVisible(false)
-          pokemonImgPanel.setVisible(false)
-          teamMenuPanel.setVisible(false)
+          /*pokemonImgPanel.setVisible(false)
           sidePanel.setVisible(false)
-          endFightPanel.setVisible(true)
+          actionMenuPanel.setVisible(false)
+          // attack menu panel
+          teamMenuPanel.setVisible(false)
+          endFightPanel.setVisible(true)*/
+          Array(endFightPanel).iter(setVisible(true))
+          pannelArray.iter(setVisible(false))
+          // [0, 0, 0, 0, 0, 1]
         } else {
           myTurn = true
           fight.new_pok_enemy()
@@ -329,15 +365,22 @@ class CombatMenu (fight:Fight) {
           messageTextLabel.setText( fight.current_pok_enemy.pokemonName + " used " + fight.current_pok_enemy.set_attack(nb_attack).attackName)
           if (!fight.team_player.team_alive()) {
             actionMenuPanel.setVisible(false)
+            sidePanel.setVisible(false)
             teamMenuPanel.setVisible(false)
             pokemonImgPanel.setVisible(false)
-            sidePanel.setVisible(false)
             endFightPanel.setVisible(true)
+            // [0, 0, 0, 0, 0, 1]
           } else {
             if (!fight.current_pok_ally.alive) {
               currentPokDead = true
+              // image panel
               actionMenuPanel.setVisible(false)
+              // side panel
+              // action menu panel
+              // attack menu panel
               teamMenuPanel.setVisible(true)
+              // end panel
+              // [1, 0, 0, 0, 1, 0]
               messageTextLabel.setText("choose a new pokemon")
               updateStatText()
             }
@@ -356,9 +399,12 @@ class CombatMenu (fight:Fight) {
     if (fight.team_player.team(nb_pok).alive) {
         fight.current_pok_ally = fight.team_player.team(nb_pok)
         pokemonImgPanel.setVisible(true)
+        // side panel
         attackMenuPanel.setVisible(false)
         actionMenuPanel.setVisible(true)
         teamMenuPanel.setVisible(false)
+        // end panel
+        // [1, 1, 0, 1, 0, 0]
         if (!currentPokDead) {
           myTurn = false
         } else {
@@ -373,9 +419,12 @@ class CombatMenu (fight:Fight) {
       def actionPerformed(e:ActionEvent) {
         if (myTurn) {
         pokemonImgPanel.setVisible(true)
+        // side panel
         attackMenuPanel.setVisible(false)
         actionMenuPanel.setVisible(false)
         teamMenuPanel.setVisible(true)
+        // end panel
+        // [1, 1, 0, 0, 1, 0]
         updateStatText()
         } else {
           errorMessage()
@@ -384,56 +433,17 @@ class CombatMenu (fight:Fight) {
       }
     }
   )
-
-  pok1SelectionButton.addActionListener(
-    new ActionListener{
-      def actionPerformed(e:ActionEvent) {
-        switch_pok(0)
+  
+ 
+  for (k<-0 until 5){
+    pokSelectButtonList(k).addActionListener(
+      new ActionListener{
+        def actionPerformed(e:ActionEvent){
+          switch_pok(k)
+        }
       }
-    }
-  )
-
-  pok2SelectionButton.addActionListener(
-    new ActionListener{
-      def actionPerformed(e:ActionEvent) {
-        switch_pok(1)
-      }
-    }
-  )
-
-  pok3SelectionButton.addActionListener(
-    new ActionListener{
-      def actionPerformed(e:ActionEvent) {
-        switch_pok(2)
-      }
-    }
-  )
-
-  pok4SelectionButton.addActionListener(
-    new ActionListener{
-      def actionPerformed(e:ActionEvent) {
-        switch_pok(3)
-      }
-    }
-  )
-
-  pok5SelectionButton.addActionListener(
-    new ActionListener{
-      def actionPerformed(e:ActionEvent) {
-        switch_pok(4)
-      }
-    }
-  )
-
-  pok6SelectionButton.addActionListener(
-    new ActionListener{
-      def actionPerformed(e:ActionEvent) {
-        switch_pok(5)
-      }
-    }
-  )
-
-
+    )
+  }
 
 
   // Return button
@@ -442,9 +452,12 @@ class CombatMenu (fight:Fight) {
     new ActionListener{
       def actionPerformed (e:ActionEvent) {
         pokemonImgPanel.setVisible(true)
+        // side panel
         actionMenuPanel.setVisible(true)
         attackMenuPanel.setVisible(false)
         teamMenuPanel.setVisible(false)
+        // end panel
+        // [1, 1, 1, 0, 0, 0]
       }
     }
   )
@@ -456,8 +469,12 @@ class CombatMenu (fight:Fight) {
     att = fight.current_pok_ally.set_attack(nb_attack)
     if (att.use_attack()) {
       pokemonImgPanel.setVisible(true)
+      // side panel
       actionMenuPanel.setVisible(true)
       attackMenuPanel.setVisible(false)
+      // team menu
+      // end panel
+      // [1, 1, 1, 0, 0, 0]
       messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName + "")
       fight.current_pok_enemy.loss_PV(att.damage)
       updateStatText()
@@ -468,39 +485,16 @@ class CombatMenu (fight:Fight) {
     }
 
   }
-
-  attackButton1.addActionListener(
-    new ActionListener {
-      def actionPerformed(e:ActionEvent) {
-          attack_processing(0)
+  
+  for (k<-0 until 3){
+    attackButtonList(k).addActionListener(
+      new ActionListener {
+        def actionPerformed(e:ActionEvent) {
+          attack_processing(k)
         }
-    }
-  )
-
-  attackButton2.addActionListener(
-    new ActionListener {
-      def actionPerformed(e:ActionEvent) {
-          attack_processing(1)
-        }
-    }
-  )
-
-  attackButton3.addActionListener(
-    new ActionListener {
-      def actionPerformed(e:ActionEvent) {
-          attack_processing(2)
-        }
-    }
-  )
-
-  attackButton4.addActionListener(
-    new ActionListener {
-      def actionPerformed(e:ActionEvent) {
-          attack_processing(3)
-        }
-    }
-  )
-
+      }
+    )
+  }
 
 
   // enables us to set the window to full screen, i have no idea what it does 
@@ -516,11 +510,11 @@ class CombatMenu (fight:Fight) {
   // makes the current frame visible
   mainFrame.setVisible(true)
   // adds the panels to the frame
-  mainFrame.add(pokemonImgPanel)
+  mainFrame.add(pokemonImgPanel2)
+  mainFrame.add(sidePanel)
   mainFrame.add(actionMenuPanel)
   mainFrame.add(attackMenuPanel)
   mainFrame.add(teamMenuPanel)
-  mainFrame.add(sidePanel)
   mainFrame.add(endFightPanel)
   // size of the window
   mainFrame.setPreferredSize(new Dimension(1920, 1080))
@@ -671,7 +665,9 @@ object MainGame {
 
   def main(args: Array[String]) { // we need to keep that argument, otherwise it doesn't count as the main function
     combatInterface.updateStatText()
-    while (true) {}
+    Thread.sleep(Int.MaxValue)
+    println("why do you close ?")
+    //while (true) {}
   }
   
 }
