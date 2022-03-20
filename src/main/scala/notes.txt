@@ -1,0 +1,7 @@
+sidebar proportion : 250/1980 = 12.5 %
+botton menu proportion : 600/1080 = 45 %
+
+Total grid size : 8x20
+sidebar size : 1x20
+image panel size : 7x11
+menu size : 7x9

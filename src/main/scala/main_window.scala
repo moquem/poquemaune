@@ -14,6 +14,7 @@ import java.io.InputStream
 import java.io.File
 import java.awt.GridLayout
 import java.awt.GridBagLayout
+import java.awt.LayoutManager
 import java.awt._
 import javax.swing.border.Border
 import javax.swing.BorderFactory
@@ -285,6 +286,7 @@ class CombatMenu (fight:Fight) {
   val pok6SelectionButton = new JButton(fight.team_player.team(5).pokemonName)
   pokSelectButtonList(5)=pok6SelectionButton;
  
+
   val returnButtonPokSelection = new JButton("Retour")
   returnButton.setVisible(true)
 
@@ -306,8 +308,8 @@ class CombatMenu (fight:Fight) {
   // Button actions
   
 
-  panelArray = new Array[JPanel](6)
-  panelArray(0)=pokemonImgPanel; panelArray(1)=sidePanel; pannelArray(2)=actionMenuPanel;
+  var panelArray = new Array[JPanel](6)
+  panelArray(0)=pokemonImgPanel; panelArray(1)=sidePanel; panelArray(2)=actionMenuPanel;
 
   def errorMessage() {
     messageTextLabel.setText("this action cannot be taken")
@@ -348,14 +350,14 @@ class CombatMenu (fight:Fight) {
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
         if (! fight.team_opp.team_alive() ) {
-          /*pokemonImgPanel.setVisible(false)
+          pokemonImgPanel.setVisible(false)
           sidePanel.setVisible(false)
           actionMenuPanel.setVisible(false)
           // attack menu panel
           teamMenuPanel.setVisible(false)
-          endFightPanel.setVisible(true)*/
-          Array(endFightPanel).iter(setVisible(true))
-          pannelArray.iter(setVisible(false))
+          endFightPanel.setVisible(true)
+          //Array(endFightPanel).iter(setVisible(true))
+          //pannelArray.iter(setVisible(false))
           // [0, 0, 0, 0, 0, 1]
         } else {
           myTurn = true
@@ -501,7 +503,7 @@ class CombatMenu (fight:Fight) {
   val graphics = GraphicsEnvironment.getLocalGraphicsEnvironment()
   val device = graphics.getDefaultScreenDevice()
 
-  // Main Frame, where everything is displayed
+  /*// Main Frame, where everything is displayed
   val mainFrame = new JFrame
   // makes sure that the 1920x1080 dimensions show fully on screen and are not obscured by additional stuff
   mainFrame.setUndecorated(true)
@@ -523,8 +525,54 @@ class CombatMenu (fight:Fight) {
   mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
   // makes the frame full screen
   device.setFullScreenWindow(mainFrame)
-  
+  mainFrame.setVisible(false)*/
 
+  /*val testButton1 = new JButton("side panel")
+  testButton1.setVisible(true)
+  val testButton2 = new JButton("image")
+  testButton2.setVisible(true)
+  val testButton3 = new JButton("menu")
+  testButton3.setVisible(true)*/
+
+
+
+  val mainFrame2 = new JFrame
+  mainFrame2.setVisible(true)
+  mainFrame2.setLayout(new GridBagLayout())
+  mainFrame2.setPreferredSize(new Dimension(1920, 1080))
+  mainFrame2.pack()
+  
+  val c2 = new GridBagConstraints()
+  c2.gridwidth = 1
+  c2.gridheight = 20
+  c2.fill = GridBagConstraints.BOTH
+  c2.weightx = 0.13
+  c2.weighty = 1
+  c2.gridx = 0
+  c2.gridy = 0
+  mainFrame2.add(sidePanel, c2)
+ 
+  c2.gridwidth = 7
+  c2.gridheight = 11
+  c2.fill = GridBagConstraints.BOTH
+  c2.weightx = 0.87
+  c2.weighty = 0.55
+  c2.gridx = 1
+  c2.gridy = 0
+  mainFrame2.add(pokemonImgPanel2, c2)
+
+  c2.gridwidth = 7
+  c2.gridheight = 9
+  c2.fill = GridBagConstraints.BOTH
+  c2.weightx = 0.87
+  c2.weighty = 0.45
+  c2.gridx = 1
+  c2.gridy = 11
+  mainFrame2.add(actionMenuPanel, c2)
+  mainFrame2.add(attackMenuPanel, c2)
+  mainFrame2.add(teamMenuPanel, c2)
+  mainFrame2.add(endFightPanel, c2)
+ 
 }
 
 object MainGame {
