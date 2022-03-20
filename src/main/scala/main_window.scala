@@ -177,13 +177,13 @@ class CombatMenu (fight:Fight) {
   // Side panel
   val sidePanel = new JPanel
   sidePanel.setVisible(true)
-  sidePanel.setLayout(null)
-  sidePanel.setBounds(borderSize, borderSize, vLim, 1080-borderSize)
+  // will change according to needs of the side bar
+  sidePanel.setLayout(new GridLayout (2, 1))
 
   // Return button
   val returnButton = new JButton("return")
   returnButton.setVisible(true)
-  returnButton.setBounds(0, hLim-borderSize, vLim-borderSize+1, 1080-hLim-borderSize-1)
+  sidePanel.add(new JButton(""))
   sidePanel.add(returnButton)
 
 
@@ -193,8 +193,6 @@ class CombatMenu (fight:Fight) {
 
   val actionMenuPanel = new JPanel
   actionMenuPanel.setVisible(true)
-  actionMenuPanel.setBounds(vLim, hLim, 1920-vLim-borderSize, 1080-hLim-borderSize)
-  // panel layout, a 2x2 grid is what we want here
   actionMenuPanel.setLayout(new GridLayout(2, 3))
   // add the buttons to the panel
   actionMenuPanel.add(atkSelectionButton)
@@ -203,16 +201,8 @@ class CombatMenu (fight:Fight) {
   actionMenuPanel.add(itemSelectionButton)
   actionMenuPanel.add(endOfTurnButton) 
   // creates border around the panel (mainly for test purposes)
-  //actionMenuPanel.setBorder(BorderFactory.createLineBorder(Color.black))
+  // actionMenuPanel.setBorder(BorderFactory.createLineBorder(Color.black))
   
-
-  /*
-   *
-   *  Attack menu, has 5 buttons, 4 for the various attacks and one for returning to the main menu
-   *
-   * */
-
-
 
 
   // Panel end of game
@@ -222,7 +212,7 @@ class CombatMenu (fight:Fight) {
 
   val endScreenImgLabel = new JLabel(endScreenImage)
   endScreenImgLabel.setVisible(true)
-  endScreenImgLabel.setBounds(0, 0, 1920, 1080)
+  //endScreenImgLabel.setBounds(0, 0, 1920, 1080)
 
   val endScreenText = new JLabel("You win ;-)")
   endScreenText.setVisible(true)
@@ -241,8 +231,6 @@ class CombatMenu (fight:Fight) {
   // Panel for the attack menu, is activated when the attack button is pressed
   val attackMenuPanel = new JPanel
   attackMenuPanel.setVisible(false)
-  attackMenuPanel.setBounds(vLim, hLim, 1920-vLim-borderSize, 1080-hLim-borderSize)
-  // Grid layout is good here
   attackMenuPanel.setLayout(new GridLayout(2,2))
   
   // Attack buttons
@@ -287,17 +275,11 @@ class CombatMenu (fight:Fight) {
   pokSelectButtonList(5)=pok6SelectionButton;
  
 
-  val returnButtonPokSelection = new JButton("Retour")
-  returnButton.setVisible(true)
-
 
   val teamMenuPanel = new JPanel
   teamMenuPanel.setVisible(true)
-  teamMenuPanel.setBounds(vLim, hLim, 1920-vLim-borderSize, 1080-hLim-borderSize)
-  // panel layout, a 2x3 grid is what we want here
   teamMenuPanel.setLayout(new GridLayout(2, 3))
-
-
+  // add buttons to the panel
   var k = 0
   for (k<-0 until 5){
     teamMenuPanel.add(pokSelectButtonList(k));
@@ -527,21 +509,20 @@ class CombatMenu (fight:Fight) {
   device.setFullScreenWindow(mainFrame)
   mainFrame.setVisible(false)*/
 
-  /*val testButton1 = new JButton("side panel")
-  testButton1.setVisible(true)
-  val testButton2 = new JButton("image")
-  testButton2.setVisible(true)
-  val testButton3 = new JButton("menu")
-  testButton3.setVisible(true)*/
 
-
-
-  val mainFrame2 = new JFrame
+ val mainFrame2 = new JFrame
   mainFrame2.setVisible(true)
   mainFrame2.setLayout(new GridBagLayout())
   mainFrame2.setPreferredSize(new Dimension(1920, 1080))
   mainFrame2.pack()
   
+  val columns = Array(0.13, 0.87)
+  val rows = Array(0.55, 0.45)
+  val cells_size_mainFrame = (columns, rows)
+  
+  //val test = new JFrame
+ // test.setLayout(new TableLayout(cells_size_mainFrame))
+
   val c2 = new GridBagConstraints()
   c2.gridwidth = 1
   c2.gridheight = 20
@@ -571,6 +552,8 @@ class CombatMenu (fight:Fight) {
   mainFrame2.add(actionMenuPanel, c2)
   mainFrame2.add(attackMenuPanel, c2)
   mainFrame2.add(teamMenuPanel, c2)
+  
+
   mainFrame2.add(endFightPanel, c2)
  
 }
@@ -714,8 +697,6 @@ object MainGame {
   def main(args: Array[String]) { // we need to keep that argument, otherwise it doesn't count as the main function
     combatInterface.updateStatText()
     Thread.sleep(Int.MaxValue)
-    println("why do you close ?")
-    //while (true) {}
   }
   
 }

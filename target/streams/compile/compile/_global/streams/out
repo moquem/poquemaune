@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:568:23: ';' expected but double literal found.[0m
-[0m[[0m[31merror[0m] [0m[0m  c_test.weighty = 0.0.45[0m
-[0m[[0m[31merror[0m] [0m[0m                      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/bozec/Documents/etudes/projet_prog_2/poquemaune/src/main/scala/main_window.scala:525:22: not found: type TableLayout[0m
+[0m[[0m[31merror[0m] [0m[0m  test.setLayout(new TableLayout(cells_size_mainFrame))[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
