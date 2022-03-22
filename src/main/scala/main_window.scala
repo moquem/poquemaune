@@ -44,9 +44,6 @@ import layout.TableLayout
 class CombatMenu (fight:Fight) {
 
 
-  val hLim = 600
-  val vLim = 250
-  val borderSize = 15
   var myTurn = true
   var currentPokDead = false
 
@@ -57,15 +54,12 @@ class CombatMenu (fight:Fight) {
   // Text to display messages to the palyer
   val messageTextLabel = new JLabel("")
   messageTextLabel.setVisible(true)
-  messageTextLabel.setBounds(250, 300, 800, 100)
 
   val playerHPTextLabel = new JLabel("hp. 100/100")
   playerHPTextLabel.setVisible(true)
-  playerHPTextLabel.setBounds(400, 400, 150, 30)
   
   val enemyHPTextLabel = new JLabel ("hp. 100/100")
   enemyHPTextLabel.setVisible(true)
-  enemyHPTextLabel.setBounds(1270, 200, 150, 30)
 
   /*val playerPPTextLabel = new JLabel("pp. 100/100")
   playerPPTextLabel.setVisible(true)
@@ -77,6 +71,9 @@ class CombatMenu (fight:Fight) {
     //playerPPTextLabel.text = "pp. " + fight.team_ally.team(0).PV + "/" + fight.team_ally.team(0).PVMax
   }
 
+  def updatePokImg (oldImg:JLabel, newImg:JLabel) : Unit = {
+    println("to be implemented")
+  }
 
   // Button for selecting attacks
   val atkSelectionButton = new JButton("Attack")
@@ -103,17 +100,17 @@ class CombatMenu (fight:Fight) {
   // makes the label visible
   playerPokLabel.setVisible(true)
   // positioning, the size of the label is exactly the size of the image
-  playerPokLabel.setBounds(250, 400, 100, 100)
   
   // Label for the image of opponent's pokemon
   val oppPokLabel = new JLabel(oppPokemonImg)
   oppPokLabel.setVisible(true)
-  oppPokLabel.setBounds(1400, 200, 100, 100)
 
 
   val pokemonImgPanel2 = new JPanel
   pokemonImgPanel2.setVisible(true)
-  pokemonImgPanel2.setBounds(vLim, borderSize, 1920-vLim-borderSize, hLim-borderSize)
+  val pokemon_img_panel_columns = Array(0.2, 0.2, 0.2, 0.2, 0.2)
+  val pokemon_img_panel_rows = Array(0.2, 0.2, 0.2, 0.2, 0.2)
+  val pokemon_img_table = Array(pokemon_img_panel_columns, pokemon_img_panel_rows)
   pokemonImgPanel2.setLayout(new GridBagLayout())
   val c = new GridBagConstraints()
   c.gridwidth = 1
@@ -124,28 +121,9 @@ class CombatMenu (fight:Fight) {
   c.gridx = 1
   c.gridy = 1
   pokemonImgPanel2.add(playerPokLabel, c)
-  pokemonImgPanel2.add(new JButton("Test1"), c)
   c.gridx = 5
   c.gridy = 5
   pokemonImgPanel2.add(oppPokLabel, c)
-  pokemonImgPanel2.add(new JButton("Test2"), c)
-
-
-/*  // Panel where the pokemons will be shown
-  val pokemonImgPanel = new JPanel
-  // makes panel visible
-  pokemonImgPanel.setVisible(true)
-  // null layout enables absolute positioning
-  pokemonImgPanel.setLayout(null)
-  // panel size and position
-  pokemonImgPanel.setBounds(vLim, borderSize, 1920-vLim-borderSize, hLim-borderSize)
-  // adds the pokemon images to the panel
-  pokemonImgPanel.add(playerPokLabel)
-  pokemonImgPanel.add(oppPokLabel)
-  pokemonImgPanel.add(messageTextLabel)
-  pokemonImgPanel.add(playerHPTextLabel)
-  pokemonImgPanel.add(enemyHPTextLabel)
-  //pokemonImgPanel.setBorder(BorderFactory.createLineBorder(Color.black))*/
 
 
   // Side panel
@@ -186,16 +164,15 @@ class CombatMenu (fight:Fight) {
 
   val endScreenImgLabel = new JLabel(endScreenImage)
   endScreenImgLabel.setVisible(true)
-  //endScreenImgLabel.setBounds(0, 0, 1920, 1080)
+  endScreenImgLabel.setBounds(0, 0, 1920, 1080)
 
   val endScreenText = new JLabel("You win ;-)")
   endScreenText.setVisible(true)
   endScreenText.setBounds(1920/2 - 250, 1080/2 - 50, 500, 100)
 
   val endFightPanel = new JPanel
-  endFightPanel.setLayout(null)
+  endFightPanel.setLayout(new GridLayout(1, 1))
   endFightPanel.setVisible(false)
-  endFightPanel.setBounds(0, 0, 1920, 1080)
   endFightPanel.add(endScreenImgLabel)
   endFightPanel.add(endScreenText)
 
@@ -490,11 +467,6 @@ class CombatMenu (fight:Fight) {
   mainMenuPanel.add(quitButton, "2, 3, 2, 3")
   quitButton.setVisible(true)
 
-
-
-  // enables us to set the window to full screen, i have no idea what it does 
-  val graphics = GraphicsEnvironment.getLocalGraphicsEnvironment()
-  val device = graphics.getDefaultScreenDevice()
 
   val columns = Array(0.13, 0.87)
   val rows = Array(0.55, 0.45)
