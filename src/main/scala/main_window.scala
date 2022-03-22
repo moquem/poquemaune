@@ -43,31 +43,6 @@ import layout.TableLayout
 
 class CombatMenu (fight:Fight) {
 
-  /*
-   * We are using a null layout, this means we have to be precise about how we organise our panels
-   * Most importantly on any given pixel there should be at most one panel
-   * Otherwise we run the risk of having a components that are invisble
-   * This is all handled in the setBounds of all the panels, however, they must respect the following layout
-   *
-   *
-   *  |----|--------------------|
-   *  | s  |                    |
-   *  | i  |                    |
-   *  | d  v      imgPanel      |
-   *  | e  L                    |
-   *  | B  i--------hLim--------|
-   *  | a  m                    |
-   *  | r  |   actionMenuPanel  |
-   *  |    |                    |
-   *  |----|--------------------|
-   *
-   *  To this we have to add a border so it isn't hideous
-   *
-   *  It is possible that some single pixel adjusting may have to be done
-   *
-   *
-   */
-
 
   val hLim = 600
   val vLim = 250
@@ -156,7 +131,7 @@ class CombatMenu (fight:Fight) {
   pokemonImgPanel2.add(new JButton("Test2"), c)
 
 
-  // Panel where the pokemons will be shown
+/*  // Panel where the pokemons will be shown
   val pokemonImgPanel = new JPanel
   // makes panel visible
   pokemonImgPanel.setVisible(true)
@@ -170,7 +145,7 @@ class CombatMenu (fight:Fight) {
   pokemonImgPanel.add(messageTextLabel)
   pokemonImgPanel.add(playerHPTextLabel)
   pokemonImgPanel.add(enemyHPTextLabel)
-  //pokemonImgPanel.setBorder(BorderFactory.createLineBorder(Color.black))
+  //pokemonImgPanel.setBorder(BorderFactory.createLineBorder(Color.black))*/
 
 
   // Side panel
@@ -290,7 +265,7 @@ class CombatMenu (fight:Fight) {
   
 
   var panelArray = new Array[JPanel](6)
-  panelArray(0)=pokemonImgPanel; panelArray(1)=sidePanel; panelArray(2)=actionMenuPanel;
+  panelArray(0)=pokemonImgPanel2; panelArray(1)=sidePanel; panelArray(2)=actionMenuPanel;
 
   def errorMessage() {
     messageTextLabel.setText("this action cannot be taken")
@@ -301,7 +276,7 @@ class CombatMenu (fight:Fight) {
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
         if (myTurn) {
-          pokemonImgPanel.setVisible(true)
+          pokemonImgPanel2.setVisible(true)
           // side panel
           actionMenuPanel.setVisible(false)
           teamMenuPanel.setVisible(false)
@@ -331,7 +306,7 @@ class CombatMenu (fight:Fight) {
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
         if (! fight.team_opp.team_alive() ) {
-          pokemonImgPanel.setVisible(false)
+          pokemonImgPanel2.setVisible(false)
           sidePanel.setVisible(false)
           actionMenuPanel.setVisible(false)
           // attack menu panel
@@ -350,7 +325,7 @@ class CombatMenu (fight:Fight) {
             actionMenuPanel.setVisible(false)
             sidePanel.setVisible(false)
             teamMenuPanel.setVisible(false)
-            pokemonImgPanel.setVisible(false)
+            pokemonImgPanel2.setVisible(false)
             endFightPanel.setVisible(true)
             // [0, 0, 0, 0, 0, 1]
           } else {
@@ -381,7 +356,7 @@ class CombatMenu (fight:Fight) {
   def switch_pok(nb_pok:Int) {
     if (fight.team_player.team(nb_pok).alive) {
         fight.current_pok_ally = fight.team_player.team(nb_pok)
-        pokemonImgPanel.setVisible(true)
+        pokemonImgPanel2.setVisible(true)
         // side panel
         attackMenuPanel.setVisible(false)
         actionMenuPanel.setVisible(true)
@@ -401,7 +376,7 @@ class CombatMenu (fight:Fight) {
     new ActionListener{
       def actionPerformed(e:ActionEvent) {
         if (myTurn) {
-        pokemonImgPanel.setVisible(true)
+        pokemonImgPanel2.setVisible(true)
         // side panel
         attackMenuPanel.setVisible(false)
         actionMenuPanel.setVisible(false)
@@ -434,7 +409,7 @@ class CombatMenu (fight:Fight) {
   returnButton.addActionListener(
     new ActionListener{
       def actionPerformed (e:ActionEvent) {
-        pokemonImgPanel.setVisible(true)
+        pokemonImgPanel2.setVisible(true)
         // side panel
         actionMenuPanel.setVisible(true)
         attackMenuPanel.setVisible(false)
@@ -451,7 +426,7 @@ class CombatMenu (fight:Fight) {
     var att = new Attack("")
     att = fight.current_pok_ally.set_attack(nb_attack)
     if (att.use_attack()) {
-      pokemonImgPanel.setVisible(true)
+      pokemonImgPanel2.setVisible(true)
       // side panel
       actionMenuPanel.setVisible(true)
       attackMenuPanel.setVisible(false)
@@ -542,7 +517,8 @@ class CombatMenu (fight:Fight) {
   mainFrame2.add(teamMenuPanel, "1, 1, 1, 1")
 
   mainFrame2.add(endFightPanel, "0, 0, 1, 1")
-
+  
+  val fight_menu_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel)
   val all_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel, endFightPanel, mainMenuPanel)
  
 }
@@ -685,6 +661,8 @@ object MainGame {
 
   def main(args: Array[String]) { // we need to keep that argument, otherwise it doesn't count as the main function
     combatInterface.updateStatText()
+    
+    // activates the main menu, deactivates all other panels, the menu system handles the ui from then on
     val k = 0
     for (k<-0 until combatInterface.all_panels.length){
       combatInterface.all_panels(k).setVisible(false)
