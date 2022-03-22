@@ -26,16 +26,16 @@ import layout.TableLayout
 
 /*
  * TODO :
- * - Factoriser code et mettre tour au propre 
+ * - Factoriser code et mettre tour au propre (à terminer)
  * - Refaire fenêtre
- *    - refaire menu qui ont besoins d'être retravaillés
- *    - retravailler les menus pour que ce soit beau
- * - Menu acceuil
+ *    - refaire menus qui ont besoins d'être retravaillés (+ tard)
+ *    - retravailler les menus pour que ce soit beau (+ tard)
+ * - Menu acceuil (mtnt)
  *    - palceholder menu
- * - Animations 1
+ * - Animations 1 (+ tard)
  *    - animations basique
  *    - animation combats fonctionnelles de base
- * - Système monde
+ * - Système monde (en priorité)
  *    - base avec placeholder
  *    - petit mais propre
  *    - étendre par morceaux
@@ -479,34 +479,47 @@ class CombatMenu (fight:Fight) {
     )
   }
 
+  // Main menu
+  
+  def startGame (panels_to_activate:Array[JPanel]){
+    val k = 0
+    for (k<-0 until panels_to_activate.size){
+      panels_to_activate(k).setVisible(true)
+    }
+    mainMenuPanel.setVisible(false)
+  }
+
+  val mainMenuPanel = new JPanel
+  mainMenuPanel.setVisible(true)
+  val main_menu_columns = Array(0.33, 0.06, 0.21, 0.06,0.33)
+  val main_menu_rows = Array(0.33, 0.11, 0.11, 0.11, 0.33)
+  val main_menu_table = Array(main_menu_columns, main_menu_rows)
+  mainMenuPanel.setLayout(new TableLayout(main_menu_table))
+
+  val startGameButton = new JButton("Start Game")
+  val settingsButton = new JButton("Settings")
+  val quitButton = new JButton("Quit")
+  
+  mainMenuPanel.add(startGameButton, "1, 1, 3, 1")
+  startGameButton.setVisible(true)
+  startGameButton.addActionListener(
+    new ActionListener {
+      def actionPerformed(e:ActionEvent) {
+        startGame(Array(pokemonImgPanel2, sidePanel, actionMenuPanel))
+      }
+    }
+  )
+
+  mainMenuPanel.add(settingsButton, "2, 2, 2, 2")
+  settingsButton.setVisible(true)
+  mainMenuPanel.add(quitButton, "2, 3, 2, 3")
+  quitButton.setVisible(true)
+
+
 
   // enables us to set the window to full screen, i have no idea what it does 
   val graphics = GraphicsEnvironment.getLocalGraphicsEnvironment()
   val device = graphics.getDefaultScreenDevice()
-
-  /*// Main Frame, where everything is displayed
-  val mainFrame = new JFrame
-  // makes sure that the 1920x1080 dimensions show fully on screen and are not obscured by additional stuff
-  mainFrame.setUndecorated(true)
-  // enables us to position panels absolutely
-  mainFrame.setLayout(null)
-  // makes the current frame visible
-  mainFrame.setVisible(true)
-  // adds the panels to the frame
-  mainFrame.add(pokemonImgPanel2)
-  mainFrame.add(sidePanel)
-  mainFrame.add(actionMenuPanel)
-  mainFrame.add(attackMenuPanel)
-  mainFrame.add(teamMenuPanel)
-  mainFrame.add(endFightPanel)
-  // size of the window
-  mainFrame.setPreferredSize(new Dimension(1920, 1080))
-  mainFrame.pack()
-  // makes the window close when the cross is pressed
-  mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
-  // makes the frame full screen
-  device.setFullScreenWindow(mainFrame)
-  mainFrame.setVisible(false)*/
 
   val columns = Array(0.13, 0.87)
   val rows = Array(0.55, 0.45)
@@ -518,43 +531,19 @@ class CombatMenu (fight:Fight) {
   mainFrame2.setPreferredSize(new Dimension(1920, 1080))
   mainFrame2.pack()
   
-  
-  val test = new JFrame
-  test.setVisible(false)
-  test.setLayout(new TableLayout(cells_size_mainFrame))
+  mainFrame2.add(mainMenuPanel, "0, 0, 1, 1")
 
-  val c2 = new GridBagConstraints()
-  c2.gridwidth = 1
-  c2.gridheight = 20
-  c2.fill = GridBagConstraints.BOTH
-  c2.weightx = 0.13
-  c2.weighty = 1
-  c2.gridx = 0
-  c2.gridy = 0
   mainFrame2.add(sidePanel, "0, 0, 0, 1")
  
-  c2.gridwidth = 7
-  c2.gridheight = 11
-  c2.fill = GridBagConstraints.BOTH
-  c2.weightx = 0.87
-  c2.weighty = 0.55
-  c2.gridx = 1
-  c2.gridy = 0
   mainFrame2.add(pokemonImgPanel2, "1, 0, 1, 0")
 
-  c2.gridwidth = 7
-  c2.gridheight = 9
-  c2.fill = GridBagConstraints.BOTH
-  c2.weightx = 0.87
-  c2.weighty = 0.45
-  c2.gridx = 1
-  c2.gridy = 11
   mainFrame2.add(actionMenuPanel, "1, 1, 1, 1")
   mainFrame2.add(attackMenuPanel, "1, 1, 1, 1")
   mainFrame2.add(teamMenuPanel, "1, 1, 1, 1")
-  
 
-  mainFrame2.add(endFightPanel, "0, 0, 0, 0")
+  mainFrame2.add(endFightPanel, "0, 0, 1, 1")
+
+  val all_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel, endFightPanel, mainMenuPanel)
  
 }
 
@@ -696,6 +685,11 @@ object MainGame {
 
   def main(args: Array[String]) { // we need to keep that argument, otherwise it doesn't count as the main function
     combatInterface.updateStatText()
+    val k = 0
+    for (k<-0 until combatInterface.all_panels.length){
+      combatInterface.all_panels(k).setVisible(false)
+    }
+    combatInterface.mainMenuPanel.setVisible(true)
     Thread.sleep(Int.MaxValue)
   }
   
