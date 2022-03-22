@@ -21,8 +21,7 @@ import javax.swing.BorderFactory
 import java.awt.GraphicsDevice
 import java.awt.GraphicsEnvironment
 import java.awt.event._
-//import scala.swing.event._
-
+import layout.TableLayout
 
 
 /*
@@ -509,19 +508,20 @@ class CombatMenu (fight:Fight) {
   device.setFullScreenWindow(mainFrame)
   mainFrame.setVisible(false)*/
 
+  val columns = Array(0.13, 0.87)
+  val rows = Array(0.55, 0.45)
+  val cells_size_mainFrame = Array(columns, rows)
 
- val mainFrame2 = new JFrame
+  val mainFrame2 = new JFrame
   mainFrame2.setVisible(true)
-  mainFrame2.setLayout(new GridBagLayout())
+  mainFrame2.setLayout(new TableLayout(cells_size_mainFrame))
   mainFrame2.setPreferredSize(new Dimension(1920, 1080))
   mainFrame2.pack()
   
-  val columns = Array(0.13, 0.87)
-  val rows = Array(0.55, 0.45)
-  val cells_size_mainFrame = (columns, rows)
   
-  //val test = new JFrame
- // test.setLayout(new TableLayout(cells_size_mainFrame))
+  val test = new JFrame
+  test.setVisible(false)
+  test.setLayout(new TableLayout(cells_size_mainFrame))
 
   val c2 = new GridBagConstraints()
   c2.gridwidth = 1
@@ -531,7 +531,7 @@ class CombatMenu (fight:Fight) {
   c2.weighty = 1
   c2.gridx = 0
   c2.gridy = 0
-  mainFrame2.add(sidePanel, c2)
+  mainFrame2.add(sidePanel, "0, 0, 0, 1")
  
   c2.gridwidth = 7
   c2.gridheight = 11
@@ -540,7 +540,7 @@ class CombatMenu (fight:Fight) {
   c2.weighty = 0.55
   c2.gridx = 1
   c2.gridy = 0
-  mainFrame2.add(pokemonImgPanel2, c2)
+  mainFrame2.add(pokemonImgPanel2, "1, 0, 1, 0")
 
   c2.gridwidth = 7
   c2.gridheight = 9
@@ -549,12 +549,12 @@ class CombatMenu (fight:Fight) {
   c2.weighty = 0.45
   c2.gridx = 1
   c2.gridy = 11
-  mainFrame2.add(actionMenuPanel, c2)
-  mainFrame2.add(attackMenuPanel, c2)
-  mainFrame2.add(teamMenuPanel, c2)
+  mainFrame2.add(actionMenuPanel, "1, 1, 1, 1")
+  mainFrame2.add(attackMenuPanel, "1, 1, 1, 1")
+  mainFrame2.add(teamMenuPanel, "1, 1, 1, 1")
   
 
-  mainFrame2.add(endFightPanel, c2)
+  mainFrame2.add(endFightPanel, "0, 0, 0, 0")
  
 }
 
