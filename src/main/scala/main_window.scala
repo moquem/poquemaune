@@ -61,32 +61,38 @@ sealed trait Direction
 
 class Map (self:JPanel, size_x:Int, size_y:Int, mapImages:Array[ImageIcon], mapLayout:Array[Array[Int]], backImage:ImageIcon) extends JPanel {
   
-  val map_columns = Array.fill[Double](size_x)(1/size_x)
-  val map_rows = Array.fill[Double](size_y)(1/size_y)
-  val map_table = Array(map_columns, map_rows)
-  self.setLayout(new TableLayout(map_table))
 
   val curr_x_pos = 0
   val curr_y_pos = 0
 
   val testImage = new ImageIcon("src/main/resources/green_square.png")
 
-  val tiles_column = Array.fill[MapTile](size_x)(new MapTile(new JButton, testImage))
-  val tiles = Array.fill[Array[MapTile]](size_y)(tiles_column)
+  val tiles_column = Array.fill[MapTile](size_x)(new MapTile(new JButton(), testImage))
+  val tiles = Array.fill[Array[MapTile]](size_y)(Array.fill[MapTile](size_x)(new MapTile(new JButton(), testImage)))
 
   def in_bounds (x_pos:Int, y_pos:Int) : Boolean = {
     return !(x_pos >= size_x || x_pos < 0) && !(y_pos>=size_y || y_pos < size_y)
   }
   
-  def attach_tiles () {
-    for (i<-0 until size_y-1){
-      for (j<-0 until size_x-1){
-        self.add(tiles(i)(j), i.toString + ", " + j.toString + ", " + i.toString + ", " + j.toString)
+  def init (panel:JPanel) {
+    
+    val map_columns = Array.fill[Double](size_x)(1.toDouble/size_x)
+    val map_rows = Array.fill[Double](size_y)(1.toDouble/size_y)
+    val map_table = Array(map_columns, map_rows)
+    panel.setLayout(new TableLayout(map_table))
+    panel.setVisible(true)
+
+    for (i<-0 until size_y){
+      for (j<-0 until size_x){
+        panel.add(tiles(i)(j), i.toString + ", " + j.toString + ", " + i.toString + ", " + j.toString)
+        panel.revalidate()
+        validate()
+        panel.repaint()
+        tiles(i)(j).setIcon(testImage)
+        tiles(i)(j).setVisible(true)
       }
     }
   }
-
-  attach_tiles()
 
 
   def move_player_dir (dir:Direction){
@@ -121,8 +127,6 @@ class Map (self:JPanel, size_x:Int, size_y:Int, mapImages:Array[ImageIcon], mapL
         }
       }
     }
-
-
   }
 }
 
@@ -557,10 +561,27 @@ class CombatMenu (fight:Fight) {
   val rows = Array(0.55, 0.45)
   val cells_size_mainFrame = Array(columns, rows)
 
-  val test_map_layout_columns = Array.fill[Int](30)(0)
-  val test_map_layout = Array.fill[Array[Int]](20)(test_map_layout_columns)
-  val testMap = new Map(new JPanel, 20, 30, Array(playerPokemonImg, oppPokemonImg), test_map_layout, oppPokemonImg)
-  testMap.setVisible(true)
+  val test_map_layout_columns = Array.fill[Int](5)(0)
+  val test_map_layout = Array.fill[Array[Int]](5)(test_map_layout_columns)
+  val testMap = new Map(new JPanel(), 5, 5, Array(playerPokemonImg, oppPokemonImg), test_map_layout, oppPokemonImg)
+
+  testMap.init(testMap)  
+  testMap.getComponents()(24)  
+  /*val map_columns = Array.fill(5)(1.toDouble/5)
+  val map_rows = Array.fill(5)(1.toDouble/5)
+  val map_table = Array(map_columns, map_rows)
+  testMap.setLayout(new TableLayout(map_table))
+  testMap.setVisible(true)*/
+
+  /*val testButton = new JButton()
+  testButton.setVisible(true)
+  testButton.setIcon(playerPokemonImg)
+  testMap.add(testButton, "0, 0, 1, 1")
+  val testButton2 = new JButton()
+  testButton2.setVisible(true)
+  testButton2.setIcon(playerPokemonImg)
+  testMap.add(testButton2, "1, 1, 2, 2")*/
+  
 
   val mainFrame2 = new JFrame
   mainFrame2.setVisible(true)
@@ -581,6 +602,7 @@ class CombatMenu (fight:Fight) {
   mainFrame2.add(teamMenuPanel, "1, 1, 1, 1")
 
   mainFrame2.add(endFightPanel, "0, 0, 1, 1")*/
+
   
   val fight_menu_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel)
   val all_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel, endFightPanel, mainMenuPanel)
