@@ -30,8 +30,10 @@ import layout.TableLayout
  * - Refaire fenêtre
  *    - refaire menus qui ont besoins d'être retravaillés (+ tard)
  *    - retravailler les menus pour que ce soit beau (+ tard)
- * - Menu acceuil (mtnt)
- *    - palceholder menu
+ * - Menu acceuil
+ *    x start
+ *    - settings
+ *    - quit
  * - Animations 1 (+ tard)
  *    - animations basique
  *    - animation combats fonctionnelles de base
@@ -40,6 +42,89 @@ import layout.TableLayout
  *    - petit mais propre
  *    - étendre par morceaux
  */
+
+
+class MapTile (self:JButton, image:ImageIcon) extends JButton {
+  self.setVisible(true) 
+  def updateTile (new_img:ImageIcon){
+    self.setIcon(new_img);
+  }
+
+
+}
+
+sealed trait Direction
+  case object Right extends Direction
+  case object Left extends Direction
+  case object Up extends Direction
+  case object Down extends Direction
+
+class Map (self:JPanel, size_x:Int, size_y:Int, mapImages:Array[ImageIcon], mapLayout:Array[Array[Int]], backImage:ImageIcon) extends JPanel {
+  
+  val map_columns = Array.fill[Double](size_x)(1/size_x)
+  val map_rows = Array.fill[Double](size_y)(1/size_y)
+  val map_table = Array(map_columns, map_rows)
+  self.setLayout(new TableLayout(map_table))
+
+  val curr_x_pos = 0
+  val curr_y_pos = 0
+
+  val testImage = new ImageIcon("src/main/resources/green_square.png")
+
+  val tiles_column = Array.fill[MapTile](size_x)(new MapTile(new JButton, testImage))
+  val tiles = Array.fill[Array[MapTile]](size_y)(tiles_column)
+
+  def in_bounds (x_pos:Int, y_pos:Int) : Boolean = {
+    return !(x_pos >= size_x || x_pos < 0) && !(y_pos>=size_y || y_pos < size_y)
+  }
+  
+  def attach_tiles () {
+    for (i<-0 until size_y-1){
+      for (j<-0 until size_x-1){
+        self.add(tiles(i)(j), i.toString + ", " + j.toString + ", " + i.toString + ", " + j.toString)
+      }
+    }
+  }
+
+  attach_tiles()
+
+
+  def move_player_dir (dir:Direction){
+    var new_pos_x = 0
+    var new_pos_y = 0
+    dir match{
+      case Right =>
+        new_pos_x = curr_x_pos-1;
+        new_pos_y = curr_y_pos;
+      case Left =>
+        new_pos_x = curr_x_pos+1;
+        new_pos_y = curr_y_pos;
+      case Up =>
+        new_pos_x = curr_x_pos;
+        new_pos_y = curr_y_pos-1;
+      case Down =>
+        new_pos_x = curr_x_pos;
+        new_pos_y = curr_y_pos+1;
+    }
+    
+    val i = 0
+    val j = 0
+    for (i<-0 to size_x){
+      for (j<-0 to size_y){
+        val tile = tiles(i)(j)
+        if (in_bounds(new_pos_x+i, new_pos_y+j)){
+          val newTileImage = mapImages(mapLayout(new_pos_x+i)(new_pos_y+j))
+          tile.updateTile(newTileImage)
+        }
+        else {
+          tile.updateTile(backImage)
+        }
+      }
+    }
+
+
+  }
+}
 
 class CombatMenu (fight:Fight) {
 
@@ -472,13 +557,20 @@ class CombatMenu (fight:Fight) {
   val rows = Array(0.55, 0.45)
   val cells_size_mainFrame = Array(columns, rows)
 
+  val test_map_layout_columns = Array.fill[Int](30)(0)
+  val test_map_layout = Array.fill[Array[Int]](20)(test_map_layout_columns)
+  val testMap = new Map(new JPanel, 20, 30, Array(playerPokemonImg, oppPokemonImg), test_map_layout, oppPokemonImg)
+  testMap.setVisible(true)
+
   val mainFrame2 = new JFrame
   mainFrame2.setVisible(true)
   mainFrame2.setLayout(new TableLayout(cells_size_mainFrame))
   mainFrame2.setPreferredSize(new Dimension(1920, 1080))
   mainFrame2.pack()
+
+  mainFrame2.add(testMap, "0, 0, 1, 1")
   
-  mainFrame2.add(mainMenuPanel, "0, 0, 1, 1")
+  /*mainFrame2.add(mainMenuPanel, "0, 0, 1, 1")
 
   mainFrame2.add(sidePanel, "0, 0, 0, 1")
  
@@ -488,7 +580,7 @@ class CombatMenu (fight:Fight) {
   mainFrame2.add(attackMenuPanel, "1, 1, 1, 1")
   mainFrame2.add(teamMenuPanel, "1, 1, 1, 1")
 
-  mainFrame2.add(endFightPanel, "0, 0, 1, 1")
+  mainFrame2.add(endFightPanel, "0, 0, 1, 1")*/
   
   val fight_menu_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel)
   val all_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel, endFightPanel, mainMenuPanel)
