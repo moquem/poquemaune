@@ -44,14 +44,13 @@ import layout.TableLayout
  */
 
 
-class MapTile (self:JButton, image:ImageIcon) extends JButton {
-  self.setVisible(true) 
+class MapTile (image:ImageIcon) extends JButton {
+  this.setVisible(true) 
   def updateTile (new_img:ImageIcon){
-    self.setIcon(new_img);
+    this.setIcon(new_img);
   }
-
-
 }
+
 
 sealed trait Direction
   case object Right extends Direction
@@ -59,37 +58,38 @@ sealed trait Direction
   case object Up extends Direction
   case object Down extends Direction
 
+
+
 class Map (self:JPanel, size_x:Int, size_y:Int, mapImages:Array[ImageIcon], mapLayout:Array[Array[Int]], backImage:ImageIcon) extends JPanel {
   
+  
+  var curr_x_pos = 0
+  var curr_y_pos = 0
 
-  val curr_x_pos = 0
-  val curr_y_pos = 0
 
-  val testImage = new ImageIcon("src/main/resources/green_square.png")
-
-  val tiles_column = Array.fill[MapTile](size_x)(new MapTile(new JButton(), testImage))
-  val tiles = Array.fill[Array[MapTile]](size_y)(Array.fill[MapTile](size_x)(new MapTile(new JButton(), testImage)))
+  val tiles_column = Array.fill[MapTile](size_y)(new MapTile(backImage))
+  val tiles = Array.fill[Array[MapTile]](size_x)(Array.fill[MapTile](size_y)(new MapTile(backImage)))
 
   def in_bounds (x_pos:Int, y_pos:Int) : Boolean = {
-    return !(x_pos >= size_x || x_pos < 0) && !(y_pos>=size_y || y_pos < size_y)
+    return !(x_pos >= size_x || x_pos < 0) && !(y_pos>=size_y || y_pos < 0)
   }
   
   def init (panel:JPanel) {
     
-    val map_columns = Array.fill[Double](size_x)(1.toDouble/size_x)
-    val map_rows = Array.fill[Double](size_y)(1.toDouble/size_y)
-    val map_table = Array(map_columns, map_rows)
+    val map_columns = Array.fill[Double](size_y)((1).toDouble/size_y)
+    val map_rows = Array.fill[Double](size_x)((1.toDouble)/size_x)
+    val map_table = Array(map_rows, map_columns)
     panel.setLayout(new TableLayout(map_table))
     panel.setVisible(true)
 
-    for (i<-0 until size_y){
-      for (j<-0 until size_x){
-        panel.add(tiles(i)(j), i.toString + ", " + j.toString + ", " + i.toString + ", " + j.toString)
-        panel.revalidate()
-        validate()
-        panel.repaint()
-        tiles(i)(j).setIcon(testImage)
-        tiles(i)(j).setVisible(true)
+    for (i<-0 until size_x){
+      for (j<-0 until size_y){
+        var tile = tiles(i)(j)
+        panel.add(tile, i.toString + ", " + j.toString + ", " + i.toString + ", " + j.toString)
+        tile.setIcon(backImage)
+        tile.setVisible(true)
+        //tile.setBorderPainted(false)
+        
       }
     }
   }
@@ -100,10 +100,10 @@ class Map (self:JPanel, size_x:Int, size_y:Int, mapImages:Array[ImageIcon], mapL
     var new_pos_y = 0
     dir match{
       case Right =>
-        new_pos_x = curr_x_pos-1;
+        new_pos_x = curr_x_pos+1;
         new_pos_y = curr_y_pos;
       case Left =>
-        new_pos_x = curr_x_pos+1;
+        new_pos_x = curr_x_pos-1;
         new_pos_y = curr_y_pos;
       case Up =>
         new_pos_x = curr_x_pos;
@@ -115,9 +115,13 @@ class Map (self:JPanel, size_x:Int, size_y:Int, mapImages:Array[ImageIcon], mapL
     
     val i = 0
     val j = 0
-    for (i<-0 to size_x){
-      for (j<-0 to size_y){
+    for (i<-0 until size_x){
+      for (j<-0 until size_y){
         val tile = tiles(i)(j)
+        /*println("pos_x, pos_y")
+        println(new_pos_x+i)
+        println(new_pos_y+j)
+        println(in_bounds(new_pos_x+i, new_pos_y+j))*/
         if (in_bounds(new_pos_x+i, new_pos_y+j)){
           val newTileImage = mapImages(mapLayout(new_pos_x+i)(new_pos_y+j))
           tile.updateTile(newTileImage)
@@ -127,8 +131,24 @@ class Map (self:JPanel, size_x:Int, size_y:Int, mapImages:Array[ImageIcon], mapL
         }
       }
     }
+
+    curr_x_pos = new_pos_x
+    curr_y_pos = new_pos_y
   }
 }
+
+
+class MapArrow (direction:Direction, map:Map) extends JButton{
+  this.setVisible(true)
+  this.addActionListener(
+    new ActionListener{
+      def actionPerformed(e:ActionEvent){
+        map.move_player_dir(direction) 
+      }
+    }
+  ) 
+}
+
 
 class CombatMenu (fight:Fight) {
 
@@ -365,7 +385,6 @@ class CombatMenu (fight:Fight) {
   )
 
 
-
   // End of turn
 
   endOfTurnButton.addActionListener(
@@ -560,36 +579,47 @@ class CombatMenu (fight:Fight) {
   val columns = Array(0.13, 0.87)
   val rows = Array(0.55, 0.45)
   val cells_size_mainFrame = Array(columns, rows)
-
-  val test_map_layout_columns = Array.fill[Int](5)(0)
-  val test_map_layout = Array.fill[Array[Int]](5)(test_map_layout_columns)
-  val testMap = new Map(new JPanel(), 5, 5, Array(playerPokemonImg, oppPokemonImg), test_map_layout, oppPokemonImg)
-
-  testMap.init(testMap)  
-  testMap.getComponents()(24)  
-  /*val map_columns = Array.fill(5)(1.toDouble/5)
-  val map_rows = Array.fill(5)(1.toDouble/5)
-  val map_table = Array(map_columns, map_rows)
-  testMap.setLayout(new TableLayout(map_table))
-  testMap.setVisible(true)*/
-
-  /*val testButton = new JButton()
-  testButton.setVisible(true)
-  testButton.setIcon(playerPokemonImg)
-  testMap.add(testButton, "0, 0, 1, 1")
-  val testButton2 = new JButton()
-  testButton2.setVisible(true)
-  testButton2.setIcon(playerPokemonImg)
-  testMap.add(testButton2, "1, 1, 2, 2")*/
   
+  // Map side panel
+  val mapSidePanel = new JPanel()
+  mapSidePanel.setVisible(true)
+  val mapSidePanel_columns = Array(0.33, 0.33, 0.33)
+  val mapSidePanel_rows = Array(0.07, 0.07, 0.07, 0.19, 0.2, 0.2, 0.2)
+  val mapSidePanelLayout = Array(mapSidePanel_columns, mapSidePanel_rows)
+  mapSidePanel.setLayout(new TableLayout(mapSidePanelLayout))
 
+
+  // Map
+  val test_map_layout_columns = Array.fill[Int](20)(0)
+  val test_map_layout = Array.fill[Array[Int]](30)(test_map_layout_columns)
+  val mainMap = new Map(new JPanel(), 30, 20, Array(playerPokemonImg, oppPokemonImg), test_map_layout, oppPokemonImg)
+  mainMap.init(mainMap)  
+ 
+  // Map movement keys
+  val mapUpButton = new MapArrow(Up, mainMap)
+  mapUpButton.setLabel("up")
+  val mapDownButton = new MapArrow(Down, mainMap)
+  mapDownButton.setLabel("down")
+  val mapRightButton = new MapArrow(Right, mainMap)
+  mapRightButton.setLabel("right")
+  val mapLeftButton = new MapArrow(Left, mainMap)
+  mapLeftButton.setLabel("left")
+
+  mapSidePanel.add(mapUpButton, "1, 0, 1, 0")
+  mapSidePanel.add(mapDownButton, "1, 2, 1, 2")
+  mapSidePanel.add(mapRightButton, "2, 1, 2, 1")
+  mapSidePanel.add(mapLeftButton, "0, 1, 0, 1")
+
+  mapSidePanel.setVisible(true)
+ 
   val mainFrame2 = new JFrame
   mainFrame2.setVisible(true)
   mainFrame2.setLayout(new TableLayout(cells_size_mainFrame))
   mainFrame2.setPreferredSize(new Dimension(1920, 1080))
   mainFrame2.pack()
 
-  mainFrame2.add(testMap, "0, 0, 1, 1")
+  mainFrame2.add(mainMap, "1, 0, 1, 1")
+  mainFrame2.add(mapSidePanel, "0, 0, 0, 1")
   
   /*mainFrame2.add(mainMenuPanel, "0, 0, 1, 1")
 
