@@ -391,6 +391,16 @@ class CombatMenu (fight:Fight) {
     if (no_available_attacks){
       atkSelectionButton.setEnabled(false)
     }
+
+    // Pokemon selection button
+    for (k<-0 until pokSelectButtonList.size){
+      if (fight.team_player.team(k).alive){
+        pokSelectButtonList(k).setEnabled(true)
+      }
+      else {
+        pokSelectButtonList(k).setEnabled(false)
+      }
+    }
   }
 
   var panelArray = new Array[JPanel](6)
