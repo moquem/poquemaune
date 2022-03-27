@@ -176,8 +176,7 @@ class MapArrow (direction:Direction, map:Map) extends JButton{
 
 
 class CombatMenu (fight:Fight) {
-
-
+  
   var myTurn = true
   var currentPokDead = false
 
@@ -190,12 +189,15 @@ class CombatMenu (fight:Fight) {
   // Text to display messages to the palyer
   val messageTextLabel = new JLabel("")
   messageTextLabel.setVisible(true)
+  messageTextLabel.setHorizontalAlignment(SwingConstants.CENTER)
 
   val playerHPTextLabel = new JLabel("hp. 100/100")
   playerHPTextLabel.setVisible(true)
+  playerHPTextLabel.setHorizontalAlignment(SwingConstants.CENTER)
   
   val enemyHPTextLabel = new JLabel ("hp. 100/100")
   enemyHPTextLabel.setVisible(true)
+  enemyHPTextLabel.setHorizontalAlignment(SwingConstants.CENTER)
 
   /*val playerPPTextLabel = new JLabel("pp. 100/100")
   playerPPTextLabel.setVisible(true)
@@ -242,26 +244,20 @@ class CombatMenu (fight:Fight) {
   oppPokLabel.setVisible(true)
 
 
-  val pokemonImgPanel2 = new JPanel
+  val pokemonImgPanel2 = new JPanel()
   pokemonImgPanel2.setVisible(true)
+  
   val pokemon_img_panel_columns = Array(0.2, 0.2, 0.2, 0.2, 0.2)
-  val pokemon_img_panel_rows = Array(0.2, 0.2, 0.2, 0.2, 0.2)
+  val pokemon_img_panel_rows = Array(0.16, 0.16, 0.16, 0.16, 0.16, 0.2)
   val pokemon_img_table = Array(pokemon_img_panel_columns, pokemon_img_panel_rows)
-  pokemonImgPanel2.setLayout(new GridBagLayout())
-  val c = new GridBagConstraints()
-  c.gridwidth = 1
-  c.gridheight = 1
-  c.fill = GridBagConstraints.NONE
-  c.weightx = 0.5
-  c.weighty = 0.5
-  c.gridx = 1
-  c.gridy = 1
-  pokemonImgPanel2.add(playerPokLabel, c)
-  c.gridx = 5
-  c.gridy = 5
-  pokemonImgPanel2.add(oppPokLabel, c)
-
-
+  pokemonImgPanel2.setLayout(new TableLayout(pokemon_img_table))
+  
+  pokemonImgPanel2.add(playerPokLabel, "1, 3, 1, 3")
+  pokemonImgPanel2.add(oppPokLabel, "3, 1, 3, 1")
+  pokemonImgPanel2.add(playerHPTextLabel, "1, 2, 1, 2")
+  pokemonImgPanel2.add(enemyHPTextLabel, "3, 0, 3, 0")
+  //pokemonImgPanel2.add(new JButton("test"), "0, 5, 4, 5")
+  pokemonImgPanel2.add(messageTextLabel, "0, 5, 4, 5")
   // Side panel
   val sidePanel = new JPanel
   sidePanel.setVisible(true)
@@ -338,11 +334,8 @@ class CombatMenu (fight:Fight) {
     attackButtonList(k).setVisible(true);
   }
 
-  
-
 
   // Team panel
-  
 
   // pokemon selection buttons
   
@@ -649,10 +642,10 @@ class CombatMenu (fight:Fight) {
   mainFrame2.pack()
 
 
-  mainFrame2.add(mainMap, "1, 0, 1, 1")
-  mainFrame2.add(mapSidePanel, "0, 0, 0, 1")
+  //mainFrame2.add(mainMap, "1, 0, 1, 1")
+  //mainFrame2.add(mapSidePanel, "0, 0, 0, 1")
   
-  /*mainFrame2.add(mainMenuPanel, "0, 0, 1, 1")
+  mainFrame2.add(mainMenuPanel, "0, 0, 1, 1")
 
   mainFrame2.add(sidePanel, "0, 0, 0, 1")
  
@@ -662,7 +655,7 @@ class CombatMenu (fight:Fight) {
   mainFrame2.add(attackMenuPanel, "1, 1, 1, 1")
   mainFrame2.add(teamMenuPanel, "1, 1, 1, 1")
 
-  mainFrame2.add(endFightPanel, "0, 0, 1, 1")*/
+  mainFrame2.add(endFightPanel, "0, 0, 1, 1")
 
   
   val fight_menu_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel)
