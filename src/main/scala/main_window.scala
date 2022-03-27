@@ -44,10 +44,26 @@ import layout.TableLayout
  */
 
 
+// useless for now but could end up becoming useful ?
+sealed trait TileRole
+  case object Decorative extends TileRole
+  case object FightIcon extends TileRole
+
 class MapTile (image:ImageIcon) extends JButton {
-  this.setVisible(true) 
+  this.setVisible(true)
+
+  // returns a resized ImageIcon
+  // it is necessary to do this at every refresh step because the player can resize the window at any time
+  /*def resizeIcon () {
+    val img_icon = this.getIcon().asInstanceOf[ImageIcon]
+    val img = img_icon.getImage()
+    val resized_img = img.getScaledInstance(this.getHeight(), this.getWidth(), Image.SCALE_SMOOTH)
+    this.setIcon(new ImageIcon(resized_img))
+  }*/
   def updateTile (new_img:ImageIcon){
-    this.setIcon(new_img);
+    if (new_img != this.getIcon()){
+      this.setIcon(new_img)
+    }
   }
 }
 
@@ -73,7 +89,7 @@ class Map (self:JPanel, size_x:Int, size_y:Int, mapImages:Array[ImageIcon], mapL
   def in_bounds (x_pos:Int, y_pos:Int) : Boolean = {
     return !(x_pos >= size_x || x_pos < 0) && !(y_pos>=size_y || y_pos < 0)
   }
-  
+
   def init (panel:JPanel) {
     
     val map_columns = Array.fill[Double](size_y)((1).toDouble/size_y)
@@ -96,6 +112,15 @@ class Map (self:JPanel, size_x:Int, size_y:Int, mapImages:Array[ImageIcon], mapL
 
 
   def move_player_dir (dir:Direction){
+    // rescales the images, must be done repeatedly because the player can change window size at any time
+    val resizedMapImages = mapImages
+    val ex_tile = tiles(0)(0)
+    for (k<-0 until mapImages.size){
+      val img_to_resize = mapImages(k).getImage()
+      val resized_img = img_to_resize.getScaledInstance(ex_tile.getHeight(), ex_tile.getWidth(), Image.SCALE_SMOOTH)
+      resizedMapImages(k) = new ImageIcon(resized_img)
+    }
+
     var new_pos_x = 0
     var new_pos_y = 0
     dir match{
@@ -123,7 +148,7 @@ class Map (self:JPanel, size_x:Int, size_y:Int, mapImages:Array[ImageIcon], mapL
         println(new_pos_y+j)
         println(in_bounds(new_pos_x+i, new_pos_y+j))*/
         if (in_bounds(new_pos_x+i, new_pos_y+j)){
-          val newTileImage = mapImages(mapLayout(new_pos_x+i)(new_pos_y+j))
+          val newTileImage = resizedMapImages(mapLayout(new_pos_x+i)(new_pos_y+j))
           tile.updateTile(newTileImage)
         }
         else {
@@ -159,6 +184,8 @@ class CombatMenu (fight:Fight) {
   // Images for the player's and oponent's pokemon
   val playerPokemonImg = new ImageIcon("src/main/resources/green_square.png")
   val oppPokemonImg = new ImageIcon("src/main/resources/purple_square.png")
+
+  val fightIcon = new ImageIcon("src/main/resources/fight_icon.png")
   
   // Text to display messages to the palyer
   val messageTextLabel = new JLabel("")
@@ -348,7 +375,6 @@ class CombatMenu (fight:Fight) {
   
 
   // Button actions
-  
 
   var panelArray = new Array[JPanel](6)
   panelArray(0)=pokemonImgPanel2; panelArray(1)=sidePanel; panelArray(2)=actionMenuPanel;
@@ -591,8 +617,12 @@ class CombatMenu (fight:Fight) {
 
   // Map
   val test_map_layout_columns = Array.fill[Int](20)(0)
-  val test_map_layout = Array.fill[Array[Int]](30)(test_map_layout_columns)
-  val mainMap = new Map(new JPanel(), 30, 20, Array(playerPokemonImg, oppPokemonImg), test_map_layout, oppPokemonImg)
+  val map_x = 30
+  val map_y = 20
+  val test_map_layout = Array.fill[Array[Int]](map_x)(Array.fill[Int](map_y)(0))
+  test_map_layout(10)(15) = 2
+  val tilesIcons = Array(playerPokemonImg, oppPokemonImg, fightIcon)
+  val mainMap = new Map(new JPanel(), map_x, map_y, tilesIcons, test_map_layout, oppPokemonImg)
   mainMap.init(mainMap)  
  
   // Map movement keys
@@ -617,6 +647,7 @@ class CombatMenu (fight:Fight) {
   mainFrame2.setLayout(new TableLayout(cells_size_mainFrame))
   mainFrame2.setPreferredSize(new Dimension(1920, 1080))
   mainFrame2.pack()
+
 
   mainFrame2.add(mainMap, "1, 0, 1, 1")
   mainFrame2.add(mapSidePanel, "0, 0, 0, 1")
