@@ -181,7 +181,7 @@ class CombatMenu (fight:Fight) {
   var currentPokDead = false
 
   // Images for the player's and oponent's pokemon
-  val playerPokemonImg = new ImageIcon("src/main/resources/green_square.png")
+  val playerPokemonImg = new ImageIcon("src/main/resources/ho-ho-garlic-bread-ho-ho.png")
   val oppPokemonImg = new ImageIcon("src/main/resources/purple_square.png")
 
   val fightIcon = new ImageIcon("src/main/resources/fight_icon.png")
@@ -368,6 +368,30 @@ class CombatMenu (fight:Fight) {
   
 
   // Button actions
+  
+  // looks at all the conditions for various buttons and activates or deactivates them as needed
+  def updateActive(){
+    // Attack button
+    atkSelectionButton.setEnabled(true)
+    if (!myTurn){
+      atkSelectionButton.setEnabled(false)
+    }
+    var no_available_attacks = true
+    for (k<-0 until 4){
+      if (attackButtonList(k).isEnabled()){
+        no_available_attacks = false
+        if (fight.current_pok_ally.set_attack(k).PP_cost>fight.current_pok_ally.set_attack(k).PP){
+          attackButtonList(k).setEnabled(false)
+        }
+        else {
+          attackButtonList(k).setEnabled(true)
+        }
+      }
+    }
+    if (no_available_attacks){
+      atkSelectionButton.setEnabled(false)
+    }
+  }
 
   var panelArray = new Array[JPanel](6)
   panelArray(0)=pokemonImgPanel2; panelArray(1)=sidePanel; panelArray(2)=actionMenuPanel;
@@ -391,15 +415,16 @@ class CombatMenu (fight:Fight) {
 
           val attackButtonList = new Array[JButton](4)
           attackButtonList(0) = attackButton1; attackButtonList(1) =  attackButton2;  attackButtonList(2) = attackButton3; attackButtonList(3) = attackButton4
-        
+          
           for (k<-0 until 4){
             // Set the button to the name of the pokemon attack
-            attackButtonList(k).setText(fight.current_pok_ally.set_attack(k).attackName) 
+            attackButtonList(k).setText(fight.current_pok_ally.set_attack(k).attackName)
           }
         } else {
           errorMessage()
         }
       }
+      updateActive()
     }
   )
 
@@ -449,6 +474,7 @@ class CombatMenu (fight:Fight) {
           }
         }
         updateStatText()
+        updateActive()
       }
     }
   )
@@ -492,6 +518,7 @@ class CombatMenu (fight:Fight) {
           errorMessage()
           updateStatText()
         }
+        updateActive()
       }
     }
   )
@@ -502,6 +529,7 @@ class CombatMenu (fight:Fight) {
       new ActionListener{
         def actionPerformed(e:ActionEvent){
           switch_pok(k)
+          updateActive()
         }
       }
     )
@@ -520,6 +548,7 @@ class CombatMenu (fight:Fight) {
         teamMenuPanel.setVisible(false)
         // end panel
         // [1, 1, 1, 0, 0, 0]
+        updateActive()
       }
     }
   )
@@ -548,11 +577,12 @@ class CombatMenu (fight:Fight) {
 
   }
   
-  for (k<-0 until 3){
+  for (k<-0 until 4){
     attackButtonList(k).addActionListener(
       new ActionListener {
         def actionPerformed(e:ActionEvent) {
           attack_processing(k)
+          updateActive()
         }
       }
     )
