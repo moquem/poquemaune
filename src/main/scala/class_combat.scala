@@ -24,13 +24,23 @@ class Fight (team1:Team, team2:Team) {
         var fail_attack = true
         var nb_attack:Int = 0
         var att:Attack = new Attack("")
+        var bonus_typ:Int = 0
+
+        var typ1:String = current_pok_ally.typ
+        var typ2:String = current_pok_enemy.typ
+
+        if ((typ1 == "Feuille" && typ2 == "Pierre") || (typ1 == "Pierre" && typ2 == "Ciseaux") || (typ1 == "Ciseaux" && typ2 == "Feuille")) {
+            bonus_typ = 0.2
+        } else if ((typ1 == "Pierre" && typ2 == "Feuille") || (typ1 == "Ciseaux" && typ2 == "Pierre") || (typ1 == "Feuille" && typ2 == "Ciseaux")) {
+            bonus_typ = -0.2
+        }
 
         while (fail_attack) {
             nb_attack = r.nextInt(4)
             att = current_pok_enemy.set_attack(nb_attack)
             fail_attack = att.use_attack()
             if (!(fail_attack)) { 
-                current_pok_ally.loss_PV(att.damage)
+                current_pok_ally.loss_PV(att.damage*(current_pok_ally.statDef+bonus_typ)*current_pok_enemy.statAtt)
             }
         }
         nb_attack

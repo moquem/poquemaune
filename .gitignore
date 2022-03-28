@@ -1,0 +1,11 @@
+# sbt
+.bsp
+project/project
+project/target
+target/
+
+# Scala
+*.class
+
+# Editor
+*.sw{n,o,p}
