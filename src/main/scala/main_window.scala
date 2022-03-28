@@ -38,35 +38,32 @@ import layout.TableLayout
  *    - animations basique
  *    - animation combats fonctionnelles de base
  * - Système monde (en priorité)
- *    - base avec placeholder
- *    - petit mais propre
- *    - étendre par morceaux
+ * - Ajouter joueur
+ * - Ajouter combat depuis map
  */
 
 
-// useless for now but could end up becoming useful ?
-sealed trait TileRole
-  case object Decorative extends TileRole
-  case object FightIcon extends TileRole
 
-class MapTile (image:ImageIcon) extends JButton {
+trait Tile extends JButton {
+  def updateTile(new_img:ImageIcon) : Unit
+}
+
+class MapTile (image:ImageIcon) extends Tile {
   this.setVisible(true)
 
-  // returns a resized ImageIcon
-  // it is necessary to do this at every refresh step because the player can resize the window at any time
-  /*def resizeIcon () {
-    val img_icon = this.getIcon().asInstanceOf[ImageIcon]
-    val img = img_icon.getImage()
-    val resized_img = img.getScaledInstance(this.getHeight(), this.getWidth(), Image.SCALE_SMOOTH)
-    this.setIcon(new ImageIcon(resized_img))
-  }*/
-  def updateTile (new_img:ImageIcon){
+ def updateTile (new_img:ImageIcon){
     if (new_img != this.getIcon()){
       this.setIcon(new_img)
     }
   }
 }
 
+// Tile representing the player
+class PlayerTile () extends Tile {
+  this.setVisible(true)
+  def updateTile (new_img:ImageIcon){
+  }
+}
 
 sealed trait Direction
   case object Right extends Direction
@@ -74,22 +71,27 @@ sealed trait Direction
   case object Up extends Direction
   case object Down extends Direction
 
-
-
-class Map (self:JPanel, size_x:Int, size_y:Int, mapImages:Array[ImageIcon], mapLayout:Array[Array[Int]], backImage:ImageIcon) extends JPanel {
-  
+class Map (self:JPanel, size_x:Int, size_y:Int, mapImages:Array[ImageIcon], mapLayout:Array[Array[Int]], backImage:ImageIcon, playerImage:ImageIcon, playerTileCoord:(Int, Int)) extends JPanel {
   
   var curr_x_pos = 0
   var curr_y_pos = 0
 
-
-  val tiles_column = Array.fill[MapTile](size_y)(new MapTile(backImage))
-  val tiles = Array.fill[Array[MapTile]](size_x)(Array.fill[MapTile](size_y)(new MapTile(backImage)))
+  var tiles = Array.fill[Array[Tile]](size_x)(Array.fill[Tile](size_y)(new MapTile(backImage)))
+ 
+  // this means that the player will start at position 0, 0, should probably be passed as parameter
+  tiles(0)(0) = new PlayerTile()
 
   def in_bounds (x_pos:Int, y_pos:Int) : Boolean = {
     return !(x_pos >= size_x || x_pos < 0) && !(y_pos>=size_y || y_pos < 0)
   }
+  
+  def resizeImage (imgIcon:ImageIcon, new_x:Int, new_y:Int) : ImageIcon = {
+    val imgToResize = imgIcon.getImage()
+    val resizedImg = imgToResize.getScaledInstance(new_x, new_y, Image.SCALE_SMOOTH)
+    return new ImageIcon(resizedImg)
+  }
 
+  // adds all the tiles to the panel
   def init (panel:JPanel) {
     
     val map_columns = Array.fill[Double](size_y)((1).toDouble/size_y)
@@ -97,28 +99,33 @@ class Map (self:JPanel, size_x:Int, size_y:Int, mapImages:Array[ImageIcon], mapL
     val map_table = Array(map_rows, map_columns)
     panel.setLayout(new TableLayout(map_table))
     panel.setVisible(true)
-
+    
     for (i<-0 until size_x){
       for (j<-0 until size_y){
-        var tile = tiles(i)(j)
-        panel.add(tile, i.toString + ", " + j.toString + ", " + i.toString + ", " + j.toString)
-        tile.setIcon(backImage)
+        tiles(i)(j) = new MapTile(mapImages(mapLayout(i)(j)))
+        val tile = tiles(i)(j)
+        this.add(tile, i.toString + ", " + j.toString + ", " + i.toString + ", " + j.toString)
         tile.setVisible(true)
         //tile.setBorderPainted(false)
-        
       }
     }
+
+    // sets up the player
+    tiles(playerTileCoord._1)(playerTileCoord._2) = new PlayerTile()
+    val playerTile = tiles(playerTileCoord._1)(playerTileCoord._2)
+    this.add(playerTile, playerTileCoord._1.toString + ", " + playerTileCoord._2.toString + ", " + playerTileCoord._1.toString + ", " + playerTileCoord._2.toString)
   }
 
-
+  // moves the map
   def move_player_dir (dir:Direction){
     // rescales the images, must be done repeatedly because the player can change window size at any time
     val resizedMapImages = mapImages
     val ex_tile = tiles(0)(0)
+    // resizes player
+    tiles(playerTileCoord._1)(playerTileCoord._2).setIcon(resizeImage(playerImage, ex_tile.getWidth(), ex_tile.getHeight()))
+    //println(tiles(playerTileCoord._1)(playerTileCoord._2).getWidth())
     for (k<-0 until mapImages.size){
-      val img_to_resize = mapImages(k).getImage()
-      val resized_img = img_to_resize.getScaledInstance(ex_tile.getHeight(), ex_tile.getWidth(), Image.SCALE_SMOOTH)
-      resizedMapImages(k) = new ImageIcon(resized_img)
+      resizedMapImages(k) = resizeImage(mapImages(k), ex_tile.getWidth(), ex_tile.getHeight())
     }
 
     var new_pos_x = 0
@@ -143,10 +150,6 @@ class Map (self:JPanel, size_x:Int, size_y:Int, mapImages:Array[ImageIcon], mapL
     for (i<-0 until size_x){
       for (j<-0 until size_y){
         val tile = tiles(i)(j)
-        /*println("pos_x, pos_y")
-        println(new_pos_x+i)
-        println(new_pos_y+j)
-        println(in_bounds(new_pos_x+i, new_pos_y+j))*/
         if (in_bounds(new_pos_x+i, new_pos_y+j)){
           val newTileImage = resizedMapImages(mapLayout(new_pos_x+i)(new_pos_y+j))
           tile.updateTile(newTileImage)
@@ -182,7 +185,10 @@ class CombatMenu (fight:Fight) {
 
   // Images for the player's and oponent's pokemon
   val playerPokemonImg = new ImageIcon("src/main/resources/ho-ho-garlic-bread-ho-ho.png")
+  val greenSquare = new ImageIcon("src/main/resources/green_square.png")
   val oppPokemonImg = new ImageIcon("src/main/resources/purple_square.png")
+
+  val playerIcon = new ImageIcon("src/main/resources/player_icon.jpeg")
 
   val fightIcon = new ImageIcon("src/main/resources/fight_icon.png")
   
@@ -228,9 +234,14 @@ class CombatMenu (fight:Fight) {
   // Button for slecting an item
   val itemSelectionButton = new JButton("Item")
   itemSelectionButton.setVisible(true)
-
+  
+  // ends the player's current turn
   val endOfTurnButton = new JButton("End turn")
   endOfTurnButton.setVisible(true)
+
+  // shows the map
+  val openMapButton = new JButton("Open map")
+  openMapButton.setVisible(true)
   
 
   // Label for the image of player's pokemon
@@ -264,6 +275,9 @@ class CombatMenu (fight:Fight) {
   // will change according to needs of the side bar
   sidePanel.setLayout(new GridLayout (2, 1))
 
+  
+
+  
   // Return button
   val returnButton = new JButton("return")
   returnButton.setVisible(true)
@@ -283,11 +297,65 @@ class CombatMenu (fight:Fight) {
   actionMenuPanel.add(pokSelectionButton)
   actionMenuPanel.add(actionSelectionButton)
   actionMenuPanel.add(itemSelectionButton)
-  actionMenuPanel.add(endOfTurnButton) 
+  actionMenuPanel.add(endOfTurnButton)
+  actionMenuPanel.add(openMapButton)
   // creates border around the panel (mainly for test purposes)
   // actionMenuPanel.setBorder(BorderFactory.createLineBorder(Color.black))
-  
 
+  // Map
+  val test_map_layout_columns = Array.fill[Int](20)(0)
+  val map_x = 30
+  val map_y = 20
+  val test_map_layout = Array.fill[Array[Int]](map_x)(Array.fill[Int](map_y)(0))
+  test_map_layout(10)(15) = 2
+  val tilesIcons = Array(greenSquare, oppPokemonImg, fightIcon)
+  val mainMap = new Map(new JPanel(), map_x, map_y, tilesIcons, test_map_layout, oppPokemonImg, playerPokemonImg, (15, 10))
+  mainMap.init(mainMap)  
+ 
+
+
+   // Map side panel
+  val mapSidePanel = new JPanel()
+  mapSidePanel.setVisible(true)
+  val mapSidePanel_columns = Array(0.33, 0.33, 0.33)
+  val mapSidePanel_rows = Array(0.07, 0.07, 0.07, 0.19, 0.2, 0.2, 0.2)
+  val mapSidePanelLayout = Array(mapSidePanel_columns, mapSidePanel_rows)
+  mapSidePanel.setLayout(new TableLayout(mapSidePanelLayout))
+  mapSidePanel.setVisible(true)
+
+  // Map return button
+  val mapReturnButton = new JButton("return")
+  mapReturnButton.setVisible(true)
+  mapSidePanel.add(mapReturnButton, "0, 6, 2, 6")
+
+  // Map movement keys
+  val mapUpButton = new MapArrow(Up, mainMap)
+  mapUpButton.setLabel("up")
+  val mapDownButton = new MapArrow(Down, mainMap)
+  mapDownButton.setLabel("down")
+  val mapRightButton = new MapArrow(Right, mainMap)
+  mapRightButton.setLabel("right")
+  val mapLeftButton = new MapArrow(Left, mainMap)
+  mapLeftButton.setLabel("left")
+
+  mapSidePanel.add(mapUpButton, "1, 0, 1, 0")
+  mapSidePanel.add(mapDownButton, "1, 2, 1, 2")
+  mapSidePanel.add(mapRightButton, "2, 1, 2, 1")
+  mapSidePanel.add(mapLeftButton, "0, 1, 0, 1")
+
+
+
+  val fightMenuPanels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel)
+  val mapPanels = Array(mainMap, mapSidePanel)
+  
+  def deactivateAllPanels() {
+    for (k<-0 until fightMenuPanels.size){
+      fightMenuPanels(k).setVisible(false)
+    }
+    for (k<-0 until mapPanels.size){
+      mapPanels(k).setVisible(false)
+    }
+  }
 
   // Panel end of game
   
@@ -309,7 +377,28 @@ class CombatMenu (fight:Fight) {
   endFightPanel.add(endScreenText)
 
 
-
+  // openMapButton
+  openMapButton.addActionListener(
+    new ActionListener{
+      def actionPerformed (e:ActionEvent){
+        deactivateAllPanels()
+        for (k<-0 until mapPanels.size){
+          mapPanels(k).setVisible(true)
+        }
+      }
+    }
+  )
+  
+  // Map return button
+  mapReturnButton.addActionListener(
+    new ActionListener{
+      def actionPerformed(e:ActionEvent){
+        deactivateAllPanels()
+        fightMenuPanels.foreach(_.setVisible(true))
+      }
+    }
+  )
+  
 
   // Panel for the attack menu, is activated when the attack button is pressed
   val attackMenuPanel = new JPanel
@@ -317,7 +406,6 @@ class CombatMenu (fight:Fight) {
   attackMenuPanel.setLayout(new GridLayout(2,2))
   
   // Attack buttons
-
   val attackButtonList = new Array[JButton](4)
 
   val attackButton1 = new JButton("attack 1")
@@ -366,7 +454,6 @@ class CombatMenu (fight:Fight) {
     pokSelectButtonList(k).setVisible(true)
   }
   
-
   // Button actions
   
   // looks at all the conditions for various buttons and activates or deactivates them as needed
@@ -401,6 +488,7 @@ class CombatMenu (fight:Fight) {
         pokSelectButtonList(k).setEnabled(false)
       }
     }
+    // The map arrow keys, need to add a bool to see if in fight
   }
 
   var panelArray = new Array[JPanel](6)
@@ -488,8 +576,6 @@ class CombatMenu (fight:Fight) {
       }
     }
   )
-
-
 
   // Switch pokemon
 
@@ -639,42 +725,7 @@ class CombatMenu (fight:Fight) {
   val rows = Array(0.55, 0.45)
   val cells_size_mainFrame = Array(columns, rows)
   
-  // Map side panel
-  val mapSidePanel = new JPanel()
-  mapSidePanel.setVisible(true)
-  val mapSidePanel_columns = Array(0.33, 0.33, 0.33)
-  val mapSidePanel_rows = Array(0.07, 0.07, 0.07, 0.19, 0.2, 0.2, 0.2)
-  val mapSidePanelLayout = Array(mapSidePanel_columns, mapSidePanel_rows)
-  mapSidePanel.setLayout(new TableLayout(mapSidePanelLayout))
-
-
-  // Map
-  val test_map_layout_columns = Array.fill[Int](20)(0)
-  val map_x = 30
-  val map_y = 20
-  val test_map_layout = Array.fill[Array[Int]](map_x)(Array.fill[Int](map_y)(0))
-  test_map_layout(10)(15) = 2
-  val tilesIcons = Array(playerPokemonImg, oppPokemonImg, fightIcon)
-  val mainMap = new Map(new JPanel(), map_x, map_y, tilesIcons, test_map_layout, oppPokemonImg)
-  mainMap.init(mainMap)  
- 
-  // Map movement keys
-  val mapUpButton = new MapArrow(Up, mainMap)
-  mapUpButton.setLabel("up")
-  val mapDownButton = new MapArrow(Down, mainMap)
-  mapDownButton.setLabel("down")
-  val mapRightButton = new MapArrow(Right, mainMap)
-  mapRightButton.setLabel("right")
-  val mapLeftButton = new MapArrow(Left, mainMap)
-  mapLeftButton.setLabel("left")
-
-  mapSidePanel.add(mapUpButton, "1, 0, 1, 0")
-  mapSidePanel.add(mapDownButton, "1, 2, 1, 2")
-  mapSidePanel.add(mapRightButton, "2, 1, 2, 1")
-  mapSidePanel.add(mapLeftButton, "0, 1, 0, 1")
-
-  mapSidePanel.setVisible(true)
- 
+  
   val mainFrame2 = new JFrame
   mainFrame2.setVisible(true)
   mainFrame2.setLayout(new TableLayout(cells_size_mainFrame))
@@ -682,8 +733,8 @@ class CombatMenu (fight:Fight) {
   mainFrame2.pack()
 
 
-  //mainFrame2.add(mainMap, "1, 0, 1, 1")
-  //mainFrame2.add(mapSidePanel, "0, 0, 0, 1")
+  mainFrame2.add(mainMap, "1, 0, 1, 1")
+  mainFrame2.add(mapSidePanel, "0, 0, 0, 1")
   
   mainFrame2.add(mainMenuPanel, "0, 0, 1, 1")
 
@@ -699,7 +750,7 @@ class CombatMenu (fight:Fight) {
 
   
   val fight_menu_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel)
-  val all_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel, endFightPanel, mainMenuPanel)
+  val all_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel, endFightPanel, mainMenuPanel, mainMap, mapSidePanel)
  
 }
 
@@ -843,11 +894,9 @@ object MainGame {
     combatInterface.updateStatText()
     
     // activates the main menu, deactivates all other panels, the menu system handles the ui from then on
-    val k = 0
-    for (k<-0 until combatInterface.all_panels.length){
-      combatInterface.all_panels(k).setVisible(false)
-    }
+    combatInterface.all_panels.foreach(_.setVisible(false))
     combatInterface.mainMenuPanel.setVisible(true)
+    
     Thread.sleep(Int.MaxValue)
   }
   
