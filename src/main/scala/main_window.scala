@@ -178,6 +178,28 @@ class MapArrow (direction:Direction, map:Map) extends JButton{
 }
 
 
+class pokemonDescription (pok:Pokemon) extends JPanel{
+  this.setVisible(true)
+  val columns = Array(0.33, 0.34, 0.33)
+  val rows = Array(0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1)
+  this.setLayout(new TableLayout(Array(columns, rows)))
+  
+  val pokNameLabel = new JLabel(pok.pokemonName)
+  val atkStatLabel = new JLabel(pok.statAtt.toString)
+  val defStatLabel = new JLabel(pok.statDef.toString)
+  val pokTypeLabel = new JLabel(pok.typ)
+  
+  this.add(pokNameLabel, "1, 0, 1, 0")
+  this.add(pokTypeLabel, "1, 1, 1, 1")
+  this.add(atkStatLabel, "1, 2, 1, 2")
+  this.add(defStatLabel, "1, 3, 1, 3")
+
+  val pokImage = new ImageIcon(pok.lien)
+  val pokImgButton = new JButton(pokImage)
+  pokImgButton.setVisible(true)
+  this.add(pokImgButton, "2, 0, 2, 9")
+}
+
 class CombatMenu (fight:Fight) {
   
   var myTurn = true
@@ -276,7 +298,6 @@ class CombatMenu (fight:Fight) {
   sidePanel.setLayout(new GridLayout (2, 1))
 
   
-
   
   // Return button
   val returnButton = new JButton("return")
@@ -421,6 +442,12 @@ class CombatMenu (fight:Fight) {
     attackMenuPanel.add(attackButtonList(k));
     attackButtonList(k).setVisible(true);
   }
+
+
+  // Pokedex panel
+  
+  val pokeWikiPanel = new JPanel()
+  val pokeWikiScrolPane = new JScrollPane(pokeWikiPanel)
 
 
   // Team panel
@@ -856,6 +883,7 @@ object MainGame {
   atk4.PP_max = 10
   atk4.PP = 10
 
+
   var pok1 = new Pokemon("Noacier", "", "Pierre")
   pok1.PVMax = 50
   pok1.PV = 50
@@ -880,13 +908,14 @@ object MainGame {
   pok3.set_attack(2) = atk11
   pok3.set_attack(3) = atk12
 
-  var pok4 = new Pokemon("Spoink", "", "Feuille")
+  var pok4 = new Pokemon("Bellwak", "src/resources/sprites/Bellwak.png", "Feuille")
   pok4.PVMax = 50
   pok4.PV = 50
   pok4.set_attack(0) = atk13
   pok4.set_attack(1) = atk14
   pok4.set_attack(2) = atk15
   pok4.set_attack(3) = atk16
+
 
   var team1 = new Team
   var team2 = new Team
@@ -895,7 +924,7 @@ object MainGame {
   team1.team(1) = pok2
   team1.team(2) = new Pokemon("", "", "")
   team1.team(3) = new Pokemon("", "", "")
-  team1.team(4) = new Pokemon("", "", "")
+  team1.team(4) = pok4
   team1.team(5) = new Pokemon("", "", "")
 
   team2.team(0) = pok3
