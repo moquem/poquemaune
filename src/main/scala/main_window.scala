@@ -198,11 +198,11 @@ class pokemonDescription (pok:Pokemon) extends JPanel{
   val pokImgButton = new JButton(pokImage)
   pokImgButton.setVisible(true)
   pokImgButton.setEnabled(true)
-  pokImgButton.setOpaque(false)
   pokImgButton.setBorderPainted(false)
   this.add(pokImgButton, "2, 0, 2, 9")
   
   pok.set_attack.zipWithIndex.foreach{case (atk, index) => this.add(new JLabel("Attack " + (index+1).toString + " : " + atk.attackName), ("1, " + (index+4).toString + ", 1, " + (index+4).toString))}
+
 }
 
 class CombatMenu (fight:Fight) {
@@ -255,8 +255,8 @@ class CombatMenu (fight:Fight) {
   pokSelectionButton.setVisible(true)
 
   // Button for selecting an action
-  val actionSelectionButton = new JButton("Action")
-  actionSelectionButton.setVisible(true)
+  val wikiSelectionButton = new JButton("Wiki")
+  wikiSelectionButton.setVisible(true)
 
   // Button for slecting an item
   val itemSelectionButton = new JButton("Item")
@@ -321,7 +321,7 @@ class CombatMenu (fight:Fight) {
   // add the buttons to the panel
   actionMenuPanel.add(atkSelectionButton)
   actionMenuPanel.add(pokSelectionButton)
-  actionMenuPanel.add(actionSelectionButton)
+  actionMenuPanel.add(wikiSelectionButton)
   actionMenuPanel.add(itemSelectionButton)
   actionMenuPanel.add(endOfTurnButton)
   actionMenuPanel.add(openMapButton)
@@ -340,7 +340,7 @@ class CombatMenu (fight:Fight) {
  
 
 
-   // Map side panel
+  // Map side panel
   val mapSidePanel = new JPanel()
   mapSidePanel.setVisible(true)
   val mapSidePanel_columns = Array(0.33, 0.33, 0.33)
@@ -451,10 +451,13 @@ class CombatMenu (fight:Fight) {
 
   // Pokedex panel
   
-  val pokeWikiPanel = new JPanel()
-  val pokeWikiScrolPane = new JScrollPane(pokeWikiPanel)
-
-
+  var pokeWikiPanel = new pokemonDescription(fight.current_pok_ally)
+  
+  val wikiSidePanel = new JPanel()
+  val wikiReturnButton = new JButton("return")
+  wikiReturnButton.setVisible(true)
+  wikiSidePanel.add(wikiReturnButton)
+  
   // Team panel
 
   // pokemon selection buttons
@@ -664,7 +667,7 @@ class CombatMenu (fight:Fight) {
   }
 
 
-  // Return button
+  // Return buttons
 
   returnButton.addActionListener(
     new ActionListener{
@@ -677,6 +680,35 @@ class CombatMenu (fight:Fight) {
         // end panel
         // [1, 1, 1, 0, 0, 0]
         updateActive()
+      }
+    }
+  )
+
+  wikiReturnButton.addActionListener(
+    new ActionListener{
+      def actionPerformed (e:ActionEvent) {
+        pokeWikiPanel.setVisible(false)
+        wikiSidePanel.setVisible(false)
+        actionMenuPanel.setVisible(true)
+        pokemonImgPanel2.setVisible(true)
+        sidePanel.setVisible(true)
+        mainMap.setVisible(false)
+      }
+    }
+  )
+
+  // wiki selection button
+  wikiSelectionButton.addActionListener(
+    new ActionListener{
+      def actionPerformed (e:ActionEvent){
+        pokeWikiPanel = new pokemonDescription(fight.current_pok_ally)
+        mainFrame2.add(pokeWikiPanel, "1, 0, 1, 1")
+        pokeWikiPanel.setVisible(true)
+        wikiSidePanel.setVisible(true)
+        actionMenuPanel.setVisible(false)
+        pokemonImgPanel2.setVisible(false)
+        sidePanel.setVisible(false)
+        mainMap.setVisible(false)
       }
     }
   )
@@ -714,7 +746,6 @@ class CombatMenu (fight:Fight) {
 
       fight.current_pok_enemy.loss_PV((att.damage*(fight.current_pok_enemy.statDef+bonus_typ)*fight.current_pok_ally.statAtt).toInt)
       updateStatText()
-      println("why no upadate when i want")
       myTurn = false
     }
     else {
@@ -775,13 +806,13 @@ class CombatMenu (fight:Fight) {
   val rows = Array(0.55, 0.45)
   val cells_size_mainFrame = Array(columns, rows)
   
-  var pok4 = new Pokemon("Bellwak", "src/main/resources/sprite/Bellwak.png", "Feuille")
+  /*var pok4 = new Pokemon("Bellwak", "src/main/resources/sprite/Bellwak.png", "Feuille")
   pok4.PVMax = 50
   pok4.PV = 50
   pok4.set_attack(0) = new Attack("fist attack")
   pok4.set_attack(1) = new Attack("next atk")
   pok4.set_attack(2) = new Attack("another one")
-  pok4.set_attack(3) = new Attack("bites the dust")
+  pok4.set_attack(3) = new Attack("bites the dust")*/
   
 
   
@@ -792,11 +823,11 @@ class CombatMenu (fight:Fight) {
   mainFrame2.pack()
 
   
-  val testDescription = new pokemonDescription(pok4)
-  mainFrame2.add(testDescription, "0, 0, 1, 1")
-  mainFrame2.pack()
+  /*val testDescription = new pokemonDescription(pok4)*/
+  mainFrame2.add(pokeWikiPanel, "1, 0, 1, 1")
+  mainFrame2.add(wikiSidePanel, "0, 0, 0, 1")
 
- /* mainFrame2.add(mainMap, "1, 0, 1, 1")
+  mainFrame2.add(mainMap, "1, 0, 1, 1")
   mainFrame2.add(mapSidePanel, "0, 0, 0, 1")
   
   mainFrame2.add(mainMenuPanel, "0, 0, 1, 1")
@@ -809,11 +840,11 @@ class CombatMenu (fight:Fight) {
   mainFrame2.add(attackMenuPanel, "1, 1, 1, 1")
   mainFrame2.add(teamMenuPanel, "1, 1, 1, 1")
 
-  mainFrame2.add(endFightPanel, "0, 0, 1, 1")*/
+  mainFrame2.add(endFightPanel, "0, 0, 1, 1")
 
   
-  //val fight_menu_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel)
-  //val all_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel, endFightPanel, mainMenuPanel, mainMap, mapSidePanel)
+  val fight_menu_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel)
+  val all_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel, endFightPanel, mainMenuPanel, mainMap, mapSidePanel, pokeWikiPanel, wikiSidePanel)
  
 }
 
@@ -926,7 +957,7 @@ object MainGame {
   pok3.set_attack(2) = atk11
   pok3.set_attack(3) = atk12
 
-  var pok4 = new Pokemon("Bellwak", "src/resources/sprites/Bellwak.png", "Feuille")
+  var pok4 = new Pokemon("Bellwak", "src/main/resources/sprite/Bellwak.png", "Feuille")
   pok4.PVMax = 50
   pok4.PV = 50
   pok4.set_attack(0) = atk13
@@ -959,8 +990,8 @@ object MainGame {
     combatInterface.updateStatText()
     
     // activates the main menu, deactivates all other panels, the menu system handles the ui from then on
-   // combatInterface.all_panels.foreach(_.setVisible(false))
-    //combatInterface.mainMenuPanel.setVisible(true)
+    combatInterface.all_panels.foreach(_.setVisible(false))
+    combatInterface.mainMenuPanel.setVisible(true)
     
     Thread.sleep(Int.MaxValue)
   }
