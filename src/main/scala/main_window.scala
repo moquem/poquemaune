@@ -184,10 +184,10 @@ class pokemonDescription (pok:Pokemon) extends JPanel{
   val rows = Array(0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1)
   this.setLayout(new TableLayout(Array(columns, rows)))
   
-  val pokNameLabel = new JLabel(pok.pokemonName)
-  val atkStatLabel = new JLabel(pok.statAtt.toString)
-  val defStatLabel = new JLabel(pok.statDef.toString)
-  val pokTypeLabel = new JLabel(pok.typ)
+  val pokNameLabel = new JLabel("Name : " + pok.pokemonName)
+  val atkStatLabel = new JLabel("Attack : " + pok.statAtt.toString)
+  val defStatLabel = new JLabel("Defence : " + pok.statDef.toString)
+  val pokTypeLabel = new JLabel("Type : " + pok.typ)
   
   this.add(pokNameLabel, "1, 0, 1, 0")
   this.add(pokTypeLabel, "1, 1, 1, 1")
@@ -197,7 +197,12 @@ class pokemonDescription (pok:Pokemon) extends JPanel{
   val pokImage = new ImageIcon(pok.lien)
   val pokImgButton = new JButton(pokImage)
   pokImgButton.setVisible(true)
+  pokImgButton.setEnabled(true)
+  pokImgButton.setOpaque(false)
+  pokImgButton.setBorderPainted(false)
   this.add(pokImgButton, "2, 0, 2, 9")
+  
+  pok.set_attack.zipWithIndex.foreach{case (atk, index) => this.add(new JLabel("Attack " + (index+1).toString + " : " + atk.attackName), ("1, " + (index+4).toString + ", 1, " + (index+4).toString))}
 }
 
 class CombatMenu (fight:Fight) {
@@ -770,6 +775,15 @@ class CombatMenu (fight:Fight) {
   val rows = Array(0.55, 0.45)
   val cells_size_mainFrame = Array(columns, rows)
   
+  var pok4 = new Pokemon("Bellwak", "src/main/resources/sprite/Bellwak.png", "Feuille")
+  pok4.PVMax = 50
+  pok4.PV = 50
+  pok4.set_attack(0) = new Attack("fist attack")
+  pok4.set_attack(1) = new Attack("next atk")
+  pok4.set_attack(2) = new Attack("another one")
+  pok4.set_attack(3) = new Attack("bites the dust")
+  
+
   
   val mainFrame2 = new JFrame
   mainFrame2.setVisible(true)
@@ -777,8 +791,12 @@ class CombatMenu (fight:Fight) {
   mainFrame2.setPreferredSize(new Dimension(1920, 1080))
   mainFrame2.pack()
 
+  
+  val testDescription = new pokemonDescription(pok4)
+  mainFrame2.add(testDescription, "0, 0, 1, 1")
+  mainFrame2.pack()
 
-  mainFrame2.add(mainMap, "1, 0, 1, 1")
+ /* mainFrame2.add(mainMap, "1, 0, 1, 1")
   mainFrame2.add(mapSidePanel, "0, 0, 0, 1")
   
   mainFrame2.add(mainMenuPanel, "0, 0, 1, 1")
@@ -791,11 +809,11 @@ class CombatMenu (fight:Fight) {
   mainFrame2.add(attackMenuPanel, "1, 1, 1, 1")
   mainFrame2.add(teamMenuPanel, "1, 1, 1, 1")
 
-  mainFrame2.add(endFightPanel, "0, 0, 1, 1")
+  mainFrame2.add(endFightPanel, "0, 0, 1, 1")*/
 
   
-  val fight_menu_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel)
-  val all_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel, endFightPanel, mainMenuPanel, mainMap, mapSidePanel)
+  //val fight_menu_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel)
+  //val all_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel, endFightPanel, mainMenuPanel, mainMap, mapSidePanel)
  
 }
 
@@ -941,8 +959,8 @@ object MainGame {
     combatInterface.updateStatText()
     
     // activates the main menu, deactivates all other panels, the menu system handles the ui from then on
-    combatInterface.all_panels.foreach(_.setVisible(false))
-    combatInterface.mainMenuPanel.setVisible(true)
+   // combatInterface.all_panels.foreach(_.setVisible(false))
+    //combatInterface.mainMenuPanel.setVisible(true)
     
     Thread.sleep(Int.MaxValue)
   }

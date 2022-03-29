@@ -65,7 +65,6 @@ class Pokemon (pokName:String, spritePath:String, pokemonType:String){
             true
         }
     }
-
 }
 
 
