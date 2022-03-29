@@ -23,17 +23,17 @@ class Attack (name:String) {
 
 }
 
-class Pokemon {
-    val pokemonName:String
-    val lien:String
+class Pokemon (pokName:String, spritePath:String, pokemonType:String){
+    val pokemonName = pokName
+    val lien = spritePath
     var PVMax:Int = 0
-    val typ:String
-    var statAtt:Int
-    var statDef:Int
+    val typ = pokemonType
+    var statAtt:Double
+    var statDef:Double
 
     var PV:Int = PVMax
     var alive : Boolean = true
-    if (name == ""){
+    if (pokemonName == ""){
       alive = false
     } else {
       alive = true
@@ -66,9 +66,23 @@ class Pokemon {
         }
     }
 
+    
+
 }
 
 
+// initialises a pokemon with the stats provided by the file given in the path
+class pokemonGenerator(path:String){
+  
+  def generatePokemon() : Pokemon = {
+    val newPok = new Pokemon ("", "", "")
+    newPok.PVMax = 0
+    newPok.statAtt = 0.0
+    newPok.statDef = 0.0
+    return newPok
+  }
+}
+/*
 class Aeroqueen extends Pokemon { 
     override val pokemonName = "Aeroqueen"
     override val lien = "src/main/resources/sprite/Aeroqueen.png"
@@ -302,17 +316,17 @@ class Shelleel extends Pokemon {
     override val typ = "Feuille"
     statAtt = 1
     statDef = 0.6
-}
+}*/
 
-class Rhybat extends Pokemon { 
+/*class Rhybat extends Pokemon { 
     override val pokemonName = "Rhybat"
     override val lien = "src/main/resources/sprite/Rhybat.png"
     PVmax = 70
     override val typ = "Pierre"
     statAtt = 1.2
     statDef = 0.8
-}
-
+}*/
+/*
 class Tangmime extends Pokemon { 
     override val pokemonName = "Tangmime"
     override val lien = "src/main/resources/sprite/Tangmime.png"
@@ -356,12 +370,12 @@ class Voltrina extends Pokemon {
     override val typ = "Feuille"
     statAtt = 1.2
     statDef = 0.7
-}
+}*/
 
 class Empty extends Pokemon {
     override val pokemonName = ""
     override val lien = ""
-    PVmax = 0
+    PVMax = 0
     override val typ = "Feuille"
     statAtt = 0
     statDef = 0
