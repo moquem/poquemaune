@@ -668,16 +668,21 @@ class CombatMenu (fight:Fight) {
       // team menu
       // end panel
       // [1, 1, 1, 0, 0, 0]
-      messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName + "")
 
+      messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName)
+      
       if ((typ1 == "Feuille" && typ2 == "Pierre") || (typ1 == "Pierre" && typ2 == "Ciseaux") || (typ1 == "Ciseaux" && typ2 == "Feuille")) {
-            bonus_typ = 0.2
-        } else if ((typ1 == "Pierre" && typ2 == "Feuille") || (typ1 == "Ciseaux" && typ2 == "Pierre") || (typ1 == "Feuille" && typ2 == "Ciseaux")) {
-            bonus_typ = -0.2
-        }
+        bonus_typ = 0.2
+        messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName + ", this attack was very effective")
+      }
+      else if ((typ1 == "Pierre" && typ2 == "Feuille") || (typ1 == "Ciseaux" && typ2 == "Pierre") || (typ1 == "Feuille" && typ2 == "Ciseaux")) {
+        bonus_typ = -0.2
+        messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName + ", this attack wasn't very effective")
+      }
 
       fight.current_pok_enemy.loss_PV((att.damage*(fight.current_pok_enemy.statDef+bonus_typ)*fight.current_pok_ally.statAtt).toInt)
       updateStatText()
+      println("why no upadate when i want")
       myTurn = false
     }
     else {
@@ -851,7 +856,7 @@ object MainGame {
   atk4.PP_max = 10
   atk4.PP = 10
 
-  var pok1 = new Pokemon("Noacier", "", "")
+  var pok1 = new Pokemon("Noacier", "", "Pierre")
   pok1.PVMax = 50
   pok1.PV = 50
   pok1.set_attack(0) = atk1
@@ -859,7 +864,7 @@ object MainGame {
   pok1.set_attack(2) = atk3
   pok1.set_attack(3) = atk4
 
-  var pok2 = new Pokemon("Grodrive", "", "")
+  var pok2 = new Pokemon("Grodrive", "", "Ciseau")
   pok2.PVMax = 50
   pok2.PV = 50
   pok2.set_attack(0) = atk5
@@ -867,7 +872,7 @@ object MainGame {
   pok2.set_attack(2) = atk7
   pok2.set_attack(3) = atk8
 
-  var pok3 = new Pokemon("Cabriolaine", "", "")
+  var pok3 = new Pokemon("Cabriolaine", "", "Pierre")
   pok3.PVMax = 50
   pok3.PV = 50
   pok3.set_attack(0) = atk9
@@ -875,7 +880,7 @@ object MainGame {
   pok3.set_attack(2) = atk11
   pok3.set_attack(3) = atk12
 
-  var pok4 = new Pokemon("Spoink", "", "")
+  var pok4 = new Pokemon("Spoink", "", "Feuille")
   pok4.PVMax = 50
   pok4.PV = 50
   pok4.set_attack(0) = atk13
