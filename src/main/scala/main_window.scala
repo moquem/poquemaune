@@ -656,10 +656,10 @@ class CombatMenu (fight:Fight) {
     att = fight.current_pok_ally.set_attack(nb_attack)
     if (att.use_attack()) {
 
-      var typ1 = current_pok_enemy.typ
-      var typ2 = current_pok_ally.typ
+      var typ1 = fight.current_pok_enemy.typ
+      var typ2 = fight.current_pok_ally.typ
       
-      var bonus_typ:Int
+      var bonus_typ = 0.0
 
       pokemonImgPanel2.setVisible(true)
       // side panel
@@ -676,7 +676,7 @@ class CombatMenu (fight:Fight) {
             bonus_typ = -0.2
         }
 
-      fight.current_pok_enemy.loss_PV(att.damage*(current_pok_enemy.statDef+bonus_typ)*current_pok_ally.statAtt)
+      fight.current_pok_enemy.loss_PV((att.damage*(fight.current_pok_enemy.statDef+bonus_typ)*fight.current_pok_ally.statAtt).toInt)
       updateStatText()
       myTurn = false
     }
@@ -768,7 +768,7 @@ class CombatMenu (fight:Fight) {
 }
 
 object MainGame {
-  var pok_empty = new Pokemon(" ")
+  var pok_empty = new Pokemon("", "", "")
   pok_empty.alive = false
 
   var atk1 = new Attack("Griffe acier")
@@ -851,7 +851,7 @@ object MainGame {
   atk4.PP_max = 10
   atk4.PP = 10
 
-  var pok1 = new Pokemon("Noacier")
+  var pok1 = new Pokemon("Noacier", "", "")
   pok1.PVMax = 50
   pok1.PV = 50
   pok1.set_attack(0) = atk1
@@ -859,7 +859,7 @@ object MainGame {
   pok1.set_attack(2) = atk3
   pok1.set_attack(3) = atk4
 
-  var pok2 = new Pokemon("Grodrive")
+  var pok2 = new Pokemon("Grodrive", "", "")
   pok2.PVMax = 50
   pok2.PV = 50
   pok2.set_attack(0) = atk5
@@ -867,7 +867,7 @@ object MainGame {
   pok2.set_attack(2) = atk7
   pok2.set_attack(3) = atk8
 
-  var pok3 = new Pokemon("Cabriolaine")
+  var pok3 = new Pokemon("Cabriolaine", "", "")
   pok3.PVMax = 50
   pok3.PV = 50
   pok3.set_attack(0) = atk9
@@ -875,7 +875,7 @@ object MainGame {
   pok3.set_attack(2) = atk11
   pok3.set_attack(3) = atk12
 
-  var pok4 = new Pokemon("Spoink")
+  var pok4 = new Pokemon("Spoink", "", "")
   pok4.PVMax = 50
   pok4.PV = 50
   pok4.set_attack(0) = atk13
@@ -888,17 +888,17 @@ object MainGame {
 
   team1.team(0) = pok1 
   team1.team(1) = pok2
-  team1.team(2) = new Pokemon("")
-  team1.team(3) = new Pokemon("")
-  team1.team(4) = new Pokemon("")
-  team1.team(5) = new Pokemon("")
+  team1.team(2) = new Pokemon("", "", "")
+  team1.team(3) = new Pokemon("", "", "")
+  team1.team(4) = new Pokemon("", "", "")
+  team1.team(5) = new Pokemon("", "", "")
 
   team2.team(0) = pok3
   team2.team(1) = pok4
-  team2.team(2) = new Pokemon("")
-  team2.team(3) = new Pokemon("")
-  team2.team(4) = new Pokemon("")
-  team2.team(5) = new Pokemon("")
+  team2.team(2) = new Pokemon("", "", "")
+  team2.team(3) = new Pokemon("", "", "")
+  team2.team(4) = new Pokemon("", "", "")
+  team2.team(5) = new Pokemon("", "", "")
 
   var fight = new Fight(team1, team2)
   var combatInterface = new CombatMenu(fight)

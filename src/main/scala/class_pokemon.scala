@@ -28,8 +28,8 @@ class Pokemon (pokName:String, spritePath:String, pokemonType:String){
     val lien = spritePath
     var PVMax:Int = 0
     val typ = pokemonType
-    var statAtt:Double
-    var statDef:Double
+    var statAtt = 0.0
+    var statDef = 0.0
 
     var PV:Int = PVMax
     var alive : Boolean = true
@@ -65,8 +65,6 @@ class Pokemon (pokName:String, spritePath:String, pokemonType:String){
             true
         }
     }
-
-    
 
 }
 
@@ -372,13 +370,13 @@ class Voltrina extends Pokemon {
     statDef = 0.7
 }*/
 
-class Empty extends Pokemon {
-    override val pokemonName = ""
-    override val lien = ""
+class Empty extends Pokemon("", "", "") {
+    //override val pokemonName = ""
+    //override val lien = ""
     PVMax = 0
-    override val typ = "Feuille"
-    statAtt = 0
-    statDef = 0
+    //override val typ = "Feuille"
+    statAtt = 0.0
+    statDef = 0.0
 }
 
 class Team {
