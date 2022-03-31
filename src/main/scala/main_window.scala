@@ -768,12 +768,12 @@ class CombatMenu (fight:Fight) {
 }
 
 object MainGame {
-  var pok_empty = new Pokemon(" ")
+  var pok_empty = new Empty
   pok_empty.alive = false
 
   var atk1 = new Attack("Griffe acier")
   atk1.damage = 7
-  atk1.PP_max = 10
+  atk1.PP_max = 10h
   atk1.PP = 10
 
   var atk2 = new Attack("Fulguropoing")
@@ -852,7 +852,6 @@ object MainGame {
   atk4.PP = 10
 
   var pok1 = new Pokemon("Noacier")
-  pok1.PVMax = 50
   pok1.PV = 50
   pok1.set_attack(0) = atk1
   pok1.set_attack(1) = atk2

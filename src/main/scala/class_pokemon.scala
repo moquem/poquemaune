@@ -1,6 +1,5 @@
-class Attack (name:String) {
-    var attackName:String = name
-    var typ:String = "TODO"
+class Attack {
+    val attackName:String 
     var damage:Int = -1
 
     var PP_max:Int = -1
@@ -21,6 +20,13 @@ class Attack (name:String) {
         PP += restore 
         PP.min(PP_max) }
 
+}
+
+class Griffe_acier extends Attack {
+    override val attackName = "Griffe acier"
+    damage = 7
+    PP_max = 10
+    PP = 10
 }
 
 class Pokemon {
@@ -295,6 +301,15 @@ class Searino extends Pokemon {
     statDef = 0.7
 }
 
+class Seendeen extends Pokemon { 
+    override val pokemonName = "Seedeen"
+    override val lien = "src/main/resources/sprite/Seendeen.png"
+    PVmax = 70
+    override val typ = "Feuille"
+    statAtt = 1.1
+    statDef = 0.6
+}
+
 class Shelleel extends Pokemon { 
     override val pokemonName = "Shelleel"
     override val lien = "src/main/resources/sprite/Shelleel.png"
@@ -302,15 +317,6 @@ class Shelleel extends Pokemon {
     override val typ = "Feuille"
     statAtt = 1
     statDef = 0.6
-}
-
-class Rhybat extends Pokemon { 
-    override val pokemonName = "Rhybat"
-    override val lien = "src/main/resources/sprite/Rhybat.png"
-    PVmax = 70
-    override val typ = "Pierre"
-    statAtt = 1.2
-    statDef = 0.8
 }
 
 class Tangmime extends Pokemon { 
