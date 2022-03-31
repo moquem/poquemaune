@@ -178,6 +178,33 @@ class MapArrow (direction:Direction, map:Map) extends JButton{
 }
 
 
+class pokemonDescription (pok:Pokemon) extends JPanel{
+  this.setVisible(true)
+  val columns = Array(0.33, 0.34, 0.33)
+  val rows = Array(0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1)
+  this.setLayout(new TableLayout(Array(columns, rows)))
+  
+  val pokNameLabel = new JLabel("Name : " + pok.pokemonName)
+  val atkStatLabel = new JLabel("Attack : " + pok.statAtt.toString)
+  val defStatLabel = new JLabel("Defence : " + pok.statDef.toString)
+  val pokTypeLabel = new JLabel("Type : " + pok.typ)
+  
+  this.add(pokNameLabel, "1, 0, 1, 0")
+  this.add(pokTypeLabel, "1, 1, 1, 1")
+  this.add(atkStatLabel, "1, 2, 1, 2")
+  this.add(defStatLabel, "1, 3, 1, 3")
+
+  val pokImage = new ImageIcon(pok.lien)
+  val pokImgButton = new JButton(pokImage)
+  pokImgButton.setVisible(true)
+  pokImgButton.setEnabled(true)
+  pokImgButton.setBorderPainted(false)
+  this.add(pokImgButton, "2, 0, 2, 9")
+  
+  pok.set_attack.zipWithIndex.foreach{case (atk, index) => this.add(new JLabel("Attack " + (index+1).toString + " : " + atk.attackName), ("1, " + (index+4).toString + ", 1, " + (index+4).toString))}
+
+}
+
 class CombatMenu (fight:Fight) {
   
   var myTurn = true
@@ -228,8 +255,8 @@ class CombatMenu (fight:Fight) {
   pokSelectionButton.setVisible(true)
 
   // Button for selecting an action
-  val actionSelectionButton = new JButton("Action")
-  actionSelectionButton.setVisible(true)
+  val wikiSelectionButton = new JButton("Wiki")
+  wikiSelectionButton.setVisible(true)
 
   // Button for slecting an item
   val itemSelectionButton = new JButton("Item")
@@ -276,7 +303,6 @@ class CombatMenu (fight:Fight) {
   sidePanel.setLayout(new GridLayout (2, 1))
 
   
-
   
   // Return button
   val returnButton = new JButton("return")
@@ -295,7 +321,7 @@ class CombatMenu (fight:Fight) {
   // add the buttons to the panel
   actionMenuPanel.add(atkSelectionButton)
   actionMenuPanel.add(pokSelectionButton)
-  actionMenuPanel.add(actionSelectionButton)
+  actionMenuPanel.add(wikiSelectionButton)
   actionMenuPanel.add(itemSelectionButton)
   actionMenuPanel.add(endOfTurnButton)
   actionMenuPanel.add(openMapButton)
@@ -314,7 +340,7 @@ class CombatMenu (fight:Fight) {
  
 
 
-   // Map side panel
+  // Map side panel
   val mapSidePanel = new JPanel()
   mapSidePanel.setVisible(true)
   val mapSidePanel_columns = Array(0.33, 0.33, 0.33)
@@ -423,6 +449,15 @@ class CombatMenu (fight:Fight) {
   }
 
 
+  // Pokedex panel
+  
+  var pokeWikiPanel = new pokemonDescription(fight.current_pok_ally)
+  
+  val wikiSidePanel = new JPanel()
+  val wikiReturnButton = new JButton("return")
+  wikiReturnButton.setVisible(true)
+  wikiSidePanel.add(wikiReturnButton)
+  
   // Team panel
 
   // pokemon selection buttons
@@ -632,7 +667,7 @@ class CombatMenu (fight:Fight) {
   }
 
 
-  // Return button
+  // Return buttons
 
   returnButton.addActionListener(
     new ActionListener{
@@ -649,6 +684,35 @@ class CombatMenu (fight:Fight) {
     }
   )
 
+  wikiReturnButton.addActionListener(
+    new ActionListener{
+      def actionPerformed (e:ActionEvent) {
+        pokeWikiPanel.setVisible(false)
+        wikiSidePanel.setVisible(false)
+        actionMenuPanel.setVisible(true)
+        pokemonImgPanel2.setVisible(true)
+        sidePanel.setVisible(true)
+        mainMap.setVisible(false)
+      }
+    }
+  )
+
+  // wiki selection button
+  wikiSelectionButton.addActionListener(
+    new ActionListener{
+      def actionPerformed (e:ActionEvent){
+        pokeWikiPanel = new pokemonDescription(fight.current_pok_ally)
+        mainFrame2.add(pokeWikiPanel, "1, 0, 1, 1")
+        pokeWikiPanel.setVisible(true)
+        wikiSidePanel.setVisible(true)
+        actionMenuPanel.setVisible(false)
+        pokemonImgPanel2.setVisible(false)
+        sidePanel.setVisible(false)
+        mainMap.setVisible(false)
+      }
+    }
+  )
+
   // Attack menu
 
   def attack_processing (nb_attack:Int) {
@@ -656,10 +720,10 @@ class CombatMenu (fight:Fight) {
     att = fight.current_pok_ally.set_attack(nb_attack)
     if (att.use_attack()) {
 
-      var typ1 = current_pok_enemy.typ
-      var typ2 = current_pok_ally.typ
+      var typ1 = fight.current_pok_enemy.typ
+      var typ2 = fight.current_pok_ally.typ
       
-      var bonus_typ:Int
+      var bonus_typ = 0.0
 
       pokemonImgPanel2.setVisible(true)
       // side panel
@@ -668,15 +732,19 @@ class CombatMenu (fight:Fight) {
       // team menu
       // end panel
       // [1, 1, 1, 0, 0, 0]
-      messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName + "")
 
+      messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName)
+      
       if ((typ1 == "Feuille" && typ2 == "Pierre") || (typ1 == "Pierre" && typ2 == "Ciseaux") || (typ1 == "Ciseaux" && typ2 == "Feuille")) {
-            bonus_typ = 0.2
-        } else if ((typ1 == "Pierre" && typ2 == "Feuille") || (typ1 == "Ciseaux" && typ2 == "Pierre") || (typ1 == "Feuille" && typ2 == "Ciseaux")) {
-            bonus_typ = -0.2
-        }
+        bonus_typ = 0.2
+        messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName + ", this attack was very effective")
+      }
+      else if ((typ1 == "Pierre" && typ2 == "Feuille") || (typ1 == "Ciseaux" && typ2 == "Pierre") || (typ1 == "Feuille" && typ2 == "Ciseaux")) {
+        bonus_typ = -0.2
+        messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName + ", this attack wasn't very effective")
+      }
 
-      fight.current_pok_enemy.loss_PV(att.damage*(current_pok_enemy.statDef+bonus_typ)*current_pok_ally.statAtt)
+      fight.current_pok_enemy.loss_PV((att.damage*(fight.current_pok_enemy.statDef+bonus_typ)*fight.current_pok_ally.statAtt).toInt)
       updateStatText()
       myTurn = false
     }
@@ -738,6 +806,15 @@ class CombatMenu (fight:Fight) {
   val rows = Array(0.55, 0.45)
   val cells_size_mainFrame = Array(columns, rows)
   
+  /*var pok4 = new Pokemon("Bellwak", "src/main/resources/sprite/Bellwak.png", "Feuille")
+  pok4.PVMax = 50
+  pok4.PV = 50
+  pok4.set_attack(0) = new Attack("fist attack")
+  pok4.set_attack(1) = new Attack("next atk")
+  pok4.set_attack(2) = new Attack("another one")
+  pok4.set_attack(3) = new Attack("bites the dust")*/
+  
+
   
   val mainFrame2 = new JFrame
   mainFrame2.setVisible(true)
@@ -745,6 +822,10 @@ class CombatMenu (fight:Fight) {
   mainFrame2.setPreferredSize(new Dimension(1920, 1080))
   mainFrame2.pack()
 
+  
+  /*val testDescription = new pokemonDescription(pok4)*/
+  mainFrame2.add(pokeWikiPanel, "1, 0, 1, 1")
+  mainFrame2.add(wikiSidePanel, "0, 0, 0, 1")
 
   mainFrame2.add(mainMap, "1, 0, 1, 1")
   mainFrame2.add(mapSidePanel, "0, 0, 0, 1")
@@ -763,12 +844,12 @@ class CombatMenu (fight:Fight) {
 
   
   val fight_menu_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel)
-  val all_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel, endFightPanel, mainMenuPanel, mainMap, mapSidePanel)
+  val all_panels = Array(pokemonImgPanel2, sidePanel, actionMenuPanel, attackMenuPanel, teamMenuPanel, endFightPanel, mainMenuPanel, mainMap, mapSidePanel, pokeWikiPanel, wikiSidePanel)
  
 }
 
 object MainGame {
-  var pok_empty = new Empty
+  var pok_empty = new Pokemon("", "", "")
   pok_empty.alive = false
 
   var atk1 = new Attack("Griffe acier")
@@ -851,14 +932,16 @@ object MainGame {
   atk4.PP_max = 10
   atk4.PP = 10
 
-  var pok1 = new Pokemon("Noacier")
+
+  var pok1 = new Pokemon("Noacier", "", "Pierre")
+  pok1.PVMax = 50
   pok1.PV = 50
   pok1.set_attack(0) = atk1
   pok1.set_attack(1) = atk2
   pok1.set_attack(2) = atk3
   pok1.set_attack(3) = atk4
 
-  var pok2 = new Pokemon("Grodrive")
+  var pok2 = new Pokemon("Grodrive", "", "Ciseau")
   pok2.PVMax = 50
   pok2.PV = 50
   pok2.set_attack(0) = atk5
@@ -866,7 +949,7 @@ object MainGame {
   pok2.set_attack(2) = atk7
   pok2.set_attack(3) = atk8
 
-  var pok3 = new Pokemon("Cabriolaine")
+  var pok3 = new Pokemon("Cabriolaine", "", "Pierre")
   pok3.PVMax = 50
   pok3.PV = 50
   pok3.set_attack(0) = atk9
@@ -874,7 +957,7 @@ object MainGame {
   pok3.set_attack(2) = atk11
   pok3.set_attack(3) = atk12
 
-  var pok4 = new Pokemon("Spoink")
+  var pok4 = new Pokemon("Bellwak", "src/main/resources/sprite/Bellwak.png", "Feuille")
   pok4.PVMax = 50
   pok4.PV = 50
   pok4.set_attack(0) = atk13
@@ -882,22 +965,23 @@ object MainGame {
   pok4.set_attack(2) = atk15
   pok4.set_attack(3) = atk16
 
+
   var team1 = new Team
   var team2 = new Team
 
   team1.team(0) = pok1 
   team1.team(1) = pok2
-  team1.team(2) = new Pokemon("")
-  team1.team(3) = new Pokemon("")
-  team1.team(4) = new Pokemon("")
-  team1.team(5) = new Pokemon("")
+  team1.team(2) = new Pokemon("", "", "")
+  team1.team(3) = new Pokemon("", "", "")
+  team1.team(4) = pok4
+  team1.team(5) = new Pokemon("", "", "")
 
   team2.team(0) = pok3
   team2.team(1) = pok4
-  team2.team(2) = new Pokemon("")
-  team2.team(3) = new Pokemon("")
-  team2.team(4) = new Pokemon("")
-  team2.team(5) = new Pokemon("")
+  team2.team(2) = new Pokemon("", "", "")
+  team2.team(3) = new Pokemon("", "", "")
+  team2.team(4) = new Pokemon("", "", "")
+  team2.team(5) = new Pokemon("", "", "")
 
   var fight = new Fight(team1, team2)
   var combatInterface = new CombatMenu(fight)

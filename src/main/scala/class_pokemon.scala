@@ -22,24 +22,17 @@ class Attack {
 
 }
 
-class Griffe_acier extends Attack {
-    override val attackName = "Griffe acier"
-    damage = 7
-    PP_max = 10
-    PP = 10
-}
-
-class Pokemon {
-    val pokemonName:String
-    val lien:String
+class Pokemon (pokName:String, spritePath:String, pokemonType:String){
+    val pokemonName = pokName
+    val lien = spritePath
     var PVMax:Int = 0
-    val typ:String
-    var statAtt:Int
-    var statDef:Int
+    val typ = pokemonType
+    var statAtt = 0.0
+    var statDef = 0.0
 
     var PV:Int = PVMax
     var alive : Boolean = true
-    if (name == ""){
+    if (pokemonName == ""){
       alive = false
     } else {
       alive = true
@@ -71,10 +64,21 @@ class Pokemon {
             true
         }
     }
-
 }
 
 
+// initialises a pokemon with the stats provided by the file given in the path
+class pokemonGenerator(path:String){
+  
+  def generatePokemon() : Pokemon = {
+    val newPok = new Pokemon ("", "", "")
+    newPok.PVMax = 0
+    newPok.statAtt = 0.0
+    newPok.statDef = 0.0
+    return newPok
+  }
+}
+/*
 class Aeroqueen extends Pokemon { 
     override val pokemonName = "Aeroqueen"
     override val lien = "src/main/resources/sprite/Aeroqueen.png"
@@ -317,8 +321,17 @@ class Shelleel extends Pokemon {
     override val typ = "Feuille"
     statAtt = 1
     statDef = 0.6
-}
+}*/
 
+/*class Rhybat extends Pokemon { 
+    override val pokemonName = "Rhybat"
+    override val lien = "src/main/resources/sprite/Rhybat.png"
+    PVmax = 70
+    override val typ = "Pierre"
+    statAtt = 1.2
+    statDef = 0.8
+}*/
+/*
 class Tangmime extends Pokemon { 
     override val pokemonName = "Tangmime"
     override val lien = "src/main/resources/sprite/Tangmime.png"
@@ -362,15 +375,15 @@ class Voltrina extends Pokemon {
     override val typ = "Feuille"
     statAtt = 1.2
     statDef = 0.7
-}
+}*/
 
-class Empty extends Pokemon {
-    override val pokemonName = ""
-    override val lien = ""
-    PVmax = 0
-    override val typ = "Feuille"
-    statAtt = 0
-    statDef = 0
+class Empty extends Pokemon("", "", "") {
+    //override val pokemonName = ""
+    //override val lien = ""
+    PVMax = 0
+    //override val typ = "Feuille"
+    statAtt = 0.0
+    statDef = 0.0
 }
 
 class Team {
