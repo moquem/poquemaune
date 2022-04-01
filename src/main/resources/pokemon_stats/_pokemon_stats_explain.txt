@@ -1,0 +1,6 @@
+pokemon name
+path to pokemon sprite
+max hp
+pokemon type
+attack stat
+defense stat

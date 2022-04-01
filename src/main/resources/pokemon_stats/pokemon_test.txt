@@ -1,0 +1,6 @@
+testName
+src/main/resources/sprite/Alaslash.png
+70
+Pierre
+0.8
+0.5
