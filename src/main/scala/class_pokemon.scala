@@ -1,3 +1,6 @@
+import scala.io.Source
+
+
 class Attack(name: String) {
     var attackName: String = name
     var typ: String = "TODO"
@@ -34,49 +37,49 @@ class Pokemon(pokName: String, spritePath: String, pokemonType: String) {
 
     var PV: Int = PVMax
     var alive: Boolean = true
-    if (pokemonName == "") {
-        alive = false
-    } else {
-        alive = true
-    }
+    alive  = pokemonName != ""
 
     var set_attack: Array[Attack] = new Array[Attack](4)
 
     def loss_PV(damage: Int) = {
-        PV -= damage
-        PV = PV.max(0)
+        PV = (PV-damage).max(0)
         if (PV == 0) { alive = false }
     }
 
     def heal_PV(heal: Int): Boolean = {
-        if (alive) {
-            PV += heal
-            PV = PV.min(PVMax)
-            true
-        } else {
-            false
+        if (alive){
+            PV = (PV+heal).min(PVMax)
         }
+        alive
     }
 
     def ressurect(heal: Int): Boolean = {
-        if (alive) {
-            false
-        } else {
+        if (!alive){
             PV = heal
             alive = true
-            true
         }
+        !alive
     }
-}
+
+
+// the pokemon info files must be given as the following :
+// Name
+// Path to Image
+// HP
+// Atk Stat
+// Def Stat
+//
 
 // initialises a pokemon with the stats provided by the file given in the path
-class pokemonGenerator(path: String) {
 
-    def generatePokemon(): Pokemon = {
+    def generatePokemon(path:String): Pokemon = {
+        val pokFile = Source.fromFile(path)
+        val pokInfo = pokFile.getLines.toArray
         val newPok = new Pokemon("", "", "")
-        newPok.PVMax = 0
-        newPok.statAtt = 0.0
-        newPok.statDef = 0.0
+        newPok.PVMax = pokInfo(2).toInt
+        newPok.statAtt = pokInfo(3).toDouble
+        newPok.statDef = pokInfo(4).toDouble
+        pokFile.close()
         return newPok
     }
 }
@@ -383,18 +386,6 @@ class Team {
     var team: Array[Pokemon] = new Array[Pokemon](6)
 
     def team_alive(): Boolean = {
-        var nb_alive = 0
-        val i = 0
-        for (i <- 0 to 5) {
-            if (team(i).alive) {
-                nb_alive += 1
-            }
-        }
-        if (nb_alive != 0) {
-            return true
-        } else {
-            return false
-        }
-    }
-
+        !team.filter(_.alive).isEmpty
+    } 
 }
