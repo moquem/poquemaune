@@ -73,9 +73,9 @@ class CombatMenu(fight: Fight) {
   playerPPTextLabel.setBounds(400, 430, 150, 30)*/
 
     def updateStatText(): Unit = {
-        playerHPTextLabel.setText("hp. " + fight.current_pok_ally.PV + "/" + fight.current_pok_ally.PVMax)
-        enemyHPTextLabel.setText("hp. " + fight.current_pok_enemy.PV + "/" + fight.current_pok_enemy.PVMax)
-        // playerPPTextLabel.text = "pp. " + fight.team_ally.team(0).PV + "/" + fight.team_ally.team(0).PVMax
+        playerHPTextLabel.setText("hp. " + fight.current_pok_ally.currHP + "/" + fight.current_pok_ally.maxHP)
+        enemyHPTextLabel.setText("hp. " + fight.current_pok_enemy.currHP + "/" + fight.current_pok_enemy.maxHP)
+        // playerPPTextLabel.text = "pp. " + fight.team_ally.team(0).currHP + "/" + fight.team_ally.team(0).maxHP
     }
 
     def updatePokImg(oldImg: JLabel, newImg: JLabel): Unit = {
@@ -322,7 +322,7 @@ class CombatMenu(fight: Fight) {
         for (k <- 0 until 4) {
             if (attackButtonList(k).isEnabled()) {
                 no_available_attacks = false
-                if (fight.current_pok_ally.set_attack(k).PP_cost > fight.current_pok_ally.set_attack(k).PP) {
+                if (fight.current_pok_ally.atk_set(k).PP_cost > fight.current_pok_ally.atk_set(k).PP) {
                     attackButtonList(k).setEnabled(false)
                 } else {
                     attackButtonList(k).setEnabled(true)
@@ -369,7 +369,7 @@ class CombatMenu(fight: Fight) {
 
                     for (k <- 0 until 4) {
                         // Set the button to the name of the pokemon attack
-                        attackButtonList(k).setText(fight.current_pok_ally.set_attack(k).attackName)
+                        attackButtonList(k).setText(fight.current_pok_ally.atk_set(k).attackName)
                     }
                 } else {
                     errorMessage()
@@ -399,7 +399,7 @@ class CombatMenu(fight: Fight) {
                     fight.new_pok_enemy()
                     var nb_attack: Int = 0
                     nb_attack = fight.attack_enemy()
-                    messageTextLabel.setText(fight.current_pok_enemy.pokemonName + " used " + fight.current_pok_enemy.set_attack(nb_attack).attackName)
+                    messageTextLabel.setText(fight.current_pok_enemy.pokemonName + " used " + fight.current_pok_enemy.atk_set(nb_attack).attackName)
                     if (!fight.team_player.team_alive()) {
                         actionMenuPanel.setVisible(false)
                         sidePanel.setVisible(false)
@@ -532,11 +532,11 @@ class CombatMenu(fight: Fight) {
 
     def attack_processing(nb_attack: Int): Unit = {
         var att = new Attack("")
-        att = fight.current_pok_ally.set_attack(nb_attack)
-        if (att.use_attack()) {
+        att = fight.current_pok_ally.atk_set(nb_attack)
+        if (fight.current_pok_ally.can_attack(nb_attack)) {
 
-            var typ1 = fight.current_pok_enemy.typ
-            var typ2 = fight.current_pok_ally.typ
+            var typ1 = fight.current_pok_enemy.pokTyp
+            var typ2 = fight.current_pok_ally.pokTyp
 
             var bonus_typ = 0.0
 
@@ -548,19 +548,19 @@ class CombatMenu(fight: Fight) {
             // end panel
             // [1, 1, 1, 0, 0, 0]
 
-            messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName)
-
-            if ((typ1 == "Feuille" && typ2 == "Pierre") || (typ1 == "Pierre" && typ2 == "Ciseaux") || (typ1 == "Ciseaux" && typ2 == "Feuille")) {
+            messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.atk_set(nb_attack).attackName)
+            
+            if ((typ1.name == "Feuille" && typ2.name == "Pierre") || (typ1.name == "Pierre" && typ2.name == "Ciseaux") || (typ1.name == "Ciseaux" && typ2.name == "Feuille")) {
                 bonus_typ = 0.2
-                messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName + ", this attack was very effective")
+                messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.atk_set(nb_attack).attackName + ", this attack was very effective")
                 updateStatText()
-            } else if ((typ1 == "Pierre" && typ2 == "Feuille") || (typ1 == "Ciseaux" && typ2 == "Pierre") || (typ1 == "Feuille" && typ2 == "Ciseaux")) {
+            } else if ((typ1.name == "Pierre" && typ2.name == "Feuille") || (typ1.name == "Ciseaux" && typ2.name == "Pierre") || (typ1.name == "Feuille" && typ2.name == "Ciseaux")) {
                 bonus_typ = -0.2
-                messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.set_attack(nb_attack).attackName + ", this attack wasn't very effective")
+                messageTextLabel.setText(fight.current_pok_ally.pokemonName + " used " + fight.current_pok_ally.atk_set(nb_attack).attackName + ", this attack wasn't very effective")
                 updateStatText()
             }
 
-            fight.current_pok_enemy.loss_PV((att.damage * (fight.current_pok_enemy.statDef + bonus_typ) * fight.current_pok_ally.statAtt).toInt)
+            fight.current_pok_enemy.loss_PV((att.base_damage * (fight.current_pok_enemy.statDef + bonus_typ) * fight.current_pok_ally.statAtt).toInt)
             updateStatText()
             myTurn = false
         } else {
@@ -621,12 +621,12 @@ class CombatMenu(fight: Fight) {
     val cells_size_mainFrame = Array(columns, rows)
 
     /*var pok4 = new Pokemon("Bellwak", "src/main/resources/sprite/Bellwak.png", "Feuille")
-  pok4.PVMax = 50
-  pok4.PV = 50
-  pok4.set_attack(0) = new Attack("fist attack")
-  pok4.set_attack(1) = new Attack("next atk")
-  pok4.set_attack(2) = new Attack("another one")
-  pok4.set_attack(3) = new Attack("bites the dust")*/
+  pok4.maxHP = 50
+  pok4.currHP = 50
+  pok4.atk_set(0) = new Attack("fist attack")
+  pok4.atk_set(1) = new Attack("next atk")
+  pok4.atk_set(2) = new Attack("another one")
+  pok4.atk_set(3) = new Attack("bites the dust")*/
 
     val mainFrame2 = new JFrame
     mainFrame2.setVisible(true)
@@ -664,137 +664,143 @@ class CombatMenu(fight: Fight) {
 }
 
 object MainGame {
-    var pok_empty = new Pokemon("", "", "")
+    
+    val feuille = new PokTyp("Feuille", Array(), Array())
+    val pierre = new PokTyp("Pierre", Array(), Array())
+    val ciseaux = new PokTyp("Ciseaux", Array(), Array())
+    
+
+    var pok_empty = new Pokemon("", "", feuille)
     pok_empty.alive = false
 
     var atk1 = new Attack("Griffe acier")
-    atk1.damage = 7
+    atk1.base_damage = 7
     atk1.PP_max = 10
     atk1.PP = 10
 
     var atk2 = new Attack("Fulguropoing")
-    atk2.damage = 5
+    atk2.base_damage = 5
     atk2.PP_max = 20
     atk2.PP = 20
 
     var atk3 = new Attack("Inutile")
-    atk3.damage = 0
+    atk3.base_damage = 0
     atk3.PP_max = 30
     atk3.PP = 30
 
     var atk4 = new Attack("Roulade Tactique")
-    atk4.damage = 5
+    atk4.base_damage = 5
     atk4.PP_max = 10
     atk4.PP = 10
 
     var atk5 = new Attack("Griffe acier")
-    atk5.damage = 7
+    atk5.base_damage = 7
     atk5.PP_max = 10
     atk5.PP = 10
 
     var atk6 = new Attack("Fulguropoing")
-    atk6.damage = 5
+    atk6.base_damage = 5
     atk6.PP_max = 20
     atk6.PP = 20
 
     var atk7 = new Attack("Inutile")
-    atk7.damage = 0
+    atk7.base_damage = 0
     atk7.PP_max = 30
     atk7.PP = 30
 
     var atk8 = new Attack("Roulade Tactique")
-    atk8.damage = 5
+    atk8.base_damage = 5
     atk8.PP_max = 10
     atk8.PP = 10
 
     var atk9 = new Attack("Griffe acier")
-    atk9.damage = 7
+    atk9.base_damage = 7
     atk9.PP_max = 10
     atk9.PP = 10
 
     var atk10 = new Attack("Fulguropoing")
-    atk10.damage = 5
+    atk10.base_damage = 5
     atk10.PP_max = 20
     atk10.PP = 20
 
     var atk11 = new Attack("Inutile")
-    atk11.damage = 0
+    atk11.base_damage = 0
     atk11.PP_max = 30
     atk11.PP = 30
 
     var atk12 = new Attack("Roulade Tactique")
-    atk12.damage = 5
+    atk12.base_damage = 5
     atk12.PP_max = 10
     atk12.PP = 10
 
     var atk13 = new Attack("Griffe acier")
-    atk13.damage = 7
+    atk13.base_damage = 7
     atk13.PP_max = 10
     atk13.PP = 10
 
     var atk14 = new Attack("Fulguropoing")
-    atk14.damage = 5
+    atk14.base_damage = 5
     atk14.PP_max = 20
     atk14.PP = 20
 
     var atk15 = new Attack("Inutile")
-    atk3.damage = 0
+    atk3.base_damage = 0
     atk3.PP_max = 30
     atk3.PP = 30
 
     var atk16 = new Attack("Roulade Tactique")
-    atk4.damage = 5
+    atk4.base_damage = 5
     atk4.PP_max = 10
     atk4.PP = 10
 
-    var pok1 = new Pokemon("Noacier", "", "Pierre")
-    pok1.PVMax = 50
-    pok1.PV = 50
-    pok1.set_attack(0) = atk1
-    pok1.set_attack(1) = atk2
-    pok1.set_attack(2) = atk3
-    pok1.set_attack(3) = atk4
+    var pok1 = new Pokemon("Noacier", "", pierre)
+    pok1.maxHP = 50
+    pok1.currHP = 50
+    pok1.atk_set(0) = atk1
+    pok1.atk_set(1) = atk2
+    pok1.atk_set(2) = atk3
+    pok1.atk_set(3) = atk4
 
-    var pok2 = new Pokemon("Grodrive", "", "Ciseau")
-    pok2.PVMax = 50
-    pok2.PV = 50
-    pok2.set_attack(0) = atk5
-    pok2.set_attack(1) = atk6
-    pok2.set_attack(2) = atk7
-    pok2.set_attack(3) = atk8
+    var pok2 = new Pokemon("Grodrive", "", ciseaux)
+    pok2.maxHP = 50
+    pok2.currHP = 50
+    pok2.atk_set(0) = atk5
+    pok2.atk_set(1) = atk6
+    pok2.atk_set(2) = atk7
+    pok2.atk_set(3) = atk8
 
-    var pok3 = new Pokemon("Cabriolaine", "", "Pierre")
-    pok3.PVMax = 50
-    pok3.PV = 50
-    pok3.set_attack(0) = atk9
-    pok3.set_attack(1) = atk10
-    pok3.set_attack(2) = atk11
-    pok3.set_attack(3) = atk12
+    var pok3 = new Pokemon("Cabriolaine", "", pierre)
+    pok3.maxHP = 50
+    pok3.currHP = 50
+    pok3.atk_set(0) = atk9
+    pok3.atk_set(1) = atk10
+    pok3.atk_set(2) = atk11
+    pok3.atk_set(3) = atk12
 
-    var pok4 = new Pokemon("Bellwak", "src/main/resources/sprite/Bellwak.png", "Feuille")
-    pok4.PVMax = 50
-    pok4.PV = 50
-    pok4.set_attack(0) = atk13
-    pok4.set_attack(1) = atk14
-    pok4.set_attack(2) = atk15
-    pok4.set_attack(3) = atk16
+    var pok4 = new Pokemon("Bellwak", "src/main/resources/sprite/Bellwak.png", feuille)
+    pok4.maxHP = 50
+    pok4.currHP = 50
+    pok4.atk_set(0) = atk13
+    pok4.atk_set(1) = atk14
+    pok4.atk_set(2) = atk15
+    pok4.atk_set(3) = atk16
 
     var team1 = new Team
     var team2 = new Team
 
     team1.team(0) = pok1
     team1.team(1) = pok2
-    team1.team(2) = new Pokemon("", "", "")
-    team1.team(3) = new Pokemon("", "", "")
+    team1.team(2) = pok_empty
+    team1.team(3) = pok_empty
     team1.team(4) = pok4
-    team1.team(5) = new Pokemon("", "", "")
+    team1.team(5) = pok_empty
 
     team2.team(0) = pok3
     team2.team(1) = pok4
-    team2.team(2) = new Pokemon("", "", "")
-    team2.team(3) = new Pokemon("", "", "")
-    team2.team(4) = new Pokemon("", "", "")
-    team2.team(5) = new Pokemon("", "", "")
+    team2.team(2) = pok_empty
+    team2.team(3) = pok_empty
+    team2.team(4) = pok_empty
+    team2.team(5) = pok_empty
 
     var fight = new Fight(team1, team2)
     var combatInterface = new CombatMenu(fight)

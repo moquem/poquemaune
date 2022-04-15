@@ -1,61 +1,103 @@
 import scala.io.Source
 
 
+class PokTyp (typName: String, weakAgainst:Array[PokTyp], strongAgainst: Array[PokTyp]){
+  val name = typName
+  def isWeak (otherTyp :PokTyp):Boolean = {
+    weakAgainst.contains(otherTyp)
+  }
+  def isStrong (otherTyp : PokTyp):Boolean = {
+    strongAgainst.contains(otherTyp)
+  }
+}
+
 class Attack(name: String) {
     var attackName: String = name
-    var typ: String = "TODO"
-    var damage: Int = -1
-
+    var pokTyp = new PokTyp("TODO", Array(), Array())
+    var base_damage: Int = -1
+    val atkDescritpion: String = "Insert attack description here"
     var PP_max: Int = -1
     var PP: Int = -1
 
     var PP_cost: Int = 1
-
-    def use_attack(): Boolean = {
-        if (PP == 0) {
-            false
-        } else {
-            PP -= 1
-            true
-        }
+    
+    def damage_dealt (defPok:Pokemon, atkPok:Pokemon) : Int = {
+      var typ_bonus = 1.0
+      
+      // bonus damage if the pokemon is the same type as the attack
+      if (this.pokTyp == atkPok.pokTyp){
+        typ_bonus += 0.2
+      }
+      // additional damage dealt (or removed) based on typ relations (strong/weak against)
+      if (defPok.pokTyp.isWeak(this.pokTyp)){
+        typ_bonus += 0.2
+      }
+      if (defPok.pokTyp.isWeak(atkPok.pokTyp)){
+        typ_bonus += 0.2
+      }
+      if (defPok.pokTyp.isStrong(pokTyp)){
+        typ_bonus -= 0.2
+      }
+      
+      // more modifiers based on the atk and def stats for the pokemon 
+      (base_damage*typ_bonus*atkPok.statAtt*defPok.statDef).toInt
     }
-
-    def restore_PP(restore: Int) = {
-        PP += restore
-        PP.min(PP_max)
-    }
-
 }
 
-class Pokemon(pokName: String, spritePath: String, pokemonType: String) {
+class Pokemon(pokName: String, spritePath: String, pokemonType: PokTyp) {
+    // Info
     val pokemonName = pokName
     val lien = spritePath
-    var PVMax: Int = 0
-    val typ = pokemonType
+    
+    // Stats
+    val pokTyp = pokemonType
+    var maxHP: Int = 50
     var statAtt = 0.0
     var statDef = 0.0
+    var maxPP = 0
+    var currPP = maxPP
+    var currHP: Int = maxHP
 
-    var PV: Int = PVMax
+    // Bools and state
+    var hasAttacked : Boolean = false
     var alive: Boolean = true
     alive  = pokemonName != ""
 
-    var set_attack: Array[Attack] = new Array[Attack](4)
+    var atk_set: Array[Attack] = new Array[Attack](4)
+   
+    def can_attack (atk_nb:Int) : Boolean = {
+      currPP >= atk_set(atk_nb).PP_cost && !hasAttacked
+    }
 
-    def loss_PV(damage: Int) = {
-        PV = (PV-damage).max(0)
-        if (PV == 0) { alive = false }
+    def attack_pok(atk_nb:Int, defPok:Pokemon) = {
+      val atk = atk_set(atk_nb)
+      if (!can_attack(atk_nb)){
+        println("you cannot attack")
+      }
+      else {
+       defPok.loss_PV(atk.damage_dealt(defPok, this)) 
+      }
+    }
+
+    def increase_PP(pp_increase: Int) = {
+        currPP = (currPP+pp_increase).min(maxPP)
+    }
+
+    def loss_PV(damage_dealt: Int) = {
+        currHP = (currHP-damage_dealt).max(0)
+        if (currHP == 0) { alive = false }
     }
 
     def heal_PV(heal: Int): Boolean = {
         if (alive){
-            PV = (PV+heal).min(PVMax)
+            currHP = (currHP+heal).min(maxHP)
         }
         alive
     }
 
     def ressurect(heal: Int): Boolean = {
         if (!alive){
-            PV = heal
+            currHP = heal
             alive = true
         }
         !alive
@@ -75,8 +117,8 @@ class Pokemon(pokName: String, spritePath: String, pokemonType: String) {
     def generatePokemon(path:String): Pokemon = {
         val pokFile = Source.fromFile(path)
         val pokInfo = pokFile.getLines.toArray
-        val newPok = new Pokemon("", "", "")
-        newPok.PVMax = pokInfo(2).toInt
+        val newPok = new Pokemon("", "", new PokTyp("", Array(), Array()))
+        newPok.maxHP = pokInfo(2).toInt
         newPok.statAtt = pokInfo(3).toDouble
         newPok.statDef = pokInfo(4).toDouble
         pokFile.close()
@@ -373,10 +415,10 @@ class Voltrina extends Pokemon {
     statDef = 0.7
 }*/
 
-class Empty extends Pokemon("", "", "") {
+class Empty extends Pokemon("", "", new PokTyp("", Array(), Array())) {
     // override val pokemonName = ""
     // override val lien = ""
-    PVMax = 0
+    maxHP = 0
     // override val typ = "Feuille"
     statAtt = 0.0
     statDef = 0.0

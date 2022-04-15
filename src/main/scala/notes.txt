@@ -1,7 +1,14 @@
-sidebar proportion : 250/1980 = 12.5 %
-botton menu proportion : 600/1080 = 45 %
-
-Total grid size : 8x20
-sidebar size : 1x20
-image panel size : 7x11
-menu size : 7x9
+To do :
+	- refaire menus en sfml
+	- refaire carte en sfml
+	- réparer et approfondir combat
+	- faire une IA pour les combats
+	- ajouter items consomables
+	- ajouter équipements
+	- refaire génération de pokémons
+	- ajouter éditeur de niveau
+	- ajouter interactions map combats (dialogues ?)
+	- ajouter une map
+	- ajouter un système de sauvegarde
+	- ajouter npcs
+	

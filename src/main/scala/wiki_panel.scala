@@ -33,7 +33,7 @@ class pokemonDescription (pok:Pokemon) extends JPanel{
   val pokNameLabel = new JLabel("Name : " + pok.pokemonName)
   val atkStatLabel = new JLabel("Attack : " + pok.statAtt.toString)
   val defStatLabel = new JLabel("Defence : " + pok.statDef.toString)
-  val pokTypeLabel = new JLabel("Type : " + pok.typ)
+  val pokTypeLabel = new JLabel("Type : " + pok.pokTyp)
 
   this.add(pokNameLabel, "1, 0, 1, 0")
   this.add(pokTypeLabel, "1, 1, 1, 1")
@@ -47,6 +47,6 @@ class pokemonDescription (pok:Pokemon) extends JPanel{
   pokImgButton.setBorderPainted(false)
   this.add(pokImgButton, "2, 0, 2, 9")
 
-  pok.set_attack.zipWithIndex.foreach{case (atk, index) => this.add(new JLabel("Attack " + (index+1).toString + " : " + atk.attackName), ("1, " + (index+4).toString + ", 1, " + (index+4).toString))}
+  pok.atk_set.zipWithIndex.foreach{case (atk, index) => this.add(new JLabel("Attack " + (index+1).toString + " : " + atk.attackName), ("1, " + (index+4).toString + ", 1, " + (index+4).toString))}
 
 }
