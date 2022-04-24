@@ -46,7 +46,7 @@ class Fight(team1: Team, team2: Team) {
     }*/
 
 
-   def new_pok_enemy(): Unit = {
+    def new_pok_enemy(): Unit = {
         val r = scala.util.Random
 
         var dead_pok = !current_pok_enemy.alive
