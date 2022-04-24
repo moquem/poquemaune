@@ -11,6 +11,9 @@ class PokTyp (typName: String, weakAgainst:Array[PokTyp], strongAgainst: Array[P
   }
 }
 
+val empty_type = new PokTyp ("", Array(), Array())
+
+
 class Attack(name: String) {
     var attackName: String = name
     var pokTyp = new PokTyp("TODO", Array(), Array())
@@ -44,17 +47,25 @@ class Attack(name: String) {
     }
 }
 
-class Pokemon(pokName: String, spritePath: String, pokemonType: PokTyp) {
+enum PokInfo (val pokTyp:PokTyp,
+              val maxHP:Int,
+              val statAtk:Double,
+              val statDef:Double,
+              val maxPP:Int) {
+  case Default extends PokInfo(empty_type, 100, 1.0, 1.0, 10)
+}
+
+class Pokemon(pokName: String, spritePath: String, pokInfo: PokInfo) {
     // Info
     val pokemonName = pokName
     val lien = spritePath
     
     // Stats
-    val pokTyp = pokemonType
-    var maxHP: Int = 50
-    var statAtt = 0.0
-    var statDef = 0.0
-    var maxPP = 0
+    val pokTyp = pokInfo.pokTyp
+    var maxHP: Int = pokInfo.maxHP
+    var statAtt = pokInfo.statAtk
+    var statDef = pokInfo.statDef
+    var maxPP = pokInfo.maxPP
     var currPP = maxPP
     var currHP: Int = maxHP
 
@@ -75,7 +86,7 @@ class Pokemon(pokName: String, spritePath: String, pokemonType: PokTyp) {
         println("you cannot attack")
       }
       else {
-       defPok.loss_PV(atk.damage_dealt(defPok, this)) 
+       defPok.decrease_HP(atk.damage_dealt(defPok, this)) 
       }
     }
 
@@ -83,24 +94,22 @@ class Pokemon(pokName: String, spritePath: String, pokemonType: PokTyp) {
         currPP = (currPP+pp_increase).min(maxPP)
     }
 
-    def loss_PV(damage_dealt: Int) = {
+    def decrease_HP(damage_dealt: Int) = {
         currHP = (currHP-damage_dealt).max(0)
         if (currHP == 0) { alive = false }
     }
 
-    def heal_PV(heal: Int): Boolean = {
+    def heal_HP(heal: Int) = {
         if (alive){
             currHP = (currHP+heal).min(maxHP)
         }
-        alive
     }
 
-    def ressurect(heal: Int): Boolean = {
+    def ressurect(heal: Int) = {
         if (!alive){
             currHP = heal
             alive = true
         }
-        !alive
     }
 
 
@@ -117,7 +126,7 @@ class Pokemon(pokName: String, spritePath: String, pokemonType: PokTyp) {
     def generatePokemon(path:String): Pokemon = {
         val pokFile = Source.fromFile(path)
         val pokInfo = pokFile.getLines.toArray
-        val newPok = new Pokemon("", "", new PokTyp("", Array(), Array()))
+        val newPok = new Pokemon("", "", PokInfo.Default)
         newPok.maxHP = pokInfo(2).toInt
         newPok.statAtt = pokInfo(3).toDouble
         newPok.statDef = pokInfo(4).toDouble
@@ -415,13 +424,13 @@ class Voltrina extends Pokemon {
     statDef = 0.7
 }*/
 
-class Empty extends Pokemon("", "", new PokTyp("", Array(), Array())) {
+class Empty extends Pokemon("", "", PokInfo.Default) {
     // override val pokemonName = ""
     // override val lien = ""
-    maxHP = 0
+    maxHP = 100
     // override val typ = "Feuille"
-    statAtt = 0.0
-    statDef = 0.0
+    statAtt = 1.0
+    statDef = 1.0
 }
 
 class Team {

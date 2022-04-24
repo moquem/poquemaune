@@ -15,16 +15,18 @@ class Fight(team1: Team, team2: Team) {
     /* Permet de changer de Pokemon, pour l'instant possible seulement quand le pokemon en frontline meurt */
 
     /* A lancer quand c'est au moment de l'ennemi d'attaquer */
-    def attack_enemy(): Int = {
-        val r = scala.util.Random
+    /*def attack_enemy(): Int = {
+        val rand = scala.util.Random
+        
 
-        var fail_attack = true
-        var nb_attack: Int = 0
-        var att: Attack = new Attack("")
-        var bonus_typ: Double = 0.0
+        //var fail_attack = true
+        //var nb_attack: Int = 0
+        //var att: Attack = new Attack("")
+        //var bonus_typ: Double = 0.0
 
-        var typ1: PokTyp = current_pok_ally.pokTyp
-        var typ2: PokTyp = current_pok_enemy.pokTyp
+        //var typ1: PokTyp = current_pok_ally.pokTyp
+        //var typ2: PokTyp = current_pok_enemy.pokTyp
+
 
         if ((typ1.name == "Feuille" && typ2.name == "Pierre") || (typ1.name == "Pierre" && typ2.name == "Ciseaux") || (typ1.name == "Ciseaux" && typ2.name == "Feuille")) {
             bonus_typ = 0.2
@@ -40,10 +42,11 @@ class Fight(team1: Team, team2: Team) {
                 current_pok_ally.loss_PV((att.base_damage * (current_pok_ally.statDef + bonus_typ) * current_pok_enemy.statAtt).toInt)
             }
         }
-        nb_attack
-    }
+        0
+    }*/
 
-    def new_pok_enemy(): Unit = {
+
+   def new_pok_enemy(): Unit = {
         val r = scala.util.Random
 
         var dead_pok = !current_pok_enemy.alive
