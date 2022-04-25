@@ -10,8 +10,9 @@ import sfml.window.*
   text.string = "babebibobu"
   text.font = font
   while window.isOpen() do
+    //println(Mouse.position)
     for event <- window.pollEvent() do
-      println(event)
+      //println(event)
       event match
         case Event.Closed() => window.close()
         case _ => ()
