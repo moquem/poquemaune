@@ -1,4 +1,4 @@
-class Attack {
+class Attack (name:String) {
     val attackName:String 
     var damage:Int = -1
 

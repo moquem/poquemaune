@@ -854,7 +854,7 @@ object MainGame {
 
   var atk1 = new Attack("Griffe acier")
   atk1.damage = 7
-  atk1.PP_max = 10h
+  atk1.PP_max = 10
   atk1.PP = 10
 
   var atk2 = new Attack("Fulguropoing")
