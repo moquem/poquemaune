@@ -1,7 +1,7 @@
-val swing = "org.scala-lang.modules" %% "scala-swing" % "2.0.1"
+name := "poquemaune"
+scalaVersion := "3.1.1"
 
-lazy val root = (project in file(".")).
-settings(
-name := "My Project",
-libraryDependencies += swing
-)
+enablePlugins(ScalaNativePlugin)
+
+nativeMode := "debug" // "release-full"
+nativeLTO := "none" // "thin"

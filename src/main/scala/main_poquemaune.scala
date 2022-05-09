@@ -1,5 +1,0 @@
-object poquemaune {
-    def main () {
-        
-    }
-}

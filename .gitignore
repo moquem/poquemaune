@@ -8,4 +8,6 @@ target/
 *.class
 
 # Editor
-*.sw{n,o,p}
+*.swn
+*.swo
+*.swp
