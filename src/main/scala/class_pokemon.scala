@@ -39,6 +39,9 @@ class Pokemon private (spritePath: String, pokInfo: PokInfo) {
     var pokExp: Int = 0
     var pokLvl: Int = 1
 
+    // Allow the improvement of the competences. 
+    var nbPoint : Int = 0 
+
     // Bools and state
     var alive: Boolean = true
     var hasAttacked = false
@@ -80,6 +83,14 @@ class Pokemon private (spritePath: String, pokInfo: PokInfo) {
         if (!alive){
             currHP = heal
             alive = true
+        }
+    }
+
+    def new_point(level: Int) = {
+        if (level%5==0) {
+            nbPoint += 2
+        } else {
+            nbPoint += 1
         }
     }
 
