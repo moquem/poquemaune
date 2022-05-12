@@ -12,26 +12,17 @@ enum PokTyp (typName: String, weakAgainst:Array[PokTyp], strongAgainst: Array[Po
   case Empty extends PokTyp("", Array(), Array())
 }
 
-type PokInfo = {
-              val pokName:String
-              val pokTyp:PokTyp
-              val maxHP:Int
-              val maxPP:Int
-              // the default atk and defense stats of the pokemon
-              val statAtk:Double
-              val statDef:Double}
-
-class Pokemon private (spritePath: String, pokInfo: PokInfo) {
-    // Info
-    val pokemonName = pokInfo.pokName
-    val lien = spritePath
+class Pokemon private (spritePath: String, name: String, typ: PokTyp, pok_maxHP: Int, pok_maxPP: Int, pok_statAtk: Double, pok_statDef: Double) {
     
+    // Info
+    val pokemonName = name
+    val lien = spritePath
     // Stats
-    val pokTyp = pokInfo.pokTyp
-    var maxHP: Int = pokInfo.maxHP
-    var statAtt = pokInfo.statAtk
-    var statDef = pokInfo.statDef
-    var maxPP = pokInfo.maxPP
+    val pokTyp = typ
+    var maxHP: Int = pok_maxHP
+    var statAtt = pok_statAtk
+    var statDef = pok_statDef
+    var maxPP = pok_maxPP
 
     // These change
     var currPP: Int = maxPP
@@ -44,8 +35,12 @@ class Pokemon private (spritePath: String, pokInfo: PokInfo) {
     var hasAttacked = false
     alive  = pokemonName != ""
 
-    var atk_set: Array[Attack] = new Array[Attack](4)
-   
+    var atk_set: Array[Attack] = new Array[Attack](6)
+    
+    def setAttacks (attacks: Array[Attack]) = {
+      atk_set = attacks
+    }
+
     def can_attack (atk_nb:Int) : Boolean = {
       currPP >= atk_set(atk_nb).cost_PP && !hasAttacked
     }
@@ -53,26 +48,30 @@ class Pokemon private (spritePath: String, pokInfo: PokInfo) {
     def attack_pok(atk_nb:Int, defPok:Pokemon) = {
       val atk = atk_set(atk_nb)
       if (!can_attack(atk_nb)){
-        println("you cannot attack")
+        println("attack failed")
       }
       else {
        defPok.decrease_HP(atk.damage_dealt(defPok, this))
        currPP = (currPP - atk.cost_PP).max(0)
+       println("successful atk")
       }
     }
 
     def increase_PP(pp_increase: Int) = {
         currPP = (currPP+pp_increase).min(maxPP)
+        println("pp increased")
     }
 
     def decrease_HP(damage_dealt: Int) = {
         currHP = (currHP-damage_dealt).max(0)
-        if (currHP == 0) { alive = false }
+        if (currHP == 0) { println("pokemon killed"); alive = false }
+        println("hp decreased")
     }
 
     def heal_HP(heal: Int) = {
         if (alive){
             currHP = (currHP+heal).min(maxHP)
+            println("healed")
         }
     }
 
@@ -80,6 +79,7 @@ class Pokemon private (spritePath: String, pokInfo: PokInfo) {
         if (!alive){
             currHP = heal
             alive = true
+            println("resurected")
         }
     }
 
@@ -209,10 +209,12 @@ with AffectPok (name, costPP, description){
     }
 }
 
+object testAttack extends Attack("test attack", 1, "this attack does nothing for now", 10, PokTyp.Empty, Array[Buff]())
+
 object Pokemon {
     
   // initialises a pokemon with the stats provided by the file given in the path
-    def apply(path:String): Option[Pokemon] = {
+    def apply(path:String): Pokemon = {
         val pokFile = Source.fromFile(path)
         val pokInfoArr = pokFile.getLines.toArray
         val pokName = pokInfoArr(0)
@@ -221,16 +223,37 @@ object Pokemon {
         val maxPP = pokInfoArr(3).toInt
         val atkStat = pokInfoArr(4).toDouble
         val defStat = pokInfoArr(5).toDouble
-        val pokInfo = (pokName, pokTyp, maxHP, maxPP, atkStat, defStat).asInstanceOf[PokInfo]
-        val newPok = new Pokemon(pokInfoArr(6), pokInfo)
+        val pokSprite = pokInfoArr(6)
+        val atkListStr = pokInfoArr.slice(7, 13)
+        val atkList = atkListStr.map(Attack(_))
+        val newPok = new Pokemon(pokSprite, pokName, pokTyp, maxHP, maxPP, atkStat, defStat)
+        newPok.setAttacks(atkList)
         pokFile.close()
-        return Some(newPok)
+        return newPok
     }
 }
 
+object Attack {
+  
+  def apply(path: String) : Attack = {
+    val atkFile = Source.fromFile(path)
+    val atkInfoArr = atkFile.getLines.toArray
+    val atkName = atkInfoArr(0)
+    val atkPPCost = atkInfoArr(1).toInt
+    val atkDescription = atkInfoArr(2)
+    val atkDamage = atkInfoArr(3).toInt
+    val atkTyp = PokTyp.valueOf(atkInfoArr(4))
+    // TODO buffs and debuffs
+    atkFile.close()
+    val newAtk = new Attack(atkName, atkPPCost, atkDescription, atkDamage, atkTyp, Array[Buff]())
+    return newAtk
+  }
+}
 
-class Team {
-    var team: Array[Pokemon] = new Array[Pokemon](6)
+
+
+trait Team {
+    var team: Array[Pokemon]
 
     def team_alive(): Boolean = {
         !team.filter(_.alive).isEmpty
