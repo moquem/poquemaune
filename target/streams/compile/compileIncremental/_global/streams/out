@@ -1,0 +1,21 @@
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] IncrementalCompile -----------[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncrementalCompile.incrementalCompile[0m
+[0m[[0m[0mdebug[0m] [0m[0mprevious = Stamps for: 0 products, 0 sources, 0 libraries[0m
+[0m[[0m[0mdebug[0m] [0m[0mcurrent source = Set(${BASE}/src/main/scala/class_combat.scala, ${BASE}/src/main/scala/App.scala, ${BASE}/src/main/scala/main_window.scala, ${BASE}/src/main/scala/buttons.scala, ${BASE}/src/main/scala/class_pokemon.scala, ${BASE}/src/main/scala/wiki_panel.scala, ${BASE}/src/main/scala/map_tiles.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> initialChanges = InitialChanges(Changes(added = Set(${BASE}/src/main/scala/class_pokemon.scala, ${BASE}/src/main/scala/map_tiles.scala, ${BASE}/src/main/scala/App.scala, ${BASE}/src/main/scala/main_window.scala, ${BASE}/src/main/scala/class_combat.scala, ${BASE}/src/main/scala/wiki_panel.scala, ${BASE}/src/main/scala/buttons.scala), removed = Set(), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set())[0m
+[0m[[0m[0mdebug[0m] [0m[0mFull compilation, no sources in previous analysis.[0m
+[0m[[0m[0mdebug[0m] [0m[0mall 7 sources are invalidated[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: [0m
+[0m[[0m[0mdebug[0m] [0m[0mRecompiling all sources: number of invalidated sources > 50.0% of all sources[0m
+[0m[[0m[0mdebug[0m] [0m[0mcompilation cycle 1[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 7 Scala sources to /home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/target/scala-3.1.1/classes ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mReturning already retrieved and compiled bridge: /home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala3-sbt-bridge/3.1.1/scala3-sbt-bridge-3.1.1.jar.[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 4616ca80 for Scala Compiler version 3.1.1[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-Xplugin:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/nscplugin_3.1.1/0.4.4/nscplugin_3.1.1-0.4.4.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
+[0m[[0m[0mdebug[0m] [0m[0m	/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala3-library_3/3.1.1/scala3-library_3-3.1.1.jar:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.6/scala-library-2.13.6.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
+[0m[[0m[0mdebug[0m] [0m[0m	/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/target/scala-3.1.1/classes:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/scala3lib_native0.4_3/0.4.4/scala3lib_native0.4_3-0.4.4.jar:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/auxlib_native0.4_3/0.4.4/auxlib_native0.4_3-0.4.4.jar:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/javalib_native0.4_3/0.4.4/javalib_native0.4_3-0.4.4.jar:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/scalalib_native0.4_2.13/0.4.4/scalalib_native0.4_2.13-0.4.4.jar:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/nativelib_native0.4_3/0.4.4/nativelib_native0.4_3-0.4.4.jar:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/posixlib_native0.4_3/0.4.4/posixlib_native0.4_3-0.4.4.jar:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/windowslib_native0.4_3/0.4.4/windowslib_native0.4_3-0.4.4.jar:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/clib_native0.4_3/0.4.4/clib_native0.4_3-0.4.4.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0mCompilation failed[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
