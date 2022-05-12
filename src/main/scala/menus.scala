@@ -5,7 +5,7 @@ trait Menu extends Displayable{
   val buttons: Array[GraphicObj]
   
   def setActive(active: Boolean) = {
-    buttons.foreach(_.setVisible(active))
+    this.getGraphicObjects().foreach(_.setVisible(active))
   }
 }
 

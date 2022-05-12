@@ -4,7 +4,7 @@ import sfml.system.*
 
 @main def main =
   // the main window
-  val window = RenderWindow(VideoMode(1280, 720, 32), "SFML", Window.WindowStyle.DefaultStyle)
+  val window = RenderWindow(VideoMode(1280, 720, 32), "Poquemaune", Window.WindowStyle.DefaultStyle)
 
   // example
   val texture = Texture("src/main/resources/player_icon.jpeg")

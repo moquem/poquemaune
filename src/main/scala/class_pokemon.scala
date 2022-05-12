@@ -16,7 +16,7 @@ class Pokemon private (spritePath: String, name: String, typ: PokTyp, pok_maxHP:
     
     // Info
     val pokemonName = name
-    val lien = spritePath
+    val pokSpritePath = spritePath
     // Stats
     val pokTyp = typ
     var maxHP: Int = pok_maxHP

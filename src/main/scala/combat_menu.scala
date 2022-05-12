@@ -36,15 +36,17 @@ object TestCombat extends CombatMenu(testFight) {}
 
 class CombatMenu(fight: Fight) extends Menu {
   
+  val font = Font("src/main/resources/fonts/Castforce.ttf")
 
   val mainPlayerPok = fight.current_pok_ally
   val mainEnemyPok  = fight.current_pok_enemy
   
-  val tempAtk = Attack("src/main/resources/attacks/touteLaStup.txt")
-  
-  
+  val playerPokImg = new Image(Texture(mainPlayerPok.pokSpritePath), (270 - 250/2, 100), (250, 250))
+  val oppPokImg = new Image(Texture(mainEnemyPok.pokSpritePath), (1280 - (270 + 250/2), 100), (250, 250))
+ 
+  val images = Array[GraphicObj](playerPokImg, oppPokImg)
+  images.foreach(_.setVisible(true))
 
-  val font = Font("src/main/resources/fonts/Castforce.ttf")
 
   def testOnClick() = {
     println("attack button clicked")
@@ -64,10 +66,12 @@ class CombatMenu(fight: Fight) extends Menu {
     atkButtons(i).setAtk(mainPlayerPok.atk_set(i))
     atkButtons(i).setOnClick(atkOnClick)
   }
+  
   val buttons = Array[GraphicObj](attack_1, attack_2, attack_3, attack_4, attack_5, attack_6)
+  val graphicObjects = buttons ++ images
 
   def getGraphicObjects() : Array[GraphicObj] = {
-    return buttons
+    return graphicObjects
   }
 }
 
