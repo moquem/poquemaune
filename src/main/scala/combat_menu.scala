@@ -21,12 +21,12 @@ object testTeam1 extends Team {
   var team = Array[Pokemon](testPok1, testPok2, testPok3, testPok4, testPok5, testPok6)
 }
 object testTeam2 extends Team {
-  val testPok1 = Pokemon("src/main/resources/pokemons/testPokemon.txt")
-  val testPok2 = Pokemon("src/main/resources/pokemons/testPokemon.txt")
-  val testPok3 = Pokemon("src/main/resources/pokemons/testPokemon.txt")
-  val testPok4 = Pokemon("src/main/resources/pokemons/testPokemon.txt")
-  val testPok5 = Pokemon("src/main/resources/pokemons/testPokemon.txt")
-  val testPok6 = Pokemon("src/main/resources/pokemons/testPokemon.txt")
+  val testPok1 = Pokemon("src/main/resources/pokemons/bestPokemon.txt")
+  val testPok2 = Pokemon("src/main/resources/pokemons/bestPokemon.txt")
+  val testPok3 = Pokemon("src/main/resources/pokemons/bestPokemon.txt")
+  val testPok4 = Pokemon("src/main/resources/pokemons/bestPokemon.txt")
+  val testPok5 = Pokemon("src/main/resources/pokemons/bestPokemon.txt")
+  val testPok6 = Pokemon("src/main/resources/pokemons/bestPokemon.txt")
   var team = Array[Pokemon](testPok1, testPok2, testPok3, testPok4, testPok5, testPok6)
 }
 
@@ -46,6 +46,13 @@ class CombatMenu(fight: Fight) extends Menu {
  
   val images = Array[GraphicObj](playerPokImg, oppPokImg)
   images.foreach(_.setVisible(true))
+
+ 
+  val barBorderTexture = Texture("src/main/resources/ui_sprites/bar_border.png")
+  val healthBarInsideTexture = Texture("src/main/resources/ui_sprites/health_bar_inside.png")
+  val barBorderOffset = (2.0/50.0, 2.0/50.0)
+  println(barBorderOffset)
+  val allyHealthBar = new DisplayBar(mainPlayerPok.maxHP, barBorderTexture, barBorderOffset, healthBarInsideTexture, (450, 50), (400, 70))
 
 
   def testOnClick() = {
@@ -68,7 +75,7 @@ class CombatMenu(fight: Fight) extends Menu {
   }
   
   val buttons = Array[GraphicObj](attack_1, attack_2, attack_3, attack_4, attack_5, attack_6)
-  val graphicObjects = buttons ++ images
+  val graphicObjects = buttons ++ images ++ Array[GraphicObj](allyHealthBar)
 
   def getGraphicObjects() : Array[GraphicObj] = {
     return graphicObjects

@@ -4,13 +4,11 @@ import sfml.system.*
 
 trait GraphicObj {
   def updateObj() : Unit
-  def currentTexture(): Texture
   def handleInputs(event:Event) : Unit
-  def getSprite() : Sprite
+  def getSprites() : Array[Sprite]
+  def getTexts() : Array[Text]
   def setVisible(visible: Boolean) : Unit
   def isVisible() : Boolean
-  var sprite : Sprite
-  val text: Text
 }
 
 enum ButtonTextures( val activeTexture:Texture,
@@ -149,9 +147,25 @@ class Button (buttonTextures:ButtonTextures, buttonPos:Position, buttonSize:Size
     }
   }
 
-  def getSprite() : Sprite = {
-    return sprite
+  def getSprites() : Array[Sprite] = {
+    if (buttonVisible) {
+      return Array(sprite)
+    }
+    else {
+      return Array()
+    }
   }
+
+  def getTexts() : Array[Text] = {
+    if (buttonVisible) {
+      return Array(text)
+    }
+    else {
+      return Array()
+    }
+  }
+
+
 }
 
 trait Displayable () {

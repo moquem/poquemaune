@@ -6,7 +6,6 @@ class Image(texture: Texture, position: (Int, Int), size: (Int, Int)) extends Gr
   
   var pos = position
   var imageVisible = false
-  val text = Text()
   var sprite = Sprite(texture)
   sprite.position = pos
  
@@ -21,9 +20,16 @@ class Image(texture: Texture, position: (Int, Int), size: (Int, Int)) extends Gr
     return texture
   }
   
-  def getSprite(): Sprite = {
-    return sprite
+  def getSprites(): Array[Sprite] = {
+    if (imageVisible) {
+      return Array(sprite)
+    }
+    else {
+      return Array()
+    }
   }
+  
+  def getTexts(): Array[Text] = {return Array()}
 
   def setVisible(visible: Boolean) = {
     imageVisible = visible

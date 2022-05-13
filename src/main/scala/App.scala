@@ -57,11 +57,15 @@ import sfml.system.*
         case _ => ()
     
 
-    window.clear(new Color(50, 50, 50, 255.toByte))
+    window.clear(new Color(150.toByte, 150.toByte, 150.toByte, 255.toByte))
     
     graphicObjects.foreach(_.updateObj())
-    for (obj <- graphicObjects) {if (obj.isVisible()){window.draw(obj.getSprite())}}
-    for (obj <- graphicObjects) {if (obj.isVisible()) {window.draw(obj.text)}}
+    
+    var spriteArray = graphicObjects.map(_.getSprites()).flatMap(_.toList)
+    var textArray = graphicObjects.map(_.getTexts()).flatMap(_.toList)
+    
+    for (sprite <- spriteArray) {window.draw(sprite)}
+    for (text <- textArray) {window.draw(text)}
     sprite.position = (100, 200)
     //window.draw(sprite)
     
