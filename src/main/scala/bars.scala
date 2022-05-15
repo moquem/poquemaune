@@ -13,7 +13,7 @@ class DisplayBar(maxVal: Int, border: Texture, borderOffset: (Double, Double), i
 
   borderSprite.position = pos
 
-  borderSprite.scale = new Vector2f (size._1 / borderSprite.textureRect._3, size._2 / borderSprite.textureRect._4)
+  borderSprite.scale = new Vector2f (size._1.toFloat / borderSprite.textureRect._3.toFloat, size._2.toFloat / borderSprite.textureRect._4.toFloat)
  
   val barStartPixelOffset = borderOffset._1 * borderSprite.globalBounds._3
   val barEndPixelOffset = borderOffset._2 * borderSprite.globalBounds._3

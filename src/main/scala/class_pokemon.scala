@@ -45,7 +45,7 @@ class Pokemon private (spritePath: String, name: String, typ: PokTyp, pok_maxHP:
     }
 
     def can_attack (atk_nb:Int) : Boolean = {
-      currPP >= atk_set(atk_nb).cost_PP && !hasAttacked
+      currPP >= atk_set(atk_nb).cost_PP //&& !hasAttacked
     }
 
     def attack_pok(atk_nb:Int, defPok:Pokemon) = {

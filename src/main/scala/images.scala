@@ -16,10 +16,6 @@ class Image(texture: Texture, position: (Int, Int), size: (Int, Int)) extends Gr
     sprite.scale = new Vector2f(size._1.toFloat/sprite.textureRect._3.toFloat, size._2.toFloat/sprite.textureRect._4.toFloat)
   }
   
-  def currentTexture(): Texture = {
-    return texture
-  }
-  
   def getSprites(): Array[Sprite] = {
     if (imageVisible) {
       return Array(sprite)

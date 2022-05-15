@@ -50,14 +50,14 @@ class CombatMenu(fight: Fight) extends Menu {
  
   val barBorderTexture = Texture("src/main/resources/ui_sprites/bar_border.png")
   val healthBarInsideTexture = Texture("src/main/resources/ui_sprites/health_bar_inside.png")
+  val ppBarInsideTexture = Texture("src/main/resources/ui_sprites/pp_bar_inside.png")
   val barBorderOffset = (2.0/50.0, 2.0/50.0)
-  println(barBorderOffset)
-  val allyHealthBar = new DisplayBar(mainPlayerPok.maxHP, barBorderTexture, barBorderOffset, healthBarInsideTexture, (450, 50), (400, 70))
+  val allyHealthBar = new DisplayBar(mainPlayerPok.maxHP, barBorderTexture, barBorderOffset, healthBarInsideTexture, (270 - 300/2, 10), (300, 30))
+  val enemyHealthBar = new DisplayBar(mainEnemyPok.maxHP, barBorderTexture, barBorderOffset, healthBarInsideTexture, (1280 - 270 - 300/2, 10), (300, 30))
+  val allyPPBar = new DisplayBar(mainPlayerPok.maxPP, barBorderTexture, barBorderOffset, ppBarInsideTexture, (270 - 300/2, 50), (300, 30))
+  val enemyPPBar = new DisplayBar(mainEnemyPok.maxPP, barBorderTexture, barBorderOffset, ppBarInsideTexture, (1280 - 270 - 300/2, 50), (300, 30))
 
 
-  def testOnClick() = {
-    println("attack button clicked")
-  }
   val attack_1 = new AttackButton(((1280-200)/2, 500), (200, 80), ButtonTextures.GenericMenu)
   val attack_2 = new AttackButton(((1280-200)/2, 600), (200, 80), ButtonTextures.GenericMenu)
   val attack_3 = new AttackButton(((1280-200)/2-220, 500), (200, 80), ButtonTextures.GenericMenu)
@@ -69,15 +69,26 @@ class CombatMenu(fight: Fight) extends Menu {
   for (i <- 0 to 5){
     def atkOnClick() = {
       mainPlayerPok.attack_pok(i, mainEnemyPok)
+      allyPPBar.setVal(mainPlayerPok.currPP)
+      enemyHealthBar.setVal(mainEnemyPok.currHP)
     }
     atkButtons(i).setAtk(mainPlayerPok.atk_set(i))
     atkButtons(i).setOnClick(atkOnClick)
   }
   
+  val attackButtons = Array[Button](attack_1, attack_2, attack_3, attack_4, attack_5, attack_6)
   val buttons = Array[GraphicObj](attack_1, attack_2, attack_3, attack_4, attack_5, attack_6)
-  val graphicObjects = buttons ++ images ++ Array[GraphicObj](allyHealthBar)
+  val graphicObjects = buttons ++ images ++ Array[GraphicObj](allyHealthBar, allyPPBar, enemyHealthBar, enemyPPBar)
 
   def getGraphicObjects() : Array[GraphicObj] = {
+    for (i<- 0 to 5) {
+      if (mainPlayerPok.can_attack(i)) {
+        attackButtons(i).setActive(true)
+      }
+      else {
+        attackButtons(i).setActive(false)
+      }
+    }
     return graphicObjects
   }
 }

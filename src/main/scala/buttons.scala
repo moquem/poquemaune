@@ -71,7 +71,7 @@ class Button (buttonTextures:ButtonTextures, buttonPos:Position, buttonSize:Size
     text.string = string
     text.characterSize = charSize
     text.font = font
-    while ((text.globalBounds._3*1.05 > buttonSize._1 || text.globalBounds._4*1.05 > buttonSize._2) && text.characterSize > 0) {
+    while ((text.globalBounds._3*1.15 > buttonSize._1 || text.globalBounds._4*1.15 > buttonSize._2) && text.characterSize > 0) {
       text.characterSize -= 1
     }
     text.position = (buttonPos._1 + (buttonSize._1/2 - text.globalBounds._3/2), buttonPos._2 + (buttonSize._2/2 - text.globalBounds._4))
@@ -97,6 +97,7 @@ class Button (buttonTextures:ButtonTextures, buttonPos:Position, buttonSize:Size
       current_texture = buttonTextures.activeTexture
     }
     else {
+      sprite.color = new Color(255.toByte, 255.toByte, 255.toByte, 255.toByte)
       current_texture = buttonTextures.inactiveTexture
     }
     isActive = active
