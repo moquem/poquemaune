@@ -23,6 +23,7 @@ import sfml.system.*
   
 
   var displayable = Array[Displayable](MainMenu, TestCombat, MapMenu)
+  var updateable = MapMenu.getUpdateable()
   MainMenu.setActive(false)
   TestCombat.setActive(false)
   MapMenu.setActive(true)
@@ -42,6 +43,7 @@ import sfml.system.*
     for event <- window.pollEvent() do
       //println(event)
       
+      updateable.foreach(_.handleEvent(event))
       graphicObjects.foreach(_.handleInputs(event))
       
       event match
@@ -62,7 +64,7 @@ import sfml.system.*
     window.clear(new Color(150.toByte, 150.toByte, 150.toByte, 255.toByte))
     
     graphicObjects.foreach(_.updateObj())
-    
+     
     var spriteArray = graphicObjects.map(_.getSprites()).flatMap(_.toList)
     var textArray = graphicObjects.map(_.getTexts()).flatMap(_.toList)
     

@@ -3,12 +3,32 @@ import sfml.graphics.*
 import sfml.window.*
 import sfml.system.*
 
+trait Updateable () {
+  def handleEvent(event: Event) : Unit
+}
 
-class Tile(texture: Texture, pos: (Int, Int), size: (Int, Int)) extends GraphicObj {
+enum TileTypes (val texture: Texture,
+              val walkable: Boolean) {
+  
+  case GrassTile extends TileTypes(Texture("src/main/resources/ui_sprites/grass_tile.png"), true)
+  case SeaTile extends TileTypes(Texture("src/main/resources/ui_sprites/sea_tile.png"), false)
+}
+
+
+class Tile(tileList: Array[TileTypes], pos: (Int, Int), size: (Int, Int)) extends GraphicObj {
   var tileVisible = false
+  var currIndex = 0
+  var tileSize = size
+  var tileInfo = tileList(0)
 
-  val tileSprite = Sprite(texture)
+  val tileSprite = Sprite(tileList(0).texture)
   tileSprite.position = pos
+  
+  def setIndex(index: Int) = {
+    currIndex = index
+    tileSprite.texture = tileList(index).texture
+    tileInfo = tileList(index)
+  }
 
   def updateObj() = {
     tileSprite.scale = new Vector2f (size._1.toFloat / tileSprite.textureRect._3.toFloat, size._2.toFloat / tileSprite.textureRect._4.toFloat)
@@ -38,7 +58,7 @@ class Tile(texture: Texture, pos: (Int, Int), size: (Int, Int)) extends GraphicO
   }
 
   def copy() : Tile = {
-    val tileCopy = new Tile(texture, pos, size)
+    val tileCopy = new Tile(tileList, pos, size)
     return tileCopy
   }
 
@@ -47,7 +67,6 @@ class Tile(texture: Texture, pos: (Int, Int), size: (Int, Int)) extends GraphicO
 object MapMenu extends Menu {
   
   val font = Font("src/main/resources/fonts/Castforce.ttf")
-
 
   def openInventory() = {println("no inventory yet!")}
   val inventoryButton = new Button(ButtonTextures.GenericMenu, (1280 - 250, 100), (200, 100))
@@ -65,25 +84,29 @@ object MapMenu extends Menu {
   
   val map = new Map()
   map.setActive(true)
-  val seaTile = new Tile(Texture("src/main/resources/ui_sprites/sea_tile.png"), (50, 50), (50, 50))
-  val grassTile = new Tile(Texture("src/main/resources/ui_sprites/grass_tile.png"), (50, 50), (50, 50))
-  map.setTileTypes(Array(seaTile, grassTile))
+  val tileArr = Array(TileTypes.SeaTile, TileTypes.GrassTile)
+  val mapTile = new Tile(tileArr, (50, 50), (50, 50))
   
 
   val rawMapArray = Source.fromFile("src/main/resources/levels/levelMap_1.txt").getLines.toArray
   val rawMapMatrix = rawMapArray.map(_.split(" "))
   val mapArr = rawMapMatrix.flatMap(_.toList).map(_.toInt)
-  map.initMap((9, 7), mapArr)
+  map.initMap(mapTile, (9, 7), mapArr)
 
   val buttons = Array[GraphicObj](inventoryButton, returnButton)
+
 
   def getGraphicObjects() : Array[GraphicObj] = {
     return buttons ++ map.getGraphicObjects()
   }
 
+  def getUpdateable() : Array[Updateable] = {
+    return Array(map)
+  }
+
 }
 
-class Map extends Displayable {
+class Map extends Displayable, Updateable {
   
   var mapActive = false
   var tileTypes = Array[Tile]()
@@ -91,18 +114,30 @@ class Map extends Displayable {
   var mapTiles = Array[Tile]()
   var mapSize = (0, 0)
 
-  def setTileTypes(newTileTypes: Array[Tile]) = {
-    tileTypes = newTileTypes
-  }
+  val player = new Player(Texture("src/main/resources/char_sprites/player_icon.jpeg"), (50 + 50/2 - 36/2 + 50*2, 50 + 50/2 - 36/2 + 50*2), (36, 36))
+  var playerMapCoords = (2, 2)
 
-  def initMap(sizeOfMap: (Int, Int), mapArr: Array[Int]) = {
-    mapTiles = mapArr.map(tileTypes(_).copy())
+  var tileSize = (0, 0)
+
+  def initMap(tile: Tile, sizeOfMap: (Int, Int), mapArr: Array[Int]) = {
+    tileSize = tile.tileSize
+    mapTiles = mapArr.map(_ => tile.copy())
     mapSize = sizeOfMap
     mapTiles.foreach(_.setVisible(true))
     for (i <- 0 to mapSize._2 - 1) {
       for (j<- 0 to mapSize._1 - 1) {
+        mapTiles(i*mapSize._1 + j).setIndex(mapArr(i*mapSize._1 + j))
         mapTiles(i*mapSize._1 + j).setMapCoord(i, j)
       }
+    }
+  }
+  
+  def mapIndex(i: Int, j: Int, mapSize: (Int, Int)): Int = {
+    if (0 <= i && i < mapSize._1 && 0 <= j && j < mapSize._2) {
+      return i*mapSize._1 + j
+    }
+    else {
+      return -1
     }
   }
 
@@ -114,12 +149,44 @@ class Map extends Displayable {
   
   def getGraphicObjects() : Array[GraphicObj] = {
     graphicObjects = mapTiles.map(convertTile(_))
-    return graphicObjects
+    return graphicObjects ++ Array(player)
   }
 
   def setActive(active: Boolean) = {
     mapActive = active
   }
+
   
+  def handleEvent(event: Event) = {
+    var i = playerMapCoords._1
+    var j = playerMapCoords._2
+    event match
+      case Event.KeyPressed(Keyboard.Key.KeyRight, _, _, _, _) =>
+        var playerMapIndex = mapIndex(i+1, j, mapSize)
+        if (playerMapIndex != -1 && mapTiles(playerMapIndex).tileInfo.walkable) {
+          player.movePlayer(tileSize._1, 0)
+          playerMapCoords = (playerMapCoords._1 + 1, playerMapCoords._2)
+        }
+      case Event.KeyPressed(Keyboard.Key.KeyLeft, _, _, _, _) =>
+        var playerMapIndex = mapIndex(i-1, j, mapSize)
+        if (playerMapIndex != -1 && mapTiles(playerMapIndex).tileInfo.walkable) {
+          player.movePlayer(-tileSize._1, 0)
+          playerMapCoords = (playerMapCoords._1 - 1, playerMapCoords._2)
+        }
+      case Event.KeyPressed(Keyboard.Key.KeyUp, _, _, _, _) =>
+        var playerMapIndex = mapIndex(i, j-1, mapSize)
+        if (playerMapIndex != -1 && mapTiles(playerMapIndex).tileInfo.walkable) {
+          player.movePlayer(0, -tileSize._2)
+          playerMapCoords = (playerMapCoords._1, playerMapCoords._2 - 1)
+        }
+      case Event.KeyPressed(Keyboard.Key.KeyDown, _, _, _, _) =>
+        var playerMapIndex = mapIndex(i, j+1, mapSize)
+        if (playerMapIndex != -1 && mapTiles(playerMapIndex).tileInfo.walkable) {
+          player.movePlayer(0, tileSize._2)
+          playerMapCoords = (playerMapCoords._1, playerMapCoords._2 + 1)
+        }
+      case _ => {}
+  }
+
 }
 
