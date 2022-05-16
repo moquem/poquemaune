@@ -18,12 +18,12 @@ enum ButtonTextures( val activeTexture:Texture,
 
   case MainMenu extends ButtonTextures(Texture("src/main/resources/button_sprites/button_sprite.png"),
                                       Texture("src/main/resources/button_sprites/button_sprite.png"),
-                                      Texture("src/main/resources/player_icon.jpeg"),
-                                      Texture("src/main/resources/player_icon.jpeg"))
+                                      Texture("src/main/resources/button_sprites/button_sprite.png"),
+                                      Texture("src/main/resources/button_sprites/button_sprite.png"))
   case GenericMenu extends ButtonTextures(Texture("src/main/resources/button_sprites/button_sprite_2.png"),
                                       Texture("src/main/resources/button_sprites/button_sprite_2.png"),
                                       Texture("src/main/resources/button_sprites/button_sprite_2.png"),
-                                      Texture("src/main/resources/player_icon.jpeg"))
+                                      Texture("src/main/resources/button_sprites/button_sprite_2.png"))
 
 
 }
@@ -60,6 +60,10 @@ class Button (buttonTextures:ButtonTextures, buttonPos:Position, buttonSize:Size
   }
 
   def setVisible(visible: Boolean) = {
+      if (visible) {
+        current_texture = buttonTextures.activeTexture
+        sprite.color = new Color(255.toByte, 255.toByte, 255.toByte, 255.toByte)
+      }
       buttonVisible = visible
   }
 
@@ -97,7 +101,8 @@ class Button (buttonTextures:ButtonTextures, buttonPos:Position, buttonSize:Size
       current_texture = buttonTextures.activeTexture
     }
     else {
-      sprite.color = new Color(255.toByte, 255.toByte, 255.toByte, 255.toByte)
+      sprite.color = new Color(255.toByte, 255.toByte, 255.toByte, 50.toByte)
+      text.color = new Color(255.toByte, 255.toByte, 255.toByte, 50.toByte)
       current_texture = buttonTextures.inactiveTexture
     }
     isActive = active
@@ -131,10 +136,12 @@ class Button (buttonTextures:ButtonTextures, buttonPos:Position, buttonSize:Size
         if (rect.contains(mousePos._1, mousePos._2)) {
           current_texture = buttonTextures.hoveredTexture
           sprite.color = new Color(200.toByte, 200.toByte, 200.toByte, 255.toByte)
+          text.color = new Color(200.toByte, 200.toByte, 200.toByte, 255.toByte)
         }
         else {
           current_texture = buttonTextures.activeTexture
           sprite.color = new Color(255.toByte, 255.toByte, 255.toByte, 255.toByte)
+          text.color = new Color(255.toByte, 255.toByte, 255.toByte, 255.toByte)
         }
         if (rect.contains(mousePos._1, mousePos._2) && is_being_pressed) {
           current_texture = buttonTextures.clickedTexture

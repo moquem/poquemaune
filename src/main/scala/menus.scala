@@ -24,7 +24,8 @@ object MainMenu extends Menu {
   // start game button
   def startButtonOnClick() : Unit = {
     this.setActive(false)
-    TestCombat.setActive(true)
+    TestCombat.setActive(false)
+    MapMenu.setActive(true)
   }
   val startButton = new Button(ButtonTextures.MainMenu, ((1280-640)/2, 100), (640, 180))
   startButton.setOnClick(startButtonOnClick)

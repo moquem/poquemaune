@@ -64,6 +64,17 @@ class CombatMenu(fight: Fight) extends Menu {
   val attack_4 = new AttackButton(((1280-200)/2-220, 600), (200, 80), ButtonTextures.GenericMenu)
   val attack_5 = new AttackButton(((1280-200)/2+220, 500), (200, 80), ButtonTextures.GenericMenu)
   val attack_6 = new AttackButton(((1280-200)/2+220, 600), (200, 80), ButtonTextures.GenericMenu)
+  
+  val mapButton = new Button(ButtonTextures.GenericMenu, (50, 600), (150, 70))
+  mapButton.setText("Map", 60, font)
+  def mapOnClick() = {
+    MainMenu.setActive(false)
+    TestCombat.setActive(false)
+    MapMenu.setActive(true)
+  }
+  mapButton.setOnClick(mapOnClick)
+  mapButton.setActive(true)
+  mapButton.setVisible(true)
 
   val atkButtons = Array[AttackButton](attack_1, attack_2, attack_3, attack_4, attack_5, attack_6)
   for (i <- 0 to 5){
@@ -77,7 +88,7 @@ class CombatMenu(fight: Fight) extends Menu {
   }
   
   val attackButtons = Array[Button](attack_1, attack_2, attack_3, attack_4, attack_5, attack_6)
-  val buttons = Array[GraphicObj](attack_1, attack_2, attack_3, attack_4, attack_5, attack_6)
+  val buttons = Array[GraphicObj](attack_1, attack_2, attack_3, attack_4, attack_5, attack_6, mapButton)
   val graphicObjects = buttons ++ images ++ Array[GraphicObj](allyHealthBar, allyPPBar, enemyHealthBar, enemyPPBar)
 
   def getGraphicObjects() : Array[GraphicObj] = {

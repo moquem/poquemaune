@@ -8,7 +8,7 @@ trait Updateable () {
 }
 
 enum TileTypes (val texture: Texture,
-              val walkable: Boolean) {
+               val walkable: Boolean) {
   
   case GrassTile extends TileTypes(Texture("src/main/resources/ui_sprites/grass_tile.png"), true)
   case SeaTile extends TileTypes(Texture("src/main/resources/ui_sprites/sea_tile.png"), false)
@@ -22,7 +22,7 @@ class Tile(tileList: Array[TileTypes], pos: (Int, Int), size: (Int, Int)) extend
   var tileInfo = tileList(0)
 
   val tileSprite = Sprite(tileList(0).texture)
-  tileSprite.position = pos
+  tileSprite.position = (pos._2, pos._1)
   
   def setIndex(index: Int) = {
     currIndex = index
@@ -35,7 +35,7 @@ class Tile(tileList: Array[TileTypes], pos: (Int, Int), size: (Int, Int)) extend
   }
   
   def setMapCoord(x: Int, y: Int) = {
-    tileSprite.position = (pos._1 + x * size._1, pos._2 + y * size._2)
+    tileSprite.position = (pos._2 + y * size._2, pos._1 + x * size._1)
   }
 
   def handleInputs(event: Event) = {
@@ -69,16 +69,20 @@ object MapMenu extends Menu {
   val font = Font("src/main/resources/fonts/Castforce.ttf")
 
   def openInventory() = {println("no inventory yet!")}
-  val inventoryButton = new Button(ButtonTextures.GenericMenu, (1280 - 250, 100), (200, 100))
+  val inventoryButton = new Button(ButtonTextures.GenericMenu, (1280 - 200, 100), (170, 80))
   inventoryButton.setOnClick(openInventory)
   inventoryButton.setText("Inventory", 80, font)
   inventoryButton.setVisible(true)
   inventoryButton.setActive(true)
 
-  def returnOnClick() = {println("return to main menu")}
-  val returnButton = new Button(ButtonTextures.GenericMenu, (1280 - 250, 250), (200, 100))
+  def returnOnClick() = {
+    this.setActive(false)
+    TestCombat.setActive(true)
+  }
+
+  val returnButton = new Button(ButtonTextures.GenericMenu, (1280 - 200, 250), (170, 80))
   returnButton.setOnClick(returnOnClick)
-  returnButton.setText("Return", 80, font)
+  returnButton.setText("Fight", 63, font)
   returnButton.setVisible(true)
   returnButton.setActive(true)
   
@@ -91,7 +95,7 @@ object MapMenu extends Menu {
   val rawMapArray = Source.fromFile("src/main/resources/levels/levelMap_1.txt").getLines.toArray
   val rawMapMatrix = rawMapArray.map(_.split(" "))
   val mapArr = rawMapMatrix.flatMap(_.toList).map(_.toInt)
-  map.initMap(mapTile, (9, 7), mapArr)
+  map.initMap(mapTile, (rawMapMatrix(0).size, rawMapArray.size), mapArr)
 
   val buttons = Array[GraphicObj](inventoryButton, returnButton)
 
@@ -123,7 +127,7 @@ class Map extends Displayable, Updateable {
     tileSize = tile.tileSize
     mapTiles = mapArr.map(_ => tile.copy())
     mapSize = sizeOfMap
-    mapTiles.foreach(_.setVisible(true))
+    //mapTiles.foreach(_.setVisible(true))
     for (i <- 0 to mapSize._2 - 1) {
       for (j<- 0 to mapSize._1 - 1) {
         mapTiles(i*mapSize._1 + j).setIndex(mapArr(i*mapSize._1 + j))
@@ -133,7 +137,7 @@ class Map extends Displayable, Updateable {
   }
   
   def mapIndex(i: Int, j: Int, mapSize: (Int, Int)): Int = {
-    if (0 <= i && i < mapSize._1 && 0 <= j && j < mapSize._2) {
+    if (0 <= i && i < mapSize._2 && 0 <= j && j < mapSize._1) {
       return i*mapSize._1 + j
     }
     else {
@@ -154,33 +158,34 @@ class Map extends Displayable, Updateable {
 
   def setActive(active: Boolean) = {
     mapActive = active
+    getGraphicObjects().foreach(_.setVisible(active))
   }
 
   
   def handleEvent(event: Event) = {
-    var i = playerMapCoords._1
-    var j = playerMapCoords._2
+    var j = playerMapCoords._1
+    var i = playerMapCoords._2
     event match
       case Event.KeyPressed(Keyboard.Key.KeyRight, _, _, _, _) =>
-        var playerMapIndex = mapIndex(i+1, j, mapSize)
+        var playerMapIndex = mapIndex(i, j+1, mapSize)
         if (playerMapIndex != -1 && mapTiles(playerMapIndex).tileInfo.walkable) {
           player.movePlayer(tileSize._1, 0)
           playerMapCoords = (playerMapCoords._1 + 1, playerMapCoords._2)
         }
       case Event.KeyPressed(Keyboard.Key.KeyLeft, _, _, _, _) =>
-        var playerMapIndex = mapIndex(i-1, j, mapSize)
+        var playerMapIndex = mapIndex(i, j-1, mapSize)
         if (playerMapIndex != -1 && mapTiles(playerMapIndex).tileInfo.walkable) {
           player.movePlayer(-tileSize._1, 0)
           playerMapCoords = (playerMapCoords._1 - 1, playerMapCoords._2)
         }
       case Event.KeyPressed(Keyboard.Key.KeyUp, _, _, _, _) =>
-        var playerMapIndex = mapIndex(i, j-1, mapSize)
+        var playerMapIndex = mapIndex(i-1, j, mapSize)
         if (playerMapIndex != -1 && mapTiles(playerMapIndex).tileInfo.walkable) {
           player.movePlayer(0, -tileSize._2)
           playerMapCoords = (playerMapCoords._1, playerMapCoords._2 - 1)
         }
       case Event.KeyPressed(Keyboard.Key.KeyDown, _, _, _, _) =>
-        var playerMapIndex = mapIndex(i, j+1, mapSize)
+        var playerMapIndex = mapIndex(i+1, j, mapSize)
         if (playerMapIndex != -1 && mapTiles(playerMapIndex).tileInfo.walkable) {
           player.movePlayer(0, tileSize._2)
           playerMapCoords = (playerMapCoords._1, playerMapCoords._2 + 1)
