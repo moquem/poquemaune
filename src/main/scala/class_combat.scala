@@ -43,6 +43,12 @@ class Fight(team1: Team, team2: Team) {
         0
     }*/
 
+  
+    def endPlayerTurn() = {
+      println("ended player turn")
+      println("enemy attacks")
+      current_pok_ally.resetAttack()
+    }
 
     def new_pok_enemy(): Unit = {
         val r = scala.util.Random

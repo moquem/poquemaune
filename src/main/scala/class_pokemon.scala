@@ -45,7 +45,11 @@ class Pokemon private (spritePath: String, name: String, typ: PokTyp, pok_maxHP:
     }
 
     def can_attack (atk_nb:Int) : Boolean = {
-      currPP >= atk_set(atk_nb).cost_PP //&& !hasAttacked
+      currPP >= atk_set(atk_nb).cost_PP && !hasAttacked
+    }
+    
+    def resetAttack() = {
+      hasAttacked = false
     }
 
     def attack_pok(atk_nb:Int, defPok:Pokemon) = {
@@ -56,6 +60,7 @@ class Pokemon private (spritePath: String, name: String, typ: PokTyp, pok_maxHP:
       else {
        defPok.decrease_HP(atk.damage_dealt(defPok, this))
        currPP = (currPP - atk.cost_PP).max(0)
+       hasAttacked = true
        println("successful atk")
       }
     }

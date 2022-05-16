@@ -23,7 +23,7 @@ import sfml.system.*
   
 
   var displayable = Array[Displayable](MainMenu, TestCombat, MapMenu)
-  var updateable = MapMenu.getUpdateable()
+  var updateable = MapMenu.getUpdateable() ++ TestCombat.getUpdateable()
   MainMenu.setActive(true)
   TestCombat.setActive(false)
   MapMenu.setActive(false)

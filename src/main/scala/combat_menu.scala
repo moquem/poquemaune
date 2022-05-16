@@ -1,6 +1,6 @@
 import sfml.graphics.*
 import sfml.system.*
-
+import sfml.window.*
 
 class AttackButton(pos: (Int, Int), size: (Int, Int), texture: ButtonTextures) extends Button(texture, pos, size) {
   val font = Font("src/main/resources/fonts/Castforce.ttf")
@@ -34,7 +34,7 @@ object testFight extends Fight(testTeam1, testTeam2) {}
 
 object TestCombat extends CombatMenu(testFight) {}
 
-class CombatMenu(fight: Fight) extends Menu {
+class CombatMenu(fight: Fight) extends Menu, Updateable {
   
   val font = Font("src/main/resources/fonts/Castforce.ttf")
 
@@ -65,8 +65,8 @@ class CombatMenu(fight: Fight) extends Menu {
   val attack_5 = new AttackButton(((1280-200)/2+220, 500), (200, 80), ButtonTextures.GenericMenu)
   val attack_6 = new AttackButton(((1280-200)/2+220, 600), (200, 80), ButtonTextures.GenericMenu)
   
-  val mapButton = new Button(ButtonTextures.GenericMenu, (50, 600), (150, 70))
-  mapButton.setText("Map", 60, font)
+  val mapButton = new Button(ButtonTextures.GenericMenu, (1280 - 200 - 80, 600), (200, 80))
+  mapButton.setText("Map", 63, font)
   def mapOnClick() = {
     MainMenu.setActive(false)
     TestCombat.setActive(false)
@@ -75,6 +75,18 @@ class CombatMenu(fight: Fight) extends Menu {
   mapButton.setOnClick(mapOnClick)
   mapButton.setActive(true)
   mapButton.setVisible(true)
+
+  
+  val passTurnButton = new Button(ButtonTextures.GenericMenu, (80, 600), (200, 80))
+  passTurnButton.setText("End Turn", 70, font)
+  def passTurnOnClick() = {
+    println("ended turn")
+    fight.endPlayerTurn()
+  }
+  passTurnButton.setOnClick(passTurnOnClick)
+  passTurnButton.setActive(true)
+  passTurnButton.setVisible(true)
+
 
   val atkButtons = Array[AttackButton](attack_1, attack_2, attack_3, attack_4, attack_5, attack_6)
   for (i <- 0 to 5){
@@ -88,10 +100,10 @@ class CombatMenu(fight: Fight) extends Menu {
   }
   
   val attackButtons = Array[Button](attack_1, attack_2, attack_3, attack_4, attack_5, attack_6)
-  val buttons = Array[GraphicObj](attack_1, attack_2, attack_3, attack_4, attack_5, attack_6, mapButton)
+  val buttons = Array[GraphicObj](attack_1, attack_2, attack_3, attack_4, attack_5, attack_6, mapButton, passTurnButton)
   val graphicObjects = buttons ++ images ++ Array[GraphicObj](allyHealthBar, allyPPBar, enemyHealthBar, enemyPPBar)
-
-  def getGraphicObjects() : Array[GraphicObj] = {
+  
+  def handleEvent(event: Event) = {
     for (i<- 0 to 5) {
       if (mainPlayerPok.can_attack(i)) {
         attackButtons(i).setActive(true)
@@ -100,7 +112,15 @@ class CombatMenu(fight: Fight) extends Menu {
         attackButtons(i).setActive(false)
       }
     }
+  }
+
+  def getGraphicObjects() : Array[GraphicObj] = {
+    
     return graphicObjects
+  }
+
+  def getUpdateable() : Array[Updateable] = {
+    return Array[Updateable](this)
   }
 }
 
