@@ -88,6 +88,8 @@ class CombatMenu(fight: Fight) extends Menu, FrameUpdateable {
   def passTurnOnClick() = {
     println("ended turn")
     fight.endPlayerTurn()
+    allyHealthBar.setVal(mainPlayerPok.currHP)
+    enemyPPBar.setVal(mainEnemyPok.currPP)
   }
   passTurnButton.setOnClick(passTurnOnClick)
   passTurnButton.setActive(true)
@@ -98,8 +100,8 @@ class CombatMenu(fight: Fight) extends Menu, FrameUpdateable {
   for (i <- 0 to 5){
     def atkOnClick() = {
       mainPlayerPok.attack_pok(i, mainEnemyPok)
-      allyPPBar.setVal(mainPlayerPok.currPP)
       enemyHealthBar.setVal(mainEnemyPok.currHP)
+      allyPPBar.setVal(mainPlayerPok.currPP)
     }
     atkButtons(i).setAtk(mainPlayerPok.atk_set(i))
     atkButtons(i).setOnClick(atkOnClick)

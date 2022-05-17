@@ -8,7 +8,7 @@ class Image(texture: Texture, position: (Int, Int), size: (Int, Int)) extends Gr
   var imageVisible = false
   var sprite = Sprite(texture)
   sprite.position = pos
- 
+  
   def handleInputs(event: Event) = {
   }
 

@@ -27,7 +27,7 @@ class Character (texture: Texture, pos: (Int, Int), size: (Int, Int)) extends Gr
   }
 }
 
-class Player (texture: Texture, pos: (Int, Int), size: (Int, Int)) extends Character(texture, pos, size) {
+class PlayerCharacter (texture: Texture, pos: (Int, Int), size: (Int, Int)) extends Character(texture, pos, size) {
   def movePlayer(posDelta: (Int, Int)) = {
     this.charSprite.position = (charSprite.position._1 + posDelta._1, charSprite.position._2 + posDelta._2)
   }

@@ -68,7 +68,7 @@ import sfml.system.*
     graphicObjects.foreach(_.updateObj())
     
     var spriteArray = graphicObjects.filter(_.isVisible()).map(_.getSprites()).flatMap(_.toList)
-    var textArray = graphicObjects.map(_.getTexts()).flatMap(_.toList)
+    var textArray = graphicObjects.filter(_.isVisible()).map(_.getTexts()).flatMap(_.toList)
     
     for (sprite <- spriteArray) {window.draw(sprite)}
     for (text <- textArray) {window.draw(text)}

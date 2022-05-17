@@ -51,11 +51,13 @@ object MainMenu extends Menu {
   quitButton.setActive(true)
   quitButton.setVisible(true)
  
+  //val textBox = new TextBox(Texture("src/main/resources/ui_sprites/pok_sheet.png"), (0, 0), (500, 600), "this is a test\nFor now ...", 40)
+  //textBox.setVisible(true)
 
   val buttons = Array[GraphicObj](startButton, settingsButton, quitButton)
 
   def getGraphicObjects(): Array[GraphicObj] = {
-    return buttons
+    return buttons //++ Array(textBox)
   }
  
 }

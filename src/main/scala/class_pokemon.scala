@@ -9,6 +9,7 @@ enum PokTyp (typName: String, weakAgainst:Array[PokTyp], strongAgainst: Array[Po
   def isStrong (otherTyp : PokTyp):Boolean = {
     strongAgainst.contains(otherTyp)
   }
+  def typString(): String = {return typName}
   case Empty extends PokTyp("", Array(), Array())
 }
 
@@ -62,7 +63,8 @@ class Pokemon private (spritePath: String, name: String, typ: PokTyp, pok_maxHP:
        defPok.decrease_HP(atk.damage_dealt(defPok, this))
        currPP = (currPP - atk.cost_PP).max(0)
        hasAttacked = true
-       println("successful atk")
+       println("successfully attacked :")
+       println(defPok.currHP)
       }
     }
 
@@ -152,7 +154,7 @@ extends AffectPok (name, costPP, description) {
     var attackName: String = name
     var pokTyp = atk_typ
     var base_damage: Int = atk_damage
-    val atkDescritpion: String = description
+    val atkDescription: String = description
 
     var cost_PP: Int = costPP
     

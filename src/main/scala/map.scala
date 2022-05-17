@@ -118,7 +118,7 @@ class Map extends Displayable, Updateable {
   var mapTiles = Array[Tile]()
   var mapSize = (0, 0)
 
-  val player = new Player(Texture("src/main/resources/char_sprites/player_icon.jpeg"), (50 + 50/2 - 36/2 + 50*2, 50 + 50/2 - 36/2 + 50*2), (36, 36))
+  val player = new PlayerCharacter(Texture("src/main/resources/char_sprites/player_icon.jpeg"), (50 + 50/2 - 36/2 + 50*2, 50 + 50/2 - 36/2 + 50*2), (36, 36))
   var playerMapCoords = (2, 2)
 
   var tileSize = (0, 0)

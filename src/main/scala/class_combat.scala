@@ -47,6 +47,9 @@ class Fight(team1: Team, team2: Team) {
     def endPlayerTurn() = {
       println("ended player turn")
       println("enemy attacks")
+      // create some AI for this part
+      val randInt = scala.util.Random.nextInt(6)
+      current_pok_enemy.attack_pok(randInt, current_pok_ally)
       current_pok_ally.resetAttack()
     }
 
