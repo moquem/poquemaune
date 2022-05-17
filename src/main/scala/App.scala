@@ -23,7 +23,8 @@ import sfml.system.*
   
 
   var displayable = Array[Displayable](MainMenu, TestCombat, MapMenu)
-  var updateable = MapMenu.getUpdateable() ++ TestCombat.getUpdateable()
+  var updateable = MapMenu.getUpdateable()
+  var frameUpdateable = TestCombat.getFrameUpdateable()
   MainMenu.setActive(true)
   TestCombat.setActive(false)
   MapMenu.setActive(false)
@@ -63,8 +64,9 @@ import sfml.system.*
 
     window.clear(new Color(150.toByte, 150.toByte, 150.toByte, 255.toByte))
     
+    frameUpdateable.foreach(_.frameUpdate())
     graphicObjects.foreach(_.updateObj())
-     
+    
     var spriteArray = graphicObjects.filter(_.isVisible()).map(_.getSprites()).flatMap(_.toList)
     var textArray = graphicObjects.map(_.getTexts()).flatMap(_.toList)
     

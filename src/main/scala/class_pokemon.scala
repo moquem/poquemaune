@@ -50,6 +50,7 @@ class Pokemon private (spritePath: String, name: String, typ: PokTyp, pok_maxHP:
     
     def resetAttack() = {
       hasAttacked = false
+      println("attack reset")
     }
 
     def attack_pok(atk_nb:Int, defPok:Pokemon) = {

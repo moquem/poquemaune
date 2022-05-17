@@ -34,7 +34,13 @@ object testFight extends Fight(testTeam1, testTeam2) {}
 
 object TestCombat extends CombatMenu(testFight) {}
 
-class CombatMenu(fight: Fight) extends Menu, Updateable {
+
+trait FrameUpdateable () {
+  def frameUpdate(): Unit
+}
+
+
+class CombatMenu(fight: Fight) extends Menu, FrameUpdateable {
   
   val font = Font("src/main/resources/fonts/Castforce.ttf")
 
@@ -103,7 +109,7 @@ class CombatMenu(fight: Fight) extends Menu, Updateable {
   val buttons = Array[GraphicObj](attack_1, attack_2, attack_3, attack_4, attack_5, attack_6, mapButton, passTurnButton)
   val graphicObjects = buttons ++ images ++ Array[GraphicObj](allyHealthBar, allyPPBar, enemyHealthBar, enemyPPBar)
   
-  def handleEvent(event: Event) = {
+  def frameUpdate() = {
     for (i<- 0 to 5) {
       if (mainPlayerPok.can_attack(i)) {
         attackButtons(i).setActive(true)
@@ -119,8 +125,8 @@ class CombatMenu(fight: Fight) extends Menu, Updateable {
     return graphicObjects
   }
 
-  def getUpdateable() : Array[Updateable] = {
-    return Array[Updateable](this)
+  def getFrameUpdateable() : Array[FrameUpdateable] = {
+    return Array[FrameUpdateable](this)
   }
 }
 

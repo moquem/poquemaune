@@ -99,6 +99,8 @@ class Button (buttonTextures:ButtonTextures, buttonPos:Position, buttonSize:Size
   def setActive(active: Boolean) = {
     if (active){
       current_texture = buttonTextures.activeTexture
+      sprite.color = new Color(255.toByte, 255.toByte, 255.toByte, 255.toByte)
+      text.color = new Color(255.toByte, 255.toByte, 255.toByte, 255.toByte)
     }
     else {
       sprite.color = new Color(255.toByte, 255.toByte, 255.toByte, 50.toByte)
