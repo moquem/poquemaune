@@ -34,7 +34,7 @@ type Size = (Int, Int)
 class Button (buttonTextures:ButtonTextures, buttonPos:Position, buttonSize:Size) extends GraphicObj {
   
   // useful values
-  val rect = IntRect(buttonPos._1, buttonPos._2, buttonSize._1, buttonSize._2)
+  var rect = IntRect(buttonPos._1, buttonPos._2, buttonSize._1, buttonSize._2)
   val position = buttonPos
   val text = Text()
   text.position = (buttonPos._1 + text.position._1, buttonPos._2 + text.position._2)
@@ -46,6 +46,7 @@ class Button (buttonTextures:ButtonTextures, buttonPos:Position, buttonSize:Size
   var sprite = Sprite(current_texture)
   var buttonVisible = false
   var buttonReleased = false
+  var textTargetCharSize = 0
 
   // the variables for the mouse
   var mousePos = (0, 0)
@@ -75,11 +76,21 @@ class Button (buttonTextures:ButtonTextures, buttonPos:Position, buttonSize:Size
     text.string = string
     text.characterSize = charSize
     text.font = font
-    while ((text.globalBounds._3*1.15 > buttonSize._1 || text.globalBounds._4*1.15 > buttonSize._2) && text.characterSize > 0) {
-      text.characterSize -= 1
-    }
-    text.position = (buttonPos._1 + (buttonSize._1/2 - text.globalBounds._3/2), buttonPos._2 + (buttonSize._2/2 - text.globalBounds._4))
+    textTargetCharSize = charSize
+    updateText()
   }
+
+  def updateText() = {
+    text.characterSize = textTargetCharSize
+    while ((text.globalBounds._3*1.15 > rect._3 || text.globalBounds._4*1.15 > rect._4) && text.characterSize > 0) {
+      text.characterSize -= 1
+      /*println(text.globalBounds)
+      println(rect)
+      println(text.string)
+      println()*/
+    }
+    text.position = (rect._1 + (rect._3/2 - text.globalBounds._3/2), rect._2 + (rect._4/2 - text.globalBounds._4))
+}
 
   // is called once a frame, updates the image, checks for a click ...
   def updateObj() = {
@@ -91,18 +102,19 @@ class Button (buttonTextures:ButtonTextures, buttonPos:Position, buttonSize:Size
     if (buttonVisible) {  
       sprite.texture = current_texture
       sprite.scale = new Vector2f (rect._3.toFloat/sprite.textureRect._3.toFloat, rect._4.toFloat/sprite.textureRect._4.toFloat)
-      sprite.position = position
+      sprite.position = (rect._1, rect._2)
     }
+    
 
   }
 
   def setActive(active: Boolean) = {
-    if (active){
+    if (active && !isActive){
       current_texture = buttonTextures.activeTexture
       sprite.color = new Color(255.toByte, 255.toByte, 255.toByte, 255.toByte)
       text.color = new Color(255.toByte, 255.toByte, 255.toByte, 255.toByte)
     }
-    else {
+    else if (!active) {
       sprite.color = new Color(255.toByte, 255.toByte, 255.toByte, 50.toByte)
       text.color = new Color(255.toByte, 255.toByte, 255.toByte, 50.toByte)
       current_texture = buttonTextures.inactiveTexture
@@ -116,6 +128,7 @@ class Button (buttonTextures:ButtonTextures, buttonPos:Position, buttonSize:Size
 
   def handleInputs(event:Event) : Unit = {
     if (buttonVisible) {
+      
       buttonReleased = false
       event match
         case Event.MouseMoved(x, y) =>
@@ -146,6 +159,8 @@ class Button (buttonTextures:ButtonTextures, buttonPos:Position, buttonSize:Size
           text.color = new Color(255.toByte, 255.toByte, 255.toByte, 255.toByte)
         }
         if (rect.contains(mousePos._1, mousePos._2) && is_being_pressed) {
+          sprite.color = new Color(155.toByte, 155.toByte, 155.toByte, 255.toByte)
+          text.color = new Color(155.toByte, 155.toByte, 155.toByte, 255.toByte)
           current_texture = buttonTextures.clickedTexture
         }
         if (rect.contains(mousePos._1, mousePos._2) && buttonReleased) {

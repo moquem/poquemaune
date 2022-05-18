@@ -68,7 +68,10 @@ object MapMenu extends Menu {
   
   val font = Font("src/main/resources/fonts/Castforce.ttf")
 
-  def openInventory() = {println("no inventory yet!")}
+  def openInventory() = {
+    this.setActive(false)
+    PlayerInventoryMenu.setActive(true)
+  }
   val inventoryButton = new Button(ButtonTextures.GenericMenu, (1280 - 200, 100), (170, 80))
   inventoryButton.setOnClick(openInventory)
   inventoryButton.setText("Inventory", 80, font)

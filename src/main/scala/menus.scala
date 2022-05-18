@@ -3,7 +3,6 @@ import sfml.system.*
 
 trait Menu extends Displayable{
   val buttons: Array[GraphicObj]
-  
   def setActive(active: Boolean) = {
     this.getGraphicObjects().foreach(_.setVisible(active))
   }

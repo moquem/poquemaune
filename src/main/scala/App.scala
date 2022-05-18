@@ -22,10 +22,11 @@ import sfml.system.*
   testButtonSprite.scale = new Vector2f(testButton.rect._3.toFloat/testButtonSprite.textureRect._3.toFloat, testButton.rect._4.toFloat/testButtonSprite.textureRect._4.toFloat)*/
   
 
-  var displayable = Array[Displayable](MainMenu, TestCombat, MapMenu)
+  var displayable = Array[Displayable](MainMenu, TestCombat, MapMenu, PlayerInventoryMenu)
   var updateable = MapMenu.getUpdateable()
   var frameUpdateable = TestCombat.getFrameUpdateable()
   MainMenu.setActive(true)
+  PlayerInventoryMenu.setActive(false)
   TestCombat.setActive(false)
   MapMenu.setActive(false)
 
@@ -40,7 +41,7 @@ import sfml.system.*
   while window.isOpen() do
     
     graphicObjects = displayable.map(_.getGraphicObjects()).flatMap(_.toList)
-    //println(Mouse.Button.Left.isPressed())
+    
     for event <- window.pollEvent() do
       //println(event)
       

@@ -7,12 +7,12 @@ class TextBox(background: Texture, pos: (Int, Int), size:(Int, Int), textString:
   var overlayVisible = false
   
   val bg = new Image(background, pos, size)
-  bg.setVisible(true)
+  
   val text = Text()
   text.string = textString
   text.font = font
   text.characterSize = textSize
-  text.position = ((pos._1 + size._1 * 0.17).toFloat, (pos._2 + size._2 * 0.1).toFloat)
+  text.position = ((pos._1 + size._1 * 0.15).toFloat, (pos._2 + size._2 * 0.1).toFloat)
 
   def updateObj() = {bg.updateObj()}
   def handleInputs(event: Event) = {}
