@@ -1,0 +1,13 @@
+Testostemon
+Empty
+100
+20
+1.1
+0.9
+src/main/resources/test_images/ho-ho-garlic-bread-ho-ho.png
+src/main/resources/attacks/destructothon.txt
+src/main/resources/attacks/doubleKick.txt
+src/main/resources/attacks/culbuto.txt
+src/main/resources/attacks/hydroblast.txt
+src/main/resources/attacks/mentalBreakdown.txt
+src/main/resources/attacks/punch.txt

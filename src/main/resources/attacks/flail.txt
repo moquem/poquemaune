@@ -1,0 +1,6 @@
+Flail
+2
+Flail around causing no harm to the opposing pokemon
+0
+Empty
+

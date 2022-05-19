@@ -1,0 +1,13 @@
+The chosen one
+Empty
+200
+50
+2.0
+2.0
+src/main/resources/sprite/Geofetchd.png
+src/main/resources/attacks/bite.txt
+src/main/resources/attacks/obliteration.txt
+src/main/resources/attacks/chairSlam.txt
+src/main/resources/attacks/punch.txt
+src/main/resources/attacks/flail.txt
+src/main/resources/attacks/scream.txt

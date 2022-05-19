@@ -1,0 +1,6 @@
+Crush
+10
+The opposing pokemon collapses under the weight of the attacker
+40
+Empty
+

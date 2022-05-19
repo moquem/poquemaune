@@ -1,0 +1,6 @@
+Scream
+4
+Produces a powerfull scream capable of shattering glass
+15
+Empty
+

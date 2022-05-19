@@ -1,0 +1,13 @@
+Useless garbage
+Empty
+50
+30
+0.5
+0.5
+src/main/resources/sprite/Bellwak.png
+src/main/resources/attacks/flail.txt
+src/main/resources/attacks/flick.txt
+src/main/resources/attacks/flex.txt
+src/main/resources/attacks/punch.txt
+src/main/resources/attacks/flail.txt
+src/main/resources/attacks/flail.txt

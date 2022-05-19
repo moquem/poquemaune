@@ -1,0 +1,6 @@
+Punch
+0
+A standard punch
+10
+Empty
+
