@@ -11,6 +11,11 @@ enum PokTyp (typName: String, weakAgainst:Array[PokTyp], strongAgainst: Array[Po
   }
   def typString(): String = {return typName}
   case Empty extends PokTyp("", Array(), Array())
+  case Magic extends PokTyp("Magic", Array(Balloons,Military), Array())
+  case Military extends PokTyp("Military", Array(Balloons,Magic), Array(Magic))
+  case Basic extends PokTyp("Basic", Array(Balloons), Array(Military))
+  case Balloons extends PokTyp("Balloons", Array(), Array(Military))
+  case Support extends PokTyp("Support", Array(Magic,Military,Basic,Balloons), Array())
 }
 
 class Pokemon private (spritePath: String, name: String, typ: PokTyp, pok_maxHP: Int, pok_maxPP: Int, pok_statAtk: Double, pok_statDef: Double) {
@@ -166,18 +171,24 @@ extends AffectPok (name, costPP, description) {
         typ_bonus += 0.2
       }
       // additional damage dealt (or removed) based on typ relations (strong/weak against)
-      if (defPok.pokTyp.isWeak(this.pokTyp)){
+      if (defPok.pokTyp.isWeak(pokTyp)){
         typ_bonus += 0.2
       }
-      if (defPok.pokTyp.isWeak(atkPok.pokTyp)){
+      /* if (defPok.pokTyp.isWeak(atkPok.pokTyp)){
+        typ_bonus += 0.2
+      } */
+      if (pokTyp.isStrong(defPok.pokTyp)){
         typ_bonus += 0.2
       }
       if (defPok.pokTyp.isStrong(pokTyp)){
         typ_bonus -= 0.2
       }
-      if (defPok.pokTyp.isStrong(atkPok.pokTyp)){
-        typ_bonus -= 0.2
+      if (atkPok.pokTyp.isWeak(pokTyp)){
+        typ_bonus -= 0.1
       }
+      /* if (defPok.pokTyp.isStrong(atkPok.pokTyp)){
+        typ_bonus -= 0.2
+      } */
      
       // if for some reason the typ_bonus becomes negative (eg : stacking debufs)
       typ_bonus = typ_bonus.max(0)
