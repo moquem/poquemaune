@@ -52,21 +52,24 @@ class InventoryMenu(inventory: Inventory) extends Menu {
     consumableButton.setVisible(false)
     equipmentButton.setVisible(false)
     pokemonButton.setVisible(false)
-    returnButton.setVisible(true)
+    returnButton.setVisible(false)
   }
   pokemonButton.setVisible(true)
   pokemonButton.setActive(true)
   pokemonButton.setOnClick(pokemonOnCLick)
 
-  val returnButton = new Button(ButtonTextures.GenericMenu, (300 + 200, 300 + 50), (150, 80))
+  val returnButton = new Button(ButtonTextures.GenericMenu, (1280 - 50 - 150, 720 - 50 - 80), (150, 80))
   returnButton.setText("Return", 70, font)
-  def returnOnCLick() = {println("return")}
+  def returnOnCLick() = {
+    this.setActive(false)
+    MapMenu.setActive(true)
+  }
   returnButton.setVisible(true)
   returnButton.setActive(true)
   returnButton.setOnClick(returnOnCLick)
 
 
-  val buttons = Array[GraphicObj](consumableButton, equipmentButton, pokemonButton)
+  val buttons = Array[GraphicObj](consumableButton, equipmentButton, pokemonButton, returnButton)
   
   def getGraphicObjects(): Array[GraphicObj] = {
     return pokemonInventoryMenu.getGraphicObjects() ++ Array[GraphicObj]() ++ getDisplayedObjects()
@@ -118,7 +121,7 @@ class PokemonInventoryMenu(inventory: Inventory) extends Menu {
   var pokemonButtons = Array[Button]()
   var pokemonInfoSheets = Array[PokemonInfoSheet]()
   for (i <- 0 to inventory.ownedPokList.size-1) {
-    var newPokButton = new Button(ButtonTextures.GenericMenu, (0, 0), (50, 50))
+    var newPokButton = new Button(ButtonTextures.GenericMenu, (0, 0), (500, 500))
     newPokButton.setText(inventory.ownedPokList(i).pokemonName, 60, font)
     var pokInfoSheet = new PokemonInfoSheet(inventory.ownedPokList(i))
     pokInfoSheet.setActive(false)
@@ -137,15 +140,15 @@ class PokemonInventoryMenu(inventory: Inventory) extends Menu {
   }
 
   val pokListMenu = new ListMenu(pokemonButtons)
-  pokListMenu.setActive(false)
+  pokListMenu.setActive(true)
 
   def toGraphicObj(button: Button): GraphicObj = {return button}
 
-  val buttons = Array[GraphicObj]() ++ pokemonButtons.map(toGraphicObj)
+  val buttons = pokListMenu.getDisplayedObjects()
   val pokInfoSheetsGraphicObjects = pokemonInfoSheets.map(_.getGraphicObjects()).flatMap(_.toList)
   def getGraphicObjects(): Array[GraphicObj] = {
     //println(pokInfoSheetsGraphicObjects(0).isVisible())
-    return pokInfoSheetsGraphicObjects ++ getDisplayedObjects()
+    return pokInfoSheetsGraphicObjects ++ getDisplayedObjects() ++ pokemonButtons.map(toGraphicObj)
   }
 
   def getDisplayedObjects() : Array[GraphicObj] = {

@@ -166,7 +166,7 @@ extends AffectPok (name, costPP, description) {
         typ_bonus += 0.2
       }
       // additional damage dealt (or removed) based on typ relations (strong/weak against)
-      if (defPok.pokTyp.isWeak(this.pokTyp)){
+      if (defPok.pokTyp.isWeak(pokTyp)){
         typ_bonus += 0.2
       }
       if (defPok.pokTyp.isWeak(atkPok.pokTyp)){
@@ -182,7 +182,7 @@ extends AffectPok (name, costPP, description) {
       // if for some reason the typ_bonus becomes negative (eg : stacking debufs)
       typ_bonus = typ_bonus.max(0)
       // more modifiers based on the atk and def stats for the pokemon 
-      (base_damage*typ_bonus*atkPok.statAtt*defPok.statDef).toInt
+      (base_damage*typ_bonus*atkPok.statAtt/defPok.statDef).toInt
     }
     
     def applyBuff (buff: Buff, defTeam: Array[Pokemon], atkTeam: Array[Pokemon], defPok: Pokemon, atkPok: Pokemon) = {
