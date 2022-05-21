@@ -1,0 +1,5 @@
+Permafrost
+2
+Freezes the ennemy.
+15
+Magic

@@ -1,0 +1,5 @@
+Barded darts
+5
+Throws darts with barded wire.
+25
+Military

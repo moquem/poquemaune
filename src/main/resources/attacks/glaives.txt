@@ -1,0 +1,5 @@
+Glaives
+3
+Throws sharp and fast glaives.
+20
+Basic

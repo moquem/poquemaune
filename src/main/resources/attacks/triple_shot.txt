@@ -1,0 +1,5 @@
+Triple Shot
+3
+Throws 3 darts at a time.
+25
+Basic

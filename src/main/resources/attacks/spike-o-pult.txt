@@ -1,0 +1,5 @@
+Spike-o-pult
+8
+Hurls a large spiked ball.
+50
+Basic
