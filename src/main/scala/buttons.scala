@@ -64,6 +64,7 @@ class Button (buttonTextures:ButtonTextures, buttonPos:Position, buttonSize:Size
       if (visible) {
         current_texture = buttonTextures.activeTexture
         sprite.color = new Color(255.toByte, 255.toByte, 255.toByte, 255.toByte)
+        text.color = new Color(255.toByte, 255.toByte, 255.toByte, 255.toByte)
       }
       buttonVisible = visible
   }
