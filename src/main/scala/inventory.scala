@@ -69,7 +69,11 @@ class InventoryMenu(inventory: Inventory) extends Menu {
   val buttons = Array[GraphicObj](consumableButton, equipmentButton, pokemonButton)
   
   def getGraphicObjects(): Array[GraphicObj] = {
-    return buttons ++ Array[GraphicObj]() ++ pokemonInventoryMenu.getGraphicObjects().filter(_.isVisible())
+    return pokemonInventoryMenu.getGraphicObjects() ++ Array[GraphicObj]() ++ getDisplayedObjects()
+  }
+
+  def getDisplayedObjects() : Array[GraphicObj] = {
+    return buttons
   }
 }
 
@@ -99,6 +103,10 @@ class PokemonInfoSheet(pokemon: Pokemon) extends Displayable {
   def getGraphicObjects(): Array[GraphicObj] = {
     //println(textBox.isVisible())
     return Array(textBox)
+  }
+
+  def getDisplayedObjects() : Array[GraphicObj] = {
+    return getGraphicObjects()
   }
 }
 
@@ -137,9 +145,12 @@ class PokemonInventoryMenu(inventory: Inventory) extends Menu {
   val pokInfoSheetsGraphicObjects = pokemonInfoSheets.map(_.getGraphicObjects()).flatMap(_.toList)
   def getGraphicObjects(): Array[GraphicObj] = {
     //println(pokInfoSheetsGraphicObjects(0).isVisible())
-    return buttons.filter(_.isVisible()) ++ Array[GraphicObj]() ++ pokListMenu.getGraphicObjects() ++ pokInfoSheetsGraphicObjects.filter(_.isVisible())
+    return pokInfoSheetsGraphicObjects ++ getDisplayedObjects()
   }
 
+  def getDisplayedObjects() : Array[GraphicObj] = {
+    return buttons
+  }
 
 }
 

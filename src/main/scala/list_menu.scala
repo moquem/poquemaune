@@ -53,13 +53,17 @@ class ListMenu(buttonList: Array[Button]) extends Menu {
   }
   
   updateButtonsShown()
-  shownButtons.map(_.setVisible(false))
-  println("buttons should be invisible")
+  //shownButtons.map(_.setVisible(false))
+  
   def toGraphicObj(button: Button): GraphicObj = {return button}
 
   val buttons = Array[GraphicObj](nextPageButton, prevPageButton) ++ shownButtons.map(toGraphicObj(_))
   
   def getGraphicObjects(): Array[GraphicObj] = {
-    return Array[GraphicObj]() ++ buttons
+    return buttons
+  }
+
+  def getDisplayedObjects(): Array[GraphicObj] = {
+    return getGraphicObjects()
   }
 }

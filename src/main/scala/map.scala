@@ -107,6 +107,10 @@ object MapMenu extends Menu {
     return buttons ++ map.getGraphicObjects()
   }
 
+  def getDisplayedObjects() : Array[GraphicObj] = {
+    return getGraphicObjects()
+  }
+
   def getUpdateable() : Array[Updateable] = {
     return Array(map)
   }
@@ -157,6 +161,10 @@ class Map extends Displayable, Updateable {
   def getGraphicObjects() : Array[GraphicObj] = {
     graphicObjects = mapTiles.map(convertTile(_))
     return graphicObjects ++ Array(player)
+  }
+
+  def getDisplayedObjects() : Array[GraphicObj] = {
+    return getGraphicObjects()
   }
 
   def setActive(active: Boolean) = {

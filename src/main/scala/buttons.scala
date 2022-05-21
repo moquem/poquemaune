@@ -195,5 +195,6 @@ class Button (buttonTextures:ButtonTextures, buttonPos:Position, buttonSize:Size
 
 trait Displayable () {
   def getGraphicObjects () : Array[GraphicObj]
+  def getDisplayedObjects() : Array[GraphicObj]
   def setActive(active: Boolean) : Unit
 }

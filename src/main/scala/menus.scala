@@ -4,7 +4,7 @@ import sfml.system.*
 trait Menu extends Displayable{
   val buttons: Array[GraphicObj]
   def setActive(active: Boolean) = {
-    this.getGraphicObjects().foreach(_.setVisible(active))
+    this.getDisplayedObjects().foreach(_.setVisible(active))
   }
 }
 
@@ -54,6 +54,10 @@ object MainMenu extends Menu {
   //textBox.setVisible(true)
 
   val buttons = Array[GraphicObj](startButton, settingsButton, quitButton)
+
+  def getDisplayedObjects(): Array[GraphicObj] = {
+    return buttons
+  }
 
   def getGraphicObjects(): Array[GraphicObj] = {
     return buttons //++ Array(textBox)

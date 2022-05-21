@@ -122,8 +122,11 @@ class CombatMenu(fight: Fight) extends Menu, FrameUpdateable {
     }
   }
 
-  def getGraphicObjects() : Array[GraphicObj] = {
-    
+  def getGraphicObjects() : Array[GraphicObj] = {    
+    return graphicObjects
+  }
+
+  def getDisplayedObjects() : Array[GraphicObj] = {
     return graphicObjects
   }
 
