@@ -52,17 +52,19 @@ class InventoryMenu(inventory: Inventory) extends Menu {
     consumableButton.setVisible(false)
     equipmentButton.setVisible(false)
     pokemonButton.setVisible(false)
-    returnButton.setVisible(false)
+    //returnButton.setVisible(false)
+    pokemonInventoryMenu.pokListMenu.updateNavigationButtons()
   }
   pokemonButton.setVisible(true)
   pokemonButton.setActive(true)
   pokemonButton.setOnClick(pokemonOnCLick)
 
-  val returnButton = new Button(ButtonTextures.GenericMenu, (1280 - 50 - 150, 720 - 50 - 80), (150, 80))
+  val returnButton = new Button(ButtonTextures.GenericMenu, (1280 - 25 - 150, 720 - 25 - 80), (150, 80))
   returnButton.setText("Return", 70, font)
   def returnOnCLick() = {
     this.setActive(false)
     MapMenu.setActive(true)
+    pokemonInventoryMenu.setActive(false)
   }
   returnButton.setVisible(true)
   returnButton.setActive(true)
@@ -134,6 +136,7 @@ class PokemonInventoryMenu(inventory: Inventory) extends Menu {
     pokemonButtons = pokemonButtons ++ Array(newPokButton)
     pokemonInfoSheets = pokemonInfoSheets ++ Array(pokInfoSheet)
   }
+
   
   def deactivatePokButtons() = {
     pokemonButtons.foreach(_.setVisible(false))

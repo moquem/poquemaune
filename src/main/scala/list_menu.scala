@@ -28,7 +28,7 @@ class ListMenu(buttonList: Array[Button]) extends Menu {
 
   val prevPageButton = new Button(ButtonTextures.GenericMenu, (0, 0), (100, 100))
   prevPageButton.setText("Previous page", 60, font)
-  prevPageButton.setActive(true)
+  prevPageButton.setActive(false)
   prevPageButton.setVisible(true)
   def prevPageOnClick() = {
     currentPage -= 1
