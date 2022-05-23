@@ -6,22 +6,6 @@ import sfml.system.*
   // the main window
   val window = RenderWindow(VideoMode(1280, 720, 32), "Poquemaune", Window.WindowStyle.DefaultStyle)
 
-  // example
-  val texture = Texture("src/main/resources/player_icon.jpeg")
-  val sprite = Sprite(texture)
-  val font = Font("src/main/resources/fonts/test_font.ttf")
-  val text = Text()
-  text.string = "babebibobu"
-  text.font = font
-  
-  // test for button
-  /*val buttonTexture = ButtonTextures.MainMenu
-  val testButton = Button(buttonTexture, (300, 300), (100, 100))
-  val testButtonSprite = Sprite(testButton.currentTexture())
-  testButton.setActive()
-  testButtonSprite.scale = new Vector2f(testButton.rect._3.toFloat/testButtonSprite.textureRect._3.toFloat, testButton.rect._4.toFloat/testButtonSprite.textureRect._4.toFloat)*/
-  
-
   var displayable = Array[Displayable](MainMenu, TestCombat, MapMenu, PlayerInventoryMenu)
   var updateable = MapMenu.getUpdateable()
   var frameUpdateable = TestCombat.getFrameUpdateable()
@@ -73,10 +57,6 @@ import sfml.system.*
     
     for (sprite <- spriteArray) {window.draw(sprite)}
     for (text <- textArray) {window.draw(text)}
-    sprite.position = (100, 200)
-    //window.draw(sprite)
     
-    text.position = (200, 400)
-    //window.draw(text)
     
     window.display()
