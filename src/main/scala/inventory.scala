@@ -65,6 +65,8 @@ class InventoryMenu(inventory: Inventory) extends Menu {
     this.setActive(false)
     MapMenu.setActive(true)
     pokemonInventoryMenu.setActive(false)
+    pokemonInventoryMenu.pokListMenu.setActive(false)
+    pokemonInventoryMenu.pokInfoSheetsGraphicObjects.foreach(_.setVisible(false))
   }
   returnButton.setVisible(true)
   returnButton.setActive(true)

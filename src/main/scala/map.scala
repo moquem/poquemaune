@@ -12,6 +12,7 @@ enum TileTypes (val texture: Texture,
   
   case GrassTile extends TileTypes(Texture("src/main/resources/ui_sprites/grass_tile.png"), true)
   case SeaTile extends TileTypes(Texture("src/main/resources/ui_sprites/sea_tile.png"), false)
+  case FightTile extends TileTypes(Texture("src/main/resources/ui_sprites/fight_icon_tile.png"), true)
 }
 
 
@@ -28,6 +29,9 @@ class Tile(tileList: Array[TileTypes], pos: (Int, Int), size: (Int, Int)) extend
     currIndex = index
     tileSprite.texture = tileList(index).texture
     tileInfo = tileList(index)
+  }
+
+  def onPlayerContact() = {
   }
 
   def updateObj() = {
@@ -91,7 +95,7 @@ object MapMenu extends Menu {
   
   val map = new Map()
   map.setActive(true)
-  val tileArr = Array(TileTypes.SeaTile, TileTypes.GrassTile)
+  val tileArr = Array(TileTypes.SeaTile, TileTypes.GrassTile, TileTypes.FightTile)
   val mapTile = new Tile(tileArr, (50, 50), (50, 50))
   
 
