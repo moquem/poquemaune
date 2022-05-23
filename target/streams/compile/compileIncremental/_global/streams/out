@@ -1,56 +1,39 @@
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] IncrementalCompile -----------[0m
 [0m[[0m[0mdebug[0m] [0m[0mIncrementalCompile.incrementalCompile[0m
-[0m[[0m[0mdebug[0m] [0m[0mprevious = Stamps for: 79 products, 15 sources, 3 libraries[0m
+[0m[[0m[0mdebug[0m] [0m[0mprevious = Stamps for: 81 products, 15 sources, 3 libraries[0m
 [0m[[0m[0mdebug[0m] [0m[0mcurrent source = Set(${BASE}/src/main/scala/bars.scala, ${BASE}/src/main/scala/player.scala, ${BASE}/src/main/scala/map.scala, ${BASE}/src/main/scala/class_combat.scala, ${BASE}/src/main/scala/list_menu.scala, ${BASE}/src/main/scala/combat_menu.scala, ${BASE}/src/main/scala/player_character.scala, ${BASE}/src/main/scala/images.scala, ${BASE}/src/main/scala/App.scala, ${BASE}/src/main/scala/buttons.scala, ${BASE}/src/main/scala/menus.scala, ${BASE}/src/main/scala/class_pokemon.scala, ${BASE}/src/main/scala/textbox.scala, ${BASE}/src/main/scala/inventory.scala, ${BASE}/src/main/scala/inventory_menu.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0m> initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(${BASE}/src/main/scala/class_pokemon.scala, ${BASE}/src/main/scala/list_menu.scala, ${BASE}/src/main/scala/inventory.scala, ${BASE}/src/main/scala/class_combat.scala, ${BASE}/src/main/scala/buttons.scala), unmodified = ...),Set(),Set(),API Changes: Set())[0m
+[0m[[0m[0mdebug[0m] [0m[0m> initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(${BASE}/src/main/scala/player.scala), unmodified = ...),Set(),Set(),API Changes: Set())[0m
 [0m[[0m[0mdebug[0m] [0m[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0mInitial source changes:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	removed: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	added: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(${BASE}/src/main/scala/class_combat.scala, ${BASE}/src/main/scala/list_menu.scala, ${BASE}/src/main/scala/buttons.scala, ${BASE}/src/main/scala/class_pokemon.scala, ${BASE}/src/main/scala/inventory.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(${BASE}/src/main/scala/player.scala)[0m
 [0m[[0m[0mdebug[0m] [0m[0mInvalidated products: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mExternal API changes: API Changes: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mModified binary dependencies: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(Consumable, GraphicObj, Equipment, PokemonInventoryMenu, testAttack, SelfTeam, Self, DebuffAtk, BuffAtk, BuffTarget, Pokemon, Opponent, Attack, Fight, Team, ListMenu, Inventory, Button, playerInventory, AffectPok, PokemonInfoSheet, Displayable, PokTyp, Item, ButtonTextures, buttons$package, InventoryMenu, Buff, OppTeam)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(Player)[0m
 [0m[[0m[0mdebug[0m] [0m[0mSources indirectly invalidated by:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	product: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	binary dep: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	external source: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(Consumable, GraphicObj, Equipment, PokemonInventoryMenu, testAttack, SelfTeam, Self, DebuffAtk, BuffAtk, BuffTarget, Pokemon, Opponent, Attack, Fight, Team, ListMenu, Inventory, Button, playerInventory, AffectPok, PokemonInfoSheet, Displayable, PokTyp, Item, ButtonTextures, buttons$package, InventoryMenu, Buff, OppTeam)[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(${BASE}/src/main/scala/class_combat.scala, ${BASE}/src/main/scala/list_menu.scala, ${BASE}/src/main/scala/buttons.scala, ${BASE}/src/main/scala/class_pokemon.scala, ${BASE}/src/main/scala/inventory.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: Consumable, GraphicObj, Equipment, PokemonInventoryMenu, testAttack, SelfTeam, Self, DebuffAtk, BuffAtk, BuffTarget, Pokemon, Opponent, Attack, Fight, Team, ListMenu, Inventory, Button, playerInventory, AffectPok, PokemonInfoSheet, Displayable, PokTyp, Item, ButtonTextures, buttons$package, InventoryMenu, Buff, OppTeam[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding TextBox by GraphicObj[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding Tile by GraphicObj[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding DisplayBar by GraphicObj[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding Character by GraphicObj[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding PlayerCharacter by Character[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding Button by GraphicObj[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding AttackButton by Button[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding Image by GraphicObj[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding Opponent by BuffTarget[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding OppTeam by BuffTarget[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding testFight by Fight[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding testTeam2 by Team[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding testTeam1 by Team[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding playerInventory by Inventory[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding Buff by AffectPok[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding Menu by Displayable[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding MapMenu by Menu[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding MainMenu by Menu[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding CombatMenu by Menu[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding TestCombat by CombatMenu[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding InventoryMenu by Menu[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding PlayerInventoryMenu by InventoryMenu[0m
-[0m[[0m[0mdebug[0m] [0m[0mIncluding Map by Displayable[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(Player)[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(${BASE}/src/main/scala/player.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: Player[0m
 [0m[[0m[0mdebug[0m] [0m[0mcompilation cycle 1[0m
-[0m[[0m[0minfo[0m] [0m[0mcompiling 5 Scala sources to /home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/target/scala-3.1.1/classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/target/scala-3.1.1/classes ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mReturning already retrieved and compiled bridge: /home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala3-sbt-bridge/3.1.1/scala3-sbt-bridge-3.1.1.jar.[0m
-[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 1104f0c for Scala Compiler version 3.1.1[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 5abaa126 for Scala Compiler version 3.1.1[0m
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-Xplugin:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/nscplugin_3.1.1/0.4.4/nscplugin_3.1.1-0.4.4.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala3-library_3/3.1.1/scala3-library_3-3.1.1.jar:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.6/scala-library-2.13.6.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	/home/maena/Documents/Etude/ENS Paris-Saclay/L3/S2/Projet prog 2/poquemaune/target/scala-3.1.1/classes:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/scala3lib_native0.4_3/0.4.4/scala3lib_native0.4_3-0.4.4.jar:/home/maena/.cache/coursier/v1/https/maven.pkg.github.com/lafeychine/_/io/github/lafeychine/scala-native-sfml_native0.4_3/0.1.0/scala-native-sfml_native0.4_3-0.1.0.jar:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/auxlib_native0.4_3/0.4.4/auxlib_native0.4_3-0.4.4.jar:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/javalib_native0.4_3/0.4.4/javalib_native0.4_3-0.4.4.jar:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/scalalib_native0.4_2.13/0.4.4/scalalib_native0.4_2.13-0.4.4.jar:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/nativelib_native0.4_3/0.4.4/nativelib_native0.4_3-0.4.4.jar:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/posixlib_native0.4_3/0.4.4/posixlib_native0.4_3-0.4.4.jar:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/windowslib_native0.4_3/0.4.4/windowslib_native0.4_3-0.4.4.jar:/home/maena/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-native/clib_native0.4_3/0.4.4/clib_native0.4_3-0.4.4.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mCompilation failed[0m
-[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 17.24877583 s[0m
+[0m[[0m[0mdebug[0m] [0m[0mdone compiling[0m
+[0m[[0m[0mdebug[0m] [0m[0mNew invalidations:[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: [0m
+[0m[[0m[0mdebug[0m] [0m[0mPreviously invalidated, but (transitively) depend on new invalidations:[0m
+[0m[[0m[0mdebug[0m] [0m[0mFinal step, transitive dependencies:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mNo classes were invalidated.[0m
