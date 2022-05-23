@@ -3,3 +3,4 @@ Fireball
 Casts a fireball spell.
 15
 Magic
+

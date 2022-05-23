@@ -3,3 +3,4 @@ Tsar bomba
 Dump a very, very large bomb.
 60
 Military
+

@@ -3,3 +3,4 @@ Ball lightning
 Makes powerful balls of lightning.
 45
 Magic
+

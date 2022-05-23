@@ -3,3 +3,4 @@ Arcane Blast
 Magic blast.
 20
 Magic
+

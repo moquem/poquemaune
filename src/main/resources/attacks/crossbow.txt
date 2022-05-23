@@ -3,3 +3,4 @@ Crossbow
 Throws an arrow between the two eyes.
 30
 Basic
+

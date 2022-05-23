@@ -3,3 +3,4 @@ Heart of thunder
 Unleashes regular blasts of forked lightning.
 75
 Magic
+

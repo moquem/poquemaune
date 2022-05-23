@@ -3,3 +3,4 @@ Glaives
 Throws sharp and fast glaives.
 20
 Basic
+

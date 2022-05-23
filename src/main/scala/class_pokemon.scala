@@ -2,20 +2,18 @@ import scala.io.Source
 import reflect.Selectable.reflectiveSelectable
 
 
-enum PokTyp (typName: String, weakAgainst:Array[PokTyp], strongAgainst: Array[PokTyp]){
+enum PokTyp (typName: String, weakAgainst:Array[String], strongAgainst: Array[String]){
   def isWeak (otherTyp :PokTyp):Boolean = {
-    weakAgainst.contains(otherTyp)
+    weakAgainst.contains(otherTyp.typString())
   }
   def isStrong (otherTyp : PokTyp):Boolean = {
-    strongAgainst.contains(otherTyp)
+    strongAgainst.contains(otherTyp.typString())
   }
   def typString(): String = {return typName}
   case Empty extends PokTyp("", Array(), Array())
-  case Magic extends PokTyp("Magic", Array(Balloons,Military), Array())
-  case Military extends PokTyp("Military", Array(Balloons,Magic), Array(Magic))
-  case Basic extends PokTyp("Basic", Array(Balloons), Array(Military))
-  case Balloons extends PokTyp("Balloons", Array(), Array(Military))
-  case Support extends PokTyp("Support", Array(Magic,Military,Basic,Balloons), Array())
+  case Magic extends PokTyp("Magic", Array("Military"), Array())
+  case Military extends PokTyp("Military", Array("Magic"), Array("Magic"))
+  case Basic extends PokTyp("Basic", Array(), Array("Military"))
 }
 
 class Pokemon private (spritePath: String, name: String, typ: PokTyp, pok_maxHP: Int, pok_maxPP: Int, pok_statAtk: Double, pok_statDef: Double) {

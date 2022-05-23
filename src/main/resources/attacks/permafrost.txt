@@ -3,3 +3,4 @@ Permafrost
 Freezes the ennemy.
 15
 Magic
+
