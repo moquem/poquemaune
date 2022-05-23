@@ -1,0 +1,6 @@
+Ball lightning
+7
+Makes powerful balls of lightning.
+45
+Magic
+

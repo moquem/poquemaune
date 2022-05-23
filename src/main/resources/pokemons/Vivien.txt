@@ -1,0 +1,13 @@
+Vivien
+Military
+100
+60
+2.2
+1.2
+src/main/resources/sprite/Vivien.png
+src/main/resources/attacks/sharp_shots.txt
+src/main/resources/attacks/deadly_precision.txt
+src/main/resources/attacks/elite_defender.txt
+src/main/resources/attacks/semi-automatic.txt
+src/main/resources/attacks/triple_shots.txt
+src/main/resources/attacks/bouncing_bullet.txt

@@ -1,0 +1,13 @@
+Antoine
+Magic
+120
+40
+1.6
+1.6
+src/main/resources/sprite/Antoine.png
+src/main/resources/attacks/absolute_zero.txt
+src/main/resources/attacks/ball_lightning.txt
+src/main/resources/attacks/spike-o-pult.txt
+src/main/resources/attacks/permafrost.txt
+src/main/resources/attacks/glue_soak.txt
+src/main/resources/attacks/bite.txt

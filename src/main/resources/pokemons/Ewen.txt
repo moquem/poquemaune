@@ -1,0 +1,13 @@
+Ewen
+Military
+100
+30
+1.2
+1.6
+src/main/resources/sprite/Ewen.png
+src/main/resources/attacks/sharp_shots.txt
+src/main/resources/attacks/twin_guns.txt
+src/main/resources/attacks/deadly_precision.txt
+src/main/resources/attacks/dart_storm.txt
+src/main/resources/attacks/hot_shots.txt
+src/main/resources/attacks/bouncing_bullet.txt

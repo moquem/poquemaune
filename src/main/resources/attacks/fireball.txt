@@ -1,0 +1,6 @@
+Fireball
+2
+Casts a fireball spell.
+15
+Magic
+

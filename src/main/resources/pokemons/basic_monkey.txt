@@ -1,0 +1,13 @@
+Monkey
+Basic
+100
+25
+1.4
+1.2
+src/main/resources/sprite/Geofetchd.png
+src/main/resources/attacks/sharp_shots.txt
+src/main/resources/attacks/twin_guns.txt
+src/main/resources/attacks/permafrost.txt
+src/main/resources/attacks/glue_soak.txt
+src/main/resources/attacks/hot_shots.txt
+src/main/resources/attacks/grape_shot.txt

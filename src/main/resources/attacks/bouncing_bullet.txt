@@ -1,0 +1,6 @@
+Bouncing bullet
+7
+Shots bounce on the target.
+40
+Military
+

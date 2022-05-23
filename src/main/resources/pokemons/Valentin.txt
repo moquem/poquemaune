@@ -1,0 +1,14 @@
+Valentin
+Basic
+120
+50
+2.0
+1.3
+src/main/resources/sprite/Valentin.png
+src/main/resources/attacks/sharp_shots.txt
+src/main/resources/attacks/blade_maelstrom.txt
+src/main/resources/attacks/triple_shots.txt
+src/main/resources/attacks/glaives.txt
+src/main/resources/attacks/boomerang.txt
+src/main/resources/attacks/barded_darts.txt
+

@@ -1,0 +1,13 @@
+Leopold
+Basic
+160
+50
+1.8
+1.6
+src/main/resources/sprite/Leopold.png
+src/main/resources/attacks/special_concoction.txt
+src/main/resources/attacks/dissolver.txt
+src/main/resources/attacks/kick.txt
+src/main/resources/attacks/plasma_blasts.txt
+src/main/resources/attacks/hot_shots.txt
+src/main/resources/attacks/glue_soak.txt

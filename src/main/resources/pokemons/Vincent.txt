@@ -1,0 +1,13 @@
+Vincent
+Military
+140
+40
+1.8
+1.0
+src/main/resources/sprite/Vincent.png
+src/main/resources/attacks/sharp_shots.txt
+src/main/resources/attacks/twin_guns.txt
+src/main/resources/attacks/hydroblast.txt
+src/main/resources/attacks/barded_darts.txt
+src/main/resources/attacks/hot_shots.txt
+src/main/resources/attacks/grape_shot.txt

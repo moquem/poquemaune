@@ -1,0 +1,6 @@
+Arcane Blast
+4
+Magic blast.
+20
+Magic
+

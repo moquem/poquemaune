@@ -1,0 +1,6 @@
+Sharp Shots
+1
+Throws a single dart. 
+10
+Basic
+

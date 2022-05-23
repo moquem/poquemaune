@@ -1,0 +1,6 @@
+Boomerang
+5
+Throws a heavy boomerang that follows a curved path.
+25
+Basic
+

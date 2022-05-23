@@ -12,21 +12,21 @@ class AttackButton(pos: (Int, Int), size: (Int, Int), texture: ButtonTextures) e
 }
 
 object testTeam1 extends Team {
-  val testPok1 = Pokemon("src/main/resources/pokemons/testPokemon.txt")
-  val testPok2 = Pokemon("src/main/resources/pokemons/testPokemon.txt")
-  val testPok3 = Pokemon("src/main/resources/pokemons/testPokemon.txt")
-  val testPok4 = Pokemon("src/main/resources/pokemons/testPokemon.txt")
-  val testPok5 = Pokemon("src/main/resources/pokemons/testPokemon.txt")
-  val testPok6 = Pokemon("src/main/resources/pokemons/testPokemon.txt")
+  val testPok1 = Pokemon("src/main/resources/pokemons/Jean.txt")
+  val testPok2 = Pokemon("src/main/resources/pokemons/Erwann.txt")
+  val testPok3 = Pokemon("src/main/resources/pokemons/Vincent.txt")
+  val testPok4 = Pokemon("src/main/resources/pokemons/Maena.txt")
+  val testPok5 = Pokemon("src/main/resources/pokemons/Tanguy.txt")
+  val testPok6 = Pokemon("src/main/resources/pokemons/Augustin.txt")
   var team = Array[Pokemon](testPok1, testPok2, testPok3, testPok4, testPok5, testPok6)
 }
 object testTeam2 extends Team {
-  val testPok1 = Pokemon("src/main/resources/pokemons/bestPokemon.txt")
-  val testPok2 = Pokemon("src/main/resources/pokemons/bestPokemon.txt")
-  val testPok3 = Pokemon("src/main/resources/pokemons/bestPokemon.txt")
-  val testPok4 = Pokemon("src/main/resources/pokemons/bestPokemon.txt")
-  val testPok5 = Pokemon("src/main/resources/pokemons/bestPokemon.txt")
-  val testPok6 = Pokemon("src/main/resources/pokemons/bestPokemon.txt")
+  val testPok1 = Pokemon("src/main/resources/pokemons/Leopold.txt")
+  val testPok2 = Pokemon("src/main/resources/pokemons/Mina.txt")
+  val testPok3 = Pokemon("src/main/resources/pokemons/Esteban.txt")
+  val testPok4 = Pokemon("src/main/resources/pokemons/Vivien.txt")
+  val testPok5 = Pokemon("src/main/resources/pokemons/Hubert.txt")
+  val testPok6 = Pokemon("src/main/resources/pokemons/Arthur.txt")
   var team = Array[Pokemon](testPok1, testPok2, testPok3, testPok4, testPok5, testPok6)
 }
 

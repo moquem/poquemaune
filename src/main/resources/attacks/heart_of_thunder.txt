@@ -1,0 +1,6 @@
+Heart of thunder
+10
+Unleashes regular blasts of forked lightning.
+75
+Magic
+
