@@ -1,0 +1,13 @@
+Tanguy
+Basic
+130
+50
+1.6
+1.3
+src/main/resources/sprite/Tanguy.png
+src/main/resources/attacks/special_concoction.txt
+src/main/resources/attacks/hot_shots.txt
+src/main/resources/attacks/plasma_blasts.txt
+src/main/resources/attacks/grape_shot.txt
+src/main/resources/attacks/kick.txt
+src/main/resources/attacks/fireball.txt

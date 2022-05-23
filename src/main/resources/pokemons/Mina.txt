@@ -1,0 +1,13 @@
+Mina
+Magic
+130
+40
+1.8
+1.4
+src/main/resources/sprite/Mina.png
+src/main/resources/attacks/fireball.txt
+src/main/resources/attacks/plasma_blasts.txt
+src/main/resources/attacks/triple_shots.txt
+src/main/resources/attacks/heart_of_thunder.txt
+src/main/resources/attacks/hot_shots.txt
+src/main/resources/attacks/archmage.txt

@@ -2,5 +2,4 @@ Kick
 7
 A simple kick
 25
-Empty
-
+Basic

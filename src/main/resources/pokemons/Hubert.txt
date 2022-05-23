@@ -1,0 +1,13 @@
+Hubert
+Basic
+100
+35
+1.5
+1.2
+src/main/resources/sprite/Hubert.png
+src/main/resources/attacks/boomerang.txt
+src/main/resources/attacks/sharp_shots.txt
+src/main/resources/attacks/strike.txt
+src/main/resources/attacks/spike-o-pult.txt
+src/main/resources/attacks/glaives.txt
+src/main/resources/attacks/kick.txt

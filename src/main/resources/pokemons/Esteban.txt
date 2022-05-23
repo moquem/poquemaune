@@ -1,0 +1,13 @@
+Esteban
+Military
+120
+50
+1.9
+1.6
+src/main/resources/sprite/Esteban.png
+src/main/resources/attacks/dart_storm.txt
+src/main/resources/attacks/tsar_bomb.txt
+src/main/resources/attacks/triple_shots.txt
+src/main/resources/attacks/sky_shredder.txt
+src/main/resources/attacks/hot_shots.txt
+src/main/resources/attacks/twin_guns.txt

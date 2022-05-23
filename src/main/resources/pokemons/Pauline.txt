@@ -1,0 +1,13 @@
+Pauline
+Basic
+130
+45
+1.4
+1.8
+src/main/resources/sprite/Pauline.png
+src/main/resources/attacks/sharp_shots.txt
+src/main/resources/attacks/plasma_blasts.txt
+src/main/resources/attacks/triple_shots.txt
+src/main/resources/attacks/spike-o-pult.txt
+src/main/resources/attacks/hot_shots.txt
+src/main/resources/attacks/arcane_blast.txt

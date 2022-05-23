@@ -1,0 +1,13 @@
+Antonin
+Basic
+120
+45
+2.0
+1.2
+src/main/resources/sprite/Antonin.png
+src/main/resources/attacks/dissolver.txt
+src/main/resources/attacks/special_concoction.txt
+src/main/resources/attacks/glue_soak.txt
+src/main/resources/attacks/fireball.txt
+src/main/resources/attacks/hot_shots.txt
+src/main/resources/attacks/kick.txt
